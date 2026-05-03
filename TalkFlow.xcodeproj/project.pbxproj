@@ -100,13 +100,6 @@
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
-		<key>274BBF6D91DF4C7FB5C12F8A</key>
-		<dict>
-			<key>fileRef</key>
-			<string>D183C8D3D64D4A05B5900C23</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>27D8459A7081442B83B1DEDC</key>
 		<dict>
 			<key>buildSettings</key>
@@ -578,6 +571,17 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
+		<key>9EBA3952F2E843AD89FFDF65</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>PipelineStatusView.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>A1B2C3D4E5F6A1B2C3D4E500</key>
 		<dict>
 			<key>children</key>
@@ -661,11 +665,11 @@
 		<dict>
 			<key>children</key>
 			<array>
-				<string>D183C8D3D64D4A05B5900C23</string>
 				<string>A1B2C3D4E5F6A1B2C3D4E524</string>
 				<string>A1B2C3D4E5F6A1B2C3D4E522</string>
 				<string>A1B2C3D4E5F6A1B2C3D4E527</string>
 				<string>TF01TRSV0000000000000000000V</string>
+				<string>9EBA3952F2E843AD89FFDF65</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -949,7 +953,6 @@
 			<string>2147483647</string>
 			<key>files</key>
 			<array>
-				<string>274BBF6D91DF4C7FB5C12F8A</string>
 				<string>881A6C2713B74F3493EC76CE</string>
 				<string>C1B2C3D4E5F6A1B2C3D4E701</string>
 				<string>4B7E8F3A1F294A3B92256977</string>
@@ -973,6 +976,7 @@
 				<string>TF01TRSV00000000000000000BF</string>
 				<string>99264DD31AD147248AB399B0</string>
 				<string>651AE4A0CC1FE8D43AEB5519</string>
+				<string>B2841BBA9F6445ACBF68ACE8</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
@@ -1299,6 +1303,13 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>B2841BBA9F6445ACBF68ACE8</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9EBA3952F2E843AD89FFDF65</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>B90FFCA35BB349DAB6B4B4CD</key>
 		<dict>
 			<key>fileRef</key>
@@ -1425,17 +1436,6 @@
 			<string>A1B2C3D4E5F6A1B2C3D4E5F9</string>
 			<key>remoteInfo</key>
 			<string>TalkFlow</string>
-		</dict>
-		<key>D183C8D3D64D4A05B5900C23</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>RecordingStatusView.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>D384B1BCE65E49E48A1C82DC</key>
 		<dict>
