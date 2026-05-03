@@ -28,8 +28,7 @@ func recordingPhaseFromToggle(_ current: RecordingPhase, now: Date) -> Recording
 
 /// 防抖判定：自上次 toggle 是否已过 debounce 秒
 func shouldAcceptToggle(lastToggleTime: Date?, now: Date, debounce: TimeInterval) -> Bool {
-    guard let last = lastToggleTime else { return true }
-    return now.timeIntervalSince(last) >= debounce
+    lastToggleTime.map { now.timeIntervalSince($0) >= debounce } ?? true
 }
 
 /// 是否满足最短录音时长
