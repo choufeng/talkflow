@@ -166,6 +166,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         transcriptionCard.setUp()
         rootView.addSubview(transcriptionCard)
 
+        // 模型配置卡片
+        let modelView = ModelSettingsView()
+        modelView.setUp()
+        let modelCard = CardView(title: "模型", contentView: modelView)
+        modelCard.setUp()
+        rootView.addSubview(modelCard)
+
         NSLayoutConstraint.activate([
             // 权限卡片：顶部固定
             permissionCard.topAnchor.constraint(equalTo: rootView.topAnchor, constant: 20),
@@ -181,6 +188,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             transcriptionCard.topAnchor.constraint(equalTo: hotkeyCard.bottomAnchor, constant: 16),
             transcriptionCard.leadingAnchor.constraint(equalTo: rootView.leadingAnchor, constant: 20),
             transcriptionCard.trailingAnchor.constraint(equalTo: rootView.trailingAnchor, constant: -20),
+
+            // 模型卡片：位于转写卡片下方
+            modelCard.topAnchor.constraint(equalTo: transcriptionCard.bottomAnchor, constant: 16),
+            modelCard.leadingAnchor.constraint(equalTo: rootView.leadingAnchor, constant: 20),
+            modelCard.trailingAnchor.constraint(equalTo: rootView.trailingAnchor, constant: -20),
+            modelCard.bottomAnchor.constraint(lessThanOrEqualTo: rootView.bottomAnchor, constant: -20),
         ])
 
         window?.contentView = rootView
