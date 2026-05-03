@@ -306,6 +306,13 @@
 			<key>sourceTree</key>
 			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
+		<key>4E3AD1D6AE774CD59F150875</key>
+		<dict>
+			<key>fileRef</key>
+			<string>95EAB1BBA8D04F4EB4E7D1E2</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>4ED4B478A31A48588936BB62</key>
 		<dict>
 			<key>isa</key>
@@ -519,6 +526,19 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
+		<key>95EAB1BBA8D04F4EB4E7D1E2</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>folder</string>
+			<key>name</key>
+			<string>sensevoice</string>
+			<key>path</key>
+			<string>Resources/sensevoice</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>96F8A6ADCBC14712B92C76F4</key>
 		<dict>
 			<key>fileRef</key>
@@ -552,6 +572,7 @@
 				<string>A1B2C3D4E5F6A1B2C3D4E504</string>
 				<string>A1B2C3D4E5F6A1B2C3D4E503</string>
 				<string>FC47BBA3FF7D41069289DCA9</string>
+				<string>95EAB1BBA8D04F4EB4E7D1E2</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -978,6 +999,7 @@
 			<key>files</key>
 			<array>
 				<string>A1B2C3D4E5F6A1B2C3D4E505</string>
+				<string>4E3AD1D6AE774CD59F150875</string>
 			</array>
 			<key>isa</key>
 			<string>PBXResourcesBuildPhase</string>
