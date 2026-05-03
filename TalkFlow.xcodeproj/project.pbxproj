@@ -40,6 +40,10 @@
 				67CAFD07CE2E4D6CA330C88A /* ProviderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830785FC5F4D42048BB8789E /* ProviderIO.swift */; };
 				75A2D47751B34AEFA40FC0D9 /* VertexMessageAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25243784D4774C66AB567D11 /* VertexMessageAdapter.swift */; };
 				A91122883B864E41B96C7B74 /* VertexMessageAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB97BC87E45649B7A83E2C7A /* VertexMessageAdapterTests.swift */; };
+				1F0651092BBB4C05907569FD /* TokenProviderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D7DEA93DFC45BB986B7EAB /* TokenProviderIO.swift */; };
+				4521C0E7A15A4AAEAD23D093 /* MockProviderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3572EAEC244DE7A88E17DB /* MockProviderIO.swift */; };
+				A8B9F7B49287461FBA9FB17E /* MockTokenProviderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63EE2FC8DD343D1857CA3DA /* MockTokenProviderIO.swift */; };
+				410D713E627648A1A2C71891 /* ProviderIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2BE103BA5B4D1E91CFCA45 /* ProviderIOTests.swift */; };
 		/* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +86,10 @@
 				830785FC5F4D42048BB8789E /* ProviderIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderIO.swift; sourceTree = "<group>"; };
 				25243784D4774C66AB567D11 /* VertexMessageAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexMessageAdapter.swift; sourceTree = "<group>"; };
 				FB97BC87E45649B7A83E2C7A /* VertexMessageAdapterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexMessageAdapterTests.swift; sourceTree = "<group>"; };
+				86D7DEA93DFC45BB986B7EAB /* TokenProviderIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenProviderIO.swift; sourceTree = "<group>"; };
+				7F3572EAEC244DE7A88E17DB /* MockProviderIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProviderIO.swift; sourceTree = "<group>"; };
+				B63EE2FC8DD343D1857CA3DA /* MockTokenProviderIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTokenProviderIO.swift; sourceTree = "<group>"; };
+				CC2BE103BA5B4D1E91CFCA45 /* ProviderIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderIOTests.swift; sourceTree = "<group>"; };
 		/* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -106,6 +114,7 @@
 				F9FE837BBB93492C83D31911 /* FilePathIO.swift */,
 				A1B2C3D4E5F6A1B2C3D4E520 /* PermissionIO.swift */,
 				A1B2C3D4E5F6A1B2C3D4E526 /* HotkeyIO.swift */,
+				86D7DEA93DFC45BB986B7EAB /* TokenProviderIO.swift */,
 				830785FC5F4D42048BB8789E /* ProviderIO.swift */,
 			);
 			path = IO;
@@ -172,6 +181,8 @@
 				8B775F209C2749ADB5B2B05D /* MockAudioRecorderIO.swift */,
 				3F6C27EA17A843428468EA72 /* MockFilePathIO.swift */,
 				32EE0A96765C4E9CBE62461A /* MockPermissionIO.swift */,
+				B63EE2FC8DD343D1857CA3DA /* MockTokenProviderIO.swift */,
+				7F3572EAEC244DE7A88E17DB /* MockProviderIO.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -203,6 +214,7 @@
 			children = (
 				3986A974DC2E47BDB0792E31 /* AudioRecorderIOTests.swift */,
 				54EDD714AA8E485D90B99A53 /* MicPermissionIOTests.swift */,
+				CC2BE103BA5B4D1E91CFCA45 /* ProviderIOTests.swift */,
 			);
 			path = IO;
 			sourceTree = "<group>";
@@ -311,6 +323,7 @@
 1EF0CA9981774CD09609C1D1 /* ServiceAccount.swift in Sources */,
 								67CAFD07CE2E4D6CA330C88A /* ProviderIO.swift in Sources */,
 75A2D47751B34AEFA40FC0D9 /* VertexMessageAdapter.swift in Sources */,
+				1F0651092BBB4C05907569FD /* TokenProviderIO.swift in Sources */,
 								A1B2C3D4E5F6A1B2C3D4E5F6 /* main.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E5F7 /* AppDelegate.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E506 /* PermissionListView.swift in Sources */,
@@ -340,6 +353,9 @@
 				D0949B4B6E784845999ED80E /* PromptConfigTests.swift in Sources */,
 40901967AA9E4F6E85113511 /* ServiceAccountTests.swift in Sources */,
 				A91122883B864E41B96C7B74 /* VertexMessageAdapterTests.swift in Sources */,
+				4521C0E7A15A4AAEAD23D093 /* MockProviderIO.swift in Sources */,
+				A8B9F7B49287461FBA9FB17E /* MockTokenProviderIO.swift in Sources */,
+				410D713E627648A1A2C71891 /* ProviderIOTests.swift in Sources */,
 								E8789C1ECE5544F4B9DBFD54 /* PermissionCheckViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
