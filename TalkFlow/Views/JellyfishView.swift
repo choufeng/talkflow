@@ -214,9 +214,9 @@ final class JellyfishView: NSView {
             tentacleLayers[i].add(anim, forKey: "sway")
         }
 
-        // --- 整体上下浮动 ---
+        // --- 整体上下浮动（macOS CALayer Y 轴朝上，正值 = 上浮） ---
         let swimAnim = CAKeyframeAnimation(keyPath: "transform.translation.y")
-        swimAnim.values = [0, -2, 0]
+        swimAnim.values = [0, 2, 0]
         swimAnim.keyTimes = [0, 0.5, 1]
         swimAnim.duration = 2
         swimAnim.repeatCount = .infinity

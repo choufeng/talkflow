@@ -51,16 +51,25 @@ final class PulseRingView: NSView {
     }
 
     func startAnimation() {
-        ringLayer.removeAnimation(forKey: "pulseRadius")
+        ringLayer.removeAnimation(forKey: "pulsePath")
         ringLayer.removeAnimation(forKey: "pulseOpacity")
 
-        // 半径脉动
-        let radiusAnim = CAKeyframeAnimation(keyPath: "transform.scale")
-        radiusAnim.values = [1.0, 1.28, 1.0]
-        radiusAnim.keyTimes = [0, 0.5, 1]
-        radiusAnim.duration = 1.2
-        radiusAnim.repeatCount = .infinity
-        radiusAnim.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        let r = min(bounds.width, bounds.height) / 2
+        let center = CGPoint(x: bounds.midX, y: bounds.midY)
+
+        func ringPath(radius: CGFloat) -> CGPath {
+            let p = CGMutablePath()
+            p.addArc(center: center, radius: radius, startAngle: 0, endAngle: .pi * 2, clockwise: true)
+            return p
+        }
+
+        // 半径脉动 — 直接动画 path（等同 SVG animate r）
+        let pathAnim = CAKeyframeAnimation(keyPath: "path")
+        pathAnim.values = [ringPath(radius: r * 0.58), ringPath(radius: r * 0.75), ringPath(radius: r * 0.58)]
+        pathAnim.keyTimes = [0, 0.5, 1]
+        pathAnim.duration = 1.2
+        pathAnim.repeatCount = .infinity
+        pathAnim.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
 
         // 透明度脉动
         let opacityAnim = CAKeyframeAnimation(keyPath: "opacity")
@@ -70,7 +79,7 @@ final class PulseRingView: NSView {
         opacityAnim.repeatCount = .infinity
         opacityAnim.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
 
-        ringLayer.add(radiusAnim, forKey: "pulseRadius")
+        ringLayer.add(pathAnim, forKey: "pulsePath")
         ringLayer.add(opacityAnim, forKey: "pulseOpacity")
     }
 
