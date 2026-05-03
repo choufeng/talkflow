@@ -147,12 +147,10 @@ final class PermissionListView: NSView {
     }
 
     @objc private func impureRefreshAll() {
-        for subview in subviews {
-            if let stack = subview as? NSStackView {
-                for row in stack.arrangedSubviews.compactMap({ $0 as? PermissionRowView }) {
-                    row.impureRender()
-                }
-            }
-        }
+        subviews
+            .compactMap { $0 as? NSStackView }
+            .flatMap { $0.arrangedSubviews }
+            .compactMap { $0 as? PermissionRowView }
+            .forEach { $0.impureRender() }
     }
 }

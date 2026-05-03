@@ -3,7 +3,7 @@ import AVFoundation
 
 // MARK: - 协议抽象（便于测试 Mock — rule 17）
 
-protocol PermissionIO: AnyObject {
+protocol PermissionIO {
     /// 权限类型
     var kind: PermissionKind { get }
 
@@ -20,7 +20,7 @@ protocol PermissionIO: AnyObject {
 // MARK: - ⚠️ 非纯函数（读系统状态，违反引用透明性 — rule 13）
 
 /// 读取系统麦克风权限状态
-func micPermissionStatus() -> PermissionStatus {
+fileprivate func micPermissionStatus() -> PermissionStatus {
     switch AVCaptureDevice.authorizationStatus(for: .audio) {
     case .authorized:       return .authorized
     case .notDetermined:    return .notDetermined
@@ -31,13 +31,13 @@ func micPermissionStatus() -> PermissionStatus {
 
 /// 读取系统辅助功能权限状态
 /// 注意：辅助功能无 notDetermined 态，仅 authorized / denied
-func accessibilityPermissionStatus() -> PermissionStatus {
+fileprivate func accessibilityPermissionStatus() -> PermissionStatus {
     AXIsProcessTrusted() ? .authorized : .denied
 }
 
 // MARK: - 麦克风权限 IO
 
-final class MicrophonePermissionIO: PermissionIO {
+struct MicrophonePermissionIO: PermissionIO {
     let kind: PermissionKind = .microphone
 
     /// ⚠️ 非引用透明
@@ -64,7 +64,7 @@ final class MicrophonePermissionIO: PermissionIO {
 
 // MARK: - 辅助功能权限 IO
 
-final class AccessibilityPermissionIO: PermissionIO {
+struct AccessibilityPermissionIO: PermissionIO {
     let kind: PermissionKind = .accessibility
 
     /// ⚠️ 非引用透明
