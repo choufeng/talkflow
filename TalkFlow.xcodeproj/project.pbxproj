@@ -197,6 +197,13 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>3B946E24ED464C098EAD13A9</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D9EAA58F6237426F8790859D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>3BAFE738F38F478E87C53BEC</key>
 		<dict>
 			<key>children</key>
@@ -808,6 +815,7 @@
 				<string>902EC597EFB74B479C7CFC0A</string>
 				<string>19C2DADB86AE4A71955DAAF8</string>
 				<string>4ED4B478A31A48588936BB62</string>
+				<string>D9EAA58F6237426F8790859D</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -1033,6 +1041,7 @@
 				<string>F4EBA008C0B741899F90B669</string>
 				<string>1FF49FD06D46401ABB096D46</string>
 				<string>39E78ED1E2DD42ADB243829A</string>
+				<string>3B946E24ED464C098EAD13A9</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
@@ -1521,6 +1530,17 @@
 			<string>FF70BE06CAC748438A5424E7</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+		</dict>
+		<key>D9EAA58F6237426F8790859D</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>ADCLoaderIO.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>DAADD4E9D7114C38B27D5E4C</key>
 		<dict>
