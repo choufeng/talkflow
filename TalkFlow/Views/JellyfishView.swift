@@ -67,67 +67,68 @@ final class JellyfishView: NSView {
         let w = bounds.width
         let h = bounds.height
 
-        // 坐标系：0,0 左上 → 右下，viewBox 0 0 28 28
+        // 坐标系转换：SVG Y 朝下，CALayer Y 朝上 → 翻转 Y
         let sx = w / 28.0
         let sy = h / 28.0
 
-        // 绘制静态路径
-        updateBell(cx: 14, cy: 16, topY: 5, scaleX: sx, scaleY: sy)
-        updateInnerGlow(cx: 14, cy: 12, rx: 4, ry: 3, scaleX: sx, scaleY: sy)
+        // 绘制静态路径（SVG 坐标 → CALayer 翻转 Y）
+        updateBell(scaleX: sx, scaleY: sy)
+        updateInnerGlow(scaleX: sx, scaleY: sy)
         updateTentacles(scaleX: sx, scaleY: sy)
     }
 
-    private func transform(_ x: CGFloat, _ y: CGFloat, sx: CGFloat, sy: CGFloat) -> CGPoint {
-        CGPoint(x: x * sx, y: y * sy)
+    /// SVG Y 坐标转换为 CALayer Y（翻转）
+    private func cal(_ svgY: CGFloat, scaleY: CGFloat) -> CGFloat {
+        bounds.height - svgY * scaleY
     }
 
     // MARK: - 钟体路径
 
-    private func bellPath(cx: CGFloat, cy: CGFloat, topY: CGFloat, leftX: CGFloat, midX: CGFloat, rightX: CGFloat, bottomMidy: CGFloat) -> CGPath {
+    /// 参数均为 SVG 坐标（未经翻转）
+    private func bellPathSVG(cx: CGFloat, cy: CGFloat, topY: CGFloat, leftX: CGFloat, midX: CGFloat, rightX: CGFloat, bottomMidy: CGFloat) -> CGPath {
         let path = CGMutablePath()
-        // M leftX,cy Q leftX,topY midX,topY
         path.move(to: CGPoint(x: leftX, y: cy))
         path.addQuadCurve(to: CGPoint(x: midX, y: topY), control: CGPoint(x: leftX, y: topY))
-        // Q rightX,topY rightX,cy
         path.addQuadCurve(to: CGPoint(x: rightX, y: cy), control: CGPoint(x: rightX, y: topY))
-        // Q bottomOuterX,bottomMidy midX,bottomInnerY
         let bottomOuterX = cx + (rightX - cx) * 0.56
         let bottomInnerY = cy + 1
         path.addQuadCurve(to: CGPoint(x: midX, y: bottomInnerY), control: CGPoint(x: bottomOuterX, y: bottomMidy))
-        // Q bottomInnerX,bottomMidy leftX,cy
         let bottomInnerX = cx - (rightX - cx) * 0.56
         path.addQuadCurve(to: CGPoint(x: leftX, y: cy), control: CGPoint(x: bottomInnerX, y: bottomMidy))
         path.closeSubpath()
         return path
     }
 
-    private func updateBell(cx: CGFloat, cy: CGFloat, topY: CGFloat, scaleX: CGFloat, scaleY: CGFloat) {
-        let leftX = cx - 9
-        let midX = cx
-        let rightX = cx + 9
-        let bottomMidy = cy + 3
+    private func updateBell(scaleX: CGFloat, scaleY: CGFloat) {
+        let fl = { (svgY: CGFloat) -> CGFloat in self.cal(svgY, scaleY: scaleY) }
+        let sc = { (svgX: CGFloat) -> CGFloat in svgX * scaleX }
 
-        bellLayer.path = bellPath(cx: cx * scaleX, cy: cy * scaleY,
-                                   topY: topY * scaleY,
-                                   leftX: leftX * scaleX,
-                                   midX: midX * scaleX,
-                                   rightX: rightX * scaleX,
-                                   bottomMidy: bottomMidy * scaleY)
+        let leftX = sc(5)
+        let midX = sc(14)
+        let rightX = sc(23)
+        let cx = sc(14)
+        let cy = fl(16)
+        let topY = fl(5)
+        let bottomMidy = fl(19)
+
+        bellLayer.path = bellPathSVG(cx: cx, cy: cy, topY: topY,
+                                      leftX: leftX, midX: midX, rightX: rightX,
+                                      bottomMidy: bottomMidy)
     }
 
     // MARK: - 内部光晕
 
-    private func ellipsePath(cx: CGFloat, cy: CGFloat, rx: CGFloat, ry: CGFloat) -> CGPath {
-        CGPath(ellipseIn: CGRect(x: cx - rx, y: cy - ry, width: rx * 2, height: ry * 2), transform: nil)
-    }
-
-    private func updateInnerGlow(cx: CGFloat, cy: CGFloat, rx: CGFloat, ry: CGFloat, scaleX: CGFloat, scaleY: CGFloat) {
-        innerGlowLayer.path = ellipsePath(cx: cx * scaleX, cy: cy * scaleY, rx: rx * scaleX, ry: ry * scaleY)
+    private func updateInnerGlow(scaleX: CGFloat, scaleY: CGFloat) {
+        let cx = 14 * scaleX
+        let cy = cal(12, scaleY: scaleY)
+        let rx = 4 * scaleX
+        let ry = 3 * scaleY
+        innerGlowLayer.path = CGPath(ellipseIn: CGRect(x: cx - rx, y: cy - ry, width: rx * 2, height: ry * 2), transform: nil)
     }
 
     // MARK: - 触须路径
 
-    private func tentaclePath(x1: CGFloat, y1: CGFloat, _ cpx: CGFloat, _ cpy: CGFloat, _ x2: CGFloat, _ y2: CGFloat) -> CGPath {
+    private func tentaclePathSVG(x1: CGFloat, y1: CGFloat, _ cpx: CGFloat, _ cpy: CGFloat, _ x2: CGFloat, _ y2: CGFloat) -> CGPath {
         let path = CGMutablePath()
         path.move(to: CGPoint(x: x1, y: y1))
         path.addQuadCurve(to: CGPoint(x: x2, y: y2), control: CGPoint(x: cpx, y: cpy))
@@ -135,6 +136,9 @@ final class JellyfishView: NSView {
     }
 
     private func updateTentacles(scaleX: CGFloat, scaleY: CGFloat) {
+        let fl = { (svgY: CGFloat) -> CGFloat in self.cal(svgY, scaleY: scaleY) }
+        let sc = { (svgX: CGFloat) -> CGFloat in svgX * scaleX }
+
         let tentacleDefs: [(x1: CGFloat, y1: CGFloat, cpx: CGFloat, cpy: CGFloat, x2: CGFloat, y2: CGFloat)] = [
             (8, 16.5, 6, 22, 8, 27),
             (11, 17, 9, 23, 10, 28),
@@ -143,10 +147,10 @@ final class JellyfishView: NSView {
             (20, 16.5, 22, 22, 20, 27),
         ]
         for (i, def) in tentacleDefs.enumerated() {
-            tentacleLayers[i].path = tentaclePath(
-                x1: def.x1 * scaleX, y1: def.y1 * scaleY,
-                def.cpx * scaleX, def.cpy * scaleY,
-                def.x2 * scaleX, def.y2 * scaleY
+            tentacleLayers[i].path = tentaclePathSVG(
+                x1: sc(def.x1), y1: fl(def.y1),
+                sc(def.cpx), fl(def.cpy),
+                sc(def.x2), fl(def.y2)
             )
         }
     }
@@ -158,13 +162,15 @@ final class JellyfishView: NSView {
 
         let sx = bounds.width / 28.0
         let sy = bounds.height / 28.0
+        let fl = { (svgY: CGFloat) -> CGFloat in self.cal(svgY, scaleY: sy) }
+        let sc = { (svgX: CGFloat) -> CGFloat in svgX * sx }
 
-        // --- 钟体呼吸（路径形变） ---
+        // --- 钟体呼吸 ---
         let bellAnim = CAKeyframeAnimation(keyPath: "path")
         bellAnim.values = [
-            bellPath(cx: 14*sx, cy: 16*sy, topY: 5*sy, leftX: 5*sx, midX: 14*sx, rightX: 23*sx, bottomMidy: 19*sy),
-            bellPath(cx: 14*sx, cy: 15*sy, topY: 7*sy, leftX: 6*sx, midX: 14*sx, rightX: 23*sx, bottomMidy: 17*sy),
-            bellPath(cx: 14*sx, cy: 16*sy, topY: 5*sy, leftX: 5*sx, midX: 14*sx, rightX: 23*sx, bottomMidy: 19*sy),
+            bellPathSVG(cx: sc(14), cy: fl(16), topY: fl(5), leftX: sc(5), midX: sc(14), rightX: sc(23), bottomMidy: fl(19)),
+            bellPathSVG(cx: sc(14), cy: fl(15), topY: fl(7), leftX: sc(6), midX: sc(14), rightX: sc(23), bottomMidy: fl(17)),
+            bellPathSVG(cx: sc(14), cy: fl(16), topY: fl(5), leftX: sc(5), midX: sc(14), rightX: sc(23), bottomMidy: fl(19)),
         ]
         bellAnim.keyTimes = [0, 0.5, 1]
         bellAnim.duration = 2
@@ -172,7 +178,7 @@ final class JellyfishView: NSView {
         bellAnim.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         bellLayer.add(bellAnim, forKey: "breathe")
 
-        // --- 内部光晕脉动（纵轴缩放） ---
+        // --- 内部光晕脉动 ---
         let glowAnim = CAKeyframeAnimation(keyPath: "transform.scale.y")
         glowAnim.values = [1.0, 0.67, 1.0]
         glowAnim.keyTimes = [0, 0.5, 1]
@@ -182,18 +188,17 @@ final class JellyfishView: NSView {
         innerGlowLayer.add(glowAnim, forKey: "pulse")
 
         // --- 触须飘摇 ---
-        let tentacleKeyframes: [[(cpx: CGFloat, cpy: CGFloat, x2: CGFloat, y2: CGFloat)]] = [
-            // Rest → Sway → Rest
-            [(6, 22, 8, 27), (5, 21, 7, 26), (6, 22, 8, 27)],           // tentacle 0
-            [(9, 23, 10, 28), (8, 22, 9, 27), (9, 23, 10, 28)],         // tentacle 1
-            [(13, 24, 14, 28), (12, 23, 13, 27), (13, 24, 14, 28)],     // tentacle 2
-            [(19, 23, 18, 28), (20, 22, 19, 27), (19, 23, 18, 28)],     // tentacle 3
-            [(22, 22, 20, 27), (23, 21, 21, 26), (22, 22, 20, 27)],     // tentacle 4
-        ]
-        let tentacleDurations: [CFTimeInterval] = [2.5, 2.2, 2.0, 2.2, 2.5]
         let tentacleDefs: [(x1: CGFloat, y1: CGFloat)] = [
             (8, 16.5), (11, 17), (14, 17.5), (17, 17), (20, 16.5),
         ]
+        let tentacleKeyframes: [[(cpx: CGFloat, cpy: CGFloat, x2: CGFloat, y2: CGFloat)]] = [
+            [(6, 22, 8, 27), (5, 21, 7, 26), (6, 22, 8, 27)],
+            [(9, 23, 10, 28), (8, 22, 9, 27), (9, 23, 10, 28)],
+            [(13, 24, 14, 28), (12, 23, 13, 27), (13, 24, 14, 28)],
+            [(19, 23, 18, 28), (20, 22, 19, 27), (19, 23, 18, 28)],
+            [(22, 22, 20, 27), (23, 21, 21, 26), (22, 22, 20, 27)],
+        ]
+        let tentacleDurations: [CFTimeInterval] = [2.5, 2.2, 2.0, 2.2, 2.5]
 
         for i in 0..<5 {
             let def = tentacleDefs[i]
@@ -201,9 +206,9 @@ final class JellyfishView: NSView {
             let durations = tentacleDurations[i]
 
             let paths = kf.map { kf in
-                tentaclePath(x1: def.x1 * sx, y1: def.y1 * sy,
-                             kf.cpx * sx, kf.cpy * sy,
-                             kf.x2 * sx, kf.y2 * sy)
+                tentaclePathSVG(x1: sc(def.x1), y1: fl(def.y1),
+                                sc(kf.cpx), fl(kf.cpy),
+                                sc(kf.x2), fl(kf.y2))
             }
             let anim = CAKeyframeAnimation(keyPath: "path")
             anim.values = paths
