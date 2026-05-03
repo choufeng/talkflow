@@ -19,3 +19,4 @@ Pods/
 
 # Worktrees
 .worktrees/
+TalkFlow/Resources/sensevoice/model_quant.onnx

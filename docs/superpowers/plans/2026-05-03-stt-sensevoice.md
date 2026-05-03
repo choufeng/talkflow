@@ -4,9 +4,9 @@
 
 **Goal:** 实现本地离线语音转文字，录音完成后自动经 SenseVoiceSmall + ONNX Runtime 转为文本。
 
-**Architecture:** 纯函数（LFR/CMVN/argmax/后处理）+ C 桥接（fbank 特征提取 / BPE 解码）+ ONNX Runtime（模型推理）。模型文件打入 App Bundle，运行时无网络依赖。
+**Architecture:** 纯函数（fbank/LFR/CMVN/argmax/BPE解码/后处理）+ ONNX Runtime（模型推理）。fbank 使用 Accelerate/vDSP 手写，BPE 解码通过 tokens.json 查表。模型文件打入 App Bundle，运行时无网络依赖。
 
-**Tech Stack:** Swift 5.10, ONNX Runtime 1.21+, kaldi-native-fbank (C), sentencepiece (C), Xcode 16+
+**Tech Stack:** Swift 5.10, Accelerate/vDSP, ONNX Runtime 1.21+, Xcode 16+
 
 ---
 
@@ -27,89 +27,7 @@ tar xzf /tmp/ort.tgz -C /tmp/
 
 - [ ] **在 Xcode 中操作**：将 `onnxruntime.xcframework` 拖入 TalkFlow target 的 Frameworks 分组，勾选 Embed & Sign。
 
-### 任务 0b：编译 kaldi-native-fbank 静态库
-
-- [ ] **克隆并编译**
-
-```bash
-cd /tmp
-git clone --depth 1 https://github.com/csukuangfj/kaldi-native-fbank.git
-cd kaldi-native-fbank
-mkdir build && cd build
-cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTS=OFF
-cmake --build . -j$(sysctl -n hw.ncpu)
-# 产物: /tmp/kaldi-native-fbank/build/libkaldi-native-fbank-core.a
-```
-
-- [ ] **复制到项目**
-
-```bash
-mkdir -p /Users/jia.xia/development/TalkFlow/TalkFlow/STT/NativeFbank/include/kaldi-native-fbank/csrc
-cp /tmp/kaldi-native-fbank/csrc/*.h /Users/jia.xia/development/TalkFlow/TalkFlow/STT/NativeFbank/include/kaldi-native-fbank/csrc
-cp /tmp/kaldi-native-fbank/build/libkaldi-native-fbank-core.a /Users/jia.xia/development/TalkFlow/TalkFlow/STT/NativeFbank/
-```
-
-- [ ] **创建 module.modulemap**
-
-写入 `TalkFlow/STT/NativeFbank/module.modulemap`：
-
-```
-module NativeFbank {
-    header "include/kaldi-native-fbank/csrc/online-feature.h"
-    header "include/kaldi-native-fbank/csrc/feature-window.h"
-    header "include/kaldi-native-fbank/csrc/mel-computations.h"
-    header "include/kaldi-native-fbank/csrc/rfft.h"
-    export *
-    link "kaldi-native-fbank-core"
-}
-```
-
-- [ ] **在 Xcode 中配置**：
-  - Target → Build Settings → Swift Compiler → Import Paths：添加 `$(SRCROOT)/TalkFlow/STT/NativeFbank`
-  - Target → Build Settings → Library Search Paths：添加 `$(SRCROOT)/TalkFlow/STT/NativeFbank`
-  - Target → Build Phases → Link Binary With Libraries：添加 `libkaldi-native-fbank-core.a`
-
-### 任务 0c：编译 sentencepiece 静态库
-
-- [ ] **克隆并编译**
-
-```bash
-cd /tmp
-git clone --depth 1 https://github.com/google/sentencepiece.git
-cd sentencepiece
-mkdir build && cd build
-cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF
-cmake --build . -j$(sysctl -n hw.ncpu)
-# 产物: /tmp/sentencepiece/build/src/libsentencepiece.a
-```
-
-- [ ] **复制到项目**
-
-```bash
-mkdir -p /Users/jia.xia/development/TalkFlow/TalkFlow/STT/SentencePiece/include/sentencepiece
-cp /tmp/sentencepiece/src/sentencepiece_processor.h /Users/jia.xia/development/TalkFlow/TalkFlow/STT/SentencePiece/include/sentencepiece/
-cp /tmp/sentencepiece/src/sentencepiece_model.pb.h /Users/jia.xia/development/TalkFlow/TalkFlow/STT/SentencePiece/include/sentencepiece/ 2>/dev/null
-cp /tmp/sentencepiece/build/src/libsentencepiece.a /Users/jia.xia/development/TalkFlow/TalkFlow/STT/SentencePiece/
-```
-
-- [ ] **创建 module.modulemap**
-
-写入 `TalkFlow/STT/SentencePiece/module.modulemap`：
-
-```
-module SentencePiece {
-    header "include/sentencepiece/sentencepiece_processor.h"
-    export *
-    link "sentencepiece"
-}
-```
-
-- [ ] **在 Xcode 中配置**：
-  - Import Paths：添加 `$(SRCROOT)/TalkFlow/STT/SentencePiece`
-  - Library Search Paths：添加 `$(SRCROOT)/TalkFlow/STT/SentencePiece`
-  - Link Binary：添加 `libsentencepiece.a`
-
-### 任务 0d：下载模型文件
+### 任务 0b：下载模型文件
 
 - [ ] **从 HuggingFace 下载**
 
@@ -535,13 +453,13 @@ git commit -m "feat: CMVN 归一化 + argmax 解码 + 后处理"
 
 ---
 
-## 任务 4：TokenDecoder — BPE 解码桥接层
+## 任务 4：TokenDecoder — tokens.json 查表解码
 
 **文件：**
 - 创建：`TalkFlow/Utils/TokenDecoder.swift`
 - 创建：`TalkFlowTests/Pure/TokenDecoderTests.swift`
 
-由于 sentencepiece C API 需要动态加载完成才能测试 BPE 解码，此任务改为 Swift 包装层 + 纯函数测试。BPE 解码的实际 C 调用延迟到任务 7 集成测试中验证。
+使用 `tokens.json`（token_id → 文本片段 映射）做 BPE 解码。加载为 `[Int: String]`，拼接为最终文本。
 
 - [ ] **Step 1：写测试**
 
@@ -554,16 +472,27 @@ import XCTest
 
 final class TokenDecoderTests: XCTestCase {
 
-    func test_bpeModelPath_returnsBundlePath() {
-        let path = bpeModelPath()
-        XCTAssertTrue(path.hasSuffix("chn_jpn_yue_eng_ko_spectok.bpe.model"))
+    func test_loadTokens_returnsDictionary() {
+        let tokens = loadTokens()
+        XCTAssertFalse(tokens.isEmpty)
     }
 
-    func test_decodeTokenIds_emptyArray_returnsEmpty() {
-        // 空 token 列表 → 空字符串
-        // 注释：需要 SentencePiece 库链接后才能跑通
-        // 此处测试最小逻辑路径
-        XCTAssertTrue(true) // 占位：C 库链接后改为实际测试
+    func test_decode_emptyTokenIds_returnsEmptyString() {
+        let tokens: [Int: String] = [1: "你", 2: "好"]
+        let result = decodeTokenIds([], tokens: tokens)
+        XCTAssertEqual(result, "")
+    }
+
+    func test_decode_singleToken_returnsCorrectText() {
+        let tokens: [Int: String] = [1: "你", 2: "好"]
+        let result = decodeTokenIds([1, 2], tokens: tokens)
+        XCTAssertEqual(result, "你好")
+    }
+
+    func test_decode_skipsUnknownTokens() {
+        let tokens: [Int: String] = [1: "a"]
+        let result = decodeTokenIds([1, 99, 1], tokens: tokens)
+        XCTAssertEqual(result, "aa") // token 99 不在字典 → 跳过
     }
 }
 ```
@@ -574,7 +503,7 @@ final class TokenDecoderTests: XCTestCase {
 xcodebuild test -scheme TalkFlow -only-testing:TalkFlowTests/TokenDecoderTests
 ```
 
-预期：编译失败（bpeModelPath 未定义）。
+预期：编译失败（loadTokens/decodeTokenIds 未定义）。
 
 - [ ] **Step 3：实现 TokenDecoder**
 
@@ -583,18 +512,26 @@ xcodebuild test -scheme TalkFlow -only-testing:TalkFlowTests/TokenDecoderTests
 ```swift
 import Foundation
 
-// MARK: - BPE 模型路径
+// MARK: - Token 映射表
 
-/// 从 Bundle 获取 BPE 模型文件路径
-func bpeModelPath() -> String {
-    guard let path = Bundle.main.path(
-        forResource: "chn_jpn_yue_eng_ko_spectok",
-        ofType: "bpe.model",
-        inDirectory: "sensevoice"
-    ) else {
-        fatalError("BPE model not found in Bundle")
+/// 从 Bundle 加载 tokens.json，返回 [token_id: 文本片段]
+func loadTokens() -> [Int: String] {
+    guard let url = Bundle.main.url(forResource: "tokens", withExtension: "json", subdirectory: "sensevoice"),
+          let data = try? Data(contentsOf: url),
+          let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+    else {
+        return [:]
     }
-    return path
+    let dict = json.compactMap { (key, value) -> (Int, String)? in
+        guard let id = Int(key), let text = value as? String else { return nil }
+        return (id, text)
+    }
+    return Dictionary(uniqueKeysWithValues: dict)
+}
+
+/// 将 token_id 序列解码为文本
+func decodeTokenIds(_ ids: [Int32], tokens: [Int: String]) -> String {
+    ids.compactMap { tokens[Int($0)] }.joined()
 }
 ```
 
@@ -604,13 +541,13 @@ func bpeModelPath() -> String {
 xcodebuild test -scheme TalkFlow -only-testing:TalkFlowTests/TokenDecoderTests
 ```
 
-预期：1 个测试 PASS。
+预期：4 个测试 PASS。
 
 - [ ] **Step 5：提交**
 
 ```bash
 git add TalkFlow/Utils/TokenDecoder.swift TalkFlowTests/Pure/TokenDecoderTests.swift TalkFlow.xcodeproj/project.pbxproj
-git commit -m "feat: TokenDecoder BPE 模型路径 + 测试"
+git commit -m "feat: tokens.json 查表 BPE 解码 + 测试"
 ```
 
 ---
@@ -828,30 +765,49 @@ git commit -m "feat: SenseVoiceEngineIO 音频解码 + 静音判定 + 重采样"
 
 ---
 
-## 任务 7：C 桥接 — fbank 特征提取
+## 任务 7：Swift 原生 fbank 特征提取（Accelerate/vDSP）
 
 **文件：**
-- 创建：`TalkFlow/STT/FbankBridge.swift`
-- 修改：`TalkFlowTests/IO/SenseVoiceEngineIOTests.swift`
+- 创建：`TalkFlow/Utils/FbankExtractor.swift`
+- 修改：`TalkFlowTests/Pure/FbankFeatureTests.swift`
 
-- [ ] **Step 1：写 fbank 桥接测试**
+使用 Accelerate 框架（vDSP FFT + vDSP 矩阵运算）实现 fbank 特征提取，参数对标 kaldi-native-fbank。
 
-在 `SenseVoiceEngineIOTests.swift` 末尾追加：
+- [ ] **Step 1：写 fbank 测试**
+
+在 `FbankFeatureTests.swift` 末尾追加：
 
 ```swift
+    // MARK: - extractFbank
+
     func test_fbank_sineWave_producesFrames() {
-        // 生成 1s 的 440Hz 正弦波 @ 16kHz
-        let sampleCount = 16000
+        let sampleCount = 16000  // 1s @ 16kHz
         let samples = (0..<sampleCount).map { i -> Float in
             sin(2.0 * Float.pi * 440.0 * Float(i) / 16000.0)
         }
-        // 调用 fbank 提取
         let feats = extractFbank(waveform: samples)
-        // 1s 音频 → 帧数 ≈ (16000 - 400) / 160 + 1 ≈ 99 帧（窗口25ms/步进10ms）
+        // 1s → 约 99 帧 (25ms窗口/10ms步进)
         XCTAssertGreaterThan(feats.count, 80)
-        // 每帧 80 维
         if let first = feats.first {
             XCTAssertEqual(first.count, 80)
+        }
+    }
+
+    func test_fbank_shorterThanWindow_returnsEmpty() {
+        let samples = [Float](repeating: 0, count: 399) // < 400样本(25ms@16kHz)
+        let feats = extractFbank(waveform: samples)
+        XCTAssertTrue(feats.isEmpty)
+    }
+
+    func test_fbank_allZeros_isNonNegative() {
+        let samples = [Float](repeating: 0, count: 8000)
+        let feats = extractFbank(waveform: samples)
+        XCTAssertFalse(feats.isEmpty)
+        for frame in feats {
+            for val in frame {
+                XCTAssertFalse(val.isNaN)
+                XCTAssertFalse(val.isInfinite)
+            }
         }
     }
 ```
@@ -859,88 +815,164 @@ git commit -m "feat: SenseVoiceEngineIO 音频解码 + 静音判定 + 重采样"
 - [ ] **Step 2：运行测试确认失败**
 
 ```bash
-xcodebuild test -scheme TalkFlow -only-testing:TalkFlowTests/SenseVoiceEngineIOTests/test_fbank_sineWave_producesFrames
+xcodebuild test -scheme TalkFlow -only-testing:TalkFlowTests/FbankFeatureTests/test_fbank_sineWave_producesFrames
 ```
 
 预期：编译失败（extractFbank 未定义）。
 
-- [ ] **Step 3：实现 fbank 桥接**
+- [ ] **Step 3：实现 extractFbank**
 
-写入 `TalkFlow/STT/FbankBridge.swift`：
+写入 `TalkFlow/Utils/FbankExtractor.swift`：
 
 ```swift
 import Foundation
-import NativeFbank
+import Accelerate
 
-// MARK: - fbank 特征提取桥接
+// MARK: - fbank 参数（对标 kaldi-native-fbank）
 
-/// 调用 kaldi-native-fbank 提取 fbank 特征
-/// - Parameter waveform: 16kHz 单声道 PCM 样本
-/// - Returns: [帧数 × 80 维] fbank 特征矩阵
+private let sampleRate: Double = 16000
+private let frameLengthMs: Double = 25
+private let frameShiftMs: Double = 10
+private let numMelBins = 80
+private let lowFreq: Double = 20
+private let highFreq: Double = 7600  // sampleRate/2 - 400
+
+// MARK: - 公共 API
+
+/// 提取 fbank 特征
+/// - Parameter waveform: 16kHz 单声道 PCM 样本（范围 0±1）
+/// - Returns: [帧数 × 80维]
 func extractFbank(waveform: [Float]) -> [[Float]] {
-    // 创建 FbankComputer（kaldi 原生 C API）
-    // OnlineFeature + FbankComputer 组合
-    // 参照 TalkShow Rust 实现的参数：
-    //   - samp_freq: 16000
-    //   - frame_shift_ms: 10
-    //   - frame_length_ms: 25
-    //   - num_bins: 80
-    //   - low_freq: 20
-    //   - use_log_fbank: true
-    //   - use_power: true
-    //   - dither: 0, preemph_coeff: 0
+    let frameLen = Int(sampleRate * frameLengthMs / 1000)   // 400
+    let frameShift = Int(sampleRate * frameShiftMs / 1000)   // 160
+    let fftN = 1 << Int(ceil(log2(Double(frameLen))))        // 512
 
-    let opts = FbankOptions()
-    opts.frame_opts.samp_freq = 16000.0
-    opts.frame_opts.frame_shift_ms = 10.0
-    opts.frame_opts.frame_length_ms = 25.0
-    opts.frame_opts.dither = 0.0
-    opts.frame_opts.preemph_coeff = 0.0
-    opts.frame_opts.remove_dc_offset = 0
-    opts.frame_opts.window_type = "hamming"
-    opts.mel_opts.num_bins = 80
-    opts.mel_opts.low_freq = 20.0
-    opts.mel_opts.high_freq = 0.0
-    opts.use_energy = 0
-    opts.use_log_fbank = 1
-    opts.use_power = 1
+    guard waveform.count >= frameLen else { return [] }
 
-    let computer = FbankComputer(opts)
-    let onlineFeature = OnlineFeature(computer)
-
-    // 放大到 int16 范围（与 TalkShow 一致）
-    let scaled = waveform.map { $0 * 32768.0 }
-    onlineFeature.acceptWaveform(16000.0, samples: scaled, sampleCount: Int32(scaled.count))
-    onlineFeature.inputFinished()
-
-    let numFrames = Int(onlineFeature.numFramesReady())
-    guard numFrames > 0 else { return [] }
+    let numFrames = (waveform.count - frameLen) / frameShift + 1
+    let melFilterbank = precomputeMelFilterbank(fftN: fftN)
 
     var result = [[Float]]()
     result.reserveCapacity(numFrames)
+
+    // Hamming 窗
+    var window = [Float](repeating: 0, count: frameLen)
+    vDSP_hamm_window(&window, vDSP_Length(frameLen), 0)
+
+    // FFT 设置
+    let log2n = vDSP_Length(log2(Double(fftN)))
+    let fftSetup = vDSP_create_fftsetup(log2n, FFTRadix(kFFTRadix2))!
+
     for i in 0..<numFrames {
-        let frame = onlineFeature.getFrame(Int32(i))
-        result.append(frame)
+        let start = i * frameShift
+        var frame = Array(waveform[start..<min(start + frameLen, waveform.count)])
+        if frame.count < frameLen {
+            frame.append(contentsOf: [Float](repeating: 0, count: frameLen - frame.count))
+        }
+        // 去直流
+        var mean: Float = 0
+        vDSP_meanv(frame, 1, &mean, vDSP_Length(frame.count))
+        var dcRemoved = frame.map { $0 - mean }
+        // 加窗
+        vDSP_vmul(dcRemoved, 1, window, 1, &dcRemoved, 1, vDSP_Length(frameLen))
+        // FFT
+        let fbank = computeFbankFrame(dcRemoved, fftN: fftN, fftSetup: fftSetup, melFilterbank: melFilterbank)
+        result.append(fbank)
     }
+
+    vDSP_destroy_fftsetup(fftSetup)
     return result
 }
-```
 
-> **注意：** 此文件依赖 NativeFbank module 映射的 C 类型（FbankOptions, FbankComputer, OnlineFeature）。实际 C API 签名需要在编译 kaldi-native-fbank 后对齐。如果 C API 不一致，需要写一个薄的 C wrapper 统一接口。此步骤需要先确保任务 0c 完成。
+// MARK: - Mel 滤波器组
+
+private func precomputeMelFilterbank(fftN: Int) -> [[Float]] {
+    let numBins = fftN / 2 + 1
+    var melPoints = (0..<(numMelBins + 2)).map { i -> Float in
+        let melLow = hzToMel(Float(lowFreq))
+        let melHigh = hzToMel(Float(highFreq))
+        let mel = melLow + Float(i) * (melHigh - melLow) / Float(numMelBins + 1)
+        return melToHz(mel)
+    }
+    // 映射到 FFT bin
+    melPoints = melPoints.map { $0 * Float(fftN) / Float(sampleRate) }
+
+    return (0..<numMelBins).map { m in
+        var filter = [Float](repeating: 0, count: numBins)
+        for k in 0..<numBins {
+            let fk = Float(k)
+            if fk < melPoints[m] {
+                filter[k] = 0
+            } else if fk <= melPoints[m + 1] {
+                filter[k] = (fk - melPoints[m]) / (melPoints[m + 1] - melPoints[m])
+            } else if fk <= melPoints[m + 2] {
+                filter[k] = (melPoints[m + 2] - fk) / (melPoints[m + 2] - melPoints[m + 1])
+            } else {
+                filter[k] = 0
+            }
+        }
+        return filter
+    }
+}
+
+// MARK: - 单帧 fbank
+
+private func computeFbankFrame(_ frame: [Float], fftN: Int, fftSetup: FFTSetup, melFilterbank: [[Float]]) -> [Float] {
+    let numBins = fftN / 2 + 1
+    // 填充到 fftN
+    var padded = frame + [Float](repeating: 0, count: fftN - frame.count)
+    // 实数 FFT
+    var realPart = [Float](repeating: 0, count: numBins)
+    var imagPart = [Float](repeating: 0, count: numBins)
+    padded.withUnsafeMutableBufferPointer { buf in
+        var splitComplex = DSPSplitComplex(realp: &realPart, imagp: &imagPart)
+        buf.baseAddress!.withMemoryRebound(to: DSPComplex.self, capacity: fftN / 2) { complex in
+            vDSP_ctoz(complex, 2, &splitComplex, 1, vDSP_Length(fftN / 2))
+        }
+    }
+    vDSP_fft_zrip(fftSetup, &realPart, &imagPart, 1, vDSP_Length(log2(Double(fftN))), FFTDirection(kFFTDirection_Forward))
+    // 功率谱
+    var powerSpectrum = [Float](repeating: 0, count: numBins)
+    for k in 0..<numBins {
+        powerSpectrum[k] = (realPart[k] * realPart[k] + imagPart[k] * imagPart[k]) / Float(fftN)
+    }
+    // Mel 滤波器组
+    var fbank = [Float](repeating: 0, count: numMelBins)
+    for m in 0..<numMelBins {
+        var sum: Float = 0
+        vDSP_dotpr(powerSpectrum, 1, melFilterbank[m], 1, &sum, vDSP_Length(numBins))
+        fbank[m] = max(sum, 1e-10)  // 防 log(0)
+    }
+    // 对数
+    var logFbank = [Float](repeating: 0, count: numMelBins)
+    vForce.logf(fbank, &logFbank, numMelBins)
+    return logFbank
+}
+
+// MARK: - Mel 尺度转换
+
+private func hzToMel(_ hz: Float) -> Float {
+    1127.0 * log(1.0 + hz / 700.0)
+}
+
+private func melToHz(_ mel: Float) -> Float {
+    700.0 * (exp(mel / 1127.0) - 1.0)
+}
+```
 
 - [ ] **Step 4：运行测试确认通过**
 
 ```bash
-xcodebuild test -scheme TalkFlow -only-testing:TalkFlowTests/SenseVoiceEngineIOTests/test_fbank_sineWave_producesFrames
+xcodebuild test -scheme TalkFlow -only-testing:TalkFlowTests/FbankFeatureTests
 ```
 
-预期：生成 >80 帧 fbank，每帧 80 维。
+预期：17 个测试 PASS（14 已有 + 3 新增 fbank）。
 
 - [ ] **Step 5：提交**
 
 ```bash
-git add TalkFlow/STT/FbankBridge.swift TalkFlowTests/IO/SenseVoiceEngineIOTests.swift
-git commit -m "feat: kaldi-native-fbank 桥接 + 测试"
+git add TalkFlow/Utils/FbankExtractor.swift TalkFlowTests/Pure/FbankFeatureTests.swift
+xcodebuild test -scheme TalkFlow -quiet && git commit -m "feat: Accelerate/vDSP fbank 特征提取 + 测试"
 ```
 
 ---
@@ -1051,105 +1083,72 @@ git commit -m "feat: transcribe 预处理流水线串联 (LFR+CMVN)"
 - 修改：`TalkFlowTests/Mocks/MockONSSTSession.swift`
 - 修改：`TalkFlowTests/IO/SenseVoiceEngineIOTests.swift`
 
-- [ ] **Step 1：实现 ONNX 推理方法**
+使用 ONNX Runtime C API + bridging header 实现推理。输入 fbank 特征，输出 token_id 序列。
+
+- [ ] **Step 1：创建 bridging header**
+
+写入 `TalkFlow/TalkFlow-Bridging-Header.h`：
+
+```c
+#include "onnxruntime_c_api.h"
+```
+
+在 Xcode 中：Build Settings → Swift Compiler → Objective-C Bridging Header → `TalkFlow/TalkFlow-Bridging-Header.h`
+
+- [ ] **Step 2：实现 ORT 推理方法**
 
 在 `SenseVoiceEngineIO.swift` 中添加：
 
 ```swift
-import onnxruntime  // OrtSession, OrtValue
+    // MARK: - ONNX 推理（ORT C API）
 
-    // MARK: - ONNX 推理
+    private var ortEnv: OpaquePointer?
+    private var ortSession: OpaquePointer?
 
-    private var session: OrtSession?
-
-    private func ensureSession() throws -> OrtSession {
-        if let s = session { return s }
+    private func ensureSession() throws -> OpaquePointer {
+        if let s = ortSession { return s }
         guard let modelPath = Bundle.main.path(forResource: "model_quant", ofType: "onnx", inDirectory: "sensevoice") else {
             throw STTError.modelNotReady
         }
-        let env = try OrtEnv(loggingLevel: .warning)
-        let s = try OrtSession(env: env, modelPath: modelPath, sessionOptions: OrtSessionOptions())
-        self.session = s
+        let env: OpaquePointer? = nil
+        OrtCreateEnv(ORT_LOGGING_LEVEL_WARNING, "talkflow", &ortEnv)
+        OrtCreateSession(ortEnv, modelPath, nil, &ortSession)
         self.isModelReady = true
-        return s
+        return ortSession!
     }
 
-    /// 执行 ONNX 推理
-    /// 输入: [1 × T_LFR × 560] 的 fbank 特征
-    /// 返回: token_id 序列
     func runInference(feats: [[Float]], featsLen: Int) throws -> [Int32] {
         let session = try ensureSession()
         let tLFR = feats.count
         let dim = feats.first?.count ?? 560
-
-        // 扁平化为 [1, T_LFR, dim] 数组
         var flatFeats = [Float]()
-        flatFeats.reserveCapacity(tLFR * dim)
-        for frame in feats {
-            flatFeats.append(contentsOf: frame)
+        for frame in feats { flatFeats.append(contentsOf: frame) }
+
+        let inputShape: [Int64] = [1, Int64(tLFR), Int64(dim)]
+        var inputTensor: OpaquePointer?
+        let memInfo: OpaquePointer? = nil
+        OrtCreateMemoryInfo("Cpu", OrtDeviceAllocator, 0, OrtMemTypeDefault, &memInfo)
+
+        flatFeats.withUnsafeBytes { ptr in
+            OrtCreateTensorWithDataAsOrtValue(
+                memInfo, ptr.baseAddress, flatFeats.count * MemoryLayout<Float>.size,
+                inputShape, 3, ONNX_TENSOR_ELEMENT_DATA_TYPE_FLOAT, &inputTensor
+            )
         }
 
-        // 构造输入 tensor
-        let featsTensor = try OrtValue(
-            tensorData: flatFeats,
-            shape: [1, tLFR, dim]
-        )
-        let featsLenTensor = try OrtValue(
-            tensorData: [Int32(featsLen)],
-            shape: [1]
-        )
-        let languageTensor = try OrtValue(
-            tensorData: [Int32(0)], // auto-detect
-            shape: [1]
-        )
-        let textnormTensor = try OrtValue(
-            tensorData: [Int32(14)], // no text normalization
-            shape: [1]
-        )
+        // ... 构造 feats_len, language, textnorm tensors（类似）
+        // ... session.run
+        // ... 提取 logits → argmaxTokens
 
-        let outputs = try session.run(
-            withInputs: [
-                "feats": featsTensor,
-                "feats_len": featsLenTensor,
-                "language": languageTensor,
-                "textnorm": textnormTensor,
-            ]
-        )
-
-        guard let logitsValue = outputs["logits"] else {
-            throw STTError.inferenceFailed("Missing logits output")
-        }
-
-        let logitsShape = try logitsValue.tensorShape()
-        let logitsData = try logitsValue.tensorData() as [Float]
-        let frames = logitsShape[1]
-        let vocabSize = logitsShape[2]
-
-        return argmaxTokens(logits: logitsData, frames: frames, vocabSize: vocabSize)
+        return [] // 占位 — 完整实现参考 TalkShow engine.rs infer()
     }
 ```
 
-- [ ] **Step 2：实现 BPE 解码（sentencepiece 桥接）**
+> **注意：** ORT C API 需要精确的指针管理和内存释放。完整实现在子代理执行时根据实际编译通过的 API 签名调整。
 
-在 `SenseVoiceEngineIO.swift` 中继续添加：
+- [ ] **Step 3：完善 transcribe() BPE 解码**
 
-```swift
-    /// BPE 解码
-    func sentencePieceDecode(_ tokenIds: [Int32]) -> String {
-        let path = bpeModelPath()
-        guard let sp = SentencePieceProcessor(path: path) else {
-            return ""
-        }
-        let uids = tokenIds.filter { $0 > 0 }.map { UInt32($0) }
-        return sp.decodeIds(uids)
-    }
-```
-
-> **注意：** `SentencePieceProcessor` 需要基于任务 0d 的 module map 暴露的 C API 封装一个 Swift 类。此步骤假设 C 桥接已完成。
-
-- [ ] **Step 3：完善 transcribe()**
-
-将任务 8 中占位的步骤 6-7 替换为真实调用，返回 `STTResult.speech`。
+将占位解码替换为 `decodeTokenIds(ids, tokens: loadedTokens)`。
 
 - [ ] **Step 4：运行完整测试**
 
@@ -1163,7 +1162,7 @@ make test
 
 ```bash
 git add TalkFlow/IO/SenseVoiceEngineIO.swift TalkFlowTests/Mocks/MockONSSTSession.swift TalkFlowTests/IO/SenseVoiceEngineIOTests.swift
-git commit -m "feat: ONNX Runtime 推理 + SentencePiece BPE 解码"
+xcodebuild test -scheme TalkFlow -quiet && git commit -m "feat: ONNX Runtime 推理 + BPE 解码集成"
 ```
 
 ---

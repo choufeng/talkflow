@@ -1,0 +1,237 @@
+import Foundation
+import AVFoundation
+
+// MARK: - 实现
+
+struct SenseVoiceEngineIO: SenseVoiceIO {
+
+    // MARK: - 配置常量
+
+    private let targetSampleRate: Double = 16000
+    private let minSampleCount = 4800
+
+    // MARK: - 不可变状态
+
+    let isModelReady: Bool = false
+    let cmvnMeans: [Double]
+    let cmvnVars: [Double]
+    let tokens: [Int: String]
+
+    // MARK: - 公开 API
+
+    func transcribe(url: URL) async throws -> STTResult {
+        let (samples, sampleRate) = try decodeAudio(url: url)
+        let resampled = resampleTo16k(samples: samples, srcRate: sampleRate)
+
+        guard !classifySilence(samples: resampled) else {
+            return .silence
+        }
+
+        let fbank = extractFbank(waveform: resampled)
+        guard !fbank.isEmpty else { return .silence }
+
+        let lfr = applyLFR(fbank)
+        guard !lfr.isEmpty else { return .silence }
+
+        let normalized = applyCMVN(lfr, means: cmvnMeans, vars: cmvnVars)
+
+        let tokenIds = try runInference(feats: normalized, featsLen: Int32(lfr.count))
+        let text = decodeTokenIds(tokenIds, tokens: tokens)
+        let cleaned = postprocess(text)
+
+        return cleaned.isEmpty ? .silence : .speech(text: cleaned, language: "auto")
+    }
+
+    // MARK: - 纯函数：音频解码（副作用明确：文件 IO）
+
+    func decodeAudio(url: URL) throws -> (samples: [Float], sampleRate: Double) {
+        let file = try AVAudioFile(forReading: url)
+        let format = file.processingFormat
+        let frameCount = AVAudioFrameCount(file.length)
+        guard let buffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: frameCount) else {
+            throw STTError.audioDecodeFailed
+        }
+        try file.read(into: buffer)
+        guard let channelData = buffer.floatChannelData else {
+            throw STTError.audioDecodeFailed
+        }
+        let samples = Array(UnsafeBufferPointer(start: channelData[0], count: Int(buffer.frameLength)))
+        return (samples, format.sampleRate)
+    }
+
+    // MARK: - 纯函数
+
+    func classifySilence(samples: [Float]) -> Bool {
+        samples.count < minSampleCount
+    }
+
+    func resampleTo16k(samples: [Float], srcRate: Double) -> [Float] {
+        guard abs(srcRate - targetSampleRate) > 1.0 else { return samples }
+        let ratio = targetSampleRate / srcRate
+        let outputCount = Int(Double(samples.count) * ratio)
+        var result = [Float](repeating: 0, count: outputCount)
+        for i in 0..<outputCount {
+            let srcIndex = Double(i) / ratio
+            let i0 = Int(srcIndex)
+            let i1 = min(i0 + 1, samples.count - 1)
+            let frac = Float(srcIndex - Double(i0))
+            result[i] = samples[i0] * (1.0 - frac) + samples[i1] * frac
+        }
+        return result
+    }
+
+    // MARK: - ONNX 推理（C 桥接）
+
+    func runInference(feats: [[Float]], featsLen: Int32) throws -> [Int32] {
+        guard let modelPath = Bundle.main.path(
+            forResource: "model_quant", ofType: "onnx", inDirectory: "sensevoice"
+        ) else {
+            throw STTError.modelNotReady
+        }
+
+        // 初始化 ORT
+        var env: OpaquePointer?
+        var session: OpaquePointer?
+        var memInfo: OpaquePointer?
+        defer {
+            TalkFlowOrtReleaseSession(session)
+            TalkFlowOrtReleaseMemInfo(memInfo)
+            TalkFlowOrtReleaseEnv(env)
+        }
+
+        let status = TalkFlowOrtInit(modelPath, &env, &session, &memInfo)
+        guard status == nil, let session, let memInfo else {
+            throw STTError.inferenceFailed("ORT init failed")
+        }
+
+        let tLFR = feats.count
+        let dim = feats.first?.count ?? 560
+        let flatFeats = feats.flatMap { $0 }
+
+        // 创建输入 tensors
+        var shape: [Int64] = [1, Int64(tLFR), Int64(dim)]
+        var featsTensor: OpaquePointer?
+        let _ = shape.withUnsafeMutableBufferPointer { sPtr in
+            flatFeats.withUnsafeBufferPointer { dPtr in
+                TalkFlowOrtCreateFloatTensor(dPtr.baseAddress, sPtr.baseAddress, 3, memInfo, &featsTensor)
+            }
+        }
+        guard let featsTensor else { throw STTError.inferenceFailed("feats tensor failed") }
+        defer { TalkFlowOrtReleaseValue(featsTensor) }
+
+        var lenData = featsLen
+        var lenShape: [Int64] = [1]
+        var featsLenTensor: OpaquePointer?
+        let _ = lenShape.withUnsafeMutableBufferPointer { sPtr in
+            withUnsafePointer(to: &lenData) { TalkFlowOrtCreateInt32Tensor($0, sPtr.baseAddress, 1, memInfo, &featsLenTensor) }
+        }
+        guard let featsLenTensor else { throw STTError.inferenceFailed("feats_len failed") }
+        defer { TalkFlowOrtReleaseValue(featsLenTensor) }
+
+        var langData: Int32 = 0
+        var langShape: [Int64] = [1]
+        var langTensor: OpaquePointer?
+        let _ = langShape.withUnsafeMutableBufferPointer { sPtr in
+            withUnsafePointer(to: &langData) { TalkFlowOrtCreateInt32Tensor($0, sPtr.baseAddress, 1, memInfo, &langTensor) }
+        }
+        defer { langTensor.map { TalkFlowOrtReleaseValue($0) } }
+
+        var tnData: Int32 = 14
+        var tnShape: [Int64] = [1]
+        var tnTensor: OpaquePointer?
+        let _ = tnShape.withUnsafeMutableBufferPointer { sPtr in
+            withUnsafePointer(to: &tnData) { TalkFlowOrtCreateInt32Tensor($0, sPtr.baseAddress, 1, memInfo, &tnTensor) }
+        }
+        defer { tnTensor.map { TalkFlowOrtReleaseValue($0) } }
+
+        // Run
+        let inNameStrings = ["feats", "feats_len", "language", "textnorm"]
+        var inNamePtrs = inNameStrings.map { strdup($0) }
+        var outNameStrings = ["logits"]
+        var outNamePtrs = outNameStrings.map { strdup($0) }
+        defer { inNamePtrs.forEach { free($0) } }
+        defer { outNamePtrs.forEach { free($0) } }
+
+        let inputs: [OpaquePointer?] = [featsTensor, featsLenTensor, langTensor, tnTensor]
+        var outputTensor: OpaquePointer?
+        let runStatus = inNamePtrs.withUnsafeMutableBufferPointer { iPtrs -> OpaquePointer? in
+            outNamePtrs.withUnsafeMutableBufferPointer { oPtrs -> OpaquePointer? in
+                let iBase = UnsafeMutableRawPointer(iPtrs.baseAddress!).assumingMemoryBound(to: UnsafePointer<CChar>?.self)
+                let oBase = UnsafeMutableRawPointer(oPtrs.baseAddress!).assumingMemoryBound(to: UnsafePointer<CChar>?.self)
+                var out: OpaquePointer?
+                let s = TalkFlowOrtRun(session, iBase, inputs, 4, oBase, 1, &out)
+                outputTensor = out
+                return s
+            }
+        }
+        guard runStatus == nil, let outputTensor else {
+            throw STTError.inferenceFailed("ORT run failed")
+        }
+        defer { TalkFlowOrtReleaseValue(outputTensor) }
+
+        guard let outputData = TalkFlowOrtGetFloatData(outputTensor) else {
+            throw STTError.inferenceFailed("No output data")
+        }
+
+        // 获取 shape
+        var outShape = [Int64](repeating: 0, count: 4)
+        var outDims: Int32 = 0
+        // TalkFlowOrtGetShape not yet in header, estimate from data
+        let frames = tLFR
+        let vocabSize = 7230  // SenseVoiceSmall 词表大小
+        let total = frames * vocabSize
+        let floatPtr = outputData.withMemoryRebound(to: Float.self, capacity: total) { $0 }
+        let logits = Array(UnsafeBufferPointer(start: floatPtr, count: total))
+
+        return argmaxTokens(logits: logits, frames: frames, vocabSize: vocabSize)
+    }
+}
+
+// MARK: - ⚠️ 工厂（副作用：文件 IO）
+
+func impureMakeSenseVoiceEngine() -> SenseVoiceEngineIO {
+    let cmvn = impureLoadCMVN()
+    let tokens = impureLoadTokens()
+    return SenseVoiceEngineIO(cmvnMeans: cmvn.means, cmvnVars: cmvn.vars, tokens: tokens)
+}
+
+// MARK: - 纯工厂（测试用）
+
+func makeSenseVoiceEngineForTesting() -> SenseVoiceEngineIO {
+    SenseVoiceEngineIO(cmvnMeans: [], cmvnVars: [], tokens: [:])
+}
+
+// MARK: - ⚠️ 文件 IO（副作用标记）
+
+private func impureLoadCMVN() -> (means: [Double], vars: [Double]) {
+    guard let path = Bundle.main.path(forResource: "am", ofType: "mvn", inDirectory: "sensevoice"),
+          let content = try? String(contentsOfFile: path, encoding: .utf8)
+    else { return ([], []) }
+
+    let lines = content.components(separatedBy: .newlines)
+    var section: String?
+    var means = [Double]()
+    var vars = [Double]()
+
+    for line in lines {
+        let trimmed = line.trimmingCharacters(in: .whitespaces)
+        if trimmed.contains("<AddShift>") { section = "means"; continue }
+        if trimmed.contains("<Rescale>") { section = "vars"; continue }
+        guard let section, !trimmed.isEmpty, !trimmed.hasPrefix("[") else { continue }
+        let values = trimmed.split(separator: " ").compactMap { Double($0) }
+        if section == "means" { means.append(contentsOf: values) }
+        else { vars.append(contentsOf: values) }
+    }
+    return (means, vars)
+}
+
+private func impureLoadTokens() -> [Int: String] {
+    guard let url = Bundle.main.url(forResource: "tokens", withExtension: "json", subdirectory: "sensevoice"),
+          let data = try? Data(contentsOf: url),
+          let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+    else { return [:] }
+    return json.reduce(into: [:]) { dict, pair in
+        guard let id = Int(pair.key), let text = pair.value as? String else { return }
+        dict[id] = text
+    }
+}

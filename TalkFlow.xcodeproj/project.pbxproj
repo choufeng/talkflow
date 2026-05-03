@@ -1,570 +1,1467 @@
-// !$*UTF8*$!
-{
-	archiveVersion = 1;
-	classes = {
-	};
-	objectVersion = 56;
-	objects = {
-
-/* Begin PBXBuildFile section */
-		A1B2C3D4E5F6A1B2C3D4E5F6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E501; };
-		A1B2C3D4E5F6A1B2C3D4E5F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E502; };
-		A1B2C3D4E5F6A1B2C3D4E506 /* PermissionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E522; };
-		A1B2C3D4E5F6A1B2C3D4E517 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E518; };
-		A1B2C3D4E5F6A1B2C3D4E519 /* PermissionIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E520; };
-		A1B2C3D4E5F6A1B2C3D4E523 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E524; };
-		A1B2C3D4E5F6A1B2C3D4E528 /* Hotkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E525; };
-		A1B2C3D4E5F6A1B2C3D4E529 /* HotkeyIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E526; };
-		A1B2C3D4E5F6A1B2C3D4E530 /* HotkeySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E527; };
-		A1B2C3D4E5F6A1B2C3D4E505 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E504; };
-		96F8A6ADCBC14712B92C76F4 /* MockPermissionIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EE0A96765C4E9CBE62461A; };
-		054395ED9CA04554A29B3E9A /* XCTestCaseAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5052B690BA844E1DAF3260F0; };
-		1D92190071AD432AAFF9F6EB /* MicPermissionStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E883F3253B4CF498F09BCF; };
-		B90FFCA35BB349DAB6B4B4CD /* MicPermissionUIStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7440444015BC4FB69C8AD59E; };
-		3BCFF370E3AF460A9012F153 /* MicPermissionIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EDD714AA8E485D90B99A53; };
-		E8789C1ECE5544F4B9DBFD54 /* PermissionCheckViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8D6DA6D0DF4619A9967F0B; };
-		91910FAB2CAA48F7AA32EB57 /* RecordingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD1B48199F9409787A57855 /* RecordingState.swift */; };
-		524D73189BD14892AA939FF2 /* RecordingStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAADD4E9D7114C38B27D5E4C /* RecordingStateTests.swift */; };
-		4B7E8F3A1F294A3B92256977 /* FilePathIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FE837BBB93492C83D31911 /* FilePathIO.swift */; };
-		035452780DE940D999EC7F8D /* MockFilePathIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C27EA17A843428468EA72 /* MockFilePathIO.swift */; };
-		881A6C2713B74F3493EC76CE /* AudioRecorderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BEB8DFC03F43E690DED845 /* AudioRecorderIO.swift */; };
-		389214641CFD45F191E045CB /* MockAudioRecorderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B775F209C2749ADB5B2B05D /* MockAudioRecorderIO.swift */; };
-		C1B2C3D4E5F6A1B2C3D4E703 /* MockClipboardIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B2C3D4E5F6A1B2C3D4E704 /* MockClipboardIO.swift */; };
-		A980ADF0FC2F486493EDA770 /* AudioRecorderIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3986A974DC2E47BDB0792E31 /* AudioRecorderIOTests.swift */; };
-		C1B2C3D4E5F6A1B2C3D4E705 /* ClipboardIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B2C3D4E5F6A1B2C3D4E706 /* ClipboardIOTests.swift */; };
-		274BBF6D91DF4C7FB5C12F8A /* RecordingStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D183C8D3D64D4A05B5900C23 /* RecordingStatusView.swift */; };
-		B83A495B3C5C4B299E84EEFE /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66ADAAA54A14C0CBFA3DF33 /* ChatMessage.swift */; };
-		A388EAF11DB743CB8286AEFB /* ChatMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A9BFDB3A45BF9050D74B /* ChatMessageTests.swift */; };
-		A11D10447C054B478B79C9ED /* PromptConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5605FB6E21C4996811DC35B /* PromptConfig.swift */; };
-		D0949B4B6E784845999ED80E /* PromptConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49FC8987AB746C1886D91B7 /* PromptConfigTests.swift */; };
-		1EF0CA9981774CD09609C1D1 /* ServiceAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC3E77D768449390899AA5 /* ServiceAccount.swift */; };
-		40901967AA9E4F6E85113511 /* ServiceAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF15E2747BE4FDF8E634B07 /* ServiceAccountTests.swift */; };
-		67CAFD07CE2E4D6CA330C88A /* ProviderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830785FC5F4D42048BB8789E /* ProviderIO.swift */; };
-		75A2D47751B34AEFA40FC0D9 /* VertexMessageAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25243784D4774C66AB567D11 /* VertexMessageAdapter.swift */; };
-		A91122883B864E41B96C7B74 /* VertexMessageAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB97BC87E45649B7A83E2C7A /* VertexMessageAdapterTests.swift */; };
-		1F0651092BBB4C05907569FD /* TokenProviderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D7DEA93DFC45BB986B7EAB /* TokenProviderIO.swift */; };
-		4521C0E7A15A4AAEAD23D093 /* MockProviderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3572EAEC244DE7A88E17DB /* MockProviderIO.swift */; };
-		A8B9F7B49287461FBA9FB17E /* MockTokenProviderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63EE2FC8DD343D1857CA3DA /* MockTokenProviderIO.swift */; };
-		410D713E627648A1A2C71891 /* ProviderIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2BE103BA5B4D1E91CFCA45 /* ProviderIOTests.swift */; };
-		42BCE0697F1B42FBABC6BB1F /* JWTTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECC9FAB945F48E2924EE49A /* JWTTokenProvider.swift */; };
-		FA2A53C496AE4EBDA9B81548 /* VertexAIIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B153F13AD408473A8FB7D484 /* VertexAIIO.swift */; };
-		707813DF2FFE4B4E9563280B /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459BFB9B391C4DE5B7A92AE7 /* MockURLProtocol.swift */; };
-		1F1E64F5110A46A7A52C4AA7 /* VertexAIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B09D2A5398B4C14B6A0E221 /* VertexAIOTests.swift */; };
-		CC797AB04818412D82B26B19 /* ServiceAccountIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9D80B5522A46A794E60848 /* ServiceAccountIO.swift */; };
-		799707D52E0644CC96FAB0B5 /* ServiceAccountIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59EB176AD8B4DB493486BC3 /* ServiceAccountIOTests.swift */; };
-		C1B2C3D4E5F6A1B2C3D4E701 /* ClipboardIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B2C3D4E5F6A1B2C3D4E702 /* ClipboardIO.swift */; };
-/* End PBXBuildFile section */
-
-/* Begin PBXFileReference section */
-		A1B2C3D4E5F6A1B2C3D4E5F8 /* TalkFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TalkFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1B2C3D4E5F6A1B2C3D4E501 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		A1B2C3D4E5F6A1B2C3D4E502 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A1B2C3D4E5F6A1B2C3D4E503 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A1B2C3D4E5F6A1B2C3D4E504 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A1B2C3D4E5F6A1B2C3D4E507 /* PermissionCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionCheckView.swift; sourceTree = "<group>"; };
-		A1B2C3D4E5F6A1B2C3D4E511 /* MicPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicPermission.swift; sourceTree = "<group>"; };
-		A1B2C3D4E5F6A1B2C3D4E515 /* MicPermissionIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicPermissionIO.swift; sourceTree = "<group>"; };
-		A1B2C3D4E5F6A1B2C3D4E522 /* PermissionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionListView.swift; sourceTree = "<group>"; };
-		A1B2C3D4E5F6A1B2C3D4E518 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
-		A1B2C3D4E5F6A1B2C3D4E520 /* PermissionIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionIO.swift; sourceTree = "<group>"; };
-		A1B2C3D4E5F6A1B2C3D4E524 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
-		A1B2C3D4E5F6A1B2C3D4E525 /* Hotkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hotkey.swift; sourceTree = "<group>"; };
-		A1B2C3D4E5F6A1B2C3D4E526 /* HotkeyIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyIO.swift; sourceTree = "<group>"; };
-		A1B2C3D4E5F6A1B2C3D4E527 /* HotkeySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeySettingsView.swift; sourceTree = "<group>"; };
-		4C044E5EE95348CBACF3159C /* TalkFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TalkFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C1B2C3D4E5F6A1B2C3D4E702 /* ClipboardIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardIO.swift; sourceTree = "<group>"; };
-		32EE0A96765C4E9CBE62461A /* MockPermissionIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPermissionIO.swift; sourceTree = "<group>"; };
-		5052B690BA844E1DAF3260F0 /* XCTestCaseAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestCaseAsync.swift; sourceTree = "<group>"; };
-		C3E883F3253B4CF498F09BCF /* MicPermissionStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicPermissionStatusTests.swift; sourceTree = "<group>"; };
-		7440444015BC4FB69C8AD59E /* MicPermissionUIStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicPermissionUIStateTests.swift; sourceTree = "<group>"; };
-		54EDD714AA8E485D90B99A53 /* MicPermissionIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicPermissionIOTests.swift; sourceTree = "<group>"; };
-		3B8D6DA6D0DF4619A9967F0B /* PermissionCheckViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionCheckViewTests.swift; sourceTree = "<group>"; };
-		6FD1B48199F9409787A57855 /* RecordingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingState.swift; sourceTree = "<group>"; };
-		DAADD4E9D7114C38B27D5E4C /* RecordingStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingStateTests.swift; sourceTree = "<group>"; };
-		F9FE837BBB93492C83D31911 /* FilePathIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePathIO.swift; sourceTree = "<group>"; };
-		3F6C27EA17A843428468EA72 /* MockFilePathIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFilePathIO.swift; sourceTree = "<group>"; };
-		83BEB8DFC03F43E690DED845 /* AudioRecorderIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderIO.swift; sourceTree = "<group>"; };
-		8B775F209C2749ADB5B2B05D /* MockAudioRecorderIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAudioRecorderIO.swift; sourceTree = "<group>"; };
-		C1B2C3D4E5F6A1B2C3D4E704 /* MockClipboardIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockClipboardIO.swift; sourceTree = "<group>"; };
-		3986A974DC2E47BDB0792E31 /* AudioRecorderIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderIOTests.swift; sourceTree = "<group>"; };
-		C1B2C3D4E5F6A1B2C3D4E706 /* ClipboardIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardIOTests.swift; sourceTree = "<group>"; };
-		D183C8D3D64D4A05B5900C23 /* RecordingStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingStatusView.swift; sourceTree = "<group>"; };
-		C66ADAAA54A14C0CBFA3DF33 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
-				3FD9A9BFDB3A45BF9050D74B /* ChatMessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageTests.swift; sourceTree = "<group>"; };
-				E5605FB6E21C4996811DC35B /* PromptConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptConfig.swift; sourceTree = "<group>"; };
-				B49FC8987AB746C1886D91B7 /* PromptConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptConfigTests.swift; sourceTree = "<group>"; };
-				58EC3E77D768449390899AA5 /* ServiceAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAccount.swift; sourceTree = "<group>"; };
-				ABF15E2747BE4FDF8E634B07 /* ServiceAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAccountTests.swift; sourceTree = "<group>"; };
-				830785FC5F4D42048BB8789E /* ProviderIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderIO.swift; sourceTree = "<group>"; };
-				25243784D4774C66AB567D11 /* VertexMessageAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexMessageAdapter.swift; sourceTree = "<group>"; };
-				FB97BC87E45649B7A83E2C7A /* VertexMessageAdapterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexMessageAdapterTests.swift; sourceTree = "<group>"; };
-				86D7DEA93DFC45BB986B7EAB /* TokenProviderIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenProviderIO.swift; sourceTree = "<group>"; };
-				7F3572EAEC244DE7A88E17DB /* MockProviderIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProviderIO.swift; sourceTree = "<group>"; };
-				B63EE2FC8DD343D1857CA3DA /* MockTokenProviderIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTokenProviderIO.swift; sourceTree = "<group>"; };
-				CC2BE103BA5B4D1E91CFCA45 /* ProviderIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderIOTests.swift; sourceTree = "<group>"; };
-				6ECC9FAB945F48E2924EE49A /* JWTTokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTTokenProvider.swift; sourceTree = "<group>"; };
-				B153F13AD408473A8FB7D484 /* VertexAIIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexAIIO.swift; sourceTree = "<group>"; };
-				459BFB9B391C4DE5B7A92AE7 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
-				5B09D2A5398B4C14B6A0E221 /* VertexAIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexAIOTests.swift; sourceTree = "<group>"; };
-				9F9D80B5522A46A794E60848 /* ServiceAccountIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAccountIO.swift; sourceTree = "<group>"; };
-				D59EB176AD8B4DB493486BC3 /* ServiceAccountIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAccountIOTests.swift; sourceTree = "<group>"; };
-		/* End PBXFileReference section */
-
-/* Begin PBXGroup section */
-		A1B2C3D4E5F6A1B2C3D4E500 /* TalkFlow */ = {
-			isa = PBXGroup;
-			children = (
-				A1B2C3D4E5F6A1B2C3D4E501 /* main.swift */,
-				A1B2C3D4E5F6A1B2C3D4E502 /* AppDelegate.swift */,
-				A1B2C3D4E5F6A1B2C3D4E516 /* IO */,
-				A1B2C3D4E5F6A1B2C3D4E512 /* Utils */,
-				A1B2C3D4E5F6A1B2C3D4E508 /* Views */,
-				A1B2C3D4E5F6A1B2C3D4E504 /* Assets.xcassets */,
-				A1B2C3D4E5F6A1B2C3D4E503 /* Info.plist */,
-			);
-			path = TalkFlow;
-			sourceTree = "<group>";
-		};
-		A1B2C3D4E5F6A1B2C3D4E516 /* IO */ = {
-			isa = PBXGroup;
-			children = (
-				83BEB8DFC03F43E690DED845 /* AudioRecorderIO.swift */,
-				C1B2C3D4E5F6A1B2C3D4E702 /* ClipboardIO.swift */,
-				F9FE837BBB93492C83D31911 /* FilePathIO.swift */,
-				A1B2C3D4E5F6A1B2C3D4E520 /* PermissionIO.swift */,
-				A1B2C3D4E5F6A1B2C3D4E526 /* HotkeyIO.swift */,
-				9F9D80B5522A46A794E60848 /* ServiceAccountIO.swift */,
-				B153F13AD408473A8FB7D484 /* VertexAIIO.swift */,
-				6ECC9FAB945F48E2924EE49A /* JWTTokenProvider.swift */,
-				86D7DEA93DFC45BB986B7EAB /* TokenProviderIO.swift */,
-				830785FC5F4D42048BB8789E /* ProviderIO.swift */,
-			);
-			path = IO;
-			sourceTree = "<group>";
-		};
-		A1B2C3D4E5F6A1B2C3D4E512 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				6FD1B48199F9409787A57855 /* RecordingState.swift */,
-				A1B2C3D4E5F6A1B2C3D4E518 /* Permission.swift */,
-				A1B2C3D4E5F6A1B2C3D4E525 /* Hotkey.swift */,
-				25243784D4774C66AB567D11 /* VertexMessageAdapter.swift */,
-				58EC3E77D768449390899AA5 /* ServiceAccount.swift */,
-				E5605FB6E21C4996811DC35B /* PromptConfig.swift */,
-				C66ADAAA54A14C0CBFA3DF33 /* ChatMessage.swift */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
-		A1B2C3D4E5F6A1B2C3D4E508 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				D183C8D3D64D4A05B5900C23 /* RecordingStatusView.swift */,
-				A1B2C3D4E5F6A1B2C3D4E524 /* CardView.swift */,
-				A1B2C3D4E5F6A1B2C3D4E522 /* PermissionListView.swift */,
-				A1B2C3D4E5F6A1B2C3D4E527 /* HotkeySettingsView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		A1B2C3D4E5F6A1B2C3D4E509 /* = */ = {
-			isa = PBXGroup;
-			children = (
-				A1B2C3D4E5F6A1B2C3D4E500 /* TalkFlow */,
-				DD88553FEADD406D8ADF5A15 /* TalkFlowTests */,
-				A1B2C3D4E5F6A1B2C3D4E510 /* Products */,
-			);
-			sourceTree = "<group>";
-		};
-		A1B2C3D4E5F6A1B2C3D4E510 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A1B2C3D4E5F6A1B2C3D4E5F8 /* TalkFlow.app */,
-				4C044E5EE95348CBACF3159C /* TalkFlowTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		DD88553FEADD406D8ADF5A15 /* TalkFlowTests */ = {
-			isa = PBXGroup;
-			children = (
-				D0B461F9C4514EEABE70B615 /* Mocks */,
-				3BAFE738F38F478E87C53BEC /* Helpers */,
-				AA290EC17B624564AE6CE288 /* Pure */,
-				40F4A5F6BED5447E9E9F74CF /* IO */,
-				D112870FB8774447941623F8 /* ViewLogic */,
-			);
-			path = TalkFlowTests;
-			sourceTree = "<group>";
-		};
-		D0B461F9C4514EEABE70B615 /* Mocks */ = {
-			isa = PBXGroup;
-			children = (
-				8B775F209C2749ADB5B2B05D /* MockAudioRecorderIO.swift */,
-				C1B2C3D4E5F6A1B2C3D4E704 /* MockClipboardIO.swift */,
-				3F6C27EA17A843428468EA72 /* MockFilePathIO.swift */,
-				32EE0A96765C4E9CBE62461A /* MockPermissionIO.swift */,
-				B63EE2FC8DD343D1857CA3DA /* MockTokenProviderIO.swift */,
-				7F3572EAEC244DE7A88E17DB /* MockProviderIO.swift */,
-			);
-			path = Mocks;
-			sourceTree = "<group>";
-		};
-		3BAFE738F38F478E87C53BEC /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				5052B690BA844E1DAF3260F0 /* XCTestCaseAsync.swift */,
-				459BFB9B391C4DE5B7A92AE7 /* MockURLProtocol.swift */,
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
-		AA290EC17B624564AE6CE288 /* Pure */ = {
-			isa = PBXGroup;
-			children = (
-				DAADD4E9D7114C38B27D5E4C /* RecordingStateTests.swift */,
-				C3E883F3253B4CF498F09BCF /* MicPermissionStatusTests.swift */,
-				7440444015BC4FB69C8AD59E /* MicPermissionUIStateTests.swift */,
-				FB97BC87E45649B7A83E2C7A /* VertexMessageAdapterTests.swift */,
-				ABF15E2747BE4FDF8E634B07 /* ServiceAccountTests.swift */,
-				B49FC8987AB746C1886D91B7 /* PromptConfigTests.swift */,
-				3FD9A9BFDB3A45BF9050D74B /* ChatMessageTests.swift */,
-			);
-			path = Pure;
-			sourceTree = "<group>";
-		};
-		40F4A5F6BED5447E9E9F74CF /* IO */ = {
-			isa = PBXGroup;
-			children = (
-				3986A974DC2E47BDB0792E31 /* AudioRecorderIOTests.swift */,
-				C1B2C3D4E5F6A1B2C3D4E706 /* ClipboardIOTests.swift */,
-				54EDD714AA8E485D90B99A53 /* MicPermissionIOTests.swift */,
-				D59EB176AD8B4DB493486BC3 /* ServiceAccountIOTests.swift */,
-				5B09D2A5398B4C14B6A0E221 /* VertexAIOTests.swift */,
-				CC2BE103BA5B4D1E91CFCA45 /* ProviderIOTests.swift */,
-			);
-			path = IO;
-			sourceTree = "<group>";
-		};
-		D112870FB8774447941623F8 /* ViewLogic */ = {
-			isa = PBXGroup;
-			children = (
-				3B8D6DA6D0DF4619A9967F0B /* PermissionCheckViewTests.swift */,
-			);
-			path = ViewLogic;
-			sourceTree = "<group>";
-		};
-/* End PBXGroup section */
-
-/* Begin PBXNativeTarget section */
-		A1B2C3D4E5F6A1B2C3D4E5F9 /* TalkFlow */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A1B2C3D4E5F6A1B2C3D4E600 /* Build configuration list for PBXNativeTarget "TalkFlow" */;
-			buildPhases = (
-				A1B2C3D4E5F6A1B2C3D4E601 /* Sources */,
-				A1B2C3D4E5F6A1B2C3D4E602 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = TalkFlow;
-			productName = TalkFlow;
-			productReference = A1B2C3D4E5F6A1B2C3D4E5F8 /* TalkFlow.app */;
-			productType = "com.apple.product-type.application";
-		};
-		63838BEF40924695924AD8D9 /* TalkFlowTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 73C01B62F9A644A6A3BF8D04 /* Build configuration list for PBXNativeTarget "TalkFlowTests" */;
-			buildPhases = (
-				2047A542841C4FD6A08BBEE4 /* Sources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				049E91C7862A46A9BD892FDC /* PBXTargetDependency */,
-			);
-			name = TalkFlowTests;
-			productName = TalkFlowTests;
-			productReference = 4C044E5EE95348CBACF3159C /* TalkFlowTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-/* End PBXNativeTarget section */
-
-/* Begin PBXTargetDependency section */
-		049E91C7862A46A9BD892FDC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A1B2C3D4E5F6A1B2C3D4E5F9 /* TalkFlow */;
-			targetProxy = D1691A87231643209B7ED058 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXContainerItemProxy section */
-		D1691A87231643209B7ED058 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A1B2C3D4E5F6A1B2C3D4E699 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A1B2C3D4E5F6A1B2C3D4E5F9;
-			remoteInfo = TalkFlow;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXProject section */
-		A1B2C3D4E5F6A1B2C3D4E699 /* Project object */ = {
-			isa = PBXProject;
-			attributes = {
-				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1600;
-				LastUpgradeCheck = 1600;
-			};
-			buildConfigurationList = A1B2C3D4E5F6A1B2C3D4E700 /* Build configuration list for PBXProject "TalkFlow" */;
-			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-				Base,
-			);
-			mainGroup = A1B2C3D4E5F6A1B2C3D4E509 /* = */;
-			productRefGroup = A1B2C3D4E5F6A1B2C3D4E510 /* Products */;
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				A1B2C3D4E5F6A1B2C3D4E5F9 /* TalkFlow */,
-				63838BEF40924695924AD8D9 /* TalkFlowTests */,
-			);
-		};
-/* End PBXProject section */
-
-/* Begin PBXSourcesBuildPhase section */
-		A1B2C3D4E5F6A1B2C3D4E601 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				274BBF6D91DF4C7FB5C12F8A /* RecordingStatusView.swift in Sources */,
-				881A6C2713B74F3493EC76CE /* AudioRecorderIO.swift in Sources */,
-				C1B2C3D4E5F6A1B2C3D4E701 /* ClipboardIO.swift in Sources */,
-				4B7E8F3A1F294A3B92256977 /* FilePathIO.swift in Sources */,
-				91910FAB2CAA48F7AA32EB57 /* RecordingState.swift in Sources */,
-				B83A495B3C5C4B299E84EEFE /* ChatMessage.swift in Sources */,
-				A11D10447C054B478B79C9ED /* PromptConfig.swift in Sources */,
-1EF0CA9981774CD09609C1D1 /* ServiceAccount.swift in Sources */,
-								67CAFD07CE2E4D6CA330C88A /* ProviderIO.swift in Sources */,
-75A2D47751B34AEFA40FC0D9 /* VertexMessageAdapter.swift in Sources */,
-				1F0651092BBB4C05907569FD /* TokenProviderIO.swift in Sources */,
-								42BCE0697F1B42FBABC6BB1F /* JWTTokenProvider.swift in Sources */,
-FA2A53C496AE4EBDA9B81548 /* VertexAIIO.swift in Sources */,
-				CC797AB04818412D82B26B19 /* ServiceAccountIO.swift in Sources */,
-								A1B2C3D4E5F6A1B2C3D4E5F6 /* main.swift in Sources */,
-				A1B2C3D4E5F6A1B2C3D4E5F7 /* AppDelegate.swift in Sources */,
-				A1B2C3D4E5F6A1B2C3D4E506 /* PermissionListView.swift in Sources */,
-				A1B2C3D4E5F6A1B2C3D4E517 /* Permission.swift in Sources */,
-				A1B2C3D4E5F6A1B2C3D4E519 /* PermissionIO.swift in Sources */,
-				A1B2C3D4E5F6A1B2C3D4E523 /* CardView.swift in Sources */,
-				A1B2C3D4E5F6A1B2C3D4E528 /* Hotkey.swift in Sources */,
-				A1B2C3D4E5F6A1B2C3D4E529 /* HotkeyIO.swift in Sources */,
-				A1B2C3D4E5F6A1B2C3D4E530 /* HotkeySettingsView.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2047A542841C4FD6A08BBEE4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A980ADF0FC2F486493EDA770 /* AudioRecorderIOTests.swift in Sources */,
-				C1B2C3D4E5F6A1B2C3D4E705 /* ClipboardIOTests.swift in Sources */,
-				389214641CFD45F191E045CB /* MockAudioRecorderIO.swift in Sources */,
-				C1B2C3D4E5F6A1B2C3D4E703 /* MockClipboardIO.swift in Sources */,
-				035452780DE940D999EC7F8D /* MockFilePathIO.swift in Sources */,
-				524D73189BD14892AA939FF2 /* RecordingStateTests.swift in Sources */,
-				96F8A6ADCBC14712B92C76F4 /* MockPermissionIO.swift in Sources */,
-				054395ED9CA04554A29B3E9A /* XCTestCaseAsync.swift in Sources */,
-				1D92190071AD432AAFF9F6EB /* MicPermissionStatusTests.swift in Sources */,
-				B90FFCA35BB349DAB6B4B4CD /* MicPermissionUIStateTests.swift in Sources */,
-				3BCFF370E3AF460A9012F153 /* MicPermissionIOTests.swift in Sources */,
-				A388EAF11DB743CB8286AEFB /* ChatMessageTests.swift in Sources */,
-				D0949B4B6E784845999ED80E /* PromptConfigTests.swift in Sources */,
-40901967AA9E4F6E85113511 /* ServiceAccountTests.swift in Sources */,
-				A91122883B864E41B96C7B74 /* VertexMessageAdapterTests.swift in Sources */,
-				4521C0E7A15A4AAEAD23D093 /* MockProviderIO.swift in Sources */,
-				A8B9F7B49287461FBA9FB17E /* MockTokenProviderIO.swift in Sources */,
-				410D713E627648A1A2C71891 /* ProviderIOTests.swift in Sources */,
-				707813DF2FFE4B4E9563280B /* MockURLProtocol.swift in Sources */,
-				1F1E64F5110A46A7A52C4AA7 /* VertexAIOTests.swift in Sources */,
-				799707D52E0644CC96FAB0B5 /* ServiceAccountIOTests.swift in Sources */,
-								E8789C1ECE5544F4B9DBFD54 /* PermissionCheckViewTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin PBXResourcesBuildPhase section */
-		A1B2C3D4E5F6A1B2C3D4E602 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A1B2C3D4E5F6A1B2C3D4E505 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin XCBuildConfiguration section */
-		A1B2C3D4E5F6A1B2C3D4E701 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-			};
-			name = Debug;
-		};
-		A1B2C3D4E5F6A1B2C3D4E702 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_OPTIMIZATION_LEVEL = s;
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = macosx;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-			};
-			name = Release;
-		};
-		A1B2C3D4E5F6A1B2C3D4E703 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				ENABLE_HARDENED_RUNTIME = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TalkFlow/Info.plist;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.talkflow.app;
-				PRODUCT_NAME = TalkFlow;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		A1B2C3D4E5F6A1B2C3D4E704 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				ENABLE_HARDENED_RUNTIME = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TalkFlow/Info.plist;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.talkflow.app;
-				PRODUCT_NAME = TalkFlow;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		4B21E9491CED4C41B47209E1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.talkflow.tests;
-				PRODUCT_NAME = TalkFlowTests;
-				SWIFT_VERSION = 5.0;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TalkFlow.app/Contents/MacOS/TalkFlow";
-			};
-			name = Debug;
-		};
-		27D8459A7081442B83B1DEDC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.talkflow.tests;
-				PRODUCT_NAME = TalkFlowTests;
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TalkFlow.app/Contents/MacOS/TalkFlow";
-			};
-			name = Release;
-		};
-/* End XCBuildConfiguration section */
-
-/* Begin XCConfigurationList section */
-		A1B2C3D4E5F6A1B2C3D4E600 /* Build configuration list for PBXNativeTarget "TalkFlow" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A1B2C3D4E5F6A1B2C3D4E703 /* Debug */,
-				A1B2C3D4E5F6A1B2C3D4E704 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A1B2C3D4E5F6A1B2C3D4E700 /* Build configuration list for PBXProject "TalkFlow" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A1B2C3D4E5F6A1B2C3D4E701 /* Debug */,
-				A1B2C3D4E5F6A1B2C3D4E702 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		73C01B62F9A644A6A3BF8D04 /* Build configuration list for PBXNativeTarget "TalkFlowTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4B21E9491CED4C41B47209E1 /* Debug */,
-				27D8459A7081442B83B1DEDC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-/* End XCConfigurationList section */
-	};
-	rootObject = A1B2C3D4E5F6A1B2C3D4E699 /* Project object */;
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>archiveVersion</key>
+	<string>1</string>
+	<key>classes</key>
+	<dict/>
+	<key>objectVersion</key>
+	<string>56</string>
+	<key>objects</key>
+	<dict>
+		<key>035452780DE940D999EC7F8D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3F6C27EA17A843428468EA72</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>049E91C7862A46A9BD892FDC</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>target</key>
+			<string>A1B2C3D4E5F6A1B2C3D4E5F9</string>
+			<key>targetProxy</key>
+			<string>D1691A87231643209B7ED058</string>
+		</dict>
+		<key>0506E5C8520849749A320F07</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>FbankExtractor.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>054395ED9CA04554A29B3E9A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5052B690BA844E1DAF3260F0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>07B16567D7044B9E905F50E9</key>
+		<dict>
+			<key>fileRef</key>
+			<string>55D86B63D0BE4ABBB56FF8F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>19C2DADB86AE4A71955DAAF8</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>SenseVoiceEngineIO.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1D92190071AD432AAFF9F6EB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C3E883F3253B4CF498F09BCF</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>2047A542841C4FD6A08BBEE4</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>A980ADF0FC2F486493EDA770</string>
+				<string>C1B2C3D4E5F6A1B2C3D4E705</string>
+				<string>389214641CFD45F191E045CB</string>
+				<string>C1B2C3D4E5F6A1B2C3D4E703</string>
+				<string>035452780DE940D999EC7F8D</string>
+				<string>524D73189BD14892AA939FF2</string>
+				<string>96F8A6ADCBC14712B92C76F4</string>
+				<string>054395ED9CA04554A29B3E9A</string>
+				<string>1D92190071AD432AAFF9F6EB</string>
+				<string>B90FFCA35BB349DAB6B4B4CD</string>
+				<string>3BCFF370E3AF460A9012F153</string>
+				<string>E8789C1ECE5544F4B9DBFD54</string>
+				<string>E9689FBD422D41A78BF0469F</string>
+				<string>456325FA75774BA2912F6608</string>
+				<string>07B16567D7044B9E905F50E9</string>
+				<string>3FC856034ADE4ABA831CE337</string>
+				<string>53A635FBD9734986BB0E7114</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>274BBF6D91DF4C7FB5C12F8A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D183C8D3D64D4A05B5900C23</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>27D8459A7081442B83B1DEDC</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>BUNDLE_LOADER</key>
+				<string>$(TEST_HOST)</string>
+				<key>CODE_SIGN_STYLE</key>
+				<string>Automatic</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>GENERATE_INFOPLIST_FILE</key>
+				<string>YES</string>
+				<key>MACOSX_DEPLOYMENT_TARGET</key>
+				<string>14.0</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>com.talkflow.tests</string>
+				<key>PRODUCT_NAME</key>
+				<string>TalkFlowTests</string>
+				<key>SWIFT_VERSION</key>
+				<string>5.0</string>
+				<key>TEST_HOST</key>
+				<string>$(BUILT_PRODUCTS_DIR)/TalkFlow.app/Contents/MacOS/TalkFlow</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>32EE0A96765C4E9CBE62461A</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>MockPermissionIO.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>389214641CFD45F191E045CB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>8B775F209C2749ADB5B2B05D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>3986A974DC2E47BDB0792E31</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>AudioRecorderIOTests.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3B8D6DA6D0DF4619A9967F0B</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>PermissionCheckViewTests.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BAFE738F38F478E87C53BEC</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>5052B690BA844E1DAF3260F0</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Helpers</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BCFF370E3AF460A9012F153</key>
+		<dict>
+			<key>fileRef</key>
+			<string>54EDD714AA8E485D90B99A53</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>3F6C27EA17A843428468EA72</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>MockFilePathIO.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3FC856034ADE4ABA831CE337</key>
+		<dict>
+			<key>fileRef</key>
+			<string>AF5639DD2A874A2EBA4EC50D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>3FE0ECB83A6A445A87509942</key>
+		<dict>
+			<key>fileRef</key>
+			<string>19C2DADB86AE4A71955DAAF8</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>40F4A5F6BED5447E9E9F74CF</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>3986A974DC2E47BDB0792E31</string>
+				<string>C1B2C3D4E5F6A1B2C3D4E706</string>
+				<string>54EDD714AA8E485D90B99A53</string>
+				<string>AF5639DD2A874A2EBA4EC50D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>IO</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>456325FA75774BA2912F6608</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B240948846CF48DF9E5EB5E8</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4874117D483C4470AFA968AE</key>
+		<dict>
+			<key>fileRef</key>
+			<string>902EC597EFB74B479C7CFC0A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4B21E9491CED4C41B47209E1</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>BUNDLE_LOADER</key>
+				<string>$(TEST_HOST)</string>
+				<key>CODE_SIGN_STYLE</key>
+				<string>Automatic</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>GENERATE_INFOPLIST_FILE</key>
+				<string>YES</string>
+				<key>MACOSX_DEPLOYMENT_TARGET</key>
+				<string>14.0</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>com.talkflow.tests</string>
+				<key>PRODUCT_NAME</key>
+				<string>TalkFlowTests</string>
+				<key>SWIFT_VERSION</key>
+				<string>5.0</string>
+				<key>TEST_HOST</key>
+				<string>$(BUILT_PRODUCTS_DIR)/TalkFlow.app/Contents/MacOS/TalkFlow</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>4B7E8F3A1F294A3B92256977</key>
+		<dict>
+			<key>fileRef</key>
+			<string>F9FE837BBB93492C83D31911</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4C044E5EE95348CBACF3159C</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.cfbundle</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>TalkFlowTests.xctest</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>5052B690BA844E1DAF3260F0</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>XCTestCaseAsync.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>524D73189BD14892AA939FF2</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DAADD4E9D7114C38B27D5E4C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>53A635FBD9734986BB0E7114</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D384B1BCE65E49E48A1C82DC</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>54EDD714AA8E485D90B99A53</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>MicPermissionIOTests.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>55D86B63D0BE4ABBB56FF8F7</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>TokenDecoderTests.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>560E73B216B14A4DA5F203D8</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>FbankFeature.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>63838BEF40924695924AD8D9</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>73C01B62F9A644A6A3BF8D04</string>
+			<key>buildPhases</key>
+			<array>
+				<string>2047A542841C4FD6A08BBEE4</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array>
+				<string>049E91C7862A46A9BD892FDC</string>
+			</array>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>TalkFlowTests</string>
+			<key>productName</key>
+			<string>TalkFlowTests</string>
+			<key>productReference</key>
+			<string>4C044E5EE95348CBACF3159C</string>
+			<key>productType</key>
+			<string>com.apple.product-type.bundle.unit-test</string>
+		</dict>
+		<key>667BDCA79AB244BAA9058E4F</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>TokenDecoder.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>6FD1B48199F9409787A57855</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>RecordingState.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>73C01B62F9A644A6A3BF8D04</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>4B21E9491CED4C41B47209E1</string>
+				<string>27D8459A7081442B83B1DEDC</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>7440444015BC4FB69C8AD59E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>MicPermissionUIStateTests.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>79D46372155D4AEF9BE350E2</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0506E5C8520849749A320F07</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>83BEB8DFC03F43E690DED845</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>AudioRecorderIO.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>84B1150BB57145B9B4A8A3B6</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FC47BBA3FF7D41069289DCA9</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>881A6C2713B74F3493EC76CE</key>
+		<dict>
+			<key>fileRef</key>
+			<string>83BEB8DFC03F43E690DED845</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>8B775F209C2749ADB5B2B05D</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>MockAudioRecorderIO.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>902EC597EFB74B479C7CFC0A</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>SenseVoiceIO.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>91910FAB2CAA48F7AA32EB57</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6FD1B48199F9409787A57855</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>96F8A6ADCBC14712B92C76F4</key>
+		<dict>
+			<key>fileRef</key>
+			<string>32EE0A96765C4E9CBE62461A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9DCF00B777F64E8286D1C7C6</key>
+		<dict>
+			<key>fileRef</key>
+			<string>560E73B216B14A4DA5F203D8</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E500</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>A1B2C3D4E5F6A1B2C3D4E501</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E502</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E516</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E512</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E508</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E504</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E503</string>
+				<string>FC47BBA3FF7D41069289DCA9</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>TalkFlow</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E501</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>main.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E502</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>AppDelegate.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E503</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E504</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>folder.assetcatalog</string>
+			<key>path</key>
+			<string>Assets.xcassets</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E505</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A1B2C3D4E5F6A1B2C3D4E504</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E506</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A1B2C3D4E5F6A1B2C3D4E522</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E507</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>PermissionCheckView.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E508</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>D183C8D3D64D4A05B5900C23</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E524</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E522</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E527</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Views</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E509</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>A1B2C3D4E5F6A1B2C3D4E500</string>
+				<string>DD88553FEADD406D8ADF5A15</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E510</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E510</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>A1B2C3D4E5F6A1B2C3D4E5F8</string>
+				<string>4C044E5EE95348CBACF3159C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E511</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>MicPermission.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E512</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>6FD1B48199F9409787A57855</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E518</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E525</string>
+				<string>FF70BE06CAC748438A5424E7</string>
+				<string>560E73B216B14A4DA5F203D8</string>
+				<string>667BDCA79AB244BAA9058E4F</string>
+				<string>0506E5C8520849749A320F07</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Utils</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E515</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>MicPermissionIO.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E516</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>83BEB8DFC03F43E690DED845</string>
+				<string>C1B2C3D4E5F6A1B2C3D4E702</string>
+				<string>F9FE837BBB93492C83D31911</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E520</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E526</string>
+				<string>902EC597EFB74B479C7CFC0A</string>
+				<string>19C2DADB86AE4A71955DAAF8</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>IO</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E517</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A1B2C3D4E5F6A1B2C3D4E518</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E518</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>Permission.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E519</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A1B2C3D4E5F6A1B2C3D4E520</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E520</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>PermissionIO.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E522</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>PermissionListView.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E523</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A1B2C3D4E5F6A1B2C3D4E524</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E524</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>CardView.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E525</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>Hotkey.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E526</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>HotkeyIO.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E527</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>HotkeySettingsView.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E528</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A1B2C3D4E5F6A1B2C3D4E525</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E529</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A1B2C3D4E5F6A1B2C3D4E526</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E530</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A1B2C3D4E5F6A1B2C3D4E527</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E5F6</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A1B2C3D4E5F6A1B2C3D4E501</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E5F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A1B2C3D4E5F6A1B2C3D4E502</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E5F8</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.application</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>TalkFlow.app</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E5F9</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>A1B2C3D4E5F6A1B2C3D4E600</string>
+			<key>buildPhases</key>
+			<array>
+				<string>A1B2C3D4E5F6A1B2C3D4E601</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E602</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>TalkFlow</string>
+			<key>productName</key>
+			<string>TalkFlow</string>
+			<key>productReference</key>
+			<string>A1B2C3D4E5F6A1B2C3D4E5F8</string>
+			<key>productType</key>
+			<string>com.apple.product-type.application</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E600</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>A1B2C3D4E5F6A1B2C3D4E703</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E704</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E601</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>274BBF6D91DF4C7FB5C12F8A</string>
+				<string>881A6C2713B74F3493EC76CE</string>
+				<string>C1B2C3D4E5F6A1B2C3D4E701</string>
+				<string>4B7E8F3A1F294A3B92256977</string>
+				<string>91910FAB2CAA48F7AA32EB57</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E5F6</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E5F7</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E506</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E517</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E519</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E523</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E528</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E529</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E530</string>
+				<string>D54C8989C7854F939CDFAAB1</string>
+				<string>9DCF00B777F64E8286D1C7C6</string>
+				<string>FF190FF7E92F4BE28EF5A33E</string>
+				<string>79D46372155D4AEF9BE350E2</string>
+				<string>4874117D483C4470AFA968AE</string>
+				<string>3FE0ECB83A6A445A87509942</string>
+				<string>84B1150BB57145B9B4A8A3B6</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E602</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>A1B2C3D4E5F6A1B2C3D4E505</string>
+			</array>
+			<key>isa</key>
+			<string>PBXResourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E699</key>
+		<dict>
+			<key>attributes</key>
+			<dict>
+				<key>BuildIndependentTargetsInParallel</key>
+				<string>1</string>
+				<key>LastSwiftUpdateCheck</key>
+				<string>1600</string>
+				<key>LastUpgradeCheck</key>
+				<string>1600</string>
+			</dict>
+			<key>buildConfigurationList</key>
+			<string>A1B2C3D4E5F6A1B2C3D4E700</string>
+			<key>compatibilityVersion</key>
+			<string>Xcode 14.0</string>
+			<key>developmentRegion</key>
+			<string>en</string>
+			<key>hasScannedForEncodings</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXProject</string>
+			<key>knownRegions</key>
+			<array>
+				<string>en</string>
+				<string>Base</string>
+			</array>
+			<key>mainGroup</key>
+			<string>A1B2C3D4E5F6A1B2C3D4E509</string>
+			<key>productRefGroup</key>
+			<string>A1B2C3D4E5F6A1B2C3D4E510</string>
+			<key>projectDirPath</key>
+			<string></string>
+			<key>projectRoot</key>
+			<string></string>
+			<key>targets</key>
+			<array>
+				<string>A1B2C3D4E5F6A1B2C3D4E5F9</string>
+				<string>63838BEF40924695924AD8D9</string>
+			</array>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E700</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>A1B2C3D4E5F6A1B2C3D4E701</string>
+				<string>A1B2C3D4E5F6A1B2C3D4E702</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E701</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_ANALYZER_NONNULL</key>
+				<string>YES</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++20</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>NO</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>ENABLE_TESTABILITY</key>
+				<string>YES</string>
+				<key>GCC_DYNAMIC_NO_PIC</key>
+				<string>NO</string>
+				<key>GCC_OPTIMIZATION_LEVEL</key>
+				<string>0</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>MACOSX_DEPLOYMENT_TARGET</key>
+				<string>14.0</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>INCLUDE_SOURCE</string>
+				<key>ONLY_ACTIVE_ARCH</key>
+				<string>YES</string>
+				<key>SDKROOT</key>
+				<string>macosx</string>
+				<key>SWIFT_ACTIVE_COMPILATION_CONDITIONS</key>
+				<string>DEBUG</string>
+				<key>SWIFT_OPTIMIZATION_LEVEL</key>
+				<string>-Onone</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E702</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_ANALYZER_NONNULL</key>
+				<string>YES</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++20</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>NO</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>ENABLE_NS_ASSERTIONS</key>
+				<string>NO</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_OPTIMIZATION_LEVEL</key>
+				<string>s</string>
+				<key>MACOSX_DEPLOYMENT_TARGET</key>
+				<string>14.0</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>SDKROOT</key>
+				<string>macosx</string>
+				<key>SWIFT_COMPILATION_MODE</key>
+				<string>wholemodule</string>
+				<key>SWIFT_OPTIMIZATION_LEVEL</key>
+				<string>-O</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E703</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
+				<key>CODE_SIGN_STYLE</key>
+				<string>Automatic</string>
+				<key>COMBINE_HIDPI_IMAGES</key>
+				<string>YES</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>ENABLE_HARDENED_RUNTIME</key>
+				<string>YES</string>
+				<key>GENERATE_INFOPLIST_FILE</key>
+				<string>YES</string>
+				<key>HEADER_SEARCH_PATHS</key>
+				<array>
+					<string>$(SRCROOT)/TalkFlow/STT/onnxruntime/include</string>
+				</array>
+				<key>INFOPLIST_FILE</key>
+				<string>TalkFlow/Info.plist</string>
+				<key>INFOPLIST_KEY_NSHumanReadableCopyright</key>
+				<string></string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/../Frameworks</string>
+				</array>
+				<key>LIBRARY_SEARCH_PATHS</key>
+				<array>
+					<string>$(SRCROOT)/TalkFlow/STT/onnxruntime</string>
+				</array>
+				<key>MARKETING_VERSION</key>
+				<string>1.0</string>
+				<key>OTHER_LDFLAGS</key>
+				<array>
+					<string>-lonnxruntime</string>
+				</array>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>com.talkflow.app</string>
+				<key>PRODUCT_NAME</key>
+				<string>TalkFlow</string>
+				<key>SWIFT_EMIT_LOC_STRINGS</key>
+				<string>YES</string>
+				<key>SWIFT_OBJC_BRIDGING_HEADER</key>
+				<string>TalkFlow/TalkFlow-Bridging-Header.h</string>
+				<key>SWIFT_VERSION</key>
+				<string>5.0</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>A1B2C3D4E5F6A1B2C3D4E704</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
+				<key>CODE_SIGN_STYLE</key>
+				<string>Automatic</string>
+				<key>COMBINE_HIDPI_IMAGES</key>
+				<string>YES</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>ENABLE_HARDENED_RUNTIME</key>
+				<string>YES</string>
+				<key>GENERATE_INFOPLIST_FILE</key>
+				<string>YES</string>
+				<key>HEADER_SEARCH_PATHS</key>
+				<array>
+					<string>$(SRCROOT)/TalkFlow/STT/onnxruntime/include</string>
+				</array>
+				<key>INFOPLIST_FILE</key>
+				<string>TalkFlow/Info.plist</string>
+				<key>INFOPLIST_KEY_NSHumanReadableCopyright</key>
+				<string></string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/../Frameworks</string>
+				</array>
+				<key>LIBRARY_SEARCH_PATHS</key>
+				<array>
+					<string>$(SRCROOT)/TalkFlow/STT/onnxruntime</string>
+				</array>
+				<key>MARKETING_VERSION</key>
+				<string>1.0</string>
+				<key>OTHER_LDFLAGS</key>
+				<array>
+					<string>-lonnxruntime</string>
+				</array>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>com.talkflow.app</string>
+				<key>PRODUCT_NAME</key>
+				<string>TalkFlow</string>
+				<key>SWIFT_EMIT_LOC_STRINGS</key>
+				<string>YES</string>
+				<key>SWIFT_OBJC_BRIDGING_HEADER</key>
+				<string>TalkFlow/TalkFlow-Bridging-Header.h</string>
+				<key>SWIFT_VERSION</key>
+				<string>5.0</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>A980ADF0FC2F486493EDA770</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3986A974DC2E47BDB0792E31</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>AA290EC17B624564AE6CE288</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>DAADD4E9D7114C38B27D5E4C</string>
+				<string>C3E883F3253B4CF498F09BCF</string>
+				<string>7440444015BC4FB69C8AD59E</string>
+				<string>C41285D1EF9B490391216CCE</string>
+				<string>B240948846CF48DF9E5EB5E8</string>
+				<string>55D86B63D0BE4ABBB56FF8F7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Pure</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>AF5639DD2A874A2EBA4EC50D</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>SenseVoiceEngineIOTests.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B240948846CF48DF9E5EB5E8</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>FbankFeatureTests.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B90FFCA35BB349DAB6B4B4CD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>7440444015BC4FB69C8AD59E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>C1B2C3D4E5F6A1B2C3D4E701</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C1B2C3D4E5F6A1B2C3D4E702</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>C1B2C3D4E5F6A1B2C3D4E702</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>ClipboardIO.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C1B2C3D4E5F6A1B2C3D4E703</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C1B2C3D4E5F6A1B2C3D4E704</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>C1B2C3D4E5F6A1B2C3D4E704</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>MockClipboardIO.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C1B2C3D4E5F6A1B2C3D4E705</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C1B2C3D4E5F6A1B2C3D4E706</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>C1B2C3D4E5F6A1B2C3D4E706</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>ClipboardIOTests.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C3E883F3253B4CF498F09BCF</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>MicPermissionStatusTests.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C41285D1EF9B490391216CCE</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>STTResultTests.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D0B461F9C4514EEABE70B615</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>8B775F209C2749ADB5B2B05D</string>
+				<string>C1B2C3D4E5F6A1B2C3D4E704</string>
+				<string>3F6C27EA17A843428468EA72</string>
+				<string>32EE0A96765C4E9CBE62461A</string>
+				<string>D384B1BCE65E49E48A1C82DC</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Mocks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D112870FB8774447941623F8</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>3B8D6DA6D0DF4619A9967F0B</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>ViewLogic</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D1691A87231643209B7ED058</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>A1B2C3D4E5F6A1B2C3D4E699</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>A1B2C3D4E5F6A1B2C3D4E5F9</string>
+			<key>remoteInfo</key>
+			<string>TalkFlow</string>
+		</dict>
+		<key>D183C8D3D64D4A05B5900C23</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>RecordingStatusView.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D384B1BCE65E49E48A1C82DC</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>MockONSSTSession.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D54C8989C7854F939CDFAAB1</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FF70BE06CAC748438A5424E7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DAADD4E9D7114C38B27D5E4C</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>RecordingStateTests.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DD88553FEADD406D8ADF5A15</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>D0B461F9C4514EEABE70B615</string>
+				<string>3BAFE738F38F478E87C53BEC</string>
+				<string>AA290EC17B624564AE6CE288</string>
+				<string>40F4A5F6BED5447E9E9F74CF</string>
+				<string>D112870FB8774447941623F8</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>TalkFlowTests</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E8789C1ECE5544F4B9DBFD54</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3B8D6DA6D0DF4619A9967F0B</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>E9689FBD422D41A78BF0469F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C41285D1EF9B490391216CCE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>F9FE837BBB93492C83D31911</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>FilePathIO.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FC47BBA3FF7D41069289DCA9</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.c</string>
+			<key>path</key>
+			<string>STT/onnxruntime/TalkFlowORTBridge.c</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FF190FF7E92F4BE28EF5A33E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>667BDCA79AB244BAA9058E4F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FF70BE06CAC748438A5424E7</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>STTResult.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+	</dict>
+	<key>rootObject</key>
+	<string>A1B2C3D4E5F6A1B2C3D4E699</string>
+</dict>
+</plist>
