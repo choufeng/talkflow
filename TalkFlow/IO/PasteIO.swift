@@ -1,4 +1,4 @@
-import Foundation
+import AppKit
 
 // MARK: - 协议
 
@@ -22,9 +22,9 @@ final class CGEventPasteIO: PasteIO {
         down.flags = .maskCommand
         up.flags = .maskCommand
 
-        let postDown = down.post(tap: .cgAnnotatedSessionEventTap)
-        let postUp = up.post(tap: .cgAnnotatedSessionEventTap)
+        down.post(tap: .cgAnnotatedSessionEventTap)
+        up.post(tap: .cgAnnotatedSessionEventTap)
 
-        return postDown == .success && postUp == .success
+        return true
     }
 }

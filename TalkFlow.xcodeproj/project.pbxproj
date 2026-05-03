@@ -92,6 +92,8 @@
 				<string>07B16567D7044B9E905F50E9</string>
 				<string>3FC856034ADE4ABA831CE337</string>
 				<string>53A635FBD9734986BB0E7114</string>
+				<string>30DACB75494749B39A8F7DA0</string>
+				<string>ACA13395D123462E891F2FCA</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
@@ -132,6 +134,13 @@
 			<string>XCBuildConfiguration</string>
 			<key>name</key>
 			<string>Release</string>
+		</dict>
+		<key>30DACB75494749B39A8F7DA0</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A385F2D487694A21A6956075</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>32EE0A96765C4E9CBE62461A</key>
 		<dict>
@@ -226,6 +235,7 @@
 				<string>C1B2C3D4E5F6A1B2C3D4E706</string>
 				<string>54EDD714AA8E485D90B99A53</string>
 				<string>AF5639DD2A874A2EBA4EC50D</string>
+				<string>6EB7ADAF0670456386928B3F</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -295,6 +305,17 @@
 			<string>TalkFlowTests.xctest</string>
 			<key>sourceTree</key>
 			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>4ED4B478A31A48588936BB62</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>PasteIO.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>5052B690BA844E1DAF3260F0</key>
 		<dict>
@@ -387,6 +408,17 @@
 			<string>sourcecode.swift</string>
 			<key>path</key>
 			<string>TokenDecoder.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>6EB7ADAF0670456386928B3F</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>PasteIOTests.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -491,6 +523,13 @@
 		<dict>
 			<key>fileRef</key>
 			<string>32EE0A96765C4E9CBE62461A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>99264DD31AD147248AB399B0</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4ED4B478A31A48588936BB62</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -686,6 +725,7 @@
 				<string>A1B2C3D4E5F6A1B2C3D4E526</string>
 				<string>902EC597EFB74B479C7CFC0A</string>
 				<string>19C2DADB86AE4A71955DAAF8</string>
+				<string>4ED4B478A31A48588936BB62</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -924,6 +964,7 @@
 				<string>3FE0ECB83A6A445A87509942</string>
 				<string>84B1150BB57145B9B4A8A3B6</string>
 				<string>TF01TRSV00000000000000000BF</string>
+				<string>99264DD31AD147248AB399B0</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
@@ -1196,6 +1237,17 @@
 			<key>name</key>
 			<string>Release</string>
 		</dict>
+		<key>A385F2D487694A21A6956075</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>MockPasteIO.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>A980ADF0FC2F486493EDA770</key>
 		<dict>
 			<key>fileRef</key>
@@ -1220,6 +1272,13 @@
 			<string>Pure</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>ACA13395D123462E891F2FCA</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6EB7ADAF0670456386928B3F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>AF5639DD2A874A2EBA4EC50D</key>
 		<dict>
@@ -1335,6 +1394,7 @@
 				<string>3F6C27EA17A843428468EA72</string>
 				<string>32EE0A96765C4E9CBE62461A</string>
 				<string>D384B1BCE65E49E48A1C82DC</string>
+				<string>A385F2D487694A21A6956075</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
