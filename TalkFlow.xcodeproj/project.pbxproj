@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A1B2C3D4E5F6A1B2C3D4E5F6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E501; };
 		A1B2C3D4E5F6A1B2C3D4E5F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E502; };
+		A1B2C3D4E5F6A1B2C3D4E505 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E504; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,6 +17,7 @@
 		A1B2C3D4E5F6A1B2C3D4E501 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F6A1B2C3D4E502 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F6A1B2C3D4E503 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1B2C3D4E5F6A1B2C3D4E504 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -24,6 +26,7 @@
 			children = (
 				A1B2C3D4E5F6A1B2C3D4E501 /* main.swift */,
 				A1B2C3D4E5F6A1B2C3D4E502 /* AppDelegate.swift */,
+				A1B2C3D4E5F6A1B2C3D4E504 /* Assets.xcassets */,
 				A1B2C3D4E5F6A1B2C3D4E503 /* Info.plist */,
 			);
 			path = TalkFlow;
@@ -53,6 +56,7 @@
 			buildConfigurationList = A1B2C3D4E5F6A1B2C3D4E600 /* Build configuration list for PBXNativeTarget "TalkFlow" */;
 			buildPhases = (
 				A1B2C3D4E5F6A1B2C3D4E601 /* Sources */,
+				A1B2C3D4E5F6A1B2C3D4E602 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -102,6 +106,17 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A1B2C3D4E5F6A1B2C3D4E602 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1B2C3D4E5F6A1B2C3D4E505 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
 		A1B2C3D4E5F6A1B2C3D4E701 /* Debug */ = {
