@@ -31,6 +31,7 @@
 		389214641CFD45F191E045CB /* MockAudioRecorderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B775F209C2749ADB5B2B05D /* MockAudioRecorderIO.swift */; };
 		C1B2C3D4E5F6A1B2C3D4E703 /* MockClipboardIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B2C3D4E5F6A1B2C3D4E704 /* MockClipboardIO.swift */; };
 		A980ADF0FC2F486493EDA770 /* AudioRecorderIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3986A974DC2E47BDB0792E31 /* AudioRecorderIOTests.swift */; };
+		C1B2C3D4E5F6A1B2C3D4E705 /* ClipboardIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B2C3D4E5F6A1B2C3D4E706 /* ClipboardIOTests.swift */; };
 		274BBF6D91DF4C7FB5C12F8A /* RecordingStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D183C8D3D64D4A05B5900C23 /* RecordingStatusView.swift */; };
 		C1B2C3D4E5F6A1B2C3D4E701 /* ClipboardIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B2C3D4E5F6A1B2C3D4E702 /* ClipboardIO.swift */; };
 /* End PBXBuildFile section */
@@ -67,6 +68,7 @@
 		8B775F209C2749ADB5B2B05D /* MockAudioRecorderIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAudioRecorderIO.swift; sourceTree = "<group>"; };
 		C1B2C3D4E5F6A1B2C3D4E704 /* MockClipboardIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockClipboardIO.swift; sourceTree = "<group>"; };
 		3986A974DC2E47BDB0792E31 /* AudioRecorderIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderIOTests.swift; sourceTree = "<group>"; };
+		C1B2C3D4E5F6A1B2C3D4E706 /* ClipboardIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardIOTests.swift; sourceTree = "<group>"; };
 		D183C8D3D64D4A05B5900C23 /* RecordingStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingStatusView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -181,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				3986A974DC2E47BDB0792E31 /* AudioRecorderIOTests.swift */,
+				C1B2C3D4E5F6A1B2C3D4E706 /* ClipboardIOTests.swift */,
 				54EDD714AA8E485D90B99A53 /* MicPermissionIOTests.swift */,
 			);
 			path = IO;
@@ -303,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A980ADF0FC2F486493EDA770 /* AudioRecorderIOTests.swift in Sources */,
+				C1B2C3D4E5F6A1B2C3D4E705 /* ClipboardIOTests.swift in Sources */,
 				389214641CFD45F191E045CB /* MockAudioRecorderIO.swift in Sources */,
 				C1B2C3D4E5F6A1B2C3D4E703 /* MockClipboardIO.swift in Sources */,
 				035452780DE940D999EC7F8D /* MockFilePathIO.swift in Sources */,
