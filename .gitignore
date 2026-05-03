@@ -1,0 +1,17 @@
+# Xcode - 用户特定数据
+xcuserdata/
+*.xcuserstate
+
+# Xcode - 构建产物
+build/
+*.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+
+# Swift Package Manager
+.swiftpm/
+.build/
+
+# CocoaPods
+Pods/
+
+# macOS
+.DS_Store
