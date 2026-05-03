@@ -49,7 +49,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window?.center()
 
         // 权限检查模块
-        let permissionView = PermissionCheckView(frame: windowRect)
+        let ios: [PermissionIO] = [MicrophonePermissionIO(), AccessibilityPermissionIO()]
+        let permissionView = PermissionListView(frame: windowRect, ios: ios)
         permissionView.setUp()
         window?.contentView = permissionView
 
