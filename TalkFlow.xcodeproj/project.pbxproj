@@ -31,7 +31,9 @@
 		389214641CFD45F191E045CB /* MockAudioRecorderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B775F209C2749ADB5B2B05D /* MockAudioRecorderIO.swift */; };
 		A980ADF0FC2F486493EDA770 /* AudioRecorderIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3986A974DC2E47BDB0792E31 /* AudioRecorderIOTests.swift */; };
 		274BBF6D91DF4C7FB5C12F8A /* RecordingStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D183C8D3D64D4A05B5900C23 /* RecordingStatusView.swift */; };
-/* End PBXBuildFile section */
+		B83A495B3C5C4B299E84EEFE /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66ADAAA54A14C0CBFA3DF33 /* ChatMessage.swift */; };
+				A388EAF11DB743CB8286AEFB /* ChatMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A9BFDB3A45BF9050D74B /* ChatMessageTests.swift */; };
+		/* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A1B2C3D4E5F6A1B2C3D4E5F8 /* TalkFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TalkFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,7 +66,9 @@
 		8B775F209C2749ADB5B2B05D /* MockAudioRecorderIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAudioRecorderIO.swift; sourceTree = "<group>"; };
 		3986A974DC2E47BDB0792E31 /* AudioRecorderIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderIOTests.swift; sourceTree = "<group>"; };
 		D183C8D3D64D4A05B5900C23 /* RecordingStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingStatusView.swift; sourceTree = "<group>"; };
-/* End PBXFileReference section */
+		C66ADAAA54A14C0CBFA3DF33 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+				3FD9A9BFDB3A45BF9050D74B /* ChatMessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageTests.swift; sourceTree = "<group>"; };
+		/* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		A1B2C3D4E5F6A1B2C3D4E500 /* TalkFlow */ = {
@@ -98,6 +102,7 @@
 				6FD1B48199F9409787A57855 /* RecordingState.swift */,
 				A1B2C3D4E5F6A1B2C3D4E518 /* Permission.swift */,
 				A1B2C3D4E5F6A1B2C3D4E525 /* Hotkey.swift */,
+				C66ADAAA54A14C0CBFA3DF33 /* ChatMessage.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -167,6 +172,7 @@
 				DAADD4E9D7114C38B27D5E4C /* RecordingStateTests.swift */,
 				C3E883F3253B4CF498F09BCF /* MicPermissionStatusTests.swift */,
 				7440444015BC4FB69C8AD59E /* MicPermissionUIStateTests.swift */,
+				3FD9A9BFDB3A45BF9050D74B /* ChatMessageTests.swift */,
 			);
 			path = Pure;
 			sourceTree = "<group>";
@@ -279,6 +285,7 @@
 				881A6C2713B74F3493EC76CE /* AudioRecorderIO.swift in Sources */,
 				4B7E8F3A1F294A3B92256977 /* FilePathIO.swift in Sources */,
 				91910FAB2CAA48F7AA32EB57 /* RecordingState.swift in Sources */,
+				B83A495B3C5C4B299E84EEFE /* ChatMessage.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E5F6 /* main.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E5F7 /* AppDelegate.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E506 /* PermissionListView.swift in Sources */,
@@ -304,6 +311,7 @@
 				1D92190071AD432AAFF9F6EB /* MicPermissionStatusTests.swift in Sources */,
 				B90FFCA35BB349DAB6B4B4CD /* MicPermissionUIStateTests.swift in Sources */,
 				3BCFF370E3AF460A9012F153 /* MicPermissionIOTests.swift in Sources */,
+				A388EAF11DB743CB8286AEFB /* ChatMessageTests.swift in Sources */,
 				E8789C1ECE5544F4B9DBFD54 /* PermissionCheckViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
