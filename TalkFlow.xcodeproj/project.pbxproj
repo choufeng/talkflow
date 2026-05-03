@@ -382,6 +382,17 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>5D725AFFC3FC9EFA4831F174</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>PipelinePhase.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>63838BEF40924695924AD8D9</key>
 		<dict>
 			<key>buildConfigurationList</key>
@@ -406,6 +417,13 @@
 			<string>4C044E5EE95348CBACF3159C</string>
 			<key>productType</key>
 			<string>com.apple.product-type.bundle.unit-test</string>
+		</dict>
+		<key>651AE4A0CC1FE8D43AEB5519</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5D725AFFC3FC9EFA4831F174</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>667BDCA79AB244BAA9058E4F</key>
 		<dict>
@@ -639,17 +657,6 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>A1B2C3D4E5F6A1B2C3D4E507</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>PermissionCheckView.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>A1B2C3D4E5F6A1B2C3D4E508</key>
 		<dict>
 			<key>children</key>
@@ -694,17 +701,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>A1B2C3D4E5F6A1B2C3D4E511</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>MicPermission.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>A1B2C3D4E5F6A1B2C3D4E512</key>
 		<dict>
 			<key>children</key>
@@ -716,22 +712,12 @@
 				<string>560E73B216B14A4DA5F203D8</string>
 				<string>667BDCA79AB244BAA9058E4F</string>
 				<string>0506E5C8520849749A320F07</string>
+				<string>5D725AFFC3FC9EFA4831F174</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
 			<key>path</key>
 			<string>Utils</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A1B2C3D4E5F6A1B2C3D4E515</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>MicPermissionIO.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -986,6 +972,7 @@
 				<string>84B1150BB57145B9B4A8A3B6</string>
 				<string>TF01TRSV00000000000000000BF</string>
 				<string>99264DD31AD147248AB399B0</string>
+				<string>651AE4A0CC1FE8D43AEB5519</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
@@ -1166,9 +1153,7 @@
 				<key>GENERATE_INFOPLIST_FILE</key>
 				<string>YES</string>
 				<key>HEADER_SEARCH_PATHS</key>
-				<array>
-					<string>$(SRCROOT)/TalkFlow/STT/onnxruntime/include</string>
-				</array>
+				<string>$(SRCROOT)/TalkFlow/STT/onnxruntime/include</string>
 				<key>INFOPLIST_FILE</key>
 				<string>TalkFlow/Info.plist</string>
 				<key>INFOPLIST_KEY_NSHumanReadableCopyright</key>
@@ -1179,15 +1164,11 @@
 					<string>@executable_path/../Frameworks</string>
 				</array>
 				<key>LIBRARY_SEARCH_PATHS</key>
-				<array>
-					<string>$(SRCROOT)/TalkFlow/STT/onnxruntime</string>
-				</array>
+				<string>$(SRCROOT)/TalkFlow/STT/onnxruntime</string>
 				<key>MARKETING_VERSION</key>
 				<string>1.0</string>
 				<key>OTHER_LDFLAGS</key>
-				<array>
-					<string>-lonnxruntime</string>
-				</array>
+				<string>-lonnxruntime</string>
 				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
 				<string>com.talkflow.app</string>
 				<key>PRODUCT_NAME</key>
@@ -1221,9 +1202,7 @@
 				<key>GENERATE_INFOPLIST_FILE</key>
 				<string>YES</string>
 				<key>HEADER_SEARCH_PATHS</key>
-				<array>
-					<string>$(SRCROOT)/TalkFlow/STT/onnxruntime/include</string>
-				</array>
+				<string>$(SRCROOT)/TalkFlow/STT/onnxruntime/include</string>
 				<key>INFOPLIST_FILE</key>
 				<string>TalkFlow/Info.plist</string>
 				<key>INFOPLIST_KEY_NSHumanReadableCopyright</key>
@@ -1234,15 +1213,11 @@
 					<string>@executable_path/../Frameworks</string>
 				</array>
 				<key>LIBRARY_SEARCH_PATHS</key>
-				<array>
-					<string>$(SRCROOT)/TalkFlow/STT/onnxruntime</string>
-				</array>
+				<string>$(SRCROOT)/TalkFlow/STT/onnxruntime</string>
 				<key>MARKETING_VERSION</key>
 				<string>1.0</string>
 				<key>OTHER_LDFLAGS</key>
-				<array>
-					<string>-lonnxruntime</string>
-				</array>
+				<string>-lonnxruntime</string>
 				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
 				<string>com.talkflow.app</string>
 				<key>PRODUCT_NAME</key>
