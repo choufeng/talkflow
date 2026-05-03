@@ -14,7 +14,7 @@
 		A1B2C3D4E5F6A1B2C3D4E519 /* PermissionIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E520; };
 		A1B2C3D4E5F6A1B2C3D4E523 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E524; };
 		A1B2C3D4E5F6A1B2C3D4E505 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E504; };
-		96F8A6ADCBC14712B92C76F4 /* MockMicPermissionIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EE0A96765C4E9CBE62461A; };
+		96F8A6ADCBC14712B92C76F4 /* MockPermissionIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EE0A96765C4E9CBE62461A; };
 		054395ED9CA04554A29B3E9A /* XCTestCaseAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5052B690BA844E1DAF3260F0; };
 		1D92190071AD432AAFF9F6EB /* MicPermissionStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E883F3253B4CF498F09BCF; };
 		B90FFCA35BB349DAB6B4B4CD /* MicPermissionUIStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7440444015BC4FB69C8AD59E; };
@@ -36,7 +36,7 @@
 		A1B2C3D4E5F6A1B2C3D4E520 /* PermissionIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionIO.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F6A1B2C3D4E524 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		4C044E5EE95348CBACF3159C /* TalkFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TalkFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		32EE0A96765C4E9CBE62461A /* MockMicPermissionIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMicPermissionIO.swift; sourceTree = "<group>"; };
+		32EE0A96765C4E9CBE62461A /* MockPermissionIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPermissionIO.swift; sourceTree = "<group>"; };
 		5052B690BA844E1DAF3260F0 /* XCTestCaseAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestCaseAsync.swift; sourceTree = "<group>"; };
 		C3E883F3253B4CF498F09BCF /* MicPermissionStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicPermissionStatusTests.swift; sourceTree = "<group>"; };
 		7440444015BC4FB69C8AD59E /* MicPermissionUIStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicPermissionUIStateTests.swift; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 		D0B461F9C4514EEABE70B615 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				32EE0A96765C4E9CBE62461A /* MockMicPermissionIO.swift */,
+				32EE0A96765C4E9CBE62461A /* MockPermissionIO.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -255,7 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96F8A6ADCBC14712B92C76F4 /* MockMicPermissionIO.swift in Sources */,
+				96F8A6ADCBC14712B92C76F4 /* MockPermissionIO.swift in Sources */,
 				054395ED9CA04554A29B3E9A /* XCTestCaseAsync.swift in Sources */,
 				1D92190071AD432AAFF9F6EB /* MicPermissionStatusTests.swift in Sources */,
 				B90FFCA35BB349DAB6B4B4CD /* MicPermissionUIStateTests.swift in Sources */,

@@ -2,79 +2,61 @@
 import XCTest
 @testable import TalkFlow
 
-/// 通过 MockMicPermissionIO 验证 IO 协议行为
-final class MicPermissionIOTests: XCTestCase {
+final class PermissionIOTests: XCTestCase {
 
     // MARK: - currentStatus()
 
     func test_currentStatus_shouldReturnStubbedValue() {
-        let mock = MockMicPermissionIO()
-        mock.stubbedStatus = .authorized
+        let mock = MockPermissionIO(status: .authorized)
         XCTAssertEqual(mock.currentStatus(), .authorized)
-    }
-
-    func test_currentStatus_whenNotDetermined_shouldReturnNotDetermined() {
-        let mock = MockMicPermissionIO()
-        mock.stubbedStatus = .notDetermined
-        XCTAssertEqual(mock.currentStatus(), .notDetermined)
+        XCTAssertEqual(mock.currentStatusCallCount, 1)
     }
 
     func test_currentStatus_whenDenied_shouldReturnDenied() {
-        let mock = MockMicPermissionIO()
-        mock.stubbedStatus = .denied
+        let mock = MockPermissionIO(status: .denied)
         XCTAssertEqual(mock.currentStatus(), .denied)
     }
 
-    // MARK: - performAction(for:) 调用计数与参数记录
-
-    func test_performAction_shouldIncrementCallCount() async {
-        let mock = MockMicPermissionIO()
-        mock.stubbedStatus = .denied
-        _ = await mock.performAction(for: .denied)
-        XCTAssertEqual(mock.performActionCallCount, 1)
-        _ = await mock.performAction(for: .denied)
-        XCTAssertEqual(mock.performActionCallCount, 2)
+    func test_currentStatus_whenNotDetermined_shouldReturnNotDetermined() {
+        let mock = MockPermissionIO(status: .notDetermined)
+        XCTAssertEqual(mock.currentStatus(), .notDetermined)
     }
 
-    func test_performAction_shouldRecordReceivedStatus() async {
-        let mock = MockMicPermissionIO()
-        mock.stubbedStatus = .notDetermined
-        _ = await mock.performAction(for: .notDetermined)
-        XCTAssertEqual(mock.performActionReceivedStatuses, [.notDetermined])
-        _ = await mock.performAction(for: .denied)
-        XCTAssertEqual(mock.performActionReceivedStatuses, [.notDetermined, .denied])
+    // MARK: - kind
+
+    func test_kind_microphone() {
+        let mock = MockPermissionIO(kind: .microphone)
+        XCTAssertEqual(mock.kind, .microphone)
     }
 
-    func test_performAction_shouldReturnStubbedStatus() async {
-        let mock = MockMicPermissionIO()
-        mock.stubbedStatus = .authorized
-        let result = await mock.performAction(for: .notDetermined)
+    func test_kind_accessibility() {
+        let mock = MockPermissionIO(kind: .accessibility)
+        XCTAssertEqual(mock.kind, .accessibility)
+    }
+
+    // MARK: - requestAccess()
+
+    func test_requestAccess_shouldReturnStubbedStatus() async {
+        let mock = MockPermissionIO(status: .authorized)
+        let result = await mock.requestAccess()
         XCTAssertEqual(result, .authorized)
+        XCTAssertEqual(mock.requestAccessCallCount, 1)
     }
 
-    // MARK: - performAction(for:) 各分支路径验证
-
-    func test_performAction_whenAuthorized_shouldNotChangeState() async {
-        let mock = MockMicPermissionIO()
-        mock.stubbedStatus = .authorized
-        let result = await mock.performAction(for: .authorized)
-        XCTAssertEqual(result, .authorized)
-        XCTAssertEqual(mock.performActionCallCount, 1)
+    func test_requestAccess_shouldIncrementCallCount() async {
+        let mock = MockPermissionIO(status: .denied)
+        _ = await mock.requestAccess()
+        _ = await mock.requestAccess()
+        XCTAssertEqual(mock.requestAccessCallCount, 2)
     }
 
-    func test_performAction_whenNotDetermined_shouldSimulateRequestAccess() async {
-        let mock = MockMicPermissionIO()
-        mock.stubbedStatus = .notDetermined
-        let result = await mock.performAction(for: .notDetermined)
-        XCTAssertEqual(result, .notDetermined)
-        XCTAssertEqual(mock.performActionCallCount, 1)
-    }
+    // MARK: - openSystemSettings()
 
-    func test_performAction_whenDenied_shouldSimulateOpenPreferences() async {
-        let mock = MockMicPermissionIO()
-        mock.stubbedStatus = .denied
-        let result = await mock.performAction(for: .denied)
-        XCTAssertEqual(result, .denied)
-        XCTAssertEqual(mock.performActionCallCount, 1)
+    func test_openSystemSettings_shouldIncrementCallCount() {
+        let mock = MockPermissionIO()
+        mock.openSystemSettings()
+        XCTAssertEqual(mock.openSystemSettingsCallCount, 1)
+        mock.openSystemSettings()
+        XCTAssertEqual(mock.openSystemSettingsCallCount, 2)
     }
 }

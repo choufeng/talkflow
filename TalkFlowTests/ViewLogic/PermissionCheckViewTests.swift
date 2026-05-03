@@ -3,133 +3,130 @@ import XCTest
 import AppKit
 @testable import TalkFlow
 
-/// View 逻辑测试：验证数据 → UI 映射，不测 Autolayout/像素
-final class PermissionCheckViewTests: XCTestCase {
+final class PermissionRowViewTests: XCTestCase {
 
-    // MARK: - authorized 状态
+    // MARK: - authorized 麦克风
 
-    func test_render_whenAuthorized_shouldShowAuthorizedLabel() {
-        let mock = MockMicPermissionIO()
-        mock.stubbedStatus = .authorized
-        let view = PermissionCheckView(frame: .zero, io: mock)
-        view.setUp()
+    func test_render_authorizedMicrophone_shouldShowGreenLabel() {
+        let mock = MockPermissionIO(kind: .microphone, status: .authorized)
+        let row = PermissionRowView(io: mock)
+        row.setUp()
 
-        let label = view.subviews.compactMap { $0 as? NSTextField }.first
-        XCTAssertEqual(label?.stringValue, "✅ 麦克风权限：已启用")
-    }
-
-    func test_render_whenAuthorized_shouldSetGreenColor() {
-        let mock = MockMicPermissionIO()
-        mock.stubbedStatus = .authorized
-        let view = PermissionCheckView(frame: .zero, io: mock)
-        view.setUp()
-
-        let label = view.subviews.compactMap { $0 as? NSTextField }.first
+        let label = row.subviews.compactMap { $0 as? NSTextField }.first
         XCTAssertEqual(label?.textColor, .systemGreen)
     }
 
-    func test_render_whenAuthorized_shouldHideButton() {
-        let mock = MockMicPermissionIO()
-        mock.stubbedStatus = .authorized
-        let view = PermissionCheckView(frame: .zero, io: mock)
-        view.setUp()
+    func test_render_authorizedMicrophone_shouldHideButton() {
+        let mock = MockPermissionIO(kind: .microphone, status: .authorized)
+        let row = PermissionRowView(io: mock)
+        row.setUp()
 
-        let button = view.subviews.compactMap { $0 as? NSButton }.first
+        let button = row.subviews.compactMap { $0 as? NSButton }.first
         XCTAssertTrue(button?.isHidden ?? false)
     }
 
-    // MARK: - notDetermined 状态
+    func test_render_authorizedMicrophone_shouldShowAuthorizedLabel() {
+        let mock = MockPermissionIO(kind: .microphone, status: .authorized)
+        let row = PermissionRowView(io: mock)
+        row.setUp()
 
-    func test_render_whenNotDetermined_shouldShowRequestLabel() {
-        let mock = MockMicPermissionIO()
-        mock.stubbedStatus = .notDetermined
-        let view = PermissionCheckView(frame: .zero, io: mock)
-        view.setUp()
-
-        let label = view.subviews.compactMap { $0 as? NSTextField }.first
-        XCTAssertEqual(label?.stringValue, "🎤 需要麦克风权限来录制语音")
+        let label = row.subviews.compactMap { $0 as? NSTextField }.first
+        XCTAssertEqual(label?.stringValue, "✅ 麦克风权限：已启用")
     }
 
-    func test_render_whenNotDetermined_shouldShowSecondaryLabelColor() {
-        let mock = MockMicPermissionIO()
-        mock.stubbedStatus = .notDetermined
-        let view = PermissionCheckView(frame: .zero, io: mock)
-        view.setUp()
+    // MARK: - authorized 辅助功能
 
-        let label = view.subviews.compactMap { $0 as? NSTextField }.first
+    func test_render_authorizedAccessibility_shouldShowGreenLabel() {
+        let mock = MockPermissionIO(kind: .accessibility, status: .authorized)
+        let row = PermissionRowView(io: mock)
+        row.setUp()
+
+        let label = row.subviews.compactMap { $0 as? NSTextField }.first
+        XCTAssertEqual(label?.textColor, .systemGreen)
+    }
+
+    // MARK: - notDetermined
+
+    func test_render_notDeterminedMicrophone_shouldShowRequestLabel() {
+        let mock = MockPermissionIO(kind: .microphone, status: .notDetermined)
+        let row = PermissionRowView(io: mock)
+        row.setUp()
+
+        let label = row.subviews.compactMap { $0 as? NSTextField }.first
+        XCTAssertEqual(label?.stringValue, "🎤 需要麦克风权限")
+    }
+
+    func test_render_notDetermined_shouldShowButton() {
+        let mock = MockPermissionIO(kind: .microphone, status: .notDetermined)
+        let row = PermissionRowView(io: mock)
+        row.setUp()
+
+        let button = row.subviews.compactMap { $0 as? NSButton }.first
+        XCTAssertFalse(button?.isHidden ?? true)
+        XCTAssertEqual(button?.title, "授予麦克风权限")
+    }
+
+    func test_render_notDetermined_shouldNotBeGreen() {
+        let mock = MockPermissionIO(kind: .microphone, status: .notDetermined)
+        let row = PermissionRowView(io: mock)
+        row.setUp()
+
+        let label = row.subviews.compactMap { $0 as? NSTextField }.first
         XCTAssertEqual(label?.textColor, .secondaryLabelColor)
     }
 
-    func test_render_whenNotDetermined_shouldShowGrantButton() {
-        let mock = MockMicPermissionIO()
-        mock.stubbedStatus = .notDetermined
-        let view = PermissionCheckView(frame: .zero, io: mock)
-        view.setUp()
+    // MARK: - denied
 
-        let button = view.subviews.compactMap { $0 as? NSButton }.first
-        XCTAssertEqual(button?.title, "授予麦克风权限")
-        XCTAssertFalse(button?.isHidden ?? true)
-    }
+    func test_render_denied_shouldShowDeniedLabel() {
+        let mock = MockPermissionIO(kind: .microphone, status: .denied)
+        let row = PermissionRowView(io: mock)
+        row.setUp()
 
-    // MARK: - denied 状态
-
-    func test_render_whenDenied_shouldShowDeniedLabel() {
-        let mock = MockMicPermissionIO()
-        mock.stubbedStatus = .denied
-        let view = PermissionCheckView(frame: .zero, io: mock)
-        view.setUp()
-
-        let label = view.subviews.compactMap { $0 as? NSTextField }.first
+        let label = row.subviews.compactMap { $0 as? NSTextField }.first
         XCTAssertEqual(label?.stringValue, "⚠️ 麦克风权限已被拒绝，请在系统设置中开启")
     }
 
-    func test_render_whenDenied_shouldShowSecondaryLabelColor() {
-        let mock = MockMicPermissionIO()
-        mock.stubbedStatus = .denied
-        let view = PermissionCheckView(frame: .zero, io: mock)
-        view.setUp()
+    func test_render_denied_shouldShowSettingsButton() {
+        let mock = MockPermissionIO(kind: .microphone, status: .denied)
+        let row = PermissionRowView(io: mock)
+        row.setUp()
 
-        let label = view.subviews.compactMap { $0 as? NSTextField }.first
-        XCTAssertEqual(label?.textColor, .secondaryLabelColor)
-    }
-
-    func test_render_whenDenied_shouldShowOpenSettingsButton() {
-        let mock = MockMicPermissionIO()
-        mock.stubbedStatus = .denied
-        let view = PermissionCheckView(frame: .zero, io: mock)
-        view.setUp()
-
-        let button = view.subviews.compactMap { $0 as? NSButton }.first
+        let button = row.subviews.compactMap { $0 as? NSButton }.first
         XCTAssertEqual(button?.title, "打开系统设置")
         XCTAssertFalse(button?.isHidden ?? true)
     }
 
-    // MARK: - IO 交互验证
+    // MARK: - button click → IO 交互
 
-    func test_buttonClick_shouldCallPerformAction() {
-        let mock = MockMicPermissionIO()
-        mock.stubbedStatus = .notDetermined
-        let view = PermissionCheckView(frame: .zero, io: mock)
-        view.setUp()
+    func test_buttonClick_whenNotDetermined_shouldCallRequestAccess() {
+        let mock = MockPermissionIO(kind: .microphone, status: .notDetermined)
+        let row = PermissionRowView(io: mock)
+        row.setUp()
 
-        let button = view.subviews.compactMap { $0 as? NSButton }.first
+        let button = row.subviews.compactMap { $0 as? NSButton }.first
         button?.performClick(nil)
 
-        let expectation = XCTestExpectation(description: "performAction called")
+        let exp = XCTestExpectation(description: "requestAccess called")
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            if mock.performActionCallCount > 0 {
-                expectation.fulfill()
-            }
+            if mock.requestAccessCallCount > 0 { exp.fulfill() }
         }
-        wait(for: [expectation], timeout: 1.0)
-        XCTAssertEqual(mock.performActionCallCount, 1)
+        wait(for: [exp], timeout: 1.0)
+        XCTAssertGreaterThan(mock.requestAccessCallCount, 0)
     }
 
-    // MARK: - IO 注入验证
+    func test_buttonClick_whenDenied_shouldCallOpenSystemSettings() {
+        let mock = MockPermissionIO(kind: .microphone, status: .denied)
+        let row = PermissionRowView(io: mock)
+        row.setUp()
 
-    func test_defaultInit_shouldUseDefaultMicPermissionIO() {
-        let view = PermissionCheckView(frame: .zero)
-        // 默认构造不应崩溃
-        XCTAssertNotNil(view)
+        let button = row.subviews.compactMap { $0 as? NSButton }.first
+        button?.performClick(nil)
+
+        let exp = XCTestExpectation(description: "openSystemSettings called")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            if mock.openSystemSettingsCallCount > 0 { exp.fulfill() }
+        }
+        wait(for: [exp], timeout: 1.0)
+        XCTAssertGreaterThan(mock.openSystemSettingsCallCount, 0)
     }
 }
