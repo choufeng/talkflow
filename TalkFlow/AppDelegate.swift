@@ -16,6 +16,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     // STT 模块
     private let sttEngine: SenseVoiceIO = impureMakeSenseVoiceEngine()
+    // 粘贴模块
+    private let pasteIO: PasteIO = CGEventPasteIO()
 
     /// 录音完成回调 — 供后续工作流（语音转写）接入
     var onRecordingComplete: ((URL) -> Void)?
@@ -48,6 +50,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                             print("[STT] \(language): \(text)")
                             NSPasteboard.general.clearContents()
                             NSPasteboard.general.setString(text, forType: .string)
+                            let pasted = self.pasteIO.paste()
+                            print("[Paste] \(pasted ? "✅" : "❌") pasted to active app")
                         case .silence:
                             print("[STT] Silence — ignored")
                         case .failure(let error):
