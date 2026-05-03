@@ -45,6 +45,9 @@
 				A8B9F7B49287461FBA9FB17E /* MockTokenProviderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63EE2FC8DD343D1857CA3DA /* MockTokenProviderIO.swift */; };
 				410D713E627648A1A2C71891 /* ProviderIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2BE103BA5B4D1E91CFCA45 /* ProviderIOTests.swift */; };
 				42BCE0697F1B42FBABC6BB1F /* JWTTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECC9FAB945F48E2924EE49A /* JWTTokenProvider.swift */; };
+				FA2A53C496AE4EBDA9B81548 /* VertexAIIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B153F13AD408473A8FB7D484 /* VertexAIIO.swift */; };
+				707813DF2FFE4B4E9563280B /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459BFB9B391C4DE5B7A92AE7 /* MockURLProtocol.swift */; };
+				1F1E64F5110A46A7A52C4AA7 /* VertexAIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B09D2A5398B4C14B6A0E221 /* VertexAIOTests.swift */; };
 		/* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +95,9 @@
 				B63EE2FC8DD343D1857CA3DA /* MockTokenProviderIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTokenProviderIO.swift; sourceTree = "<group>"; };
 				CC2BE103BA5B4D1E91CFCA45 /* ProviderIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderIOTests.swift; sourceTree = "<group>"; };
 				6ECC9FAB945F48E2924EE49A /* JWTTokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTTokenProvider.swift; sourceTree = "<group>"; };
+				B153F13AD408473A8FB7D484 /* VertexAIIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexAIIO.swift; sourceTree = "<group>"; };
+				459BFB9B391C4DE5B7A92AE7 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+				5B09D2A5398B4C14B6A0E221 /* VertexAIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexAIOTests.swift; sourceTree = "<group>"; };
 		/* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -116,6 +122,7 @@
 				F9FE837BBB93492C83D31911 /* FilePathIO.swift */,
 				A1B2C3D4E5F6A1B2C3D4E520 /* PermissionIO.swift */,
 				A1B2C3D4E5F6A1B2C3D4E526 /* HotkeyIO.swift */,
+				B153F13AD408473A8FB7D484 /* VertexAIIO.swift */,
 				6ECC9FAB945F48E2924EE49A /* JWTTokenProvider.swift */,
 				86D7DEA93DFC45BB986B7EAB /* TokenProviderIO.swift */,
 				830785FC5F4D42048BB8789E /* ProviderIO.swift */,
@@ -194,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				5052B690BA844E1DAF3260F0 /* XCTestCaseAsync.swift */,
+				459BFB9B391C4DE5B7A92AE7 /* MockURLProtocol.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -217,6 +225,7 @@
 			children = (
 				3986A974DC2E47BDB0792E31 /* AudioRecorderIOTests.swift */,
 				54EDD714AA8E485D90B99A53 /* MicPermissionIOTests.swift */,
+				5B09D2A5398B4C14B6A0E221 /* VertexAIOTests.swift */,
 				CC2BE103BA5B4D1E91CFCA45 /* ProviderIOTests.swift */,
 			);
 			path = IO;
@@ -328,7 +337,8 @@
 75A2D47751B34AEFA40FC0D9 /* VertexMessageAdapter.swift in Sources */,
 				1F0651092BBB4C05907569FD /* TokenProviderIO.swift in Sources */,
 								42BCE0697F1B42FBABC6BB1F /* JWTTokenProvider.swift in Sources */,
-				A1B2C3D4E5F6A1B2C3D4E5F6 /* main.swift in Sources */,
+FA2A53C496AE4EBDA9B81548 /* VertexAIIO.swift in Sources */,
+								A1B2C3D4E5F6A1B2C3D4E5F6 /* main.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E5F7 /* AppDelegate.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E506 /* PermissionListView.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E517 /* Permission.swift in Sources */,
@@ -360,6 +370,8 @@
 				4521C0E7A15A4AAEAD23D093 /* MockProviderIO.swift in Sources */,
 				A8B9F7B49287461FBA9FB17E /* MockTokenProviderIO.swift in Sources */,
 				410D713E627648A1A2C71891 /* ProviderIOTests.swift in Sources */,
+				707813DF2FFE4B4E9563280B /* MockURLProtocol.swift in Sources */,
+				1F1E64F5110A46A7A52C4AA7 /* VertexAIOTests.swift in Sources */,
 								E8789C1ECE5544F4B9DBFD54 /* PermissionCheckViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
