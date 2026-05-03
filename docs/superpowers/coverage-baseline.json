@@ -1,0 +1,26 @@
+{
+  "date": "2026-05-03",
+  "targets": {
+    "TalkFlow.app": {
+      "overall": "74.4% (119/160)",
+      "files": {
+        "Utils/MicPermission.swift": "100.0% (7/7)",
+        "Views/PermissionCheckView.swift": "100.0% (63/63)",
+        "IO/MicPermissionIO.swift": "28.2% (11/39)",
+        "AppDelegate.swift": "72.3% (34/47)",
+        "main.swift": "100.0% (4/4)"
+      }
+    }
+  },
+  "thresholds": {
+    "Utils/": {"target": "100%", "actual": "100%", "status": "PASS"},
+    "Views/": {"target": ">=80%", "actual": "100%", "status": "PASS"},
+    "IO/": {"target": "100%", "actual": "28.2%", "status": "PARTIAL", "note": "DefaultMicPermissionIO internal methods require system mocking (AVFoundation)"},
+    "overall": {"target": ">=90%", "actual": "74.4%", "status": "IN_PROGRESS", "note": "AppDelegate toggle window method uncovered"}
+  },
+  "tests": {
+    "total": 41,
+    "passed": 41,
+    "failed": 0
+  }
+}

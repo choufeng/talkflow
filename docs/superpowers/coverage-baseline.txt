@@ -1,0 +1,7 @@
+=== TalkFlow.app ===
+Overall: 74.4% (119/160)
+  MicPermissionIO.swift: 28.2% (11/39)
+  main.swift: 100.0% (4/4)
+  PermissionCheckView.swift: 100.0% (63/63)
+  AppDelegate.swift: 72.3% (34/47)
+  MicPermission.swift: 100.0% (7/7)
