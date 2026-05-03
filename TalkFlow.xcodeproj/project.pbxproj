@@ -31,6 +31,7 @@
 		389214641CFD45F191E045CB /* MockAudioRecorderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B775F209C2749ADB5B2B05D /* MockAudioRecorderIO.swift */; };
 		A980ADF0FC2F486493EDA770 /* AudioRecorderIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3986A974DC2E47BDB0792E31 /* AudioRecorderIOTests.swift */; };
 		274BBF6D91DF4C7FB5C12F8A /* RecordingStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D183C8D3D64D4A05B5900C23 /* RecordingStatusView.swift */; };
+		C1B2C3D4E5F6A1B2C3D4E701 /* ClipboardIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B2C3D4E5F6A1B2C3D4E702 /* ClipboardIO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		A1B2C3D4E5F6A1B2C3D4E526 /* HotkeyIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyIO.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F6A1B2C3D4E527 /* HotkeySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeySettingsView.swift; sourceTree = "<group>"; };
 		4C044E5EE95348CBACF3159C /* TalkFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TalkFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1B2C3D4E5F6A1B2C3D4E702 /* ClipboardIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardIO.swift; sourceTree = "<group>"; };
 		32EE0A96765C4E9CBE62461A /* MockPermissionIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPermissionIO.swift; sourceTree = "<group>"; };
 		5052B690BA844E1DAF3260F0 /* XCTestCaseAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestCaseAsync.swift; sourceTree = "<group>"; };
 		C3E883F3253B4CF498F09BCF /* MicPermissionStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicPermissionStatusTests.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				83BEB8DFC03F43E690DED845 /* AudioRecorderIO.swift */,
+				C1B2C3D4E5F6A1B2C3D4E702 /* ClipboardIO.swift */,
 				F9FE837BBB93492C83D31911 /* FilePathIO.swift */,
 				A1B2C3D4E5F6A1B2C3D4E520 /* PermissionIO.swift */,
 				A1B2C3D4E5F6A1B2C3D4E526 /* HotkeyIO.swift */,
@@ -277,6 +280,7 @@
 			files = (
 				274BBF6D91DF4C7FB5C12F8A /* RecordingStatusView.swift in Sources */,
 				881A6C2713B74F3493EC76CE /* AudioRecorderIO.swift in Sources */,
+				C1B2C3D4E5F6A1B2C3D4E701 /* ClipboardIO.swift in Sources */,
 				4B7E8F3A1F294A3B92256977 /* FilePathIO.swift in Sources */,
 				91910FAB2CAA48F7AA32EB57 /* RecordingState.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E5F6 /* main.swift in Sources */,
