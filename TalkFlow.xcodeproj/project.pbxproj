@@ -35,6 +35,8 @@
 				A388EAF11DB743CB8286AEFB /* ChatMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A9BFDB3A45BF9050D74B /* ChatMessageTests.swift */; };
 				A11D10447C054B478B79C9ED /* PromptConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5605FB6E21C4996811DC35B /* PromptConfig.swift */; };
 				D0949B4B6E784845999ED80E /* PromptConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49FC8987AB746C1886D91B7 /* PromptConfigTests.swift */; };
+				1EF0CA9981774CD09609C1D1 /* ServiceAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC3E77D768449390899AA5 /* ServiceAccount.swift */; };
+				40901967AA9E4F6E85113511 /* ServiceAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF15E2747BE4FDF8E634B07 /* ServiceAccountTests.swift */; };
 		/* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +74,8 @@
 				3FD9A9BFDB3A45BF9050D74B /* ChatMessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageTests.swift; sourceTree = "<group>"; };
 				E5605FB6E21C4996811DC35B /* PromptConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptConfig.swift; sourceTree = "<group>"; };
 				B49FC8987AB746C1886D91B7 /* PromptConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptConfigTests.swift; sourceTree = "<group>"; };
+				58EC3E77D768449390899AA5 /* ServiceAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAccount.swift; sourceTree = "<group>"; };
+				ABF15E2747BE4FDF8E634B07 /* ServiceAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAccountTests.swift; sourceTree = "<group>"; };
 		/* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -106,6 +110,7 @@
 				6FD1B48199F9409787A57855 /* RecordingState.swift */,
 				A1B2C3D4E5F6A1B2C3D4E518 /* Permission.swift */,
 				A1B2C3D4E5F6A1B2C3D4E525 /* Hotkey.swift */,
+				58EC3E77D768449390899AA5 /* ServiceAccount.swift */,
 				E5605FB6E21C4996811DC35B /* PromptConfig.swift */,
 				C66ADAAA54A14C0CBFA3DF33 /* ChatMessage.swift */,
 			);
@@ -177,6 +182,7 @@
 				DAADD4E9D7114C38B27D5E4C /* RecordingStateTests.swift */,
 				C3E883F3253B4CF498F09BCF /* MicPermissionStatusTests.swift */,
 				7440444015BC4FB69C8AD59E /* MicPermissionUIStateTests.swift */,
+				ABF15E2747BE4FDF8E634B07 /* ServiceAccountTests.swift */,
 				B49FC8987AB746C1886D91B7 /* PromptConfigTests.swift */,
 				3FD9A9BFDB3A45BF9050D74B /* ChatMessageTests.swift */,
 			);
@@ -293,7 +299,8 @@
 				91910FAB2CAA48F7AA32EB57 /* RecordingState.swift in Sources */,
 				B83A495B3C5C4B299E84EEFE /* ChatMessage.swift in Sources */,
 				A11D10447C054B478B79C9ED /* PromptConfig.swift in Sources */,
-				A1B2C3D4E5F6A1B2C3D4E5F6 /* main.swift in Sources */,
+1EF0CA9981774CD09609C1D1 /* ServiceAccount.swift in Sources */,
+								A1B2C3D4E5F6A1B2C3D4E5F6 /* main.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E5F7 /* AppDelegate.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E506 /* PermissionListView.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E517 /* Permission.swift in Sources */,
@@ -320,7 +327,8 @@
 				3BCFF370E3AF460A9012F153 /* MicPermissionIOTests.swift in Sources */,
 				A388EAF11DB743CB8286AEFB /* ChatMessageTests.swift in Sources */,
 				D0949B4B6E784845999ED80E /* PromptConfigTests.swift in Sources */,
-				E8789C1ECE5544F4B9DBFD54 /* PermissionCheckViewTests.swift in Sources */,
+40901967AA9E4F6E85113511 /* ServiceAccountTests.swift in Sources */,
+								E8789C1ECE5544F4B9DBFD54 /* PermissionCheckViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
