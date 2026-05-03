@@ -19,7 +19,7 @@ enum ConnectionTestStatus: Equatable {
 
 /// 模型卡片内容 — 下拉选择 + Vertex AI 配置 + 连接测试
 /// init 仅赋值（rule 16），setUp() 显式触发副作用
-final class ModelSettingsView: NSView {
+final class ModelSettingsView: NSView, NSTextFieldDelegate {
 
     // MARK: - 可变状态
 
@@ -58,6 +58,7 @@ final class ModelSettingsView: NSView {
 
     func setUp() {
         impureSetupUI()
+        impureLoadConfig()
         impureDetectADC()
         impureRender()
     }
@@ -95,6 +96,7 @@ final class ModelSettingsView: NSView {
         projectIDField.font = NSFont.monospacedSystemFont(ofSize: 13, weight: .regular)
         projectIDField.isEditable = true
         projectIDField.placeholderString = "输入 Google Cloud Project ID"
+        projectIDField.delegate = self
         projectIDField.translatesAutoresizingMaskIntoConstraints = false
         vertexAIContainer.addSubview(projectIDField)
 
@@ -106,6 +108,7 @@ final class ModelSettingsView: NSView {
         modelNameField.font = NSFont.monospacedSystemFont(ofSize: 13, weight: .regular)
         modelNameField.isEditable = true
         modelNameField.placeholderString = "gemini-2.5-flash"
+        modelNameField.delegate = self
         modelNameField.translatesAutoresizingMaskIntoConstraints = false
         vertexAIContainer.addSubview(modelNameField)
 
@@ -172,6 +175,16 @@ final class ModelSettingsView: NSView {
     }
 
     // MARK: - ⚠️ ADC 检测
+
+    private func impureLoadConfig() {
+        let config = impureLoadAppConfig()
+        if !config.vertexAI.modelName.isEmpty {
+            modelNameField.stringValue = config.vertexAI.modelName
+        }
+        if !config.vertexAI.projectID.isEmpty && projectIDField.stringValue.isEmpty {
+            projectIDField.stringValue = config.vertexAI.projectID
+        }
+    }
 
     private func impureDetectADC() {
         guard let adc = impureLoadADCFromDefaultPath() else {
@@ -313,5 +326,27 @@ final class ModelSettingsView: NSView {
             testButton.isEnabled = true
             testButton.title = "测试连接"
         }
+    }
+
+    // MARK: - NSTextFieldDelegate
+
+    func controlTextDidEndEditing(_ notification: Notification) {
+        impureSaveConfig()
+    }
+
+    // MARK: - ⚠️ 持久化
+
+    private func impureSaveConfig() {
+        let modelName = modelNameField.stringValue.trimmingCharacters(in: .whitespaces)
+        let projectID = projectIDField.stringValue.trimmingCharacters(in: .whitespaces)
+
+        var config = impureLoadAppConfig()
+        if !modelName.isEmpty {
+            config.vertexAI.modelName = modelName
+        }
+        if !projectID.isEmpty {
+            config.vertexAI.projectID = projectID
+        }
+        impureSaveAppConfig(config)
     }
 }
