@@ -12,6 +12,7 @@
 		A1B2C3D4E5F6A1B2C3D4E506 /* PermissionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E522; };
 		A1B2C3D4E5F6A1B2C3D4E517 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E518; };
 		A1B2C3D4E5F6A1B2C3D4E519 /* PermissionIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E520; };
+		A1B2C3D4E5F6A1B2C3D4E523 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E524; };
 		A1B2C3D4E5F6A1B2C3D4E505 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E504; };
 /* End PBXBuildFile section */
 
@@ -24,6 +25,7 @@
 		A1B2C3D4E5F6A1B2C3D4E522 /* PermissionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionListView.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F6A1B2C3D4E518 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F6A1B2C3D4E520 /* PermissionIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionIO.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F6A1B2C3D4E524 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -60,6 +62,7 @@
 		A1B2C3D4E5F6A1B2C3D4E508 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A1B2C3D4E5F6A1B2C3D4E524 /* CardView.swift */,
 				A1B2C3D4E5F6A1B2C3D4E522 /* PermissionListView.swift */,
 			);
 			path = Views;
@@ -138,6 +141,7 @@
 				A1B2C3D4E5F6A1B2C3D4E506 /* PermissionListView.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E517 /* Permission.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E519 /* PermissionIO.swift in Sources */,
+				A1B2C3D4E5F6A1B2C3D4E523 /* CardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

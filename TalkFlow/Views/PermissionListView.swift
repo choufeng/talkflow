@@ -88,17 +88,17 @@ final class PermissionRowView: NSView {
     }
 }
 
-// MARK: - 权限列表容器视图
+// MARK: - 权限列表内容视图
 
-/// 权限列表容器 — 组合多个 PermissionRowView
+/// 权限列表 — 垂直排列多个 PermissionRowView，作为卡片内容使用
 /// init 仅赋值（rule 16），setUp() 显式触发副作用
 final class PermissionListView: NSView {
 
     private let ios: [PermissionIO]
 
-    init(frame frameRect: NSRect, ios: [PermissionIO]) {
+    init(ios: [PermissionIO]) {
         self.ios = ios
-        super.init(frame: frameRect)
+        super.init(frame: .zero)
     }
 
     @available(*, unavailable)
@@ -113,31 +113,34 @@ final class PermissionListView: NSView {
     // MARK: - ⚠️ UI 构建
 
     private func impureSetupUI() {
-        wantsLayer = true
-        layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
+        translatesAutoresizingMaskIntoConstraints = false
 
         let stack = NSStackView()
         stack.orientation = .vertical
-        stack.spacing = 8
+        stack.spacing = 6
         stack.alignment = .leading
         stack.distribution = .equalSpacing
         stack.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stack)
 
-        for io in ios {
-            let row = PermissionRowView(io: io)
-            row.setUp()
-            stack.addArrangedSubview(row)
-            row.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
-        }
+        ios
+            .map { io -> PermissionRowView in
+                let row = PermissionRowView(io: io)
+                row.setUp()
+                return row
+            }
+            .forEach { row in
+                stack.addArrangedSubview(row)
+                row.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
+            }
 
         NSLayoutConstraint.activate([
-            stack.centerXAnchor.constraint(equalTo: centerXAnchor),
-            stack.centerYAnchor.constraint(equalTo: centerYAnchor),
-            stack.widthAnchor.constraint(equalToConstant: 400),
+            stack.topAnchor.constraint(equalTo: topAnchor),
+            stack.leadingAnchor.constraint(equalTo: leadingAnchor),
+            stack.trailingAnchor.constraint(equalTo: trailingAnchor),
+            stack.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
 
-        // 监听应用回到前台时刷新
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(impureRefreshAll),
