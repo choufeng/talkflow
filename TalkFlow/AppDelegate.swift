@@ -14,12 +14,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private let debounceInterval: TimeInterval = 0.5
     private let minRecordingDuration: TimeInterval = 1.0
 
+    // STT 模块
+    private let sttEngine: SenseVoiceIO = impureMakeSenseVoiceEngine()
+
     /// 录音完成回调 — 供后续工作流（语音转写）接入
     var onRecordingComplete: ((URL) -> Void)?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         impureSetupMenuBarIcon()
         impureShowMainWindow()
+        impureSetupSTT()
 
         // 监听主快捷键触发
         NotificationCenter.default.addObserver(
@@ -28,6 +32,33 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             name: .talkFlowHotkeyTriggered,
             object: nil
         )
+    }
+
+    // MARK: - ⚠️ STT 集成
+
+    private func impureSetupSTT() {
+        onRecordingComplete = { [weak self] url in
+            Task { [weak self] in
+                guard let self else { return }
+                do {
+                    let result = try await self.sttEngine.transcribe(url: url)
+                    await MainActor.run {
+                        switch result {
+                        case .speech(let text, let language):
+                            print("[STT] \(language): \(text)")
+                            NSPasteboard.general.clearContents()
+                            NSPasteboard.general.setString(text, forType: .string)
+                        case .silence:
+                            print("[STT] Silence — ignored")
+                        case .failure(let error):
+                            print("[STT] Error: \(error)")
+                        }
+                    }
+                } catch {
+                    print("[STT] Exception: \(error)")
+                }
+            }
+        }
     }
 
     // MARK: - ⚠️ 菜单栏图标（含副作用：系统状态栏注册）
