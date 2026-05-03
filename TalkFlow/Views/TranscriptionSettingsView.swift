@@ -57,8 +57,10 @@ final class TranscriptionSettingsView: NSView {
     // MARK: - ⚠️ 事件
 
     @objc private func impureCheckboxToggled() {
+        let isOn = useLLMCheckbox.state == .on
         var config = impureLoadAppConfig()
-        config.transcription.useLLM = useLLMCheckbox.state == .on
+        config.transcription.useLLM = isOn
         impureSaveAppConfig(config)
+        NotificationCenter.default.post(name: .talkFlowUseLLMChanged, object: isOn)
     }
 }

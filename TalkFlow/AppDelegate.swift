@@ -3,6 +3,7 @@ import AppKit
 class AppDelegate: NSObject, NSApplicationDelegate {
     private var window: NSWindow?
     private var statusItem: NSStatusItem?
+    private var modelCard: CardView?
 
     // 录音模块
     private var hotkeyIO: HotkeyIO?
@@ -35,9 +36,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             name: .talkFlowHotkeyTriggered,
             object: nil
         )
+        // 监听 LLM 开关变化 → 显示/隐藏模型卡片
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(impureHandleUseLLMChanged(_:)),
+            name: .talkFlowUseLLMChanged,
+            object: nil
+        )
     }
-
-    // MARK: - ⚠️ STT 集成
 
     private func impureSetupSTT() {
         onRecordingComplete = { [weak self] url in
@@ -122,6 +128,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    @objc private func impureHandleUseLLMChanged(_ notification: Notification) {
+        guard let isOn = notification.object as? Bool else { return }
+        modelCard?.isHidden = !isOn
+    }
+
     // MARK: - ⚠️ 主窗口（含副作用：窗口创建 + 视图挂载）
 
     private func impureShowMainWindow() {
@@ -169,9 +180,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // 模型配置卡片
         let modelView = ModelSettingsView()
         modelView.setUp()
-        let modelCard = CardView(title: "模型", contentView: modelView)
-        modelCard.setUp()
-        rootView.addSubview(modelCard)
+        let mc = CardView(title: "模型", contentView: modelView)
+        mc.setUp()
+        self.modelCard = mc
+        rootView.addSubview(mc)
+
+        // 初始可见性：根据 useLLM 配置
+        let initialUseLLM = impureLoadAppConfig().transcription.useLLM
+        mc.isHidden = !initialUseLLM
 
         NSLayoutConstraint.activate([
             // 权限卡片：顶部固定
@@ -190,10 +206,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             transcriptionCard.trailingAnchor.constraint(equalTo: rootView.trailingAnchor, constant: -20),
 
             // 模型卡片：位于转写卡片下方
-            modelCard.topAnchor.constraint(equalTo: transcriptionCard.bottomAnchor, constant: 16),
-            modelCard.leadingAnchor.constraint(equalTo: rootView.leadingAnchor, constant: 20),
-            modelCard.trailingAnchor.constraint(equalTo: rootView.trailingAnchor, constant: -20),
-            modelCard.bottomAnchor.constraint(lessThanOrEqualTo: rootView.bottomAnchor, constant: -20),
+            mc.topAnchor.constraint(equalTo: transcriptionCard.bottomAnchor, constant: 16),
+            mc.leadingAnchor.constraint(equalTo: rootView.leadingAnchor, constant: 20),
+            mc.trailingAnchor.constraint(equalTo: rootView.trailingAnchor, constant: -20),
+            mc.bottomAnchor.constraint(lessThanOrEqualTo: rootView.bottomAnchor, constant: -20),
         ])
 
         window?.contentView = rootView
