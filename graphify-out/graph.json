@@ -1,0 +1,2846 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "hyperedges": [
+      {
+        "id": "fp_triad",
+        "label": "\u51fd\u6570\u5f0f\u7f16\u7a0b\u4e09\u5927\u539f\u5219",
+        "nodes": [
+          "agents_pure_function_abstraction",
+          "agents_side_effect_isolation",
+          "agents_immutable_data"
+        ],
+        "relation": "form",
+        "confidence": "INFERRED",
+        "confidence_score": 0.85,
+        "source_file": "AGENTS.md"
+      },
+      {
+        "id": "test_quality_gates",
+        "label": "\u6d4b\u8bd5\u8d28\u91cf\u95e8\u7981\u4f53\u7cfb",
+        "nodes": [
+          "spec_coverage_gate",
+          "spec_precommit_hook",
+          "spec_makefile"
+        ],
+        "relation": "form",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "docs/superpowers/specs/2026-05-03-talkflow-test-infrastructure-design.md"
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "label": "MockMicPermissionIO.swift",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Mocks/MockMicPermissionIO.swift",
+      "source_location": "L1",
+      "id": "talkflowtests_mocks_mockmicpermissionio_swift",
+      "community": 0,
+      "norm_label": "mockmicpermissionio.swift"
+    },
+    {
+      "label": "MockMicPermissionIO",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Mocks/MockMicPermissionIO.swift",
+      "source_location": "L7",
+      "id": "mocks_mockmicpermissionio_mockmicpermissionio",
+      "community": 0,
+      "norm_label": "mockmicpermissionio"
+    },
+    {
+      "label": "MicPermissionIO",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "id": "micpermissionio",
+      "community": 0,
+      "norm_label": "micpermissionio"
+    },
+    {
+      "label": ".currentStatus()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Mocks/MockMicPermissionIO.swift",
+      "source_location": "L12",
+      "id": "mocks_mockmicpermissionio_mockmicpermissionio_currentstatus",
+      "community": 0,
+      "norm_label": ".currentstatus()"
+    },
+    {
+      "label": ".performAction()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Mocks/MockMicPermissionIO.swift",
+      "source_location": "L16",
+      "id": "mocks_mockmicpermissionio_mockmicpermissionio_performaction",
+      "community": 0,
+      "norm_label": ".performaction()"
+    },
+    {
+      "label": "MicPermissionIOTests.swift",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L1",
+      "id": "talkflowtests_io_micpermissioniotests_swift",
+      "community": 0,
+      "norm_label": "micpermissioniotests.swift"
+    },
+    {
+      "label": "MicPermissionIOTests",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L6",
+      "id": "io_micpermissioniotests_micpermissioniotests",
+      "community": 0,
+      "norm_label": "micpermissioniotests"
+    },
+    {
+      "label": "XCTestCase",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "id": "xctestcase",
+      "community": 2,
+      "norm_label": "xctestcase"
+    },
+    {
+      "label": ".test_currentStatus_shouldReturnStubbedValue()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L10",
+      "id": "io_micpermissioniotests_micpermissioniotests_test_currentstatus_shouldreturnstubbedvalue",
+      "community": 0,
+      "norm_label": ".test_currentstatus_shouldreturnstubbedvalue()"
+    },
+    {
+      "label": ".test_currentStatus_whenNotDetermined_shouldReturnNotDetermined()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L16",
+      "id": "io_micpermissioniotests_micpermissioniotests_test_currentstatus_whennotdetermined_shouldreturnnotdetermined",
+      "community": 0,
+      "norm_label": ".test_currentstatus_whennotdetermined_shouldreturnnotdetermined()"
+    },
+    {
+      "label": ".test_currentStatus_whenDenied_shouldReturnDenied()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L22",
+      "id": "io_micpermissioniotests_micpermissioniotests_test_currentstatus_whendenied_shouldreturndenied",
+      "community": 0,
+      "norm_label": ".test_currentstatus_whendenied_shouldreturndenied()"
+    },
+    {
+      "label": ".test_performAction_shouldIncrementCallCount()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L30",
+      "id": "io_micpermissioniotests_micpermissioniotests_test_performaction_shouldincrementcallcount",
+      "community": 0,
+      "norm_label": ".test_performaction_shouldincrementcallcount()"
+    },
+    {
+      "label": ".test_performAction_shouldRecordReceivedStatus()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L39",
+      "id": "io_micpermissioniotests_micpermissioniotests_test_performaction_shouldrecordreceivedstatus",
+      "community": 0,
+      "norm_label": ".test_performaction_shouldrecordreceivedstatus()"
+    },
+    {
+      "label": ".test_performAction_shouldReturnStubbedStatus()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L48",
+      "id": "io_micpermissioniotests_micpermissioniotests_test_performaction_shouldreturnstubbedstatus",
+      "community": 0,
+      "norm_label": ".test_performaction_shouldreturnstubbedstatus()"
+    },
+    {
+      "label": ".test_performAction_whenAuthorized_shouldNotChangeState()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L57",
+      "id": "io_micpermissioniotests_micpermissioniotests_test_performaction_whenauthorized_shouldnotchangestate",
+      "community": 0,
+      "norm_label": ".test_performaction_whenauthorized_shouldnotchangestate()"
+    },
+    {
+      "label": ".test_performAction_whenNotDetermined_shouldSimulateRequestAccess()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L65",
+      "id": "io_micpermissioniotests_micpermissioniotests_test_performaction_whennotdetermined_shouldsimulaterequestaccess",
+      "community": 0,
+      "norm_label": ".test_performaction_whennotdetermined_shouldsimulaterequestaccess()"
+    },
+    {
+      "label": ".test_performAction_whenDenied_shouldSimulateOpenPreferences()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L73",
+      "id": "io_micpermissioniotests_micpermissioniotests_test_performaction_whendenied_shouldsimulateopenpreferences",
+      "community": 0,
+      "norm_label": ".test_performaction_whendenied_shouldsimulateopenpreferences()"
+    },
+    {
+      "label": "PermissionCheckViewTests.swift",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L1",
+      "id": "talkflowtests_viewlogic_permissioncheckviewtests_swift",
+      "community": 5,
+      "norm_label": "permissioncheckviewtests.swift"
+    },
+    {
+      "label": "PermissionCheckViewTests",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L7",
+      "id": "viewlogic_permissioncheckviewtests_permissioncheckviewtests",
+      "community": 5,
+      "norm_label": "permissioncheckviewtests"
+    },
+    {
+      "label": ".test_render_whenAuthorized_shouldShowAuthorizedLabel()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L11",
+      "id": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whenauthorized_shouldshowauthorizedlabel",
+      "community": 5,
+      "norm_label": ".test_render_whenauthorized_shouldshowauthorizedlabel()"
+    },
+    {
+      "label": ".test_render_whenAuthorized_shouldSetGreenColor()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L21",
+      "id": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whenauthorized_shouldsetgreencolor",
+      "community": 5,
+      "norm_label": ".test_render_whenauthorized_shouldsetgreencolor()"
+    },
+    {
+      "label": ".test_render_whenAuthorized_shouldHideButton()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L31",
+      "id": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whenauthorized_shouldhidebutton",
+      "community": 5,
+      "norm_label": ".test_render_whenauthorized_shouldhidebutton()"
+    },
+    {
+      "label": ".test_render_whenNotDetermined_shouldShowRequestLabel()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L43",
+      "id": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whennotdetermined_shouldshowrequestlabel",
+      "community": 5,
+      "norm_label": ".test_render_whennotdetermined_shouldshowrequestlabel()"
+    },
+    {
+      "label": ".test_render_whenNotDetermined_shouldShowSecondaryLabelColor()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L53",
+      "id": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whennotdetermined_shouldshowsecondarylabelcolor",
+      "community": 5,
+      "norm_label": ".test_render_whennotdetermined_shouldshowsecondarylabelcolor()"
+    },
+    {
+      "label": ".test_render_whenNotDetermined_shouldShowGrantButton()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L63",
+      "id": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whennotdetermined_shouldshowgrantbutton",
+      "community": 0,
+      "norm_label": ".test_render_whennotdetermined_shouldshowgrantbutton()"
+    },
+    {
+      "label": ".test_render_whenDenied_shouldShowDeniedLabel()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L76",
+      "id": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whendenied_shouldshowdeniedlabel",
+      "community": 0,
+      "norm_label": ".test_render_whendenied_shouldshowdeniedlabel()"
+    },
+    {
+      "label": ".test_render_whenDenied_shouldShowSecondaryLabelColor()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L86",
+      "id": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whendenied_shouldshowsecondarylabelcolor",
+      "community": 0,
+      "norm_label": ".test_render_whendenied_shouldshowsecondarylabelcolor()"
+    },
+    {
+      "label": ".test_render_whenDenied_shouldShowOpenSettingsButton()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L96",
+      "id": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whendenied_shouldshowopensettingsbutton",
+      "community": 5,
+      "norm_label": ".test_render_whendenied_shouldshowopensettingsbutton()"
+    },
+    {
+      "label": ".test_buttonClick_shouldCallPerformAction()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L109",
+      "id": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_buttonclick_shouldcallperformaction",
+      "community": 5,
+      "norm_label": ".test_buttonclick_shouldcallperformaction()"
+    },
+    {
+      "label": ".test_defaultInit_shouldUseDefaultMicPermissionIO()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L130",
+      "id": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_defaultinit_shouldusedefaultmicpermissionio",
+      "community": 5,
+      "norm_label": ".test_defaultinit_shouldusedefaultmicpermissionio()"
+    },
+    {
+      "label": "XCTestCaseAsync.swift",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Helpers/XCTestCaseAsync.swift",
+      "source_location": "L1",
+      "id": "talkflowtests_helpers_xctestcaseasync_swift",
+      "community": 10,
+      "norm_label": "xctestcaseasync.swift"
+    },
+    {
+      "label": "XCTestCase",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Helpers/XCTestCaseAsync.swift",
+      "source_location": "L4",
+      "id": "helpers_xctestcaseasync_xctestcase",
+      "community": 10,
+      "norm_label": "xctestcase"
+    },
+    {
+      "label": ".assertAsync()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Helpers/XCTestCaseAsync.swift",
+      "source_location": "L6",
+      "id": "helpers_xctestcaseasync_xctestcase_assertasync",
+      "community": 10,
+      "norm_label": ".assertasync()"
+    },
+    {
+      "label": "MicPermissionUIStateTests.swift",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L1",
+      "id": "talkflowtests_pure_micpermissionuistatetests_swift",
+      "community": 2,
+      "norm_label": "micpermissionuistatetests.swift"
+    },
+    {
+      "label": "MicPermissionUIStateTests",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L6",
+      "id": "pure_micpermissionuistatetests_micpermissionuistatetests",
+      "community": 2,
+      "norm_label": "micpermissionuistatetests"
+    },
+    {
+      "label": ".test_authorizedPreset_label_shouldBeAuthorized()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L10",
+      "id": "pure_micpermissionuistatetests_micpermissionuistatetests_test_authorizedpreset_label_shouldbeauthorized",
+      "community": 2,
+      "norm_label": ".test_authorizedpreset_label_shouldbeauthorized()"
+    },
+    {
+      "label": ".test_authorizedPreset_buttonVisible_shouldBeFalse()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L14",
+      "id": "pure_micpermissionuistatetests_micpermissionuistatetests_test_authorizedpreset_buttonvisible_shouldbefalse",
+      "community": 2,
+      "norm_label": ".test_authorizedpreset_buttonvisible_shouldbefalse()"
+    },
+    {
+      "label": ".test_authorizedPreset_buttonTitle_shouldBeEmpty()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L18",
+      "id": "pure_micpermissionuistatetests_micpermissionuistatetests_test_authorizedpreset_buttontitle_shouldbeempty",
+      "community": 2,
+      "norm_label": ".test_authorizedpreset_buttontitle_shouldbeempty()"
+    },
+    {
+      "label": ".test_authorizedPreset_needsSystemSettings_shouldBeFalse()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L22",
+      "id": "pure_micpermissionuistatetests_micpermissionuistatetests_test_authorizedpreset_needssystemsettings_shouldbefalse",
+      "community": 2,
+      "norm_label": ".test_authorizedpreset_needssystemsettings_shouldbefalse()"
+    },
+    {
+      "label": ".test_notDeterminedPreset_label_shouldBeRequest()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L28",
+      "id": "pure_micpermissionuistatetests_micpermissionuistatetests_test_notdeterminedpreset_label_shouldberequest",
+      "community": 2,
+      "norm_label": ".test_notdeterminedpreset_label_shouldberequest()"
+    },
+    {
+      "label": ".test_notDeterminedPreset_buttonVisible_shouldBeTrue()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L32",
+      "id": "pure_micpermissionuistatetests_micpermissionuistatetests_test_notdeterminedpreset_buttonvisible_shouldbetrue",
+      "community": 2,
+      "norm_label": ".test_notdeterminedpreset_buttonvisible_shouldbetrue()"
+    },
+    {
+      "label": ".test_notDeterminedPreset_buttonTitle_shouldBeGrant()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L36",
+      "id": "pure_micpermissionuistatetests_micpermissionuistatetests_test_notdeterminedpreset_buttontitle_shouldbegrant",
+      "community": 2,
+      "norm_label": ".test_notdeterminedpreset_buttontitle_shouldbegrant()"
+    },
+    {
+      "label": ".test_notDeterminedPreset_needsSystemSettings_shouldBeFalse()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L40",
+      "id": "pure_micpermissionuistatetests_micpermissionuistatetests_test_notdeterminedpreset_needssystemsettings_shouldbefalse",
+      "community": 2,
+      "norm_label": ".test_notdeterminedpreset_needssystemsettings_shouldbefalse()"
+    },
+    {
+      "label": ".test_deniedPreset_label_shouldBeDenied()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L46",
+      "id": "pure_micpermissionuistatetests_micpermissionuistatetests_test_deniedpreset_label_shouldbedenied",
+      "community": 2,
+      "norm_label": ".test_deniedpreset_label_shouldbedenied()"
+    },
+    {
+      "label": ".test_deniedPreset_buttonVisible_shouldBeTrue()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L50",
+      "id": "pure_micpermissionuistatetests_micpermissionuistatetests_test_deniedpreset_buttonvisible_shouldbetrue",
+      "community": 2,
+      "norm_label": ".test_deniedpreset_buttonvisible_shouldbetrue()"
+    },
+    {
+      "label": ".test_deniedPreset_buttonTitle_shouldBeOpenSettings()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L54",
+      "id": "pure_micpermissionuistatetests_micpermissionuistatetests_test_deniedpreset_buttontitle_shouldbeopensettings",
+      "community": 2,
+      "norm_label": ".test_deniedpreset_buttontitle_shouldbeopensettings()"
+    },
+    {
+      "label": ".test_deniedPreset_needsSystemSettings_shouldBeTrue()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L58",
+      "id": "pure_micpermissionuistatetests_micpermissionuistatetests_test_deniedpreset_needssystemsettings_shouldbetrue",
+      "community": 2,
+      "norm_label": ".test_deniedpreset_needssystemsettings_shouldbetrue()"
+    },
+    {
+      "label": "MicPermissionStatusTests.swift",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L1",
+      "id": "talkflowtests_pure_micpermissionstatustests_swift",
+      "community": 4,
+      "norm_label": "micpermissionstatustests.swift"
+    },
+    {
+      "label": "MicPermissionStatusTests",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L6",
+      "id": "pure_micpermissionstatustests_micpermissionstatustests",
+      "community": 4,
+      "norm_label": "micpermissionstatustests"
+    },
+    {
+      "label": ".test_authorized_shouldProduceAuthorizedLabel()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L10",
+      "id": "pure_micpermissionstatustests_micpermissionstatustests_test_authorized_shouldproduceauthorizedlabel",
+      "community": 4,
+      "norm_label": ".test_authorized_shouldproduceauthorizedlabel()"
+    },
+    {
+      "label": ".test_authorized_shouldHideButton()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L15",
+      "id": "pure_micpermissionstatustests_micpermissionstatustests_test_authorized_shouldhidebutton",
+      "community": 4,
+      "norm_label": ".test_authorized_shouldhidebutton()"
+    },
+    {
+      "label": ".test_authorized_shouldNotNeedSystemSettings()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L20",
+      "id": "pure_micpermissionstatustests_micpermissionstatustests_test_authorized_shouldnotneedsystemsettings",
+      "community": 4,
+      "norm_label": ".test_authorized_shouldnotneedsystemsettings()"
+    },
+    {
+      "label": ".test_notDetermined_shouldProduceRequestLabel()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L27",
+      "id": "pure_micpermissionstatustests_micpermissionstatustests_test_notdetermined_shouldproducerequestlabel",
+      "community": 4,
+      "norm_label": ".test_notdetermined_shouldproducerequestlabel()"
+    },
+    {
+      "label": ".test_notDetermined_shouldShowButton()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L32",
+      "id": "pure_micpermissionstatustests_micpermissionstatustests_test_notdetermined_shouldshowbutton",
+      "community": 4,
+      "norm_label": ".test_notdetermined_shouldshowbutton()"
+    },
+    {
+      "label": ".test_notDetermined_shouldNotNeedSystemSettings()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L37",
+      "id": "pure_micpermissionstatustests_micpermissionstatustests_test_notdetermined_shouldnotneedsystemsettings",
+      "community": 4,
+      "norm_label": ".test_notdetermined_shouldnotneedsystemsettings()"
+    },
+    {
+      "label": ".test_denied_shouldProduceDeniedLabel()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L44",
+      "id": "pure_micpermissionstatustests_micpermissionstatustests_test_denied_shouldproducedeniedlabel",
+      "community": 4,
+      "norm_label": ".test_denied_shouldproducedeniedlabel()"
+    },
+    {
+      "label": ".test_denied_shouldShowButton()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L49",
+      "id": "pure_micpermissionstatustests_micpermissionstatustests_test_denied_shouldshowbutton",
+      "community": 4,
+      "norm_label": ".test_denied_shouldshowbutton()"
+    },
+    {
+      "label": ".test_denied_shouldNeedSystemSettings()",
+      "file_type": "code",
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L54",
+      "id": "pure_micpermissionstatustests_micpermissionstatustests_test_denied_shouldneedsystemsettings",
+      "community": 4,
+      "norm_label": ".test_denied_shouldneedsystemsettings()"
+    },
+    {
+      "label": "AppDelegate.swift",
+      "file_type": "code",
+      "source_file": "TalkFlow/AppDelegate.swift",
+      "source_location": "L1",
+      "id": "talkflow_appdelegate_swift",
+      "community": 7,
+      "norm_label": "appdelegate.swift"
+    },
+    {
+      "label": "AppDelegate",
+      "file_type": "code",
+      "source_file": "TalkFlow/AppDelegate.swift",
+      "source_location": "L3",
+      "id": "talkflow_appdelegate_appdelegate",
+      "community": 7,
+      "norm_label": "appdelegate"
+    },
+    {
+      "label": "NSObject",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "id": "nsobject",
+      "community": 7,
+      "norm_label": "nsobject"
+    },
+    {
+      "label": "NSApplicationDelegate",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "id": "nsapplicationdelegate",
+      "community": 7,
+      "norm_label": "nsapplicationdelegate"
+    },
+    {
+      "label": ".applicationDidFinishLaunching()",
+      "file_type": "code",
+      "source_file": "TalkFlow/AppDelegate.swift",
+      "source_location": "L7",
+      "id": "talkflow_appdelegate_appdelegate_applicationdidfinishlaunching",
+      "community": 7,
+      "norm_label": ".applicationdidfinishlaunching()"
+    },
+    {
+      "label": ".impureSetupMenuBarIcon()",
+      "file_type": "code",
+      "source_file": "TalkFlow/AppDelegate.swift",
+      "source_location": "L14",
+      "id": "talkflow_appdelegate_appdelegate_impuresetupmenubaricon",
+      "community": 7,
+      "norm_label": ".impuresetupmenubaricon()"
+    },
+    {
+      "label": ".impureToggleWindow()",
+      "file_type": "code",
+      "source_file": "TalkFlow/AppDelegate.swift",
+      "source_location": "L26",
+      "id": "talkflow_appdelegate_appdelegate_impuretogglewindow",
+      "community": 7,
+      "norm_label": ".impuretogglewindow()"
+    },
+    {
+      "label": ".impureShowMainWindow()",
+      "file_type": "code",
+      "source_file": "TalkFlow/AppDelegate.swift",
+      "source_location": "L39",
+      "id": "talkflow_appdelegate_appdelegate_impureshowmainwindow",
+      "community": 7,
+      "norm_label": ".impureshowmainwindow()"
+    },
+    {
+      "label": ".applicationShouldTerminateAfterLastWindowClosed()",
+      "file_type": "code",
+      "source_file": "TalkFlow/AppDelegate.swift",
+      "source_location": "L59",
+      "id": "talkflow_appdelegate_appdelegate_applicationshouldterminateafterlastwindowclosed",
+      "community": 7,
+      "norm_label": ".applicationshouldterminateafterlastwindowclosed()"
+    },
+    {
+      "label": "main.swift",
+      "file_type": "code",
+      "source_file": "TalkFlow/main.swift",
+      "source_location": "L1",
+      "id": "talkflow_main_swift",
+      "community": 12,
+      "norm_label": "main.swift"
+    },
+    {
+      "label": "MicPermissionIO.swift",
+      "file_type": "code",
+      "source_file": "TalkFlow/IO/MicPermissionIO.swift",
+      "source_location": "L1",
+      "id": "talkflow_io_micpermissionio_swift",
+      "community": 8,
+      "norm_label": "micpermissionio.swift"
+    },
+    {
+      "label": "MicPermissionIO",
+      "file_type": "code",
+      "source_file": "TalkFlow/IO/MicPermissionIO.swift",
+      "source_location": "L6",
+      "id": "io_micpermissionio_micpermissionio",
+      "community": 8,
+      "norm_label": "micpermissionio"
+    },
+    {
+      "label": "micPermissionStatus()",
+      "file_type": "code",
+      "source_file": "TalkFlow/IO/MicPermissionIO.swift",
+      "source_location": "L20",
+      "id": "io_micpermissionio_micpermissionstatus",
+      "community": 8,
+      "norm_label": "micpermissionstatus()"
+    },
+    {
+      "label": "DefaultMicPermissionIO",
+      "file_type": "code",
+      "source_file": "TalkFlow/IO/MicPermissionIO.swift",
+      "source_location": "L31",
+      "id": "io_micpermissionio_defaultmicpermissionio",
+      "community": 8,
+      "norm_label": "defaultmicpermissionio"
+    },
+    {
+      "label": ".currentStatus()",
+      "file_type": "code",
+      "source_file": "TalkFlow/IO/MicPermissionIO.swift",
+      "source_location": "L34",
+      "id": "io_micpermissionio_defaultmicpermissionio_currentstatus",
+      "community": 8,
+      "norm_label": ".currentstatus()"
+    },
+    {
+      "label": ".performAction()",
+      "file_type": "code",
+      "source_file": "TalkFlow/IO/MicPermissionIO.swift",
+      "source_location": "L39",
+      "id": "io_micpermissionio_defaultmicpermissionio_performaction",
+      "community": 8,
+      "norm_label": ".performaction()"
+    },
+    {
+      "label": ".impureRequestAccess()",
+      "file_type": "code",
+      "source_file": "TalkFlow/IO/MicPermissionIO.swift",
+      "source_location": "L49",
+      "id": "io_micpermissionio_defaultmicpermissionio_impurerequestaccess",
+      "community": 8,
+      "norm_label": ".impurerequestaccess()"
+    },
+    {
+      "label": ".impureOpenSystemPreferences()",
+      "file_type": "code",
+      "source_file": "TalkFlow/IO/MicPermissionIO.swift",
+      "source_location": "L57",
+      "id": "io_micpermissionio_defaultmicpermissionio_impureopensystempreferences",
+      "community": 8,
+      "norm_label": ".impureopensystempreferences()"
+    },
+    {
+      "label": "MicPermission.swift",
+      "file_type": "code",
+      "source_file": "TalkFlow/Utils/MicPermission.swift",
+      "source_location": "L1",
+      "id": "talkflow_utils_micpermission_swift",
+      "community": 9,
+      "norm_label": "micpermission.swift"
+    },
+    {
+      "label": "MicPermissionStatus",
+      "file_type": "code",
+      "source_file": "TalkFlow/Utils/MicPermission.swift",
+      "source_location": "L6",
+      "id": "utils_micpermission_micpermissionstatus",
+      "community": 9,
+      "norm_label": "micpermissionstatus"
+    },
+    {
+      "label": "Equatable",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "id": "equatable",
+      "community": 9,
+      "norm_label": "equatable"
+    },
+    {
+      "label": "authorized",
+      "file_type": "code",
+      "source_file": "TalkFlow/Utils/MicPermission.swift",
+      "source_location": "L7",
+      "id": "utils_micpermission_micpermissionstatus_authorized",
+      "community": 9,
+      "norm_label": "authorized"
+    },
+    {
+      "label": "notDetermined",
+      "file_type": "code",
+      "source_file": "TalkFlow/Utils/MicPermission.swift",
+      "source_location": "L8",
+      "id": "utils_micpermission_micpermissionstatus_notdetermined",
+      "community": 9,
+      "norm_label": "notdetermined"
+    },
+    {
+      "label": "denied",
+      "file_type": "code",
+      "source_file": "TalkFlow/Utils/MicPermission.swift",
+      "source_location": "L9",
+      "id": "utils_micpermission_micpermissionstatus_denied",
+      "community": 9,
+      "norm_label": "denied"
+    },
+    {
+      "label": "MicPermissionUIState",
+      "file_type": "code",
+      "source_file": "TalkFlow/Utils/MicPermission.swift",
+      "source_location": "L13",
+      "id": "utils_micpermission_micpermissionuistate",
+      "community": 9,
+      "norm_label": "micpermissionuistate"
+    },
+    {
+      "label": "produceUIState()",
+      "file_type": "code",
+      "source_file": "TalkFlow/Utils/MicPermission.swift",
+      "source_location": "L47",
+      "id": "utils_micpermission_produceuistate",
+      "community": 4,
+      "norm_label": "produceuistate()"
+    },
+    {
+      "label": "PermissionCheckView.swift",
+      "file_type": "code",
+      "source_file": "TalkFlow/Views/PermissionCheckView.swift",
+      "source_location": "L1",
+      "id": "talkflow_views_permissioncheckview_swift",
+      "community": 6,
+      "norm_label": "permissioncheckview.swift"
+    },
+    {
+      "label": "PermissionCheckView",
+      "file_type": "code",
+      "source_file": "TalkFlow/Views/PermissionCheckView.swift",
+      "source_location": "L7",
+      "id": "views_permissioncheckview_permissioncheckview",
+      "community": 6,
+      "norm_label": "permissioncheckview"
+    },
+    {
+      "label": "NSView",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "id": "nsview",
+      "community": 6,
+      "norm_label": "nsview"
+    },
+    {
+      "label": ".init()",
+      "file_type": "code",
+      "source_file": "TalkFlow/Views/PermissionCheckView.swift",
+      "source_location": "L17",
+      "id": "views_permissioncheckview_permissioncheckview_init",
+      "community": 6,
+      "norm_label": ".init()"
+    },
+    {
+      "label": ".setUp()",
+      "file_type": "code",
+      "source_file": "TalkFlow/Views/PermissionCheckView.swift",
+      "source_location": "L28",
+      "id": "views_permissioncheckview_permissioncheckview_setup",
+      "community": 6,
+      "norm_label": ".setup()"
+    },
+    {
+      "label": ".impureSetupUI()",
+      "file_type": "code",
+      "source_file": "TalkFlow/Views/PermissionCheckView.swift",
+      "source_location": "L36",
+      "id": "views_permissioncheckview_permissioncheckview_impuresetupui",
+      "community": 6,
+      "norm_label": ".impuresetupui()"
+    },
+    {
+      "label": ".impureObserveAppActivation()",
+      "file_type": "code",
+      "source_file": "TalkFlow/Views/PermissionCheckView.swift",
+      "source_location": "L64",
+      "id": "views_permissioncheckview_permissioncheckview_impureobserveappactivation",
+      "community": 6,
+      "norm_label": ".impureobserveappactivation()"
+    },
+    {
+      "label": ".impureButtonClicked()",
+      "file_type": "code",
+      "source_file": "TalkFlow/Views/PermissionCheckView.swift",
+      "source_location": "L75",
+      "id": "views_permissioncheckview_permissioncheckview_impurebuttonclicked",
+      "community": 6,
+      "norm_label": ".impurebuttonclicked()"
+    },
+    {
+      "label": ".impureRender()",
+      "file_type": "code",
+      "source_file": "TalkFlow/Views/PermissionCheckView.swift",
+      "source_location": "L84",
+      "id": "views_permissioncheckview_permissioncheckview_impurerender",
+      "community": 6,
+      "norm_label": ".impurerender()"
+    },
+    {
+      "label": "TalkFlow",
+      "file_type": "document",
+      "source_file": "README.md",
+      "id": "readme_talkflow",
+      "community": 1,
+      "norm_label": "talkflow"
+    },
+    {
+      "label": "\u9ea6\u514b\u98ce\u6743\u9650\u81ea\u52a8\u68c0\u6d4b\u4e0e\u5f15\u5bfc",
+      "file_type": "document",
+      "source_file": "README.md",
+      "id": "readme_mic_permission",
+      "community": 1,
+      "norm_label": "\u9ea6\u514b\u98ce\u6743\u9650\u81ea\u52a8\u68c0\u6d4b\u4e0e\u5f15\u5bfc"
+    },
+    {
+      "label": "\u83dc\u5355\u680f\u5feb\u6377\u63a7\u5236",
+      "file_type": "document",
+      "source_file": "README.md",
+      "id": "readme_menu_bar",
+      "community": 1,
+      "norm_label": "\u83dc\u5355\u680f\u5feb\u6377\u63a7\u5236"
+    },
+    {
+      "label": "\u6d41\u5f0f\u5bf9\u8bdd\u4ea4\u4e92",
+      "file_type": "document",
+      "source_file": "README.md",
+      "id": "readme_streaming_dialogue",
+      "community": 1,
+      "norm_label": "\u6d41\u5f0f\u5bf9\u8bdd\u4ea4\u4e92"
+    },
+    {
+      "label": "\u8bed\u97f3\u5b9e\u65f6\u8f6c\u5199",
+      "file_type": "document",
+      "source_file": "README.md",
+      "id": "readme_realtime_transcription",
+      "community": 1,
+      "norm_label": "\u8bed\u97f3\u5b9e\u65f6\u8f6c\u5199"
+    },
+    {
+      "label": "\u51fd\u6570\u5f0f\u7f16\u7a0b\u8303\u5f0f",
+      "file_type": "document",
+      "source_file": "README.md",
+      "id": "readme_functional_paradigm",
+      "community": 1,
+      "norm_label": "\u51fd\u6570\u5f0f\u7f16\u7a0b\u8303\u5f0f"
+    },
+    {
+      "label": "macOS 14.0+ \u7cfb\u7edf\u8981\u6c42",
+      "file_type": "document",
+      "source_file": "README.md",
+      "id": "readme_macos14",
+      "community": 1,
+      "norm_label": "macos 14.0+ \u7cfb\u7edf\u8981\u6c42"
+    },
+    {
+      "label": "Apache License 2.0",
+      "file_type": "document",
+      "source_file": "README.md",
+      "id": "readme_apache_license",
+      "community": 1,
+      "norm_label": "apache license 2.0"
+    },
+    {
+      "label": "\u7eaf\u51fd\u6570\u62bd\u8c61\u94c1\u5f8b",
+      "file_type": "rationale",
+      "source_file": "AGENTS.md",
+      "rationale": "\u6240\u6709\u53ef\u62bd\u8c61\u4e3a\u7eaf\u51fd\u6570\u7684\u6570\u636e\u65b9\u6cd5\u5747\u5e94\u62bd\u8c61\uff0c\u9879\u76ee\u5e94\u4ee5\u51fd\u6570\u5f0f\u7f16\u7a0b\u65b9\u5f0f\u6784\u5efa",
+      "id": "agents_pure_function_abstraction",
+      "community": 1,
+      "norm_label": "\u7eaf\u51fd\u6570\u62bd\u8c61\u94c1\u5f8b"
+    },
+    {
+      "label": "\u526f\u4f5c\u7528\u9694\u79bb",
+      "file_type": "rationale",
+      "source_file": "AGENTS.md",
+      "rationale": "IO/\u7f51\u7edc/UI \u7b49\u526f\u4f5c\u7528\u4e0e\u7eaf\u6570\u636e\u903b\u8f91\u4e25\u683c\u5206\u79bb\uff0c\u653e\u7f6e\u5728 IO \u8fb9\u754c\u5c42",
+      "id": "agents_side_effect_isolation",
+      "community": 1,
+      "norm_label": "\u526f\u4f5c\u7528\u9694\u79bb"
+    },
+    {
+      "label": "\u4e0d\u53ef\u53d8\u6570\u636e",
+      "file_type": "rationale",
+      "source_file": "AGENTS.md",
+      "rationale": "\u4f18\u5148\u4f7f\u7528 struct \u548c\u503c\u7c7b\u578b\uff0c\u907f\u514d class \u5171\u4eab\u53ef\u53d8\u72b6\u6001",
+      "id": "agents_immutable_data",
+      "community": 13,
+      "norm_label": "\u4e0d\u53ef\u53d8\u6570\u636e"
+    },
+    {
+      "label": "\u4ee3\u6570\u6570\u636e\u7c7b\u578b ADT",
+      "file_type": "rationale",
+      "source_file": "AGENTS.md",
+      "rationale": "\u7528 sum type \u679a\u4e3e\u548c product type struct \u7cbe\u786e\u5efa\u6a21\uff0c\u8ba9\u975e\u6cd5\u72b6\u6001\u4e0d\u53ef\u8868\u793a",
+      "id": "agents_adt",
+      "community": 1,
+      "norm_label": "\u4ee3\u6570\u6570\u636e\u7c7b\u578b adt"
+    },
+    {
+      "label": "\u7a77\u5c3d\u6a21\u5f0f\u5339\u914d",
+      "file_type": "rationale",
+      "source_file": "AGENTS.md",
+      "rationale": "\u5bf9\u6240\u6709 sum type \u4f7f\u7528 switch\uff0c\u7f16\u8bd1\u5668\u68c0\u67e5\u9057\u6f0f\u5206\u652f",
+      "id": "agents_exhaustive_matching",
+      "community": 1,
+      "norm_label": "\u7a77\u5c3d\u6a21\u5f0f\u5339\u914d"
+    },
+    {
+      "label": "\u5f15\u7528\u900f\u660e\u6027",
+      "file_type": "rationale",
+      "source_file": "AGENTS.md",
+      "rationale": "\u51fd\u6570\u8c03\u7528\u53ef\u66ff\u6362\u4e3a\u8fd4\u56de\u503c\u4e0d\u6539\u53d8\u7a0b\u5e8f\u884c\u4e3a\uff0c\u526f\u4f5c\u7528\u5fc5\u987b\u660e\u786e\u6807\u8bb0",
+      "id": "agents_referential_transparency",
+      "community": 1,
+      "norm_label": "\u5f15\u7528\u900f\u660e\u6027"
+    },
+    {
+      "label": "\u9ad8\u9636\u51fd\u6570\u4f18\u5148",
+      "file_type": "rationale",
+      "source_file": "AGENTS.md",
+      "rationale": "\u51fd\u6570\u662f\u4e00\u7b49\u516c\u6c11\uff0c\u9891\u7e41\u4f7f\u7528 map/flatMap/filter/reduce",
+      "id": "agents_higher_order_functions",
+      "community": 11,
+      "norm_label": "\u9ad8\u9636\u51fd\u6570\u4f18\u5148"
+    },
+    {
+      "label": "\u6784\u9020\u4e0e\u526f\u4f5c\u7528\u5206\u79bb",
+      "file_type": "rationale",
+      "source_file": "AGENTS.md",
+      "rationale": "init \u53ea\u505a\u8d4b\u503c\u4e0d\u89e6\u53d1\u526f\u4f5c\u7528\uff0c\u526f\u4f5c\u7528\u5728\u663e\u5f0f\u8c03\u7528\u65f6\u6267\u884c",
+      "id": "agents_construct_separate",
+      "community": 1,
+      "norm_label": "\u6784\u9020\u4e0e\u526f\u4f5c\u7528\u5206\u79bb"
+    },
+    {
+      "label": "\u7ba1\u9053\u5f0f\u6d41\u7a0b\u5904\u7406",
+      "file_type": "rationale",
+      "source_file": "AGENTS.md",
+      "rationale": "\u590d\u6742\u6d41\u7a0b\u62c6\u89e3\u4e3a\u72ec\u7acb\u7eaf\u51fd\u6570\u6b65\u9aa4\u4e32\u8054\u6267\u884c",
+      "id": "agents_pipeline_pattern",
+      "community": 11,
+      "norm_label": "\u7ba1\u9053\u5f0f\u6d41\u7a0b\u5904\u7406"
+    },
+    {
+      "label": "IO \u534f\u8bae\u62bd\u8c61",
+      "file_type": "rationale",
+      "source_file": "AGENTS.md",
+      "rationale": "\u526f\u4f5c\u7528\u64cd\u4f5c\u901a\u8fc7\u534f\u8bae\u62bd\u8c61\u4fbf\u4e8e\u6d4b\u8bd5\u548c\u66ff\u6362",
+      "id": "agents_io_protocol_abstraction",
+      "community": 1,
+      "norm_label": "io \u534f\u8bae\u62bd\u8c61"
+    },
+    {
+      "label": "\u6d4b\u8bd5\u57fa\u7840\u8bbe\u65bd\u8bbe\u8ba1",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-05-03-talkflow-test-infrastructure-design.md",
+      "id": "spec_test_infrastructure",
+      "community": 3,
+      "norm_label": "\u6d4b\u8bd5\u57fa\u7840\u8bbe\u65bd\u8bbe\u8ba1"
+    },
+    {
+      "label": "XCTest \u6d4b\u8bd5\u6846\u67b6",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-05-03-talkflow-test-infrastructure-design.md",
+      "id": "spec_xctest",
+      "community": 3,
+      "norm_label": "xctest \u6d4b\u8bd5\u6846\u67b6"
+    },
+    {
+      "label": "Mock \u6ce8\u5165\u6a21\u5f0f",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-05-03-talkflow-test-infrastructure-design.md",
+      "id": "spec_mock_pattern",
+      "community": 1,
+      "norm_label": "mock \u6ce8\u5165\u6a21\u5f0f"
+    },
+    {
+      "label": "\u8986\u76d6\u7387\u95e8\u7981 CI",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-05-03-talkflow-test-infrastructure-design.md",
+      "id": "spec_coverage_gate",
+      "community": 3,
+      "norm_label": "\u8986\u76d6\u7387\u95e8\u7981 ci"
+    },
+    {
+      "label": "Pre-Commit \u6d4b\u8bd5\u94a9\u5b50",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-05-03-talkflow-test-infrastructure-design.md",
+      "id": "spec_precommit_hook",
+      "community": 3,
+      "norm_label": "pre-commit \u6d4b\u8bd5\u94a9\u5b50"
+    },
+    {
+      "label": "Makefile \u6784\u5efa\u81ea\u52a8\u5316",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-05-03-talkflow-test-infrastructure-design.md",
+      "id": "spec_makefile",
+      "community": 3,
+      "norm_label": "makefile \u6784\u5efa\u81ea\u52a8\u5316"
+    },
+    {
+      "label": "\u6d4b\u8bd5\u76ee\u5f55\u5206\u5c42 Pure/IO/ViewLogic",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-05-03-talkflow-test-infrastructure-design.md",
+      "id": "spec_directory_structure",
+      "community": 3,
+      "norm_label": "\u6d4b\u8bd5\u76ee\u5f55\u5206\u5c42 pure/io/viewlogic"
+    },
+    {
+      "label": "\u6574\u4f53\u8986\u76d6\u7387 74.4%",
+      "file_type": "document",
+      "source_file": "docs/superpowers/coverage-baseline.txt",
+      "id": "coverage_overall_74pc",
+      "community": 3,
+      "norm_label": "\u6574\u4f53\u8986\u76d6\u7387 74.4%"
+    },
+    {
+      "label": "Utils/MicPermission.swift 100% \u8986\u76d6",
+      "file_type": "document",
+      "source_file": "docs/superpowers/coverage-baseline.txt",
+      "id": "coverage_micpermission_100pc",
+      "community": 3,
+      "norm_label": "utils/micpermission.swift 100% \u8986\u76d6"
+    },
+    {
+      "label": "Views/PermissionCheckView.swift 100% \u8986\u76d6",
+      "file_type": "document",
+      "source_file": "docs/superpowers/coverage-baseline.txt",
+      "id": "coverage_view_100pc",
+      "community": 3,
+      "norm_label": "views/permissioncheckview.swift 100% \u8986\u76d6"
+    },
+    {
+      "label": "IO/MicPermissionIO.swift 28.2% \u8986\u76d6",
+      "file_type": "document",
+      "source_file": "docs/superpowers/coverage-baseline.txt",
+      "id": "coverage_io_28pc",
+      "community": 3,
+      "norm_label": "io/micpermissionio.swift 28.2% \u8986\u76d6"
+    },
+    {
+      "label": "7 \u4efb\u52a1\u5206\u6b65\u5b9e\u73b0\u8ba1\u5212",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-05-03-talkflow-test-infrastructure.md",
+      "id": "plan_task_decomposition",
+      "community": 3,
+      "norm_label": "7 \u4efb\u52a1\u5206\u6b65\u5b9e\u73b0\u8ba1\u5212"
+    },
+    {
+      "label": "TDD \u6d4b\u8bd5\u9a71\u52a8\u5f00\u53d1",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-05-03-talkflow-test-infrastructure.md",
+      "id": "plan_tdd_approach",
+      "community": 3,
+      "norm_label": "tdd \u6d4b\u8bd5\u9a71\u52a8\u5f00\u53d1"
+    },
+    {
+      "label": "Subagent-Driven \u5f00\u53d1\u6a21\u5f0f",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-05-03-talkflow-test-infrastructure.md",
+      "id": "plan_subagent_driven",
+      "community": 3,
+      "norm_label": "subagent-driven \u5f00\u53d1\u6a21\u5f0f"
+    },
+    {
+      "label": "AppIcon \u5e94\u7528\u56fe\u6807\u8d44\u6e90",
+      "file_type": "image",
+      "source_file": "TalkFlow/Assets.xcassets/AppIcon.appiconset",
+      "id": "image_appicon",
+      "community": 1,
+      "norm_label": "appicon \u5e94\u7528\u56fe\u6807\u8d44\u6e90"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Mocks/MockMicPermissionIO.swift",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "talkflowtests_mocks_mockmicpermissionio_swift",
+      "target": "mocks_mockmicpermissionio_mockmicpermissionio",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Mocks/MockMicPermissionIO.swift",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "mocks_mockmicpermissionio_mockmicpermissionio",
+      "target": "micpermissionio",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Mocks/MockMicPermissionIO.swift",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "mocks_mockmicpermissionio_mockmicpermissionio",
+      "target": "mocks_mockmicpermissionio_mockmicpermissionio_currentstatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Mocks/MockMicPermissionIO.swift",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "mocks_mockmicpermissionio_mockmicpermissionio",
+      "target": "mocks_mockmicpermissionio_mockmicpermissionio_performaction",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "io_micpermissioniotests_micpermissioniotests_test_currentstatus_shouldreturnstubbedvalue",
+      "target": "mocks_mockmicpermissionio_mockmicpermissionio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "io_micpermissioniotests_micpermissioniotests_test_currentstatus_whennotdetermined_shouldreturnnotdetermined",
+      "target": "mocks_mockmicpermissionio_mockmicpermissionio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "io_micpermissioniotests_micpermissioniotests_test_currentstatus_whendenied_shouldreturndenied",
+      "target": "mocks_mockmicpermissionio_mockmicpermissionio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "io_micpermissioniotests_micpermissioniotests_test_performaction_shouldincrementcallcount",
+      "target": "mocks_mockmicpermissionio_mockmicpermissionio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "io_micpermissioniotests_micpermissioniotests_test_performaction_shouldrecordreceivedstatus",
+      "target": "mocks_mockmicpermissionio_mockmicpermissionio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L49",
+      "weight": 1.0,
+      "source": "io_micpermissioniotests_micpermissioniotests_test_performaction_shouldreturnstubbedstatus",
+      "target": "mocks_mockmicpermissionio_mockmicpermissionio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L58",
+      "weight": 1.0,
+      "source": "io_micpermissioniotests_micpermissioniotests_test_performaction_whenauthorized_shouldnotchangestate",
+      "target": "mocks_mockmicpermissionio_mockmicpermissionio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L66",
+      "weight": 1.0,
+      "source": "io_micpermissioniotests_micpermissioniotests_test_performaction_whennotdetermined_shouldsimulaterequestaccess",
+      "target": "mocks_mockmicpermissionio_mockmicpermissionio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L74",
+      "weight": 1.0,
+      "source": "io_micpermissioniotests_micpermissioniotests_test_performaction_whendenied_shouldsimulateopenpreferences",
+      "target": "mocks_mockmicpermissionio_mockmicpermissionio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whenauthorized_shouldshowauthorizedlabel",
+      "target": "mocks_mockmicpermissionio_mockmicpermissionio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whenauthorized_shouldsetgreencolor",
+      "target": "mocks_mockmicpermissionio_mockmicpermissionio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whenauthorized_shouldhidebutton",
+      "target": "mocks_mockmicpermissionio_mockmicpermissionio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L44",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whennotdetermined_shouldshowrequestlabel",
+      "target": "mocks_mockmicpermissionio_mockmicpermissionio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L54",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whennotdetermined_shouldshowsecondarylabelcolor",
+      "target": "mocks_mockmicpermissionio_mockmicpermissionio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L64",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whennotdetermined_shouldshowgrantbutton",
+      "target": "mocks_mockmicpermissionio_mockmicpermissionio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L77",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whendenied_shouldshowdeniedlabel",
+      "target": "mocks_mockmicpermissionio_mockmicpermissionio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L87",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whendenied_shouldshowsecondarylabelcolor",
+      "target": "mocks_mockmicpermissionio_mockmicpermissionio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L97",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whendenied_shouldshowopensettingsbutton",
+      "target": "mocks_mockmicpermissionio_mockmicpermissionio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L110",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_buttonclick_shouldcallperformaction",
+      "target": "mocks_mockmicpermissionio_mockmicpermissionio"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "talkflowtests_io_micpermissioniotests_swift",
+      "target": "io_micpermissioniotests_micpermissioniotests",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "io_micpermissioniotests_micpermissioniotests",
+      "target": "xctestcase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "io_micpermissioniotests_micpermissioniotests",
+      "target": "io_micpermissioniotests_micpermissioniotests_test_currentstatus_shouldreturnstubbedvalue",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "io_micpermissioniotests_micpermissioniotests",
+      "target": "io_micpermissioniotests_micpermissioniotests_test_currentstatus_whennotdetermined_shouldreturnnotdetermined",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "io_micpermissioniotests_micpermissioniotests",
+      "target": "io_micpermissioniotests_micpermissioniotests_test_currentstatus_whendenied_shouldreturndenied",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "io_micpermissioniotests_micpermissioniotests",
+      "target": "io_micpermissioniotests_micpermissioniotests_test_performaction_shouldincrementcallcount",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "io_micpermissioniotests_micpermissioniotests",
+      "target": "io_micpermissioniotests_micpermissioniotests_test_performaction_shouldrecordreceivedstatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L48",
+      "weight": 1.0,
+      "source": "io_micpermissioniotests_micpermissioniotests",
+      "target": "io_micpermissioniotests_micpermissioniotests_test_performaction_shouldreturnstubbedstatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L57",
+      "weight": 1.0,
+      "source": "io_micpermissioniotests_micpermissioniotests",
+      "target": "io_micpermissioniotests_micpermissioniotests_test_performaction_whenauthorized_shouldnotchangestate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L65",
+      "weight": 1.0,
+      "source": "io_micpermissioniotests_micpermissioniotests",
+      "target": "io_micpermissioniotests_micpermissioniotests_test_performaction_whennotdetermined_shouldsimulaterequestaccess",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/IO/MicPermissionIOTests.swift",
+      "source_location": "L73",
+      "weight": 1.0,
+      "source": "io_micpermissioniotests_micpermissioniotests",
+      "target": "io_micpermissioniotests_micpermissioniotests_test_performaction_whendenied_shouldsimulateopenpreferences",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests",
+      "target": "xctestcase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "pure_micpermissionuistatetests_micpermissionuistatetests",
+      "target": "xctestcase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "pure_micpermissionstatustests_micpermissionstatustests",
+      "target": "xctestcase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "talkflowtests_viewlogic_permissioncheckviewtests_swift",
+      "target": "viewlogic_permissioncheckviewtests_permissioncheckviewtests",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests",
+      "target": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whenauthorized_shouldshowauthorizedlabel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests",
+      "target": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whenauthorized_shouldsetgreencolor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests",
+      "target": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whenauthorized_shouldhidebutton",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L43",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests",
+      "target": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whennotdetermined_shouldshowrequestlabel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L53",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests",
+      "target": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whennotdetermined_shouldshowsecondarylabelcolor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L63",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests",
+      "target": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whennotdetermined_shouldshowgrantbutton",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L76",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests",
+      "target": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whendenied_shouldshowdeniedlabel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L86",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests",
+      "target": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whendenied_shouldshowsecondarylabelcolor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L96",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests",
+      "target": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whendenied_shouldshowopensettingsbutton",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L109",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests",
+      "target": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_buttonclick_shouldcallperformaction",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L130",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests",
+      "target": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_defaultinit_shouldusedefaultmicpermissionio",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whenauthorized_shouldshowauthorizedlabel",
+      "target": "views_permissioncheckview_permissioncheckview"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whenauthorized_shouldsetgreencolor",
+      "target": "views_permissioncheckview_permissioncheckview"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whenauthorized_shouldhidebutton",
+      "target": "views_permissioncheckview_permissioncheckview"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L46",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whennotdetermined_shouldshowrequestlabel",
+      "target": "views_permissioncheckview_permissioncheckview"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L56",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whennotdetermined_shouldshowsecondarylabelcolor",
+      "target": "views_permissioncheckview_permissioncheckview"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L66",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whennotdetermined_shouldshowgrantbutton",
+      "target": "views_permissioncheckview_permissioncheckview"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L79",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whendenied_shouldshowdeniedlabel",
+      "target": "views_permissioncheckview_permissioncheckview"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L89",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whendenied_shouldshowsecondarylabelcolor",
+      "target": "views_permissioncheckview_permissioncheckview"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L99",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_render_whendenied_shouldshowopensettingsbutton",
+      "target": "views_permissioncheckview_permissioncheckview"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L112",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_buttonclick_shouldcallperformaction",
+      "target": "views_permissioncheckview_permissioncheckview"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift",
+      "source_location": "L131",
+      "weight": 1.0,
+      "source": "viewlogic_permissioncheckviewtests_permissioncheckviewtests_test_defaultinit_shouldusedefaultmicpermissionio",
+      "target": "views_permissioncheckview_permissioncheckview"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Helpers/XCTestCaseAsync.swift",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "talkflowtests_helpers_xctestcaseasync_swift",
+      "target": "helpers_xctestcaseasync_xctestcase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Helpers/XCTestCaseAsync.swift",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "helpers_xctestcaseasync_xctestcase",
+      "target": "helpers_xctestcaseasync_xctestcase_assertasync",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "talkflowtests_pure_micpermissionuistatetests_swift",
+      "target": "pure_micpermissionuistatetests_micpermissionuistatetests",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "pure_micpermissionuistatetests_micpermissionuistatetests",
+      "target": "pure_micpermissionuistatetests_micpermissionuistatetests_test_authorizedpreset_label_shouldbeauthorized",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "pure_micpermissionuistatetests_micpermissionuistatetests",
+      "target": "pure_micpermissionuistatetests_micpermissionuistatetests_test_authorizedpreset_buttonvisible_shouldbefalse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "pure_micpermissionuistatetests_micpermissionuistatetests",
+      "target": "pure_micpermissionuistatetests_micpermissionuistatetests_test_authorizedpreset_buttontitle_shouldbeempty",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "pure_micpermissionuistatetests_micpermissionuistatetests",
+      "target": "pure_micpermissionuistatetests_micpermissionuistatetests_test_authorizedpreset_needssystemsettings_shouldbefalse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "pure_micpermissionuistatetests_micpermissionuistatetests",
+      "target": "pure_micpermissionuistatetests_micpermissionuistatetests_test_notdeterminedpreset_label_shouldberequest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "pure_micpermissionuistatetests_micpermissionuistatetests",
+      "target": "pure_micpermissionuistatetests_micpermissionuistatetests_test_notdeterminedpreset_buttonvisible_shouldbetrue",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "pure_micpermissionuistatetests_micpermissionuistatetests",
+      "target": "pure_micpermissionuistatetests_micpermissionuistatetests_test_notdeterminedpreset_buttontitle_shouldbegrant",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "pure_micpermissionuistatetests_micpermissionuistatetests",
+      "target": "pure_micpermissionuistatetests_micpermissionuistatetests_test_notdeterminedpreset_needssystemsettings_shouldbefalse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L46",
+      "weight": 1.0,
+      "source": "pure_micpermissionuistatetests_micpermissionuistatetests",
+      "target": "pure_micpermissionuistatetests_micpermissionuistatetests_test_deniedpreset_label_shouldbedenied",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L50",
+      "weight": 1.0,
+      "source": "pure_micpermissionuistatetests_micpermissionuistatetests",
+      "target": "pure_micpermissionuistatetests_micpermissionuistatetests_test_deniedpreset_buttonvisible_shouldbetrue",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L54",
+      "weight": 1.0,
+      "source": "pure_micpermissionuistatetests_micpermissionuistatetests",
+      "target": "pure_micpermissionuistatetests_micpermissionuistatetests_test_deniedpreset_buttontitle_shouldbeopensettings",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Pure/MicPermissionUIStateTests.swift",
+      "source_location": "L58",
+      "weight": 1.0,
+      "source": "pure_micpermissionuistatetests_micpermissionuistatetests",
+      "target": "pure_micpermissionuistatetests_micpermissionuistatetests_test_deniedpreset_needssystemsettings_shouldbetrue",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "talkflowtests_pure_micpermissionstatustests_swift",
+      "target": "pure_micpermissionstatustests_micpermissionstatustests",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "pure_micpermissionstatustests_micpermissionstatustests",
+      "target": "pure_micpermissionstatustests_micpermissionstatustests_test_authorized_shouldproduceauthorizedlabel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "pure_micpermissionstatustests_micpermissionstatustests",
+      "target": "pure_micpermissionstatustests_micpermissionstatustests_test_authorized_shouldhidebutton",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "pure_micpermissionstatustests_micpermissionstatustests",
+      "target": "pure_micpermissionstatustests_micpermissionstatustests_test_authorized_shouldnotneedsystemsettings",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "pure_micpermissionstatustests_micpermissionstatustests",
+      "target": "pure_micpermissionstatustests_micpermissionstatustests_test_notdetermined_shouldproducerequestlabel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "pure_micpermissionstatustests_micpermissionstatustests",
+      "target": "pure_micpermissionstatustests_micpermissionstatustests_test_notdetermined_shouldshowbutton",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L37",
+      "weight": 1.0,
+      "source": "pure_micpermissionstatustests_micpermissionstatustests",
+      "target": "pure_micpermissionstatustests_micpermissionstatustests_test_notdetermined_shouldnotneedsystemsettings",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L44",
+      "weight": 1.0,
+      "source": "pure_micpermissionstatustests_micpermissionstatustests",
+      "target": "pure_micpermissionstatustests_micpermissionstatustests_test_denied_shouldproducedeniedlabel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L49",
+      "weight": 1.0,
+      "source": "pure_micpermissionstatustests_micpermissionstatustests",
+      "target": "pure_micpermissionstatustests_micpermissionstatustests_test_denied_shouldshowbutton",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L54",
+      "weight": 1.0,
+      "source": "pure_micpermissionstatustests_micpermissionstatustests",
+      "target": "pure_micpermissionstatustests_micpermissionstatustests_test_denied_shouldneedsystemsettings",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "pure_micpermissionstatustests_micpermissionstatustests_test_authorized_shouldproduceauthorizedlabel",
+      "target": "utils_micpermission_produceuistate"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "pure_micpermissionstatustests_micpermissionstatustests_test_authorized_shouldhidebutton",
+      "target": "utils_micpermission_produceuistate"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "pure_micpermissionstatustests_micpermissionstatustests_test_authorized_shouldnotneedsystemsettings",
+      "target": "utils_micpermission_produceuistate"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "pure_micpermissionstatustests_micpermissionstatustests_test_notdetermined_shouldproducerequestlabel",
+      "target": "utils_micpermission_produceuistate"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L33",
+      "weight": 1.0,
+      "source": "pure_micpermissionstatustests_micpermissionstatustests_test_notdetermined_shouldshowbutton",
+      "target": "utils_micpermission_produceuistate"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "pure_micpermissionstatustests_micpermissionstatustests_test_notdetermined_shouldnotneedsystemsettings",
+      "target": "utils_micpermission_produceuistate"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L45",
+      "weight": 1.0,
+      "source": "pure_micpermissionstatustests_micpermissionstatustests_test_denied_shouldproducedeniedlabel",
+      "target": "utils_micpermission_produceuistate"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L50",
+      "weight": 1.0,
+      "source": "pure_micpermissionstatustests_micpermissionstatustests_test_denied_shouldshowbutton",
+      "target": "utils_micpermission_produceuistate"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlowTests/Pure/MicPermissionStatusTests.swift",
+      "source_location": "L55",
+      "weight": 1.0,
+      "source": "pure_micpermissionstatustests_micpermissionstatustests_test_denied_shouldneedsystemsettings",
+      "target": "utils_micpermission_produceuistate"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/AppDelegate.swift",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "talkflow_appdelegate_swift",
+      "target": "talkflow_appdelegate_appdelegate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/AppDelegate.swift",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "talkflow_appdelegate_appdelegate",
+      "target": "nsobject",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/AppDelegate.swift",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "talkflow_appdelegate_appdelegate",
+      "target": "nsapplicationdelegate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/AppDelegate.swift",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "talkflow_appdelegate_appdelegate",
+      "target": "talkflow_appdelegate_appdelegate_applicationdidfinishlaunching",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/AppDelegate.swift",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "talkflow_appdelegate_appdelegate",
+      "target": "talkflow_appdelegate_appdelegate_impuresetupmenubaricon",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/AppDelegate.swift",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "talkflow_appdelegate_appdelegate",
+      "target": "talkflow_appdelegate_appdelegate_impuretogglewindow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/AppDelegate.swift",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "talkflow_appdelegate_appdelegate",
+      "target": "talkflow_appdelegate_appdelegate_impureshowmainwindow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/AppDelegate.swift",
+      "source_location": "L59",
+      "weight": 1.0,
+      "source": "talkflow_appdelegate_appdelegate",
+      "target": "talkflow_appdelegate_appdelegate_applicationshouldterminateafterlastwindowclosed",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/AppDelegate.swift",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "talkflow_appdelegate_appdelegate_applicationdidfinishlaunching",
+      "target": "talkflow_appdelegate_appdelegate_impuresetupmenubaricon",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/AppDelegate.swift",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "talkflow_appdelegate_appdelegate_applicationdidfinishlaunching",
+      "target": "talkflow_appdelegate_appdelegate_impureshowmainwindow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlow/AppDelegate.swift",
+      "source_location": "L52",
+      "weight": 1.0,
+      "source": "talkflow_appdelegate_appdelegate_impureshowmainwindow",
+      "target": "views_permissioncheckview_permissioncheckview"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/IO/MicPermissionIO.swift",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "talkflow_io_micpermissionio_swift",
+      "target": "io_micpermissionio_micpermissionio",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/IO/MicPermissionIO.swift",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "talkflow_io_micpermissionio_swift",
+      "target": "io_micpermissionio_micpermissionstatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/IO/MicPermissionIO.swift",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "talkflow_io_micpermissionio_swift",
+      "target": "io_micpermissionio_defaultmicpermissionio",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/IO/MicPermissionIO.swift",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "io_micpermissionio_defaultmicpermissionio",
+      "target": "io_micpermissionio_micpermissionio",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/IO/MicPermissionIO.swift",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "io_micpermissionio_defaultmicpermissionio_currentstatus",
+      "target": "io_micpermissionio_micpermissionstatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/IO/MicPermissionIO.swift",
+      "source_location": "L52",
+      "weight": 1.0,
+      "source": "io_micpermissionio_defaultmicpermissionio_impurerequestaccess",
+      "target": "io_micpermissionio_micpermissionstatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/IO/MicPermissionIO.swift",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "io_micpermissionio_defaultmicpermissionio",
+      "target": "io_micpermissionio_defaultmicpermissionio_currentstatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/IO/MicPermissionIO.swift",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "io_micpermissionio_defaultmicpermissionio",
+      "target": "io_micpermissionio_defaultmicpermissionio_performaction",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/IO/MicPermissionIO.swift",
+      "source_location": "L49",
+      "weight": 1.0,
+      "source": "io_micpermissionio_defaultmicpermissionio",
+      "target": "io_micpermissionio_defaultmicpermissionio_impurerequestaccess",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/IO/MicPermissionIO.swift",
+      "source_location": "L57",
+      "weight": 1.0,
+      "source": "io_micpermissionio_defaultmicpermissionio",
+      "target": "io_micpermissionio_defaultmicpermissionio_impureopensystempreferences",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/IO/MicPermissionIO.swift",
+      "source_location": "L41",
+      "weight": 1.0,
+      "source": "io_micpermissionio_defaultmicpermissionio_performaction",
+      "target": "io_micpermissionio_defaultmicpermissionio_impureopensystempreferences",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/IO/MicPermissionIO.swift",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "io_micpermissionio_defaultmicpermissionio_performaction",
+      "target": "io_micpermissionio_defaultmicpermissionio_impurerequestaccess",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/Utils/MicPermission.swift",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "talkflow_utils_micpermission_swift",
+      "target": "utils_micpermission_micpermissionstatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/Utils/MicPermission.swift",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "talkflow_utils_micpermission_swift",
+      "target": "utils_micpermission_micpermissionuistate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/Utils/MicPermission.swift",
+      "source_location": "L47",
+      "weight": 1.0,
+      "source": "talkflow_utils_micpermission_swift",
+      "target": "utils_micpermission_produceuistate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/Utils/MicPermission.swift",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "utils_micpermission_micpermissionstatus",
+      "target": "equatable",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "case_of",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/Utils/MicPermission.swift",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "utils_micpermission_micpermissionstatus",
+      "target": "utils_micpermission_micpermissionstatus_authorized",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "case_of",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/Utils/MicPermission.swift",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "utils_micpermission_micpermissionstatus",
+      "target": "utils_micpermission_micpermissionstatus_notdetermined",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "case_of",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/Utils/MicPermission.swift",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "utils_micpermission_micpermissionstatus",
+      "target": "utils_micpermission_micpermissionstatus_denied",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "TalkFlow/Views/PermissionCheckView.swift",
+      "source_location": "L86",
+      "weight": 1.0,
+      "source": "views_permissioncheckview_permissioncheckview_impurerender",
+      "target": "utils_micpermission_produceuistate"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/Views/PermissionCheckView.swift",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "talkflow_views_permissioncheckview_swift",
+      "target": "views_permissioncheckview_permissioncheckview",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/Views/PermissionCheckView.swift",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "views_permissioncheckview_permissioncheckview",
+      "target": "nsview",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/Views/PermissionCheckView.swift",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "views_permissioncheckview_permissioncheckview",
+      "target": "views_permissioncheckview_permissioncheckview_init",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/Views/PermissionCheckView.swift",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "views_permissioncheckview_permissioncheckview",
+      "target": "views_permissioncheckview_permissioncheckview_setup",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/Views/PermissionCheckView.swift",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "views_permissioncheckview_permissioncheckview",
+      "target": "views_permissioncheckview_permissioncheckview_impuresetupui",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/Views/PermissionCheckView.swift",
+      "source_location": "L64",
+      "weight": 1.0,
+      "source": "views_permissioncheckview_permissioncheckview",
+      "target": "views_permissioncheckview_permissioncheckview_impureobserveappactivation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/Views/PermissionCheckView.swift",
+      "source_location": "L75",
+      "weight": 1.0,
+      "source": "views_permissioncheckview_permissioncheckview",
+      "target": "views_permissioncheckview_permissioncheckview_impurebuttonclicked",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/Views/PermissionCheckView.swift",
+      "source_location": "L84",
+      "weight": 1.0,
+      "source": "views_permissioncheckview_permissioncheckview",
+      "target": "views_permissioncheckview_permissioncheckview_impurerender",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/Views/PermissionCheckView.swift",
+      "source_location": "L29",
+      "weight": 1.0,
+      "source": "views_permissioncheckview_permissioncheckview_setup",
+      "target": "views_permissioncheckview_permissioncheckview_impuresetupui",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/Views/PermissionCheckView.swift",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "views_permissioncheckview_permissioncheckview_setup",
+      "target": "views_permissioncheckview_permissioncheckview_impurerender",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/Views/PermissionCheckView.swift",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "views_permissioncheckview_permissioncheckview_setup",
+      "target": "views_permissioncheckview_permissioncheckview_impureobserveappactivation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "TalkFlow/Views/PermissionCheckView.swift",
+      "source_location": "L78",
+      "weight": 1.0,
+      "source": "views_permissioncheckview_permissioncheckview_impurebuttonclicked",
+      "target": "views_permissioncheckview_permissioncheckview_impurerender",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "features",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source": "readme_talkflow",
+      "target": "readme_mic_permission"
+    },
+    {
+      "relation": "features",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source": "readme_talkflow",
+      "target": "readme_menu_bar"
+    },
+    {
+      "relation": "features",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source": "readme_talkflow",
+      "target": "readme_streaming_dialogue"
+    },
+    {
+      "relation": "features",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source": "readme_talkflow",
+      "target": "readme_realtime_transcription"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source": "readme_talkflow",
+      "target": "readme_functional_paradigm"
+    },
+    {
+      "relation": "requires",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source": "readme_talkflow",
+      "target": "readme_macos14"
+    },
+    {
+      "relation": "licensed_under",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source": "readme_talkflow",
+      "target": "readme_apache_license"
+    },
+    {
+      "relation": "asset_of",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "TalkFlow/Assets.xcassets/AppIcon.appiconset",
+      "source": "image_appicon",
+      "target": "readme_talkflow"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source": "agents_pure_function_abstraction",
+      "target": "readme_functional_paradigm"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "AGENTS.md",
+      "source": "agents_pure_function_abstraction",
+      "target": "agents_side_effect_isolation"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "AGENTS.md",
+      "source": "agents_pure_function_abstraction",
+      "target": "agents_adt"
+    },
+    {
+      "relation": "informs",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "AGENTS.md",
+      "source": "agents_pure_function_abstraction",
+      "target": "spec_test_infrastructure"
+    },
+    {
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "AGENTS.md",
+      "source": "agents_side_effect_isolation",
+      "target": "agents_io_protocol_abstraction"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "AGENTS.md",
+      "source": "agents_side_effect_isolation",
+      "target": "agents_referential_transparency"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "AGENTS.md",
+      "source": "agents_construct_separate",
+      "target": "agents_side_effect_isolation"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "AGENTS.md",
+      "source": "agents_adt",
+      "target": "agents_exhaustive_matching"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "source_file": "AGENTS.md",
+      "source": "agents_pipeline_pattern",
+      "target": "agents_higher_order_functions"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/superpowers/specs/2026-05-03-talkflow-test-infrastructure-design.md",
+      "source": "spec_mock_pattern",
+      "target": "agents_io_protocol_abstraction"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-05-03-talkflow-test-infrastructure-design.md",
+      "source": "spec_test_infrastructure",
+      "target": "spec_xctest"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-05-03-talkflow-test-infrastructure-design.md",
+      "source": "spec_test_infrastructure",
+      "target": "spec_mock_pattern"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-05-03-talkflow-test-infrastructure-design.md",
+      "source": "spec_test_infrastructure",
+      "target": "spec_coverage_gate"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-05-03-talkflow-test-infrastructure-design.md",
+      "source": "spec_test_infrastructure",
+      "target": "spec_precommit_hook"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-05-03-talkflow-test-infrastructure-design.md",
+      "source": "spec_test_infrastructure",
+      "target": "spec_makefile"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-05-03-talkflow-test-infrastructure-design.md",
+      "source": "spec_test_infrastructure",
+      "target": "spec_directory_structure"
+    },
+    {
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "docs/superpowers/plans/2026-05-03-talkflow-test-infrastructure.md",
+      "source": "plan_task_decomposition",
+      "target": "spec_test_infrastructure"
+    },
+    {
+      "relation": "method_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/superpowers/plans/2026-05-03-talkflow-test-infrastructure.md",
+      "source": "plan_tdd_approach",
+      "target": "spec_test_infrastructure"
+    },
+    {
+      "relation": "reports_on",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "docs/superpowers/coverage-baseline.txt",
+      "source": "coverage_overall_74pc",
+      "target": "spec_coverage_gate"
+    },
+    {
+      "relation": "satisfies",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/coverage-baseline.txt",
+      "source": "coverage_micpermission_100pc",
+      "target": "spec_coverage_gate"
+    },
+    {
+      "relation": "satisfies",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/coverage-baseline.txt",
+      "source": "coverage_view_100pc",
+      "target": "spec_coverage_gate"
+    },
+    {
+      "relation": "violates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/coverage-baseline.txt",
+      "source": "coverage_io_28pc",
+      "target": "spec_coverage_gate"
+    },
+    {
+      "relation": "execution_model_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-05-03-talkflow-test-infrastructure.md",
+      "source": "plan_subagent_driven",
+      "target": "plan_task_decomposition"
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "fp_triad",
+      "label": "\u51fd\u6570\u5f0f\u7f16\u7a0b\u4e09\u5927\u539f\u5219",
+      "nodes": [
+        "agents_pure_function_abstraction",
+        "agents_side_effect_isolation",
+        "agents_immutable_data"
+      ],
+      "relation": "form",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "AGENTS.md"
+    },
+    {
+      "id": "test_quality_gates",
+      "label": "\u6d4b\u8bd5\u8d28\u91cf\u95e8\u7981\u4f53\u7cfb",
+      "nodes": [
+        "spec_coverage_gate",
+        "spec_precommit_hook",
+        "spec_makefile"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-05-03-talkflow-test-infrastructure-design.md"
+    }
+  ]
+}

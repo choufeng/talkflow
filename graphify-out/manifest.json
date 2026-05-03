@@ -1,0 +1,98 @@
+{
+  "/Users/jia.xia/development/TalkFlow/TalkFlowTests/Mocks/MockMicPermissionIO.swift": {
+    "mtime": 1777779549.4849842,
+    "hash": "cf89822e243e5b6690f87580a3120c9a"
+  },
+  "/Users/jia.xia/development/TalkFlow/TalkFlowTests/IO/MicPermissionIOTests.swift": {
+    "mtime": 1777779732.3993769,
+    "hash": "0d12ca67ffa200c137c6837b172654e9"
+  },
+  "/Users/jia.xia/development/TalkFlow/TalkFlowTests/ViewLogic/PermissionCheckViewTests.swift": {
+    "mtime": 1777779732.399375,
+    "hash": "e63eedb11efc3a98839f60b583e365aa"
+  },
+  "/Users/jia.xia/development/TalkFlow/TalkFlowTests/Helpers/XCTestCaseAsync.swift": {
+    "mtime": 1777779549.4849815,
+    "hash": "b43d8dad8a325d581fba24915c6787aa"
+  },
+  "/Users/jia.xia/development/TalkFlow/TalkFlowTests/Pure/MicPermissionUIStateTests.swift": {
+    "mtime": 1777779732.3992262,
+    "hash": "ffd6f3c229fb879b67c9278ed5c89dec"
+  },
+  "/Users/jia.xia/development/TalkFlow/TalkFlowTests/Pure/MicPermissionStatusTests.swift": {
+    "mtime": 1777779732.3992267,
+    "hash": "acf98873f56d76e17cf9e09b3ead51ef"
+  },
+  "/Users/jia.xia/development/TalkFlow/TalkFlow/AppDelegate.swift": {
+    "mtime": 1777777203.3535178,
+    "hash": "7aafd176d5d693132d6f45c7e32d6bb7"
+  },
+  "/Users/jia.xia/development/TalkFlow/TalkFlow/main.swift": {
+    "mtime": 1777771522.4858115,
+    "hash": "56761804d9aee38e2b262ce8ccb62856"
+  },
+  "/Users/jia.xia/development/TalkFlow/TalkFlow/IO/MicPermissionIO.swift": {
+    "mtime": 1777777203.3538034,
+    "hash": "fc43e6cc388177929603bdffbbf34975"
+  },
+  "/Users/jia.xia/development/TalkFlow/TalkFlow/Utils/MicPermission.swift": {
+    "mtime": 1777777203.354002,
+    "hash": "bf16808a41907ec6f69fa5fb113b685a"
+  },
+  "/Users/jia.xia/development/TalkFlow/TalkFlow/Views/PermissionCheckView.swift": {
+    "mtime": 1777777203.354278,
+    "hash": "6a528bdfd7b8cb3eae69764d906b00f9"
+  },
+  "/Users/jia.xia/development/TalkFlow/README.md": {
+    "mtime": 1777774530.1920767,
+    "hash": "a9835fe2442bb10aa9aca6043f246732"
+  },
+  "/Users/jia.xia/development/TalkFlow/AGENTS.md": {
+    "mtime": 1777774192.1821322,
+    "hash": "c7b76c2160ecfdf1cd2bbd0e56ae04f4"
+  },
+  "/Users/jia.xia/development/TalkFlow/docs/superpowers/coverage-baseline.txt": {
+    "mtime": 1777779932.863996,
+    "hash": "57eadc417f85de1e467236b120dcb4f0"
+  },
+  "/Users/jia.xia/development/TalkFlow/docs/superpowers/plans/2026-05-03-talkflow-test-infrastructure.md": {
+    "mtime": 1777777843.7026517,
+    "hash": "40cb4e3c03a150a48e046003679de5d9"
+  },
+  "/Users/jia.xia/development/TalkFlow/docs/superpowers/specs/2026-05-03-talkflow-test-infrastructure-design.md": {
+    "mtime": 1777777513.5436144,
+    "hash": "5d785b5b2b6411c19cc5736d76910eaf"
+  },
+  "/Users/jia.xia/development/TalkFlow/TalkFlow/Assets.xcassets/AppIcon.appiconset/icon_64x64.png": {
+    "mtime": 1777772578.1875892,
+    "hash": "d4b48e17b8a0bf2339ba43df0d84586d"
+  },
+  "/Users/jia.xia/development/TalkFlow/TalkFlow/Assets.xcassets/AppIcon.appiconset/icon_128x128.png": {
+    "mtime": 1777772578.1882608,
+    "hash": "acf92965935d9582fad3523b7cd9490c"
+  },
+  "/Users/jia.xia/development/TalkFlow/TalkFlow/Assets.xcassets/AppIcon.appiconset/icon_32x32.png": {
+    "mtime": 1777772578.1887753,
+    "hash": "b7d8f4d2f9f31016362b51772416be9d"
+  },
+  "/Users/jia.xia/development/TalkFlow/TalkFlow/Assets.xcassets/AppIcon.appiconset/icon_1024x1024.png": {
+    "mtime": 1777772578.189458,
+    "hash": "5120f38ad8908f2c0c2731d157e1131d"
+  },
+  "/Users/jia.xia/development/TalkFlow/TalkFlow/Assets.xcassets/AppIcon.appiconset/icon_512x512.png": {
+    "mtime": 1777772578.1899693,
+    "hash": "ffb86358bc1189ca1106486aadc3d8f9"
+  },
+  "/Users/jia.xia/development/TalkFlow/TalkFlow/Assets.xcassets/AppIcon.appiconset/icon.svg": {
+    "mtime": 1777772578.1904397,
+    "hash": "5dfae921ced280cec1a4692ab4008869"
+  },
+  "/Users/jia.xia/development/TalkFlow/TalkFlow/Assets.xcassets/AppIcon.appiconset/icon_16x16.png": {
+    "mtime": 1777772578.1912363,
+    "hash": "5bee42d076148e4d11d2a20451c738ab"
+  },
+  "/Users/jia.xia/development/TalkFlow/TalkFlow/Assets.xcassets/AppIcon.appiconset/icon_256x256.png": {
+    "mtime": 1777772578.1917498,
+    "hash": "ca25d7ba2e0bac34302ca4acfcc05690"
+  }
+}
