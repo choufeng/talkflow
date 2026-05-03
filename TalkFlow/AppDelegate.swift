@@ -60,10 +60,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         permissionCard.setUp()
         rootView.addSubview(permissionCard)
 
+        // 全局快捷键卡片
+        let hotkeyIO = CarbonHotkeyIO()
+        let hotkeyView = HotkeySettingsView(io: hotkeyIO)
+        hotkeyView.setUp()
+
+        let hotkeyCard = CardView(title: "全局快捷键", contentView: hotkeyView)
+        hotkeyCard.setUp()
+        rootView.addSubview(hotkeyCard)
+
         NSLayoutConstraint.activate([
+            // 权限卡片：顶部固定
             permissionCard.topAnchor.constraint(equalTo: rootView.topAnchor, constant: 20),
             permissionCard.leadingAnchor.constraint(equalTo: rootView.leadingAnchor, constant: 20),
             permissionCard.trailingAnchor.constraint(equalTo: rootView.trailingAnchor, constant: -20),
+
+            // 快捷键卡片：位于权限卡片下方
+            hotkeyCard.topAnchor.constraint(equalTo: permissionCard.bottomAnchor, constant: 16),
+            hotkeyCard.leadingAnchor.constraint(equalTo: rootView.leadingAnchor, constant: 20),
+            hotkeyCard.trailingAnchor.constraint(equalTo: rootView.trailingAnchor, constant: -20),
         ])
 
         window?.contentView = rootView

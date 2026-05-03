@@ -13,6 +13,9 @@
 		A1B2C3D4E5F6A1B2C3D4E517 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E518; };
 		A1B2C3D4E5F6A1B2C3D4E519 /* PermissionIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E520; };
 		A1B2C3D4E5F6A1B2C3D4E523 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E524; };
+		A1B2C3D4E5F6A1B2C3D4E528 /* Hotkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E525; };
+		A1B2C3D4E5F6A1B2C3D4E529 /* HotkeyIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E526; };
+		A1B2C3D4E5F6A1B2C3D4E530 /* HotkeySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E527; };
 		A1B2C3D4E5F6A1B2C3D4E505 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E504; };
 		96F8A6ADCBC14712B92C76F4 /* MockPermissionIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EE0A96765C4E9CBE62461A; };
 		054395ED9CA04554A29B3E9A /* XCTestCaseAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5052B690BA844E1DAF3260F0; };
@@ -35,6 +38,9 @@
 		A1B2C3D4E5F6A1B2C3D4E518 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F6A1B2C3D4E520 /* PermissionIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionIO.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F6A1B2C3D4E524 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F6A1B2C3D4E525 /* Hotkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hotkey.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F6A1B2C3D4E526 /* HotkeyIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyIO.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F6A1B2C3D4E527 /* HotkeySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeySettingsView.swift; sourceTree = "<group>"; };
 		4C044E5EE95348CBACF3159C /* TalkFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TalkFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		32EE0A96765C4E9CBE62461A /* MockPermissionIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPermissionIO.swift; sourceTree = "<group>"; };
 		5052B690BA844E1DAF3260F0 /* XCTestCaseAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestCaseAsync.swift; sourceTree = "<group>"; };
@@ -63,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				A1B2C3D4E5F6A1B2C3D4E520 /* PermissionIO.swift */,
+				A1B2C3D4E5F6A1B2C3D4E526 /* HotkeyIO.swift */,
 			);
 			path = IO;
 			sourceTree = "<group>";
@@ -71,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				A1B2C3D4E5F6A1B2C3D4E518 /* Permission.swift */,
+				A1B2C3D4E5F6A1B2C3D4E525 /* Hotkey.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -80,6 +88,7 @@
 			children = (
 				A1B2C3D4E5F6A1B2C3D4E524 /* CardView.swift */,
 				A1B2C3D4E5F6A1B2C3D4E522 /* PermissionListView.swift */,
+				A1B2C3D4E5F6A1B2C3D4E527 /* HotkeySettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -248,6 +257,9 @@
 				A1B2C3D4E5F6A1B2C3D4E517 /* Permission.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E519 /* PermissionIO.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E523 /* CardView.swift in Sources */,
+				A1B2C3D4E5F6A1B2C3D4E528 /* Hotkey.swift in Sources */,
+				A1B2C3D4E5F6A1B2C3D4E529 /* HotkeyIO.swift in Sources */,
+				A1B2C3D4E5F6A1B2C3D4E530 /* HotkeySettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
