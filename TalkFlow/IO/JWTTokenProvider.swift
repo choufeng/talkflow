@@ -24,10 +24,9 @@ final class JWTTokenProvider: TokenProviderIO {
 
     // MARK: - JWT 生成
 
-    private func createJWT() throws -> String {
+    private func createJWT(now: Int = Int(Date().timeIntervalSince1970)) throws -> String {
         let header = try base64URLEncode(json: ["alg": "RS256", "typ": "JWT"])
 
-        let now = Int(Date().timeIntervalSince1970)
         let claimSet: [String: Any] = [
             "iss": sa.clientEmail,
             "scope": scope,

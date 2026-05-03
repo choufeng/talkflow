@@ -48,6 +48,8 @@
 				FA2A53C496AE4EBDA9B81548 /* VertexAIIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B153F13AD408473A8FB7D484 /* VertexAIIO.swift */; };
 				707813DF2FFE4B4E9563280B /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459BFB9B391C4DE5B7A92AE7 /* MockURLProtocol.swift */; };
 				1F1E64F5110A46A7A52C4AA7 /* VertexAIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B09D2A5398B4C14B6A0E221 /* VertexAIOTests.swift */; };
+				CC797AB04818412D82B26B19 /* ServiceAccountIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9D80B5522A46A794E60848 /* ServiceAccountIO.swift */; };
+				799707D52E0644CC96FAB0B5 /* ServiceAccountIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59EB176AD8B4DB493486BC3 /* ServiceAccountIOTests.swift */; };
 		/* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +100,8 @@
 				B153F13AD408473A8FB7D484 /* VertexAIIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexAIIO.swift; sourceTree = "<group>"; };
 				459BFB9B391C4DE5B7A92AE7 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 				5B09D2A5398B4C14B6A0E221 /* VertexAIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexAIOTests.swift; sourceTree = "<group>"; };
+				9F9D80B5522A46A794E60848 /* ServiceAccountIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAccountIO.swift; sourceTree = "<group>"; };
+				D59EB176AD8B4DB493486BC3 /* ServiceAccountIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAccountIOTests.swift; sourceTree = "<group>"; };
 		/* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -122,6 +126,7 @@
 				F9FE837BBB93492C83D31911 /* FilePathIO.swift */,
 				A1B2C3D4E5F6A1B2C3D4E520 /* PermissionIO.swift */,
 				A1B2C3D4E5F6A1B2C3D4E526 /* HotkeyIO.swift */,
+				9F9D80B5522A46A794E60848 /* ServiceAccountIO.swift */,
 				B153F13AD408473A8FB7D484 /* VertexAIIO.swift */,
 				6ECC9FAB945F48E2924EE49A /* JWTTokenProvider.swift */,
 				86D7DEA93DFC45BB986B7EAB /* TokenProviderIO.swift */,
@@ -225,6 +230,7 @@
 			children = (
 				3986A974DC2E47BDB0792E31 /* AudioRecorderIOTests.swift */,
 				54EDD714AA8E485D90B99A53 /* MicPermissionIOTests.swift */,
+				D59EB176AD8B4DB493486BC3 /* ServiceAccountIOTests.swift */,
 				5B09D2A5398B4C14B6A0E221 /* VertexAIOTests.swift */,
 				CC2BE103BA5B4D1E91CFCA45 /* ProviderIOTests.swift */,
 			);
@@ -338,6 +344,7 @@
 				1F0651092BBB4C05907569FD /* TokenProviderIO.swift in Sources */,
 								42BCE0697F1B42FBABC6BB1F /* JWTTokenProvider.swift in Sources */,
 FA2A53C496AE4EBDA9B81548 /* VertexAIIO.swift in Sources */,
+				CC797AB04818412D82B26B19 /* ServiceAccountIO.swift in Sources */,
 								A1B2C3D4E5F6A1B2C3D4E5F6 /* main.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E5F7 /* AppDelegate.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E506 /* PermissionListView.swift in Sources */,
@@ -372,6 +379,7 @@ FA2A53C496AE4EBDA9B81548 /* VertexAIIO.swift in Sources */,
 				410D713E627648A1A2C71891 /* ProviderIOTests.swift in Sources */,
 				707813DF2FFE4B4E9563280B /* MockURLProtocol.swift in Sources */,
 				1F1E64F5110A46A7A52C4AA7 /* VertexAIOTests.swift in Sources */,
+				799707D52E0644CC96FAB0B5 /* ServiceAccountIOTests.swift in Sources */,
 								E8789C1ECE5544F4B9DBFD54 /* PermissionCheckViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

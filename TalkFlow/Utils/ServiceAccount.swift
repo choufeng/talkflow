@@ -18,29 +18,8 @@ enum ServiceAccountError: Error, Equatable {
 
 // MARK: - 纯函数解析
 
-/// 从 Service Account JSON 文件路径解析
-func parseServiceAccount(fromPath path: String) throws -> ServiceAccount {
-    guard FileManager.default.fileExists(atPath: path) else {
-        throw ServiceAccountError.fileNotFound(path: path)
-    }
-
-    let data: Data
-    do {
-        data = try Data(contentsOf: URL(fileURLWithPath: path))
-    } catch {
-        throw ServiceAccountError.fileNotFound(path: path)
-    }
-
-    let json: [String: Any]
-    do {
-        guard let dict = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-            throw ServiceAccountError.invalidJSON
-        }
-        json = dict
-    } catch {
-        throw ServiceAccountError.invalidJSON
-    }
-
+/// 从 JSON 字典解析 ServiceAccount（纯函数，无副作用）
+func parseServiceAccount(from json: [String: Any]) throws -> ServiceAccount {
     guard let projectID = json["project_id"] as? String else {
         throw ServiceAccountError.missingField("project_id")
     }
