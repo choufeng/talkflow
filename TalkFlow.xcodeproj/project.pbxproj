@@ -38,6 +38,8 @@
 				1EF0CA9981774CD09609C1D1 /* ServiceAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC3E77D768449390899AA5 /* ServiceAccount.swift */; };
 				40901967AA9E4F6E85113511 /* ServiceAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF15E2747BE4FDF8E634B07 /* ServiceAccountTests.swift */; };
 				67CAFD07CE2E4D6CA330C88A /* ProviderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830785FC5F4D42048BB8789E /* ProviderIO.swift */; };
+				75A2D47751B34AEFA40FC0D9 /* VertexMessageAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25243784D4774C66AB567D11 /* VertexMessageAdapter.swift */; };
+				A91122883B864E41B96C7B74 /* VertexMessageAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB97BC87E45649B7A83E2C7A /* VertexMessageAdapterTests.swift */; };
 		/* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +80,8 @@
 				58EC3E77D768449390899AA5 /* ServiceAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAccount.swift; sourceTree = "<group>"; };
 				ABF15E2747BE4FDF8E634B07 /* ServiceAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAccountTests.swift; sourceTree = "<group>"; };
 				830785FC5F4D42048BB8789E /* ProviderIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderIO.swift; sourceTree = "<group>"; };
+				25243784D4774C66AB567D11 /* VertexMessageAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexMessageAdapter.swift; sourceTree = "<group>"; };
+				FB97BC87E45649B7A83E2C7A /* VertexMessageAdapterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexMessageAdapterTests.swift; sourceTree = "<group>"; };
 		/* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -113,6 +117,7 @@
 				6FD1B48199F9409787A57855 /* RecordingState.swift */,
 				A1B2C3D4E5F6A1B2C3D4E518 /* Permission.swift */,
 				A1B2C3D4E5F6A1B2C3D4E525 /* Hotkey.swift */,
+				25243784D4774C66AB567D11 /* VertexMessageAdapter.swift */,
 				58EC3E77D768449390899AA5 /* ServiceAccount.swift */,
 				E5605FB6E21C4996811DC35B /* PromptConfig.swift */,
 				C66ADAAA54A14C0CBFA3DF33 /* ChatMessage.swift */,
@@ -185,6 +190,7 @@
 				DAADD4E9D7114C38B27D5E4C /* RecordingStateTests.swift */,
 				C3E883F3253B4CF498F09BCF /* MicPermissionStatusTests.swift */,
 				7440444015BC4FB69C8AD59E /* MicPermissionUIStateTests.swift */,
+				FB97BC87E45649B7A83E2C7A /* VertexMessageAdapterTests.swift */,
 				ABF15E2747BE4FDF8E634B07 /* ServiceAccountTests.swift */,
 				B49FC8987AB746C1886D91B7 /* PromptConfigTests.swift */,
 				3FD9A9BFDB3A45BF9050D74B /* ChatMessageTests.swift */,
@@ -304,7 +310,8 @@
 				A11D10447C054B478B79C9ED /* PromptConfig.swift in Sources */,
 1EF0CA9981774CD09609C1D1 /* ServiceAccount.swift in Sources */,
 								67CAFD07CE2E4D6CA330C88A /* ProviderIO.swift in Sources */,
-				A1B2C3D4E5F6A1B2C3D4E5F6 /* main.swift in Sources */,
+75A2D47751B34AEFA40FC0D9 /* VertexMessageAdapter.swift in Sources */,
+								A1B2C3D4E5F6A1B2C3D4E5F6 /* main.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E5F7 /* AppDelegate.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E506 /* PermissionListView.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E517 /* Permission.swift in Sources */,
@@ -332,6 +339,7 @@
 				A388EAF11DB743CB8286AEFB /* ChatMessageTests.swift in Sources */,
 				D0949B4B6E784845999ED80E /* PromptConfigTests.swift in Sources */,
 40901967AA9E4F6E85113511 /* ServiceAccountTests.swift in Sources */,
+				A91122883B864E41B96C7B74 /* VertexMessageAdapterTests.swift in Sources */,
 								E8789C1ECE5544F4B9DBFD54 /* PermissionCheckViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
