@@ -10,6 +10,13 @@
 	<string>56</string>
 	<key>objects</key>
 	<dict>
+		<key>0095EF642EC44E3E8966CE3A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>870EC224593C48C4B9C9B401</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>035452780DE940D999EC7F8D</key>
 		<dict>
 			<key>fileRef</key>
@@ -101,6 +108,7 @@
 				<string>53A635FBD9734986BB0E7114</string>
 				<string>30DACB75494749B39A8F7DA0</string>
 				<string>ACA13395D123462E891F2FCA</string>
+				<string>0095EF642EC44E3E8966CE3A</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
@@ -170,6 +178,13 @@
 			<string>AudioRecorderIOTests.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>39E78ED1E2DD42ADB243829A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>92CA46CC75684ECF993E007C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>3B8D6DA6D0DF4619A9967F0B</key>
 		<dict>
@@ -519,6 +534,17 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
+		<key>870EC224593C48C4B9C9B401</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>Utils/ADCParserTests.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>881A6C2713B74F3493EC76CE</key>
 		<dict>
 			<key>fileRef</key>
@@ -554,6 +580,17 @@
 			<string>6FD1B48199F9409787A57855</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+		</dict>
+		<key>92CA46CC75684ECF993E007C</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>ADCParser.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>95EAB1BBA8D04F4EB4E7D1E2</key>
 		<dict>
@@ -597,6 +634,19 @@
 			<string>sourcecode.swift</string>
 			<key>path</key>
 			<string>PipelineStatusView.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A16C53DDB18043A8ACCCFF09</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>870EC224593C48C4B9C9B401</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Utils</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -737,6 +787,7 @@
 				<string>667BDCA79AB244BAA9058E4F</string>
 				<string>0506E5C8520849749A320F07</string>
 				<string>5D725AFFC3FC9EFA4831F174</string>
+				<string>92CA46CC75684ECF993E007C</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -863,17 +914,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>TF01TRSV0000000000000000000V</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>TranscriptionSettingsView.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>A1B2C3D4E5F6A1B2C3D4E528</key>
 		<dict>
 			<key>fileRef</key>
@@ -892,13 +932,6 @@
 		<dict>
 			<key>fileRef</key>
 			<string>A1B2C3D4E5F6A1B2C3D4E527</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>TF01TRSV00000000000000000BF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>TF01TRSV0000000000000000000V</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -999,6 +1032,7 @@
 				<string>B2841BBA9F6445ACBF68ACE8</string>
 				<string>F4EBA008C0B741899F90B669</string>
 				<string>1FF49FD06D46401ABB096D46</string>
+				<string>39E78ED1E2DD42ADB243829A</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
@@ -1508,6 +1542,7 @@
 				<string>AA290EC17B624564AE6CE288</string>
 				<string>40F4A5F6BED5447E9E9F74CF</string>
 				<string>D112870FB8774447941623F8</string>
+				<string>A16C53DDB18043A8ACCCFF09</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -1576,6 +1611,24 @@
 			<string>STTResult.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>TF01TRSV0000000000000000000V</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>TranscriptionSettingsView.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>TF01TRSV00000000000000000BF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>TF01TRSV0000000000000000000V</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 	</dict>
 	<key>rootObject</key>
