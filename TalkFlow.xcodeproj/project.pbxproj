@@ -30,6 +30,7 @@
 		881A6C2713B74F3493EC76CE /* AudioRecorderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BEB8DFC03F43E690DED845 /* AudioRecorderIO.swift */; };
 		389214641CFD45F191E045CB /* MockAudioRecorderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B775F209C2749ADB5B2B05D /* MockAudioRecorderIO.swift */; };
 		A980ADF0FC2F486493EDA770 /* AudioRecorderIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3986A974DC2E47BDB0792E31 /* AudioRecorderIOTests.swift */; };
+		274BBF6D91DF4C7FB5C12F8A /* RecordingStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D183C8D3D64D4A05B5900C23 /* RecordingStatusView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		83BEB8DFC03F43E690DED845 /* AudioRecorderIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderIO.swift; sourceTree = "<group>"; };
 		8B775F209C2749ADB5B2B05D /* MockAudioRecorderIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAudioRecorderIO.swift; sourceTree = "<group>"; };
 		3986A974DC2E47BDB0792E31 /* AudioRecorderIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderIOTests.swift; sourceTree = "<group>"; };
+		D183C8D3D64D4A05B5900C23 /* RecordingStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingStatusView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -103,6 +105,7 @@
 		A1B2C3D4E5F6A1B2C3D4E508 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D183C8D3D64D4A05B5900C23 /* RecordingStatusView.swift */,
 				A1B2C3D4E5F6A1B2C3D4E524 /* CardView.swift */,
 				A1B2C3D4E5F6A1B2C3D4E522 /* PermissionListView.swift */,
 				A1B2C3D4E5F6A1B2C3D4E527 /* HotkeySettingsView.swift */,
@@ -272,6 +275,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				274BBF6D91DF4C7FB5C12F8A /* RecordingStatusView.swift in Sources */,
 				881A6C2713B74F3493EC76CE /* AudioRecorderIO.swift in Sources */,
 				4B7E8F3A1F294A3B92256977 /* FilePathIO.swift in Sources */,
 				91910FAB2CAA48F7AA32EB57 /* RecordingState.swift in Sources */,
