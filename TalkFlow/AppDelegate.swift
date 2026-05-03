@@ -125,7 +125,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: - ⚠️ 主窗口（含副作用：窗口创建 + 视图挂载）
 
     private func impureShowMainWindow() {
-        let windowRect = NSRect(x: 0, y: 0, width: 800, height: 600)
+        let windowRect = NSRect(x: 0, y: 0, width: 800, height: 800)
         window = NSWindow(
             contentRect: windowRect,
             styleMask: [.titled, .closable, .miniaturizable, .resizable],
