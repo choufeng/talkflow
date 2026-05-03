@@ -42,9 +42,19 @@ final class CardView: NSView {
         separator.boxType = .separator
         separator.translatesAutoresizingMaskIntoConstraints = false
 
-        contentView.translatesAutoresizingMaskIntoConstraints = false
+        // 内边框容器：包裹内容视图，添加独立边框
+        let innerBox = NSBox()
+        innerBox.boxType = .custom
+        innerBox.borderWidth = 0.5
+        innerBox.borderColor = NSColor.separatorColor
+        innerBox.cornerRadius = 6
+        innerBox.contentViewMargins = NSSize(width: 0, height: 0)
+        innerBox.translatesAutoresizingMaskIntoConstraints = false
 
-        let stack = NSStackView(views: [titleLabel, separator, contentView])
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        innerBox.contentView = contentView
+
+        let stack = NSStackView(views: [titleLabel, separator, innerBox])
         stack.orientation = .vertical
         stack.spacing = 10
         stack.alignment = .leading
@@ -60,7 +70,7 @@ final class CardView: NSView {
             stack.bottomAnchor.constraint(equalTo: bottomAnchor),
 
             separator.widthAnchor.constraint(equalTo: stack.widthAnchor),
-            contentView.widthAnchor.constraint(equalTo: stack.widthAnchor),
+            innerBox.widthAnchor.constraint(equalTo: stack.widthAnchor),
         ])
     }
 }
