@@ -44,6 +44,7 @@
 				4521C0E7A15A4AAEAD23D093 /* MockProviderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3572EAEC244DE7A88E17DB /* MockProviderIO.swift */; };
 				A8B9F7B49287461FBA9FB17E /* MockTokenProviderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63EE2FC8DD343D1857CA3DA /* MockTokenProviderIO.swift */; };
 				410D713E627648A1A2C71891 /* ProviderIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2BE103BA5B4D1E91CFCA45 /* ProviderIOTests.swift */; };
+				42BCE0697F1B42FBABC6BB1F /* JWTTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECC9FAB945F48E2924EE49A /* JWTTokenProvider.swift */; };
 		/* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +91,7 @@
 				7F3572EAEC244DE7A88E17DB /* MockProviderIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProviderIO.swift; sourceTree = "<group>"; };
 				B63EE2FC8DD343D1857CA3DA /* MockTokenProviderIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTokenProviderIO.swift; sourceTree = "<group>"; };
 				CC2BE103BA5B4D1E91CFCA45 /* ProviderIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderIOTests.swift; sourceTree = "<group>"; };
+				6ECC9FAB945F48E2924EE49A /* JWTTokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTTokenProvider.swift; sourceTree = "<group>"; };
 		/* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -114,6 +116,7 @@
 				F9FE837BBB93492C83D31911 /* FilePathIO.swift */,
 				A1B2C3D4E5F6A1B2C3D4E520 /* PermissionIO.swift */,
 				A1B2C3D4E5F6A1B2C3D4E526 /* HotkeyIO.swift */,
+				6ECC9FAB945F48E2924EE49A /* JWTTokenProvider.swift */,
 				86D7DEA93DFC45BB986B7EAB /* TokenProviderIO.swift */,
 				830785FC5F4D42048BB8789E /* ProviderIO.swift */,
 			);
@@ -324,7 +327,8 @@
 								67CAFD07CE2E4D6CA330C88A /* ProviderIO.swift in Sources */,
 75A2D47751B34AEFA40FC0D9 /* VertexMessageAdapter.swift in Sources */,
 				1F0651092BBB4C05907569FD /* TokenProviderIO.swift in Sources */,
-								A1B2C3D4E5F6A1B2C3D4E5F6 /* main.swift in Sources */,
+								42BCE0697F1B42FBABC6BB1F /* JWTTokenProvider.swift in Sources */,
+				A1B2C3D4E5F6A1B2C3D4E5F6 /* main.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E5F7 /* AppDelegate.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E506 /* PermissionListView.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E517 /* Permission.swift in Sources */,
