@@ -8,19 +8,22 @@ final class VertexAIIO: ProviderIO {
     private let location: String
     private let model: String
     private let promptConfig: PromptConfig
+    private let thinkingBudget: Int
     private let session: URLSession
 
     init(tokenProvider: TokenProviderIO,
          projectID: String,
          location: String = "us-central1",
-         model: String = "gemini-2.0-flash-001",
+         model: String = "gemini-2.5-flash",
          promptConfig: PromptConfig,
+         thinkingBudget: Int = 0,
          session: URLSession = .shared) {
         self.tokenProvider = tokenProvider
         self.projectID = projectID
         self.location = location
         self.model = model
         self.promptConfig = promptConfig
+        self.thinkingBudget = thinkingBudget
         self.session = session
     }
 
@@ -35,7 +38,7 @@ final class VertexAIIO: ProviderIO {
         }
 
         let systemPrompt = mergePrompts(promptConfig)
-        let body = VertexMessageAdapter.convert(messages: request.messages, systemPrompt: systemPrompt)
+        let body = VertexMessageAdapter.convert(messages: request.messages, systemPrompt: systemPrompt, thinkingBudget: thinkingBudget)
 
         let urlString = "https://\(location)-aiplatform.googleapis.com/v1/projects/\(projectID)/locations/\(location)/publishers/google/models/\(model):generateContent"
         guard let url = URL(string: urlString) else {

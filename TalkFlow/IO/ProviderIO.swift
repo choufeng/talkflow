@@ -22,3 +22,21 @@ enum ProviderError: Error, Equatable {
     /// 响应解析失败
     case responseParsingFailed(String)
 }
+
+// MARK: - ProviderError 显示文本
+
+extension ProviderError {
+    /// 面向用户的错误描述
+    var displayMessage: String {
+        switch self {
+        case .authenticationFailed(let msg):
+            return "认证失败: \(msg)"
+        case .networkError(let msg):
+            return "网络错误: \(msg)"
+        case .apiError(let code, let msg):
+            return "API 错误 (\(code)): \(msg)"
+        case .responseParsingFailed(let msg):
+            return "响应解析失败: \(msg)"
+        }
+    }
+}

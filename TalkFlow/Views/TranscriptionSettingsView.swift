@@ -3,7 +3,7 @@ import AppKit
 // MARK: - 转写设置内容视图
 
 /// 转写设置视图 — 作为卡片内容使用
-/// init 仅赋值（rule 16），setUp() 显式构建 UI
+/// init 仅赋值（rule 16），setUp() 显式构建 UI + 加载配置
 final class TranscriptionSettingsView: NSView {
 
     // MARK: - Subviews
@@ -25,6 +25,7 @@ final class TranscriptionSettingsView: NSView {
 
     func setUp() {
         impureSetupUI()
+        impureLoadCheckboxState()
     }
 
     // MARK: - ⚠️ UI 构建
@@ -32,8 +33,9 @@ final class TranscriptionSettingsView: NSView {
     private func impureSetupUI() {
         translatesAutoresizingMaskIntoConstraints = false
 
-        useLLMCheckbox.state = .off
         useLLMCheckbox.font = NSFont.systemFont(ofSize: 13)
+        useLLMCheckbox.target = self
+        useLLMCheckbox.action = #selector(impureCheckboxToggled)
         useLLMCheckbox.translatesAutoresizingMaskIntoConstraints = false
         addSubview(useLLMCheckbox)
 
@@ -43,5 +45,22 @@ final class TranscriptionSettingsView: NSView {
             useLLMCheckbox.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
             useLLMCheckbox.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
+    }
+
+    // MARK: - ⚠️ 配置加载
+
+    private func impureLoadCheckboxState() {
+        let config = impureLoadAppConfig()
+        useLLMCheckbox.state = config.transcription.useLLM ? .on : .off
+    }
+
+    // MARK: - ⚠️ 事件
+
+    @objc private func impureCheckboxToggled() {
+        let isOn = useLLMCheckbox.state == .on
+        var config = impureLoadAppConfig()
+        config.transcription.useLLM = isOn
+        impureSaveAppConfig(config)
+        NotificationCenter.default.post(name: .talkFlowUseLLMChanged, object: isOn)
     }
 }

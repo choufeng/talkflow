@@ -24,12 +24,22 @@ enum VertexMessageAdapter {
     struct RequestBody: Codable, Equatable {
         let contents: [Content]
         let systemInstruction: SystemInstruction?
+        let generationConfig: GenerationConfig?
+    }
+
+    struct GenerationConfig: Codable, Equatable {
+        let thinkingConfig: ThinkingConfig?
+    }
+
+    struct ThinkingConfig: Codable, Equatable {
+        let thinkingBudget: Int
     }
 
     // MARK: - 纯函数转换
 
     /// 将 ChatMessage 数组转换为 Vertex RequestBody
-    static func convert(messages: [ChatMessage], systemPrompt: String) -> RequestBody {
+    /// thinkingBudget: 0 = 关闭思维链，-1 = 由模型决定
+    static func convert(messages: [ChatMessage], systemPrompt: String, thinkingBudget: Int = 0) -> RequestBody {
         let contents = messages
             .filter { $0.role == .user }
             .map { msg in
@@ -43,7 +53,13 @@ enum VertexMessageAdapter {
             sysInstruction = nil
         }
 
-        return RequestBody(contents: contents, systemInstruction: sysInstruction)
+        return RequestBody(
+            contents: contents,
+            systemInstruction: sysInstruction,
+            generationConfig: GenerationConfig(
+                thinkingConfig: ThinkingConfig(thinkingBudget: thinkingBudget)
+            )
+        )
     }
 }
 
