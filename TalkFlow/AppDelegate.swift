@@ -122,6 +122,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         hotkeyCard.setUp()
         rootView.addSubview(hotkeyCard)
 
+        // 转写设置卡片
+        let transcriptionView = TranscriptionSettingsView()
+        transcriptionView.setUp()
+
+        let transcriptionCard = CardView(title: "转写", contentView: transcriptionView)
+        transcriptionCard.setUp()
+        rootView.addSubview(transcriptionCard)
+
         NSLayoutConstraint.activate([
             // 权限卡片：顶部固定
             permissionCard.topAnchor.constraint(equalTo: rootView.topAnchor, constant: 20),
@@ -132,6 +140,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             hotkeyCard.topAnchor.constraint(equalTo: permissionCard.bottomAnchor, constant: 16),
             hotkeyCard.leadingAnchor.constraint(equalTo: rootView.leadingAnchor, constant: 20),
             hotkeyCard.trailingAnchor.constraint(equalTo: rootView.trailingAnchor, constant: -20),
+
+            // 转写卡片：位于快捷键卡片下方
+            transcriptionCard.topAnchor.constraint(equalTo: hotkeyCard.bottomAnchor, constant: 16),
+            transcriptionCard.leadingAnchor.constraint(equalTo: rootView.leadingAnchor, constant: 20),
+            transcriptionCard.trailingAnchor.constraint(equalTo: rootView.trailingAnchor, constant: -20),
         ])
 
         window?.contentView = rootView

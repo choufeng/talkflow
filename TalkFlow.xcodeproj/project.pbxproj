@@ -598,6 +598,7 @@
 				<string>A1B2C3D4E5F6A1B2C3D4E524</string>
 				<string>A1B2C3D4E5F6A1B2C3D4E522</string>
 				<string>A1B2C3D4E5F6A1B2C3D4E527</string>
+				<string>TF01TRSV0000000000000000000V</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -791,6 +792,17 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>TF01TRSV0000000000000000000V</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>TranscriptionSettingsView.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>A1B2C3D4E5F6A1B2C3D4E528</key>
 		<dict>
 			<key>fileRef</key>
@@ -809,6 +821,13 @@
 		<dict>
 			<key>fileRef</key>
 			<string>A1B2C3D4E5F6A1B2C3D4E527</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>TF01TRSV00000000000000000BF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>TF01TRSV0000000000000000000V</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -904,6 +923,7 @@
 				<string>4874117D483C4470AFA968AE</string>
 				<string>3FE0ECB83A6A445A87509942</string>
 				<string>84B1150BB57145B9B4A8A3B6</string>
+				<string>TF01TRSV00000000000000000BF</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
