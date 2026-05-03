@@ -21,23 +21,32 @@ struct SenseVoiceEngineIO: SenseVoiceIO {
 
     func transcribe(url: URL) async throws -> STTResult {
         let (samples, sampleRate) = try decodeAudio(url: url)
+        print("[STT] 解码: \(samples.count) samples @ \(sampleRate)Hz")
         let resampled = resampleTo16k(samples: samples, srcRate: sampleRate)
+        print("[STT] 重采样: \(resampled.count) samples @ 16000Hz")
 
         guard !classifySilence(samples: resampled) else {
+            print("[STT] 静音判定: 采样数 \(resampled.count) < 4800")
             return .silence
         }
 
         let fbank = extractFbank(waveform: resampled)
-        guard !fbank.isEmpty else { return .silence }
+        print("[STT] Fbank: \(fbank.count) frames x \(fbank.first?.count ?? 0) dims")
+        guard !fbank.isEmpty else { print("[STT] Fbank isEmpty"); return .silence }
 
         let lfr = applyLFR(fbank)
-        guard !lfr.isEmpty else { return .silence }
+        print("[STT] LFR: \(lfr.count) frames x \(lfr.first?.count ?? 0) dims")
+        guard !lfr.isEmpty else { print("[STT] LFR isEmpty"); return .silence }
 
         let normalized = applyCMVN(lfr, means: cmvnMeans, vars: cmvnVars)
+        print("[STT] CMVN done, starting inference...")
 
         let tokenIds = try runInference(feats: normalized, featsLen: Int32(lfr.count))
+        print("[STT] 推理: \(tokenIds.count) token IDs")
         let text = decodeTokenIds(tokenIds, tokens: tokens)
+        print("[STT] 解码: \"\(text)\"")
         let cleaned = postprocess(text)
+        print("[STT] 后处理: \"\(cleaned)\"")
 
         return cleaned.isEmpty ? .silence : .speech(text: cleaned, language: "auto")
     }
