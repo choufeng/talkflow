@@ -90,7 +90,7 @@ final class PipelineStatusView: NSView {
         let ring = PulseRingView(frame: NSRect(x: 0, y: 0, width: 24, height: 24))
         ring.translatesAutoresizingMaskIntoConstraints = false
         addSubview(ring)
-        ring.startAnimation()
+        ring.impureStartAnimation()
         indicatorView = ring
 
         let timeField = NSTextField(labelWithString: "00:00")
@@ -129,7 +129,7 @@ final class PipelineStatusView: NSView {
         let jelly = JellyfishView(frame: NSRect(x: 0, y: 0, width: 28, height: 28))
         jelly.translatesAutoresizingMaskIntoConstraints = false
         addSubview(jelly)
-        jelly.startAnimation()
+        jelly.impureStartAnimation()
         indicatorView = jelly
 
         let label = NSTextField(labelWithString: "转写中...")

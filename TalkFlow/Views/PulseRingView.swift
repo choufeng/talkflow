@@ -50,7 +50,7 @@ final class PulseRingView: NSView {
         dotLayer.strokeColor = nil
     }
 
-    func startAnimation() {
+    func impureStartAnimation() {
         ringLayer.removeAnimation(forKey: "pulsePath")
         ringLayer.removeAnimation(forKey: "pulseOpacity")
 
@@ -83,7 +83,7 @@ final class PulseRingView: NSView {
         ringLayer.add(opacityAnim, forKey: "pulseOpacity")
     }
 
-    func stopAnimation() {
+    func impureStopAnimation() {
         ringLayer.removeAllAnimations()
     }
 }

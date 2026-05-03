@@ -157,8 +157,8 @@ final class JellyfishView: NSView {
 
     // MARK: - 动画
 
-    func startAnimation() {
-        stopAnimation()
+    func impureStartAnimation() {
+        impureStopAnimation()
 
         let sx = bounds.width / 28.0
         let sy = bounds.height / 28.0
@@ -229,7 +229,7 @@ final class JellyfishView: NSView {
         layer?.add(swimAnim, forKey: "swim")
     }
 
-    func stopAnimation() {
+    func impureStopAnimation() {
         bellLayer.removeAllAnimations()
         innerGlowLayer.removeAllAnimations()
         tentacleLayers.forEach { $0.removeAllAnimations() }
