@@ -69,6 +69,13 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
+		<key>1FF49FD06D46401ABB096D46</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B56D6DC7D2E94D8B94D42567</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>2047A542841C4FD6A08BBEE4</key>
 		<dict>
 			<key>buildActionMask</key>
@@ -298,6 +305,17 @@
 			<string>TalkFlowTests.xctest</string>
 			<key>sourceTree</key>
 			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>4D463DC015984901A446FF0A</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>PulseRingView.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>4E3AD1D6AE774CD59F150875</key>
 		<dict>
@@ -670,6 +688,8 @@
 				<string>A1B2C3D4E5F6A1B2C3D4E527</string>
 				<string>TF01TRSV0000000000000000000V</string>
 				<string>9EBA3952F2E843AD89FFDF65</string>
+				<string>4D463DC015984901A446FF0A</string>
+				<string>B56D6DC7D2E94D8B94D42567</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -977,6 +997,8 @@
 				<string>99264DD31AD147248AB399B0</string>
 				<string>651AE4A0CC1FE8D43AEB5519</string>
 				<string>B2841BBA9F6445ACBF68ACE8</string>
+				<string>F4EBA008C0B741899F90B669</string>
+				<string>1FF49FD06D46401ABB096D46</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
@@ -1310,6 +1332,17 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
+		<key>B56D6DC7D2E94D8B94D42567</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>JellyfishView.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>B90FFCA35BB349DAB6B4B4CD</key>
 		<dict>
 			<key>fileRef</key>
@@ -1494,6 +1527,13 @@
 		<dict>
 			<key>fileRef</key>
 			<string>C41285D1EF9B490391216CCE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>F4EBA008C0B741899F90B669</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4D463DC015984901A446FF0A</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>

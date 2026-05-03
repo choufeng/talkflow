@@ -87,21 +87,11 @@ final class PipelineStatusView: NSView {
     // MARK: - 录制态
 
     private func impureBuildRecording() {
-        let dot = NSView()
-        dot.wantsLayer = true
-        dot.layer?.backgroundColor = NSColor.systemRed.cgColor
-        dot.layer?.cornerRadius = 5
-        dot.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(dot)
-        indicatorView = dot
-
-        let animation = CABasicAnimation(keyPath: "opacity")
-        animation.fromValue = 1.0
-        animation.toValue = 0.3
-        animation.duration = 1.2
-        animation.autoreverses = true
-        animation.repeatCount = .infinity
-        dot.layer?.add(animation, forKey: "pulse")
+        let ring = PulseRingView(frame: NSRect(x: 0, y: 0, width: 24, height: 24))
+        ring.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(ring)
+        ring.startAnimation()
+        indicatorView = ring
 
         let timeField = NSTextField(labelWithString: "00:00")
         timeField.font = NSFont.monospacedDigitSystemFont(ofSize: 13, weight: .medium)
@@ -118,12 +108,12 @@ final class PipelineStatusView: NSView {
         recLabel = rec
 
         NSLayoutConstraint.activate([
-            dot.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            dot.centerYAnchor.constraint(equalTo: centerYAnchor),
-            dot.widthAnchor.constraint(equalToConstant: 10),
-            dot.heightAnchor.constraint(equalToConstant: 10),
+            ring.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
+            ring.centerYAnchor.constraint(equalTo: centerYAnchor),
+            ring.widthAnchor.constraint(equalToConstant: 24),
+            ring.heightAnchor.constraint(equalToConstant: 24),
 
-            timeField.leadingAnchor.constraint(equalTo: dot.trailingAnchor, constant: 8),
+            timeField.leadingAnchor.constraint(equalTo: ring.trailingAnchor, constant: 4),
             timeField.centerYAnchor.constraint(equalTo: centerYAnchor),
 
             rec.leadingAnchor.constraint(equalTo: timeField.trailingAnchor, constant: 6),
@@ -136,13 +126,11 @@ final class PipelineStatusView: NSView {
     // MARK: - 转写态
 
     private func impureBuildTranscribing() {
-        let spinner = NSProgressIndicator()
-        spinner.style = .spinning
-        spinner.controlSize = .small
-        spinner.startAnimation(nil)
-        spinner.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(spinner)
-        indicatorView = spinner
+        let jelly = JellyfishView(frame: NSRect(x: 0, y: 0, width: 28, height: 28))
+        jelly.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(jelly)
+        jelly.startAnimation()
+        indicatorView = jelly
 
         let label = NSTextField(labelWithString: "转写中...")
         label.font = NSFont.monospacedDigitSystemFont(ofSize: 13, weight: .medium)
@@ -152,10 +140,12 @@ final class PipelineStatusView: NSView {
         textLabel = label
 
         NSLayoutConstraint.activate([
-            spinner.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 14),
-            spinner.centerYAnchor.constraint(equalTo: centerYAnchor),
+            jelly.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 14),
+            jelly.centerYAnchor.constraint(equalTo: centerYAnchor),
+            jelly.widthAnchor.constraint(equalToConstant: 28),
+            jelly.heightAnchor.constraint(equalToConstant: 28),
 
-            label.leadingAnchor.constraint(equalTo: spinner.trailingAnchor, constant: 8),
+            label.leadingAnchor.constraint(equalTo: jelly.trailingAnchor, constant: 4),
             label.centerYAnchor.constraint(equalTo: centerYAnchor),
 
             heightAnchor.constraint(equalToConstant: 44),
