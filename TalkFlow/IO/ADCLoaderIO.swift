@@ -4,7 +4,7 @@ import Foundation
 
 /// 从默认路径 ~/.config/gcloud/application_default_credentials.json 加载 ADC
 /// 文件不存在或解析失败 → nil
-func impureLoadADCFromDefaultPath() -> ADCParsedInfo? {
+func impureLoadADCFromDefaultPath() -> ADCCredential? {
     let home = FileManager.default.homeDirectoryForCurrentUser
     let adcPath = home.appendingPathComponent(".config/gcloud/application_default_credentials.json")
 

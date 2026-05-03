@@ -3,41 +3,43 @@ import XCTest
 
 final class ADCParserTests: XCTestCase {
 
-    // MARK: - 有效 ADC JSON（含 project_id）
+    // MARK: - Service Account
 
-    func testParseADC_validFullJSON_returnsParsedInfo() throws {
+    func testParseADC_serviceAccountFullJSON() throws {
         let json: [String: Any] = [
+            "type": "service_account",
             "client_email": "test@developer.gserviceaccount.com",
             "private_key": "-----BEGIN PRIVATE KEY-----\nabc\n-----END PRIVATE KEY-----\n",
             "token_uri": "https://oauth2.googleapis.com/token",
             "project_id": "my-project",
         ]
         let result = try parseADC(from: json)
-        XCTAssertEqual(result.clientEmail, "test@developer.gserviceaccount.com")
-        XCTAssertEqual(result.privateKey, "-----BEGIN PRIVATE KEY-----\nabc\n-----END PRIVATE KEY-----\n")
-        XCTAssertEqual(result.tokenURI, "https://oauth2.googleapis.com/token")
-        XCTAssertEqual(result.projectID, "my-project")
+        guard case .serviceAccount(let email, let key, let uri, let pid) = result else {
+            return XCTFail("Expected serviceAccount")
+        }
+        XCTAssertEqual(email, "test@developer.gserviceaccount.com")
+        XCTAssertEqual(key, "-----BEGIN PRIVATE KEY-----\nabc\n-----END PRIVATE KEY-----\n")
+        XCTAssertEqual(uri, "https://oauth2.googleapis.com/token")
+        XCTAssertEqual(pid, "my-project")
     }
 
-    // MARK: - 有效 ADC JSON（不含 project_id）
-
-    func testParseADC_validJSONWithoutProjectID_returnsParsedInfoWithNilProjectID() throws {
+    func testParseADC_serviceAccountWithoutProjectID() throws {
         let json: [String: Any] = [
+            "type": "service_account",
             "client_email": "test@developer.gserviceaccount.com",
             "private_key": "-----BEGIN PRIVATE KEY-----\nxyz\n-----END PRIVATE KEY-----\n",
             "token_uri": "https://oauth2.googleapis.com/token",
         ]
         let result = try parseADC(from: json)
-        XCTAssertEqual(result.clientEmail, "test@developer.gserviceaccount.com")
-        XCTAssertEqual(result.privateKey, "-----BEGIN PRIVATE KEY-----\nxyz\n-----END PRIVATE KEY-----\n")
-        XCTAssertEqual(result.tokenURI, "https://oauth2.googleapis.com/token")
-        XCTAssertNil(result.projectID)
+        guard case .serviceAccount(_, _, _, let pid) = result else {
+            return XCTFail("Expected serviceAccount")
+        }
+        XCTAssertNil(pid)
     }
 
-    // MARK: - 缺失必填字段
-
-    func testParseADC_missingClientEmail_throws() {
+    func testParseADC_serviceAccountMissingClientEmail_throws() {
         let json: [String: Any] = [
+            "type": "service_account",
             "private_key": "k",
             "token_uri": "https://example.com",
         ]
@@ -49,29 +51,73 @@ final class ADCParserTests: XCTestCase {
         }
     }
 
-    func testParseADC_missingPrivateKey_throws() {
+    // MARK: - Authorized User
+
+    func testParseADC_authorizedUserFullJSON() throws {
         let json: [String: Any] = [
-            "client_email": "x@x.com",
-            "token_uri": "https://example.com",
+            "type": "authorized_user",
+            "client_id": "123.apps.googleusercontent.com",
+            "client_secret": "secret123",
+            "refresh_token": "1//refreshtoken",
+            "quota_project_id": "my-quota-project",
+        ]
+        let result = try parseADC(from: json)
+        guard case .authorizedUser(let cid, let cs, let rt, let pid) = result else {
+            return XCTFail("Expected authorizedUser")
+        }
+        XCTAssertEqual(cid, "123.apps.googleusercontent.com")
+        XCTAssertEqual(cs, "secret123")
+        XCTAssertEqual(rt, "1//refreshtoken")
+        XCTAssertEqual(pid, "my-quota-project")
+    }
+
+    func testParseADC_authorizedUserWithoutProjectID() throws {
+        let json: [String: Any] = [
+            "type": "authorized_user",
+            "client_id": "123.apps.googleusercontent.com",
+            "client_secret": "secret123",
+            "refresh_token": "1//refreshtoken",
+        ]
+        let result = try parseADC(from: json)
+        guard case .authorizedUser(_, _, _, let pid) = result else {
+            return XCTFail("Expected authorizedUser")
+        }
+        XCTAssertNil(pid)
+    }
+
+    func testParseADC_authorizedUserMissingClientID_throws() {
+        let json: [String: Any] = [
+            "type": "authorized_user",
+            "client_secret": "secret123",
+            "refresh_token": "1//refreshtoken",
         ]
         XCTAssertThrowsError(try parseADC(from: json)) { error in
             guard case ADCParseError.missingField(let field) = error else {
                 return XCTFail("Expected missingField error")
             }
-            XCTAssertEqual(field, "private_key")
+            XCTAssertEqual(field, "client_id")
         }
     }
 
-    func testParseADC_missingTokenURI_throws() {
-        let json: [String: Any] = [
-            "client_email": "x@x.com",
-            "private_key": "k",
-        ]
+    // MARK: - Unsupported/Invalid
+
+    func testParseADC_unsupportedType_throws() {
+        let json: [String: Any] = ["type": "external_account"]
+        XCTAssertThrowsError(try parseADC(from: json)) { error in
+            guard case ADCParseError.unsupportedType(let type) = error else {
+                return XCTFail("Expected unsupportedType error")
+            }
+            XCTAssertEqual(type, "external_account")
+        }
+    }
+
+    func testParseADC_missingType_throws() {
+        let json: [String: Any] = ["client_email": "x@x.com"]
         XCTAssertThrowsError(try parseADC(from: json)) { error in
             guard case ADCParseError.missingField(let field) = error else {
                 return XCTFail("Expected missingField error")
             }
-            XCTAssertEqual(field, "token_uri")
+            XCTAssertEqual(field, "type")
         }
     }
 }

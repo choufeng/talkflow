@@ -24,7 +24,7 @@ final class ModelSettingsView: NSView {
     // MARK: - 可变状态
 
     private var selectedProvider: ModelProvider = .vertexAI
-    private var adcInfo: ADCParsedInfo? = nil
+    private var adcInfo: ADCCredential? = nil
     private var connectionStatus: ConnectionTestStatus = .idle
     private var isTesting = false
 
@@ -180,9 +180,19 @@ final class ModelSettingsView: NSView {
             return
         }
         adcInfo = adc
-        print("[ModelSettings] ADC 检测成功 — clientEmail: \(adc.clientEmail)")
 
-        if let pid = adc.projectID {
+        // 提取 projectID
+        let pid: String?
+        switch adc {
+        case .serviceAccount(_, _, _, let projectID):
+            pid = projectID
+            print("[ModelSettings] ADC 检测成功 — service_account, projectID: \(pid ?? "无")")
+        case .authorizedUser(_, _, _, let projectID):
+            pid = projectID
+            print("[ModelSettings] ADC 检测成功 — authorized_user, projectID: \(pid ?? "无")")
+        }
+
+        if let pid = pid {
             projectIDField.stringValue = pid
             projectIDField.isEditable = false
         } else {
@@ -221,13 +231,25 @@ final class ModelSettingsView: NSView {
         connectionStatus = .testing
         impureRender()
 
-        let sa = ServiceAccount(
-            projectID: projectID,
-            privateKey: adc.privateKey,
-            clientEmail: adc.clientEmail,
-            tokenURI: adc.tokenURI
-        )
-        let tokenProvider = JWTTokenProvider(sa: sa)
+        let tokenProvider: any TokenProviderIO
+        switch adc {
+        case .serviceAccount(let clientEmail, let privateKey, let tokenURI, _):
+            let sa = ServiceAccount(
+                projectID: projectID,
+                privateKey: privateKey,
+                clientEmail: clientEmail,
+                tokenURI: tokenURI
+            )
+            tokenProvider = JWTTokenProvider(sa: sa)
+
+        case .authorizedUser(let clientID, let clientSecret, let refreshToken, _):
+            tokenProvider = RefreshTokenProviderIO(
+                clientID: clientID,
+                clientSecret: clientSecret,
+                refreshToken: refreshToken
+            )
+        }
+
         let provider = VertexAIIO(
             tokenProvider: tokenProvider,
             projectID: projectID,
