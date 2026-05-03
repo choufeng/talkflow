@@ -29,28 +29,31 @@
 		035452780DE940D999EC7F8D /* MockFilePathIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C27EA17A843428468EA72 /* MockFilePathIO.swift */; };
 		881A6C2713B74F3493EC76CE /* AudioRecorderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BEB8DFC03F43E690DED845 /* AudioRecorderIO.swift */; };
 		389214641CFD45F191E045CB /* MockAudioRecorderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B775F209C2749ADB5B2B05D /* MockAudioRecorderIO.swift */; };
+		C1B2C3D4E5F6A1B2C3D4E703 /* MockClipboardIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B2C3D4E5F6A1B2C3D4E704 /* MockClipboardIO.swift */; };
 		A980ADF0FC2F486493EDA770 /* AudioRecorderIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3986A974DC2E47BDB0792E31 /* AudioRecorderIOTests.swift */; };
+		C1B2C3D4E5F6A1B2C3D4E705 /* ClipboardIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B2C3D4E5F6A1B2C3D4E706 /* ClipboardIOTests.swift */; };
 		274BBF6D91DF4C7FB5C12F8A /* RecordingStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D183C8D3D64D4A05B5900C23 /* RecordingStatusView.swift */; };
 		B83A495B3C5C4B299E84EEFE /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66ADAAA54A14C0CBFA3DF33 /* ChatMessage.swift */; };
-				A388EAF11DB743CB8286AEFB /* ChatMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A9BFDB3A45BF9050D74B /* ChatMessageTests.swift */; };
-				A11D10447C054B478B79C9ED /* PromptConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5605FB6E21C4996811DC35B /* PromptConfig.swift */; };
-				D0949B4B6E784845999ED80E /* PromptConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49FC8987AB746C1886D91B7 /* PromptConfigTests.swift */; };
-				1EF0CA9981774CD09609C1D1 /* ServiceAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC3E77D768449390899AA5 /* ServiceAccount.swift */; };
-				40901967AA9E4F6E85113511 /* ServiceAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF15E2747BE4FDF8E634B07 /* ServiceAccountTests.swift */; };
-				67CAFD07CE2E4D6CA330C88A /* ProviderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830785FC5F4D42048BB8789E /* ProviderIO.swift */; };
-				75A2D47751B34AEFA40FC0D9 /* VertexMessageAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25243784D4774C66AB567D11 /* VertexMessageAdapter.swift */; };
-				A91122883B864E41B96C7B74 /* VertexMessageAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB97BC87E45649B7A83E2C7A /* VertexMessageAdapterTests.swift */; };
-				1F0651092BBB4C05907569FD /* TokenProviderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D7DEA93DFC45BB986B7EAB /* TokenProviderIO.swift */; };
-				4521C0E7A15A4AAEAD23D093 /* MockProviderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3572EAEC244DE7A88E17DB /* MockProviderIO.swift */; };
-				A8B9F7B49287461FBA9FB17E /* MockTokenProviderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63EE2FC8DD343D1857CA3DA /* MockTokenProviderIO.swift */; };
-				410D713E627648A1A2C71891 /* ProviderIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2BE103BA5B4D1E91CFCA45 /* ProviderIOTests.swift */; };
-				42BCE0697F1B42FBABC6BB1F /* JWTTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECC9FAB945F48E2924EE49A /* JWTTokenProvider.swift */; };
-				FA2A53C496AE4EBDA9B81548 /* VertexAIIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B153F13AD408473A8FB7D484 /* VertexAIIO.swift */; };
-				707813DF2FFE4B4E9563280B /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459BFB9B391C4DE5B7A92AE7 /* MockURLProtocol.swift */; };
-				1F1E64F5110A46A7A52C4AA7 /* VertexAIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B09D2A5398B4C14B6A0E221 /* VertexAIOTests.swift */; };
-				CC797AB04818412D82B26B19 /* ServiceAccountIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9D80B5522A46A794E60848 /* ServiceAccountIO.swift */; };
-				799707D52E0644CC96FAB0B5 /* ServiceAccountIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59EB176AD8B4DB493486BC3 /* ServiceAccountIOTests.swift */; };
-		/* End PBXBuildFile section */
+		A388EAF11DB743CB8286AEFB /* ChatMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A9BFDB3A45BF9050D74B /* ChatMessageTests.swift */; };
+		A11D10447C054B478B79C9ED /* PromptConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5605FB6E21C4996811DC35B /* PromptConfig.swift */; };
+		D0949B4B6E784845999ED80E /* PromptConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49FC8987AB746C1886D91B7 /* PromptConfigTests.swift */; };
+		1EF0CA9981774CD09609C1D1 /* ServiceAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC3E77D768449390899AA5 /* ServiceAccount.swift */; };
+		40901967AA9E4F6E85113511 /* ServiceAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF15E2747BE4FDF8E634B07 /* ServiceAccountTests.swift */; };
+		67CAFD07CE2E4D6CA330C88A /* ProviderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830785FC5F4D42048BB8789E /* ProviderIO.swift */; };
+		75A2D47751B34AEFA40FC0D9 /* VertexMessageAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25243784D4774C66AB567D11 /* VertexMessageAdapter.swift */; };
+		A91122883B864E41B96C7B74 /* VertexMessageAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB97BC87E45649B7A83E2C7A /* VertexMessageAdapterTests.swift */; };
+		1F0651092BBB4C05907569FD /* TokenProviderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D7DEA93DFC45BB986B7EAB /* TokenProviderIO.swift */; };
+		4521C0E7A15A4AAEAD23D093 /* MockProviderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3572EAEC244DE7A88E17DB /* MockProviderIO.swift */; };
+		A8B9F7B49287461FBA9FB17E /* MockTokenProviderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63EE2FC8DD343D1857CA3DA /* MockTokenProviderIO.swift */; };
+		410D713E627648A1A2C71891 /* ProviderIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2BE103BA5B4D1E91CFCA45 /* ProviderIOTests.swift */; };
+		42BCE0697F1B42FBABC6BB1F /* JWTTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECC9FAB945F48E2924EE49A /* JWTTokenProvider.swift */; };
+		FA2A53C496AE4EBDA9B81548 /* VertexAIIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B153F13AD408473A8FB7D484 /* VertexAIIO.swift */; };
+		707813DF2FFE4B4E9563280B /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459BFB9B391C4DE5B7A92AE7 /* MockURLProtocol.swift */; };
+		1F1E64F5110A46A7A52C4AA7 /* VertexAIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B09D2A5398B4C14B6A0E221 /* VertexAIOTests.swift */; };
+		CC797AB04818412D82B26B19 /* ServiceAccountIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9D80B5522A46A794E60848 /* ServiceAccountIO.swift */; };
+		799707D52E0644CC96FAB0B5 /* ServiceAccountIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59EB176AD8B4DB493486BC3 /* ServiceAccountIOTests.swift */; };
+		C1B2C3D4E5F6A1B2C3D4E701 /* ClipboardIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B2C3D4E5F6A1B2C3D4E702 /* ClipboardIO.swift */; };
+/* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A1B2C3D4E5F6A1B2C3D4E5F8 /* TalkFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TalkFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,6 +72,7 @@
 		A1B2C3D4E5F6A1B2C3D4E526 /* HotkeyIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyIO.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F6A1B2C3D4E527 /* HotkeySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeySettingsView.swift; sourceTree = "<group>"; };
 		4C044E5EE95348CBACF3159C /* TalkFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TalkFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1B2C3D4E5F6A1B2C3D4E702 /* ClipboardIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardIO.swift; sourceTree = "<group>"; };
 		32EE0A96765C4E9CBE62461A /* MockPermissionIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPermissionIO.swift; sourceTree = "<group>"; };
 		5052B690BA844E1DAF3260F0 /* XCTestCaseAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestCaseAsync.swift; sourceTree = "<group>"; };
 		C3E883F3253B4CF498F09BCF /* MicPermissionStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicPermissionStatusTests.swift; sourceTree = "<group>"; };
@@ -81,7 +85,9 @@
 		3F6C27EA17A843428468EA72 /* MockFilePathIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFilePathIO.swift; sourceTree = "<group>"; };
 		83BEB8DFC03F43E690DED845 /* AudioRecorderIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderIO.swift; sourceTree = "<group>"; };
 		8B775F209C2749ADB5B2B05D /* MockAudioRecorderIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAudioRecorderIO.swift; sourceTree = "<group>"; };
+		C1B2C3D4E5F6A1B2C3D4E704 /* MockClipboardIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockClipboardIO.swift; sourceTree = "<group>"; };
 		3986A974DC2E47BDB0792E31 /* AudioRecorderIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderIOTests.swift; sourceTree = "<group>"; };
+		C1B2C3D4E5F6A1B2C3D4E706 /* ClipboardIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardIOTests.swift; sourceTree = "<group>"; };
 		D183C8D3D64D4A05B5900C23 /* RecordingStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingStatusView.swift; sourceTree = "<group>"; };
 		C66ADAAA54A14C0CBFA3DF33 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 				3FD9A9BFDB3A45BF9050D74B /* ChatMessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageTests.swift; sourceTree = "<group>"; };
@@ -123,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				83BEB8DFC03F43E690DED845 /* AudioRecorderIO.swift */,
+				C1B2C3D4E5F6A1B2C3D4E702 /* ClipboardIO.swift */,
 				F9FE837BBB93492C83D31911 /* FilePathIO.swift */,
 				A1B2C3D4E5F6A1B2C3D4E520 /* PermissionIO.swift */,
 				A1B2C3D4E5F6A1B2C3D4E526 /* HotkeyIO.swift */,
@@ -194,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				8B775F209C2749ADB5B2B05D /* MockAudioRecorderIO.swift */,
+				C1B2C3D4E5F6A1B2C3D4E704 /* MockClipboardIO.swift */,
 				3F6C27EA17A843428468EA72 /* MockFilePathIO.swift */,
 				32EE0A96765C4E9CBE62461A /* MockPermissionIO.swift */,
 				B63EE2FC8DD343D1857CA3DA /* MockTokenProviderIO.swift */,
@@ -229,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				3986A974DC2E47BDB0792E31 /* AudioRecorderIOTests.swift */,
+				C1B2C3D4E5F6A1B2C3D4E706 /* ClipboardIOTests.swift */,
 				54EDD714AA8E485D90B99A53 /* MicPermissionIOTests.swift */,
 				D59EB176AD8B4DB493486BC3 /* ServiceAccountIOTests.swift */,
 				5B09D2A5398B4C14B6A0E221 /* VertexAIOTests.swift */,
@@ -334,6 +343,7 @@
 			files = (
 				274BBF6D91DF4C7FB5C12F8A /* RecordingStatusView.swift in Sources */,
 				881A6C2713B74F3493EC76CE /* AudioRecorderIO.swift in Sources */,
+				C1B2C3D4E5F6A1B2C3D4E701 /* ClipboardIO.swift in Sources */,
 				4B7E8F3A1F294A3B92256977 /* FilePathIO.swift in Sources */,
 				91910FAB2CAA48F7AA32EB57 /* RecordingState.swift in Sources */,
 				B83A495B3C5C4B299E84EEFE /* ChatMessage.swift in Sources */,
@@ -362,7 +372,9 @@ FA2A53C496AE4EBDA9B81548 /* VertexAIIO.swift in Sources */,
 			buildActionMask = 2147483647;
 			files = (
 				A980ADF0FC2F486493EDA770 /* AudioRecorderIOTests.swift in Sources */,
+				C1B2C3D4E5F6A1B2C3D4E705 /* ClipboardIOTests.swift in Sources */,
 				389214641CFD45F191E045CB /* MockAudioRecorderIO.swift in Sources */,
+				C1B2C3D4E5F6A1B2C3D4E703 /* MockClipboardIO.swift in Sources */,
 				035452780DE940D999EC7F8D /* MockFilePathIO.swift in Sources */,
 				524D73189BD14892AA939FF2 /* RecordingStateTests.swift in Sources */,
 				96F8A6ADCBC14712B92C76F4 /* MockPermissionIO.swift in Sources */,
