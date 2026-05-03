@@ -34,6 +34,14 @@ protocol HotkeyIO {
 
     /// ⚠️ 停止录制
     func stopRecording()
+
+    // MARK: - 临时热键（ESC 取消录音等场景）
+
+    /// ⚠️ 注册临时 ESC 热键
+    func registerEscHotkey(onTrigger: @escaping () -> Void)
+
+    /// ⚠️ 注销 ESC 热键
+    func unregisterEscHotkey()
 }
 
 // MARK: - ⚠️ Carbon 全局快捷键 IO 实现
@@ -52,8 +60,14 @@ final class CarbonHotkeyIO: HotkeyIO {
     private var recordingMonitor: Any?
     private let hotkeyID = EventHotKeyID(signature: 0x54464C4F, id: 1) // "TFLO"
 
+    // ESC 临时热键
+    private var escHotkeyRef: EventHotKeyRef?
+    private var escOnTrigger: (() -> Void)?
+    private let escHotkeyID = EventHotKeyID(signature: 0x54464C4F, id: 2) // "TFLO"
+
     deinit {
         stopRecording()
+        unregisterEscHotkey()
         unregisterHotkey()
     }
 
@@ -180,14 +194,70 @@ final class CarbonHotkeyIO: HotkeyIO {
         }
     }
 
+    // MARK: - 临时热键（ESC）
+
+    func registerEscHotkey(onTrigger: @escaping () -> Void) {
+        unregisterEscHotkey()
+        escOnTrigger = onTrigger
+
+        let modifiers: UInt32 = 0
+        let keyCode: UInt32 = 0x35
+
+        hotkeyLog("注册临时 ESC 热键...")
+
+        var ref: EventHotKeyRef?
+        let status = RegisterEventHotKey(
+            keyCode,
+            modifiers,
+            escHotkeyID,
+            GetEventMonitorTarget(),
+            0,
+            &ref
+        )
+        if status != noErr {
+            hotkeyLog("❌ 注册 ESC 热键失败 (OSStatus: \(status))")
+            return
+        }
+        escHotkeyRef = ref
+        hotkeyLog("✅ ESC 热键注册成功")
+    }
+
+    func unregisterEscHotkey() {
+        if let ref = escHotkeyRef {
+            UnregisterEventHotKey(ref)
+            escHotkeyRef = nil
+            hotkeyLog("注销 ESC 热键")
+        }
+        escOnTrigger = nil
+    }
+
     // MARK: - Carbon 回调
 
     private static let eventHandlerCallback: EventHandlerUPP = { _, event, userData in
         guard let userData = userData else { return noErr }
+
+        var hotkeyID = EventHotKeyID(signature: 0, id: 0)
+        let err = GetEventParameter(
+            event,
+            EventParamName(kEventParamDirectObject),
+            EventParamType(typeEventHotKeyID),
+            nil,
+            MemoryLayout<EventHotKeyID>.size,
+            nil,
+            &hotkeyID
+        )
+        guard err == noErr else { return noErr }
+
         let io = Unmanaged<CarbonHotkeyIO>.fromOpaque(userData).takeUnretainedValue()
-        hotkeyLog("🔥 全局快捷键触发！")
-        // 触发转写逻辑（此处由 AppDelegate 订阅）
-        NotificationCenter.default.post(name: .talkFlowHotkeyTriggered, object: nil)
+
+        if hotkeyID.id == 1 {
+            hotkeyLog("🔥 全局快捷键触发！")
+            NotificationCenter.default.post(name: .talkFlowHotkeyTriggered, object: nil)
+        } else if hotkeyID.id == 2 {
+            hotkeyLog("🔥 ESC 热键触发！")
+            io.escOnTrigger?()
+        }
+
         return noErr
     }
 }

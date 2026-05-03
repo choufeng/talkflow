@@ -23,6 +23,14 @@
 		B90FFCA35BB349DAB6B4B4CD /* MicPermissionUIStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7440444015BC4FB69C8AD59E; };
 		3BCFF370E3AF460A9012F153 /* MicPermissionIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EDD714AA8E485D90B99A53; };
 		E8789C1ECE5544F4B9DBFD54 /* PermissionCheckViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8D6DA6D0DF4619A9967F0B; };
+		91910FAB2CAA48F7AA32EB57 /* RecordingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD1B48199F9409787A57855 /* RecordingState.swift */; };
+		524D73189BD14892AA939FF2 /* RecordingStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAADD4E9D7114C38B27D5E4C /* RecordingStateTests.swift */; };
+		4B7E8F3A1F294A3B92256977 /* FilePathIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FE837BBB93492C83D31911 /* FilePathIO.swift */; };
+		035452780DE940D999EC7F8D /* MockFilePathIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C27EA17A843428468EA72 /* MockFilePathIO.swift */; };
+		881A6C2713B74F3493EC76CE /* AudioRecorderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BEB8DFC03F43E690DED845 /* AudioRecorderIO.swift */; };
+		389214641CFD45F191E045CB /* MockAudioRecorderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B775F209C2749ADB5B2B05D /* MockAudioRecorderIO.swift */; };
+		A980ADF0FC2F486493EDA770 /* AudioRecorderIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3986A974DC2E47BDB0792E31 /* AudioRecorderIOTests.swift */; };
+		274BBF6D91DF4C7FB5C12F8A /* RecordingStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D183C8D3D64D4A05B5900C23 /* RecordingStatusView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +56,14 @@
 		7440444015BC4FB69C8AD59E /* MicPermissionUIStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicPermissionUIStateTests.swift; sourceTree = "<group>"; };
 		54EDD714AA8E485D90B99A53 /* MicPermissionIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicPermissionIOTests.swift; sourceTree = "<group>"; };
 		3B8D6DA6D0DF4619A9967F0B /* PermissionCheckViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionCheckViewTests.swift; sourceTree = "<group>"; };
+		6FD1B48199F9409787A57855 /* RecordingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingState.swift; sourceTree = "<group>"; };
+		DAADD4E9D7114C38B27D5E4C /* RecordingStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingStateTests.swift; sourceTree = "<group>"; };
+		F9FE837BBB93492C83D31911 /* FilePathIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePathIO.swift; sourceTree = "<group>"; };
+		3F6C27EA17A843428468EA72 /* MockFilePathIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFilePathIO.swift; sourceTree = "<group>"; };
+		83BEB8DFC03F43E690DED845 /* AudioRecorderIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderIO.swift; sourceTree = "<group>"; };
+		8B775F209C2749ADB5B2B05D /* MockAudioRecorderIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAudioRecorderIO.swift; sourceTree = "<group>"; };
+		3986A974DC2E47BDB0792E31 /* AudioRecorderIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderIOTests.swift; sourceTree = "<group>"; };
+		D183C8D3D64D4A05B5900C23 /* RecordingStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingStatusView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -68,6 +84,8 @@
 		A1B2C3D4E5F6A1B2C3D4E516 /* IO */ = {
 			isa = PBXGroup;
 			children = (
+				83BEB8DFC03F43E690DED845 /* AudioRecorderIO.swift */,
+				F9FE837BBB93492C83D31911 /* FilePathIO.swift */,
 				A1B2C3D4E5F6A1B2C3D4E520 /* PermissionIO.swift */,
 				A1B2C3D4E5F6A1B2C3D4E526 /* HotkeyIO.swift */,
 			);
@@ -77,6 +95,7 @@
 		A1B2C3D4E5F6A1B2C3D4E512 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				6FD1B48199F9409787A57855 /* RecordingState.swift */,
 				A1B2C3D4E5F6A1B2C3D4E518 /* Permission.swift */,
 				A1B2C3D4E5F6A1B2C3D4E525 /* Hotkey.swift */,
 			);
@@ -86,6 +105,7 @@
 		A1B2C3D4E5F6A1B2C3D4E508 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D183C8D3D64D4A05B5900C23 /* RecordingStatusView.swift */,
 				A1B2C3D4E5F6A1B2C3D4E524 /* CardView.swift */,
 				A1B2C3D4E5F6A1B2C3D4E522 /* PermissionListView.swift */,
 				A1B2C3D4E5F6A1B2C3D4E527 /* HotkeySettingsView.swift */,
@@ -126,6 +146,8 @@
 		D0B461F9C4514EEABE70B615 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				8B775F209C2749ADB5B2B05D /* MockAudioRecorderIO.swift */,
+				3F6C27EA17A843428468EA72 /* MockFilePathIO.swift */,
 				32EE0A96765C4E9CBE62461A /* MockPermissionIO.swift */,
 			);
 			path = Mocks;
@@ -142,6 +164,7 @@
 		AA290EC17B624564AE6CE288 /* Pure */ = {
 			isa = PBXGroup;
 			children = (
+				DAADD4E9D7114C38B27D5E4C /* RecordingStateTests.swift */,
 				C3E883F3253B4CF498F09BCF /* MicPermissionStatusTests.swift */,
 				7440444015BC4FB69C8AD59E /* MicPermissionUIStateTests.swift */,
 			);
@@ -151,6 +174,7 @@
 		40F4A5F6BED5447E9E9F74CF /* IO */ = {
 			isa = PBXGroup;
 			children = (
+				3986A974DC2E47BDB0792E31 /* AudioRecorderIOTests.swift */,
 				54EDD714AA8E485D90B99A53 /* MicPermissionIOTests.swift */,
 			);
 			path = IO;
@@ -251,6 +275,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				274BBF6D91DF4C7FB5C12F8A /* RecordingStatusView.swift in Sources */,
+				881A6C2713B74F3493EC76CE /* AudioRecorderIO.swift in Sources */,
+				4B7E8F3A1F294A3B92256977 /* FilePathIO.swift in Sources */,
+				91910FAB2CAA48F7AA32EB57 /* RecordingState.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E5F6 /* main.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E5F7 /* AppDelegate.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E506 /* PermissionListView.swift in Sources */,
@@ -267,6 +295,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A980ADF0FC2F486493EDA770 /* AudioRecorderIOTests.swift in Sources */,
+				389214641CFD45F191E045CB /* MockAudioRecorderIO.swift in Sources */,
+				035452780DE940D999EC7F8D /* MockFilePathIO.swift in Sources */,
+				524D73189BD14892AA939FF2 /* RecordingStateTests.swift in Sources */,
 				96F8A6ADCBC14712B92C76F4 /* MockPermissionIO.swift in Sources */,
 				054395ED9CA04554A29B3E9A /* XCTestCaseAsync.swift in Sources */,
 				1D92190071AD432AAFF9F6EB /* MicPermissionStatusTests.swift in Sources */,
