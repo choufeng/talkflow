@@ -5,24 +5,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        setupMenuBarIcon()
-        showMainWindow()
+        impureSetupMenuBarIcon()
+        impureShowMainWindow()
     }
 
-    // MARK: - 菜单栏图标
-    private func setupMenuBarIcon() {
+    // MARK: - ⚠️ 菜单栏图标（含副作用：系统状态栏注册）
+
+    private func impureSetupMenuBarIcon() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
 
         if let button = statusItem?.button {
             button.image = NSImage(systemSymbolName: "mic.fill", accessibilityDescription: "TalkFlow")
             button.image?.size = NSSize(width: 18, height: 18)
             button.toolTip = "TalkFlow"
-            button.action = #selector(toggleWindow)
+            button.action = #selector(impureToggleWindow)
             button.target = self
         }
     }
 
-    @objc private func toggleWindow() {
+    @objc private func impureToggleWindow() {
         guard let window = window else { return }
 
         if window.isVisible {
@@ -33,8 +34,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    // MARK: - 主窗口
-    private func showMainWindow() {
+    // MARK: - ⚠️ 主窗口（含副作用：窗口创建 + 视图挂载）
+
+    private func impureShowMainWindow() {
         let windowRect = NSRect(x: 0, y: 0, width: 800, height: 600)
         window = NSWindow(
             contentRect: windowRect,
@@ -45,6 +47,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         window?.title = "TalkFlow"
         window?.center()
+
+        // 权限检查模块
+        let permissionView = PermissionCheckView(frame: windowRect)
+        permissionView.setUp()
+        window?.contentView = permissionView
+
         window?.makeKeyAndOrderFront(nil)
     }
 
