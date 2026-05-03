@@ -2,7 +2,7 @@ import AppKit
 
 /// 可复用的卡片组件
 /// - init 仅赋值（rule 16），setUp() 显式构建 UI
-/// - 卡片：圆角背景 + 标题 + 内容区
+/// - 卡片：圆角背景 + 标题 + 内容区（内边框）
 final class CardView: NSView {
 
     private let title: String
@@ -42,23 +42,31 @@ final class CardView: NSView {
         separator.boxType = .separator
         separator.translatesAutoresizingMaskIntoConstraints = false
 
-        // 内边框容器：包裹内容视图，添加独立边框
-        let innerBox = NSBox()
-        innerBox.boxType = .custom
-        innerBox.borderWidth = 0.5
-        innerBox.borderColor = NSColor.separatorColor
-        innerBox.cornerRadius = 6
-        innerBox.contentViewMargins = NSSize(width: 0, height: 0)
-        innerBox.translatesAutoresizingMaskIntoConstraints = false
+        // 内边框容器：plain NSView + layer border（约束可正确传播 intrinsic size）
+        let innerContainer = NSView()
+        innerContainer.wantsLayer = true
+        innerContainer.layer?.borderWidth = 0.5
+        innerContainer.layer?.borderColor = NSColor.separatorColor.cgColor
+        innerContainer.layer?.cornerRadius = 6
+        innerContainer.translatesAutoresizingMaskIntoConstraints = false
 
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        innerBox.contentView = contentView
+        innerContainer.addSubview(contentView)
 
-        let stack = NSStackView(views: [titleLabel, separator, innerBox])
+        // 内容与内边框之间留 padding
+        NSLayoutConstraint.activate([
+            contentView.topAnchor.constraint(equalTo: innerContainer.topAnchor, constant: 10),
+            contentView.leadingAnchor.constraint(equalTo: innerContainer.leadingAnchor, constant: 12),
+            contentView.trailingAnchor.constraint(equalTo: innerContainer.trailingAnchor, constant: -12),
+            contentView.bottomAnchor.constraint(equalTo: innerContainer.bottomAnchor, constant: -10),
+        ])
+
+        let stack = NSStackView(views: [titleLabel, separator, innerContainer])
         stack.orientation = .vertical
         stack.spacing = 10
         stack.alignment = .leading
-        stack.distribution = .fill
+        // equalSpacing：每个子视图使用自身 intrinsic height，不会被挤压
+        stack.distribution = .equalSpacing
         stack.edgeInsets = NSEdgeInsets(top: 16, left: 20, bottom: 16, right: 20)
         stack.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stack)
@@ -70,7 +78,7 @@ final class CardView: NSView {
             stack.bottomAnchor.constraint(equalTo: bottomAnchor),
 
             separator.widthAnchor.constraint(equalTo: stack.widthAnchor),
-            innerBox.widthAnchor.constraint(equalTo: stack.widthAnchor),
+            innerContainer.widthAnchor.constraint(equalTo: stack.widthAnchor),
         ])
     }
 }
