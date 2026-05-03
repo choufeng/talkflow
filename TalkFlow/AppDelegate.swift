@@ -8,7 +8,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var hotkeyIO: HotkeyIO?
     private let audioRecorder: AudioRecorderIO = AVAudioRecorderIO()
     private let filePathIO: FilePathIO = AppSupportFilePathIO()
-    private let statusWindow = RecordingStatusWindow()
+    private let statusWindow = PipelineStatusWindow()
     private var recordingPhase: RecordingPhase = .idle
     private var lastToggleTime: Date?
     private let debounceInterval: TimeInterval = 0.5
@@ -16,6 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     // STT 模块
     private let sttEngine: SenseVoiceIO = impureMakeSenseVoiceEngine()
+    private var sttTask: Task<Void, Never>?
     // 粘贴模块
     private let pasteIO: PasteIO = CGEventPasteIO()
 
@@ -41,7 +42,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func impureSetupSTT() {
         onRecordingComplete = { [weak self] url in
             print("[Pipeline] 录音文件: \(url.path)")
-            Task { [weak self] in
+            self?.sttTask = Task { [weak self] in
                 guard let self else { return }
                 print("[Pipeline] 开始 STT 转写...")
                 do {
@@ -55,16 +56,43 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                             NSPasteboard.general.setString(text, forType: .string)
                             print("[Pipeline] 已写入剪贴板")
                             let pasted = self.pasteIO.paste()
-                            print("[Pipeline] Cmd+V 粘贴\(pasted ? "✅ 成功" : "❌ 失败（文本在剪贴板，可手动粘贴）")")
+                            if pasted {
+                                print("[Pipeline] Cmd+V 粘贴✅ 成功")
+                                self.statusWindow.dismiss()
+                            } else {
+                                print("[Pipeline] Cmd+V 粘贴❌ 失败")
+                                self.statusWindow.show(phase: .pasteFailed)
+                                self.statusWindow.dismissAfter(seconds: 3)
+                            }
                         case .silence:
                             print("[Pipeline] 静音 — 跳过粘贴")
+                            self.statusWindow.dismiss()
                         case .failure(let error):
                             print("[Pipeline] STT 失败: \(error)")
+                            self.statusWindow.show(phase: .pasteFailed)
+                            self.statusWindow.dismissAfter(seconds: 3)
                         }
                     }
                 } catch {
                     print("[Pipeline] STT 异常: \(error)")
+                    await MainActor.run {
+                        self.statusWindow.dismiss()
+                    }
                 }
+            }
+        }
+
+        // ✕ 按钮回调
+        statusWindow.onCancel = { [weak self] in
+            guard let self else { return }
+            switch self.statusWindow.currentPhase {
+            case .recording:
+                self.impureCancelRecording()
+            case .transcribing:
+                self.sttTask?.cancel()
+                self.statusWindow.dismiss()
+            case .pasteFailed:
+                self.statusWindow.dismiss()
             }
         }
     }
@@ -187,7 +215,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         print("[Pipeline] 🎤 开始录音 → \(url.lastPathComponent)")
         do {
             try audioRecorder.startRecording(to: url)
-            statusWindow.show()
+            statusWindow.show(phase: .recording)
             impureUpdateMenuBarIcon(isRecording: true)
             hotkeyIO?.registerEscHotkey { [weak self] in
                 self?.impureCancelRecording()
@@ -202,7 +230,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let duration = audioRecorder.stopRecording()
         let savedURL = audioRecorder.recordingURL
         print("[Pipeline] ⏹ 停止录音 时长=\(String(format: "%.1f", duration))s")
-        statusWindow.dismiss()
+        statusWindow.show(phase: .transcribing)
         hotkeyIO?.unregisterEscHotkey()
         impureUpdateMenuBarIcon(isRecording: false)
 
@@ -211,6 +239,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             onRecordingComplete?(url)
         } else {
             print("[Pipeline] 录音太短(< \(minRecordingDuration)s) — 丢弃")
+            statusWindow.dismiss()
             if let url = savedURL {
                 try? FileManager.default.removeItem(at: url)
             }
