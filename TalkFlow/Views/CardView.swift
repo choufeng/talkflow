@@ -44,7 +44,19 @@ final class CardView: NSView {
 
         contentView.translatesAutoresizingMaskIntoConstraints = false
 
-        let stack = NSStackView(views: [titleLabel, separator, contentView])
+        // 内容区容器：提供固定的内边距，所有卡片的子内容保持一致边距
+        let contentWrapper = NSView()
+        contentWrapper.translatesAutoresizingMaskIntoConstraints = false
+        contentWrapper.addSubview(contentView)
+
+        NSLayoutConstraint.activate([
+            contentView.topAnchor.constraint(equalTo: contentWrapper.topAnchor, constant: 8),
+            contentView.leadingAnchor.constraint(equalTo: contentWrapper.leadingAnchor, constant: 12),
+            contentView.trailingAnchor.constraint(equalTo: contentWrapper.trailingAnchor, constant: -12),
+            contentView.bottomAnchor.constraint(equalTo: contentWrapper.bottomAnchor, constant: -8),
+        ])
+
+        let stack = NSStackView(views: [titleLabel, separator, contentWrapper])
         stack.orientation = .vertical
         stack.spacing = 10
         stack.alignment = .leading
@@ -61,7 +73,7 @@ final class CardView: NSView {
             stack.bottomAnchor.constraint(equalTo: bottomAnchor),
 
             separator.widthAnchor.constraint(equalTo: stack.widthAnchor),
-            contentView.widthAnchor.constraint(equalTo: stack.widthAnchor),
+            contentWrapper.widthAnchor.constraint(equalTo: stack.widthAnchor),
         ])
     }
 }
