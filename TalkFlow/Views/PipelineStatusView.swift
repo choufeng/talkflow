@@ -253,7 +253,14 @@ final class PipelineStatusWindow {
         panel.isOpaque = false
         panel.backgroundColor = .clear
         panel.contentView = view
-        panel.center()
+
+        // 底部居中
+        if let screen = NSScreen.main {
+            let screenFrame = screen.visibleFrame
+            let originX = screenFrame.midX - panel.frame.width / 2
+            let originY = screenFrame.minY + 40
+            panel.setFrameOrigin(NSPoint(x: originX, y: originY))
+        }
 
         window = panel
         panel.orderFront(nil)
