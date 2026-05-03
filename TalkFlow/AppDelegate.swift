@@ -8,7 +8,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var hotkeyIO: HotkeyIO?
     private let audioRecorder: AudioRecorderIO = AVAudioRecorderIO()
     private let filePathIO: FilePathIO = AppSupportFilePathIO()
-    private let statusWindow = RecordingStatusWindow()
+    private let statusWindow = PipelineStatusWindow()
     private var recordingPhase: RecordingPhase = .idle
     private var lastToggleTime: Date?
     private let debounceInterval: TimeInterval = 0.5
@@ -16,6 +16,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     // STT 模块
     private let sttEngine: SenseVoiceIO = impureMakeSenseVoiceEngine()
+    private var sttTask: Task<Void, Never>?
+    // 粘贴模块
+    private let pasteIO: PasteIO = CGEventPasteIO()
 
     /// 录音完成回调 — 供后续工作流（语音转写）接入
     var onRecordingComplete: ((URL) -> Void)?
@@ -38,25 +41,58 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func impureSetupSTT() {
         onRecordingComplete = { [weak self] url in
-            Task { [weak self] in
+            print("[Pipeline] 录音文件: \(url.path)")
+            self?.sttTask = Task { [weak self] in
                 guard let self else { return }
+                print("[Pipeline] 开始 STT 转写...")
                 do {
                     let result = try await self.sttEngine.transcribe(url: url)
                     await MainActor.run {
+                        print("[Pipeline] STT 转写完成: \(result)")
                         switch result {
                         case .speech(let text, let language):
-                            print("[STT] \(language): \(text)")
+                            print("[Pipeline] 识别文本 (\(language)): \(text)")
                             NSPasteboard.general.clearContents()
                             NSPasteboard.general.setString(text, forType: .string)
+                            print("[Pipeline] 已写入剪贴板")
+                            let pasted = self.pasteIO.paste()
+                            if pasted {
+                                print("[Pipeline] Cmd+V 粘贴✅ 成功")
+                                self.statusWindow.dismiss()
+                            } else {
+                                print("[Pipeline] Cmd+V 粘贴❌ 失败")
+                                self.statusWindow.show(phase: .pasteFailed)
+                                self.statusWindow.dismissAfter(seconds: 3)
+                            }
                         case .silence:
-                            print("[STT] Silence — ignored")
+                            print("[Pipeline] 静音 — 跳过粘贴")
+                            self.statusWindow.dismiss()
                         case .failure(let error):
-                            print("[STT] Error: \(error)")
+                            print("[Pipeline] STT 失败: \(error)")
+                            self.statusWindow.show(phase: .pasteFailed)
+                            self.statusWindow.dismissAfter(seconds: 3)
                         }
                     }
                 } catch {
-                    print("[STT] Exception: \(error)")
+                    print("[Pipeline] STT 异常: \(error)")
+                    await MainActor.run {
+                        self.statusWindow.dismiss()
+                    }
                 }
+            }
+        }
+
+        // ✕ 按钮回调
+        statusWindow.onCancel = { [weak self] in
+            guard let self else { return }
+            switch self.statusWindow.currentPhase {
+            case .recording:
+                self.impureCancelRecording()
+            case .transcribing:
+                self.sttTask?.cancel()
+                self.statusWindow.dismiss()
+            case .pasteFailed:
+                self.statusWindow.dismiss()
             }
         }
     }
@@ -157,6 +193,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let now = Date()
 
         guard shouldAcceptToggle(lastToggleTime: lastToggleTime, now: now, debounce: debounceInterval) else {
+            print("[Pipeline] 防抖忽略（间隔 < \(debounceInterval)s）")
             return
         }
         lastToggleTime = now
@@ -164,6 +201,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let nextPhase = recordingPhaseFromToggle(recordingPhase, now: now)
         recordingPhase = nextPhase
 
+        print("[Pipeline] 快捷键触发 → 切换到 \(nextPhase)")
         switch nextPhase {
         case .idle:
             impureStopRecording()
@@ -174,14 +212,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func impureStartRecording() {
         let url = filePathIO.nextRecordingURL()
+        print("[Pipeline] 🎤 开始录音 → \(url.lastPathComponent)")
         do {
             try audioRecorder.startRecording(to: url)
-            statusWindow.show()
+            statusWindow.show(phase: .recording)
             impureUpdateMenuBarIcon(isRecording: true)
             hotkeyIO?.registerEscHotkey { [weak self] in
                 self?.impureCancelRecording()
             }
         } catch {
+            print("[Pipeline] ❌ 录音启动失败: \(error)")
             recordingPhase = .idle
         }
     }
@@ -189,7 +229,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func impureStopRecording() {
         let duration = audioRecorder.stopRecording()
         let savedURL = audioRecorder.recordingURL
-        statusWindow.dismiss()
+        print("[Pipeline] ⏹ 停止录音 时长=\(String(format: "%.1f", duration))s")
+        statusWindow.show(phase: .transcribing)
         hotkeyIO?.unregisterEscHotkey()
         impureUpdateMenuBarIcon(isRecording: false)
 
@@ -197,6 +238,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
            let url = savedURL {
             onRecordingComplete?(url)
         } else {
+            print("[Pipeline] 录音太短(< \(minRecordingDuration)s) — 丢弃")
+            statusWindow.dismiss()
             if let url = savedURL {
                 try? FileManager.default.removeItem(at: url)
             }

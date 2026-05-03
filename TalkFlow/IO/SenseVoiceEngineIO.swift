@@ -21,23 +21,32 @@ struct SenseVoiceEngineIO: SenseVoiceIO {
 
     func transcribe(url: URL) async throws -> STTResult {
         let (samples, sampleRate) = try decodeAudio(url: url)
+        print("[STT] 解码: \(samples.count) samples @ \(sampleRate)Hz")
         let resampled = resampleTo16k(samples: samples, srcRate: sampleRate)
+        print("[STT] 重采样: \(resampled.count) samples @ 16000Hz")
 
         guard !classifySilence(samples: resampled) else {
+            print("[STT] 静音判定: 采样数 \(resampled.count) < 4800")
             return .silence
         }
 
         let fbank = extractFbank(waveform: resampled)
-        guard !fbank.isEmpty else { return .silence }
+        print("[STT] Fbank: \(fbank.count) frames x \(fbank.first?.count ?? 0) dims")
+        guard !fbank.isEmpty else { print("[STT] Fbank isEmpty"); return .silence }
 
         let lfr = applyLFR(fbank)
-        guard !lfr.isEmpty else { return .silence }
+        print("[STT] LFR: \(lfr.count) frames x \(lfr.first?.count ?? 0) dims")
+        guard !lfr.isEmpty else { print("[STT] LFR isEmpty"); return .silence }
 
         let normalized = applyCMVN(lfr, means: cmvnMeans, vars: cmvnVars)
+        print("[STT] CMVN done, starting inference...")
 
         let tokenIds = try runInference(feats: normalized, featsLen: Int32(lfr.count))
+        print("[STT] 推理: \(tokenIds.count) token IDs")
         let text = decodeTokenIds(tokenIds, tokens: tokens)
+        print("[STT] 解码: \"\(text)\"")
         let cleaned = postprocess(text)
+        print("[STT] 后处理: \"\(cleaned)\"")
 
         return cleaned.isEmpty ? .silence : .speech(text: cleaned, language: "auto")
     }
@@ -145,40 +154,36 @@ struct SenseVoiceEngineIO: SenseVoiceIO {
         defer { tnTensor.map { TalkFlowOrtReleaseValue($0) } }
 
         // Run
-        let inNameStrings = ["feats", "feats_len", "language", "textnorm"]
+        // 实际模型输入/输出名称
+        let inNameStrings = ["speech", "speech_lengths", "language", "textnorm"]
         var inNamePtrs = inNameStrings.map { strdup($0) }
-        var outNameStrings = ["logits"]
+        let outNameStrings = ["ctc_logits", "encoder_out_lens"]
         var outNamePtrs = outNameStrings.map { strdup($0) }
         defer { inNamePtrs.forEach { free($0) } }
         defer { outNamePtrs.forEach { free($0) } }
 
         let inputs: [OpaquePointer?] = [featsTensor, featsLenTensor, langTensor, tnTensor]
-        var outputTensor: OpaquePointer?
+        var outputs = [OpaquePointer?](repeating: nil, count: 2)
         let runStatus = inNamePtrs.withUnsafeMutableBufferPointer { iPtrs -> OpaquePointer? in
             outNamePtrs.withUnsafeMutableBufferPointer { oPtrs -> OpaquePointer? in
                 let iBase = UnsafeMutableRawPointer(iPtrs.baseAddress!).assumingMemoryBound(to: UnsafePointer<CChar>?.self)
                 let oBase = UnsafeMutableRawPointer(oPtrs.baseAddress!).assumingMemoryBound(to: UnsafePointer<CChar>?.self)
-                var out: OpaquePointer?
-                let s = TalkFlowOrtRun(session, iBase, inputs, 4, oBase, 1, &out)
-                outputTensor = out
-                return s
+                return TalkFlowOrtRun(session, iBase, inputs, 4, oBase, 2, &outputs)
             }
         }
-        guard runStatus == nil, let outputTensor else {
+        defer { outputs.forEach { $0.map { TalkFlowOrtReleaseValue($0) } } }
+        guard runStatus == nil else {
             throw STTError.inferenceFailed("ORT run failed")
         }
-        defer { TalkFlowOrtReleaseValue(outputTensor) }
 
-        guard let outputData = TalkFlowOrtGetFloatData(outputTensor) else {
-            throw STTError.inferenceFailed("No output data")
+        guard let logitsTensor = outputs[0],
+              let outputData = TalkFlowOrtGetFloatData(logitsTensor) else {
+            throw STTError.inferenceFailed("No ctc_logits output")
         }
 
-        // 获取 shape
-        var outShape = [Int64](repeating: 0, count: 4)
-        var outDims: Int32 = 0
-        // TalkFlowOrtGetShape not yet in header, estimate from data
+        // SenseVoiceSmall 词表大小 = 25055
         let frames = tLFR
-        let vocabSize = 7230  // SenseVoiceSmall 词表大小
+        let vocabSize = 25055
         let total = frames * vocabSize
         let floatPtr = outputData.withMemoryRebound(to: Float.self, capacity: total) { $0 }
         let logits = Array(UnsafeBufferPointer(start: floatPtr, count: total))
@@ -227,11 +232,14 @@ private func impureLoadCMVN() -> (means: [Double], vars: [Double]) {
 
 private func impureLoadTokens() -> [Int: String] {
     guard let url = Bundle.main.url(forResource: "tokens", withExtension: "json", subdirectory: "sensevoice"),
-          let data = try? Data(contentsOf: url),
-          let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+          let data = try? Data(contentsOf: url)
     else { return [:] }
-    return json.reduce(into: [:]) { dict, pair in
-        guard let id = Int(pair.key), let text = pair.value as? String else { return }
-        dict[id] = text
+
+    // tokens.json 是数组格式: ["<unk>", "<s>", ...]
+    if let array = try? JSONSerialization.jsonObject(with: data) as? [String] {
+        return array.enumerated().reduce(into: [:]) { dict, pair in
+            dict[pair.offset] = pair.element
+        }
     }
+    return [:]
 }
