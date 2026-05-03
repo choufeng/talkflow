@@ -105,7 +105,7 @@ final class ModelSettingsView: NSView {
 
         modelNameField.font = NSFont.monospacedSystemFont(ofSize: 13, weight: .regular)
         modelNameField.isEditable = true
-        modelNameField.placeholderString = "gemini-2.0-flash-001"
+        modelNameField.placeholderString = "gemini-2.5-flash"
         modelNameField.translatesAutoresizingMaskIntoConstraints = false
         vertexAIContainer.addSubview(modelNameField)
 
