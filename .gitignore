@@ -1,12 +1,13 @@
-# Xcode - 用户特定数据
+# Xcode
 xcuserdata/
+*.xcuserdata
+*.xcworkspace/xcuserdata/
 *.xcuserstate
-
-# Xcode - 构建产物
-build/
 *.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+DerivedData/
+build/
 
-# Swift Package Manager
+# SwiftPM
 .swiftpm/
 .build/
 

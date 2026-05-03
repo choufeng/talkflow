@@ -1,0 +1,13 @@
+#!/bin/bash
+# TalkFlow pre-commit hook
+set -e
+
+echo "🧪 Running tests before commit..."
+
+xcodebuild test \
+    -scheme TalkFlow \
+    -destination 'platform=macOS' \
+    -quiet
+
+echo ""
+echo "✅ All tests passed."

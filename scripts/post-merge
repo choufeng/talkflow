@@ -1,0 +1,16 @@
+#!/bin/bash
+# 合并到 main 后自动更新知识图谱
+
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+if [ "$CURRENT_BRANCH" = "main" ]; then
+    echo "🧠 Merged to main - updating knowledge graph..."
+    graphify . --update
+    if [ -d graphify-out ] && [ -n "$(git status --porcelain graphify-out/)" ]; then
+        git add graphify-out/
+        git commit -m "chore: update knowledge graph [post-merge]" || true
+        echo "📊 Knowledge graph updated and committed."
+    else
+        echo "📊 Knowledge graph up to date."
+    fi
+fi
