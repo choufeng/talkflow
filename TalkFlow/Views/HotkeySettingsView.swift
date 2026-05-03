@@ -174,19 +174,9 @@ final class HotkeySettingsView: NSView {
     // MARK: - ⚠️ 渲染
 
     func impureRender() {
-        let statusMsg: String
-        if isRecording {
-            statusMsg = "🎤 正在录制... 请按下你想要的组合键（如 ⌘⇧T）"
-        } else if let b = currentBinding {
-            statusMsg = "当前快捷键已注册到系统。按下 \(formatHotkey(b)) 即可触发转写。"
-        } else {
-            statusMsg = "未设置快捷键，点击下方按钮进行录制。"
-        }
-
         let state = produceHotkeyUIState(
             binding: currentBinding,
-            isRecording: isRecording,
-            statusMessage: statusMsg
+            isRecording: isRecording
         )
 
         hotkeyLabel.stringValue = state.displayText

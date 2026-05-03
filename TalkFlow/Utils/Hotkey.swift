@@ -40,9 +40,10 @@ private let specialKeyNames: [UInt16: String] = [
     0x35: "⎋",        // Escape
 ]
 
-// MARK: - 纯函数（引用透明，无副作用）
+// MARK: - ⚠️ 非纯函数（读键盘布局状态，违反引用透明性 — rule 13）
 
 /// 键码 → 可读按键名称
+/// ⚠️ 非引用透明：依赖当前系统键盘布局
 func keyName(from keyCode: UInt16) -> String {
     if let special = specialKeyNames[keyCode] {
         return special
@@ -74,24 +75,34 @@ func keyName(from keyCode: UInt16) -> String {
     return "?"
 }
 
+// MARK: - 纯函数（引用透明，无副作用）
+
 /// Carbon 修饰键 → 符号字符串（如 "⌘⌥"）
 func modifierSymbols(_ carbonModifiers: UInt) -> String {
-    var result = ""
-    if carbonModifiers & UInt(cmdKey) != 0     { result += "⌘" }
-    if carbonModifiers & UInt(optionKey) != 0  { result += "⌥" }
-    if carbonModifiers & UInt(controlKey) != 0 { result += "⌃" }
-    if carbonModifiers & UInt(shiftKey) != 0   { result += "⇧" }
-    return result
+    let pairs: [(UInt, String)] = [
+        (UInt(cmdKey), "⌘"),
+        (UInt(optionKey), "⌥"),
+        (UInt(controlKey), "⌃"),
+        (UInt(shiftKey), "⇧"),
+    ]
+    return pairs
+        .filter { carbonModifiers & $0.0 != 0 }
+        .map { $0.1 }
+        .joined()
 }
 
 /// NSEvent.ModifierFlags → Carbon 修饰键标志位
 func nseventModifiersToCarbon(_ flags: NSEvent.ModifierFlags) -> UInt {
-    var carbon: UInt = 0
-    if flags.contains(.command) { carbon |= UInt(cmdKey) }
-    if flags.contains(.option)  { carbon |= UInt(optionKey) }
-    if flags.contains(.control) { carbon |= UInt(controlKey) }
-    if flags.contains(.shift)   { carbon |= UInt(shiftKey) }
-    return carbon
+    let pairs: [(NSEvent.ModifierFlags.Element, UInt)] = [
+        (.command, UInt(cmdKey)),
+        (.option,  UInt(optionKey)),
+        (.control, UInt(controlKey)),
+        (.shift,   UInt(shiftKey)),
+    ]
+    return pairs
+        .filter { flags.contains($0.0) }
+        .map { $0.1 }
+        .reduce(0, |)
 }
 
 /// 格式化快捷键绑定为显示字符串（纯函数）
@@ -102,18 +113,26 @@ func formatHotkey(_ binding: HotkeyBinding?) -> String {
     return syms + key
 }
 
+/// 产生状态文案（纯函数）
+func produceStatusMessage(isRecording: Bool, binding: HotkeyBinding?) -> String {
+    if isRecording {
+        return "🎤 正在录制... 请按下你想要的组合键（如 ⌘⇧T）"
+    }
+    if let b = binding {
+        return "当前快捷键已注册到系统。按下 \(formatHotkey(b)) 即可触发转写。"
+    }
+    return "未设置快捷键，点击下方按钮进行录制。"
+}
+
 /// 快捷键绑定 + 录制状态 → UI 状态（核心纯函数）
 func produceHotkeyUIState(
     binding: HotkeyBinding?,
-    isRecording: Bool,
-    statusMessage: String
+    isRecording: Bool
 ) -> HotkeyUIState {
-    let displayText = formatHotkey(binding)
-    let isSet = binding != nil
-    return HotkeyUIState(
-        displayText: displayText,
+    HotkeyUIState(
+        displayText: formatHotkey(binding),
         isRecording: isRecording,
-        statusMessage: statusMessage,
-        isSet: isSet
+        statusMessage: produceStatusMessage(isRecording: isRecording, binding: binding),
+        isSet: binding != nil
     )
 }
