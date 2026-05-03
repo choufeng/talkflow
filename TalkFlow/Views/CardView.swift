@@ -42,26 +42,9 @@ final class CardView: NSView {
         separator.boxType = .separator
         separator.translatesAutoresizingMaskIntoConstraints = false
 
-        // 内边框容器：plain NSView + layer border（约束可正确传播 intrinsic size）
-        let innerContainer = NSView()
-        innerContainer.wantsLayer = true
-        innerContainer.layer?.borderWidth = 0.5
-        innerContainer.layer?.borderColor = NSColor.separatorColor.cgColor
-        innerContainer.layer?.cornerRadius = 6
-        innerContainer.translatesAutoresizingMaskIntoConstraints = false
-
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        innerContainer.addSubview(contentView)
 
-        // 内容与内边框之间留 padding
-        NSLayoutConstraint.activate([
-            contentView.topAnchor.constraint(equalTo: innerContainer.topAnchor, constant: 10),
-            contentView.leadingAnchor.constraint(equalTo: innerContainer.leadingAnchor, constant: 12),
-            contentView.trailingAnchor.constraint(equalTo: innerContainer.trailingAnchor, constant: -12),
-            contentView.bottomAnchor.constraint(equalTo: innerContainer.bottomAnchor, constant: -10),
-        ])
-
-        let stack = NSStackView(views: [titleLabel, separator, innerContainer])
+        let stack = NSStackView(views: [titleLabel, separator, contentView])
         stack.orientation = .vertical
         stack.spacing = 10
         stack.alignment = .leading
@@ -78,7 +61,7 @@ final class CardView: NSView {
             stack.bottomAnchor.constraint(equalTo: bottomAnchor),
 
             separator.widthAnchor.constraint(equalTo: stack.widthAnchor),
-            innerContainer.widthAnchor.constraint(equalTo: stack.widthAnchor),
+            contentView.widthAnchor.constraint(equalTo: stack.widthAnchor),
         ])
     }
 }
