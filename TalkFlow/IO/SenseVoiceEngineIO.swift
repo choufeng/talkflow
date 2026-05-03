@@ -232,11 +232,14 @@ private func impureLoadCMVN() -> (means: [Double], vars: [Double]) {
 
 private func impureLoadTokens() -> [Int: String] {
     guard let url = Bundle.main.url(forResource: "tokens", withExtension: "json", subdirectory: "sensevoice"),
-          let data = try? Data(contentsOf: url),
-          let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+          let data = try? Data(contentsOf: url)
     else { return [:] }
-    return json.reduce(into: [:]) { dict, pair in
-        guard let id = Int(pair.key), let text = pair.value as? String else { return }
-        dict[id] = text
+
+    // tokens.json 是数组格式: ["<unk>", "<s>", ...]
+    if let array = try? JSONSerialization.jsonObject(with: data) as? [String] {
+        return array.enumerated().reduce(into: [:]) { dict, pair in
+            dict[pair.offset] = pair.element
+        }
     }
+    return [:]
 }
