@@ -37,6 +37,7 @@
 				D0949B4B6E784845999ED80E /* PromptConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49FC8987AB746C1886D91B7 /* PromptConfigTests.swift */; };
 				1EF0CA9981774CD09609C1D1 /* ServiceAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC3E77D768449390899AA5 /* ServiceAccount.swift */; };
 				40901967AA9E4F6E85113511 /* ServiceAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF15E2747BE4FDF8E634B07 /* ServiceAccountTests.swift */; };
+				67CAFD07CE2E4D6CA330C88A /* ProviderIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830785FC5F4D42048BB8789E /* ProviderIO.swift */; };
 		/* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 				B49FC8987AB746C1886D91B7 /* PromptConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptConfigTests.swift; sourceTree = "<group>"; };
 				58EC3E77D768449390899AA5 /* ServiceAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAccount.swift; sourceTree = "<group>"; };
 				ABF15E2747BE4FDF8E634B07 /* ServiceAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAccountTests.swift; sourceTree = "<group>"; };
+				830785FC5F4D42048BB8789E /* ProviderIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderIO.swift; sourceTree = "<group>"; };
 		/* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -100,6 +102,7 @@
 				F9FE837BBB93492C83D31911 /* FilePathIO.swift */,
 				A1B2C3D4E5F6A1B2C3D4E520 /* PermissionIO.swift */,
 				A1B2C3D4E5F6A1B2C3D4E526 /* HotkeyIO.swift */,
+				830785FC5F4D42048BB8789E /* ProviderIO.swift */,
 			);
 			path = IO;
 			sourceTree = "<group>";
@@ -300,7 +303,8 @@
 				B83A495B3C5C4B299E84EEFE /* ChatMessage.swift in Sources */,
 				A11D10447C054B478B79C9ED /* PromptConfig.swift in Sources */,
 1EF0CA9981774CD09609C1D1 /* ServiceAccount.swift in Sources */,
-								A1B2C3D4E5F6A1B2C3D4E5F6 /* main.swift in Sources */,
+								67CAFD07CE2E4D6CA330C88A /* ProviderIO.swift in Sources */,
+				A1B2C3D4E5F6A1B2C3D4E5F6 /* main.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E5F7 /* AppDelegate.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E506 /* PermissionListView.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E517 /* Permission.swift in Sources */,
