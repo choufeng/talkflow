@@ -48,11 +48,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window?.title = "TalkFlow"
         window?.center()
 
-        // 权限检查模块
-        let permissionView = PermissionCheckView(frame: windowRect)
-        permissionView.setUp()
-        window?.contentView = permissionView
+        // 根视图
+        let rootView = NSView(frame: windowRect)
 
+        // 权限管理卡片
+        let ios: [PermissionIO] = [MicrophonePermissionIO(), AccessibilityPermissionIO()]
+        let permissionList = PermissionListView(ios: ios)
+        permissionList.setUp()
+
+        let permissionCard = CardView(title: "权限管理", contentView: permissionList)
+        permissionCard.setUp()
+        rootView.addSubview(permissionCard)
+
+        NSLayoutConstraint.activate([
+            permissionCard.topAnchor.constraint(equalTo: rootView.topAnchor, constant: 20),
+            permissionCard.leadingAnchor.constraint(equalTo: rootView.leadingAnchor, constant: 20),
+            permissionCard.trailingAnchor.constraint(equalTo: rootView.trailingAnchor, constant: -20),
+        ])
+
+        window?.contentView = rootView
         window?.makeKeyAndOrderFront(nil)
     }
 

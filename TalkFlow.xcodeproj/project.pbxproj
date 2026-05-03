@@ -9,9 +9,10 @@
 /* Begin PBXBuildFile section */
 		A1B2C3D4E5F6A1B2C3D4E5F6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E501; };
 		A1B2C3D4E5F6A1B2C3D4E5F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E502; };
-		A1B2C3D4E5F6A1B2C3D4E506 /* PermissionCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E507; };
-		A1B2C3D4E5F6A1B2C3D4E513 /* MicPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E511; };
-		A1B2C3D4E5F6A1B2C3D4E514 /* MicPermissionIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E515; };
+		A1B2C3D4E5F6A1B2C3D4E506 /* PermissionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E522; };
+		A1B2C3D4E5F6A1B2C3D4E517 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E518; };
+		A1B2C3D4E5F6A1B2C3D4E519 /* PermissionIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E520; };
+		A1B2C3D4E5F6A1B2C3D4E523 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E524; };
 		A1B2C3D4E5F6A1B2C3D4E505 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A1B2C3D4E504; };
 /* End PBXBuildFile section */
 
@@ -21,9 +22,10 @@
 		A1B2C3D4E5F6A1B2C3D4E502 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F6A1B2C3D4E503 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1B2C3D4E5F6A1B2C3D4E504 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A1B2C3D4E5F6A1B2C3D4E507 /* PermissionCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionCheckView.swift; sourceTree = "<group>"; };
-		A1B2C3D4E5F6A1B2C3D4E511 /* MicPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicPermission.swift; sourceTree = "<group>"; };
-		A1B2C3D4E5F6A1B2C3D4E515 /* MicPermissionIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicPermissionIO.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F6A1B2C3D4E522 /* PermissionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionListView.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F6A1B2C3D4E518 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F6A1B2C3D4E520 /* PermissionIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionIO.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F6A1B2C3D4E524 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -44,7 +46,7 @@
 		A1B2C3D4E5F6A1B2C3D4E516 /* IO */ = {
 			isa = PBXGroup;
 			children = (
-				A1B2C3D4E5F6A1B2C3D4E515 /* MicPermissionIO.swift */,
+				A1B2C3D4E5F6A1B2C3D4E520 /* PermissionIO.swift */,
 			);
 			path = IO;
 			sourceTree = "<group>";
@@ -52,7 +54,7 @@
 		A1B2C3D4E5F6A1B2C3D4E512 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				A1B2C3D4E5F6A1B2C3D4E511 /* MicPermission.swift */,
+				A1B2C3D4E5F6A1B2C3D4E518 /* Permission.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -60,7 +62,8 @@
 		A1B2C3D4E5F6A1B2C3D4E508 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A1B2C3D4E5F6A1B2C3D4E507 /* PermissionCheckView.swift */,
+				A1B2C3D4E5F6A1B2C3D4E524 /* CardView.swift */,
+				A1B2C3D4E5F6A1B2C3D4E522 /* PermissionListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -135,9 +138,10 @@
 			files = (
 				A1B2C3D4E5F6A1B2C3D4E5F6 /* main.swift in Sources */,
 				A1B2C3D4E5F6A1B2C3D4E5F7 /* AppDelegate.swift in Sources */,
-				A1B2C3D4E5F6A1B2C3D4E506 /* PermissionCheckView.swift in Sources */,
-				A1B2C3D4E5F6A1B2C3D4E513 /* MicPermission.swift in Sources */,
-				A1B2C3D4E5F6A1B2C3D4E514 /* MicPermissionIO.swift in Sources */,
+				A1B2C3D4E5F6A1B2C3D4E506 /* PermissionListView.swift in Sources */,
+				A1B2C3D4E5F6A1B2C3D4E517 /* Permission.swift in Sources */,
+				A1B2C3D4E5F6A1B2C3D4E519 /* PermissionIO.swift in Sources */,
+				A1B2C3D4E5F6A1B2C3D4E523 /* CardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
