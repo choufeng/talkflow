@@ -18,9 +18,9 @@ func impureSaveAppConfig(_ config: AppConfig) {
     do {
         let data = try JSONEncoder().encode(config)
         try data.write(to: url, options: .atomic)
-        print("[AppConfig] 已保存: \(url.path)")
+        impureMakeLogger().debug(tag: "AppConfig", "已保存: \(url.path)")
     } catch {
-        print("[AppConfig] 保存失败: \(error.localizedDescription)")
+        impureMakeLogger().error(tag: "AppConfig", "保存失败: \(error.localizedDescription)")
     }
 }
 
@@ -28,16 +28,16 @@ func impureSaveAppConfig(_ config: AppConfig) {
 func impureLoadAppConfig() -> AppConfig {
     let url = configFilePath()
     guard FileManager.default.fileExists(atPath: url.path) else {
-        print("[AppConfig] 配置文件不存在，使用默认")
+        impureMakeLogger().info(tag: "AppConfig", "配置文件不存在，使用默认")
         return makeDefaultAppConfig()
     }
     do {
         let data = try Data(contentsOf: url)
         let config = try JSONDecoder().decode(AppConfig.self, from: data)
-        print("[AppConfig] 已加载: \(url.path)")
+        impureMakeLogger().debug(tag: "AppConfig", "已加载: \(url.path)")
         return config
     } catch {
-        print("[AppConfig] 加载失败: \(error.localizedDescription)，使用默认")
+        impureMakeLogger().warning(tag: "AppConfig", "加载失败: \(error.localizedDescription)，使用默认")
         return makeDefaultAppConfig()
     }
 }
