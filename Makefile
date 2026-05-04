@@ -1,7 +1,7 @@
 .PHONY: test coverage lint setup sign-deps dmg clean-dmg
 
 BUILD_DIR = $(shell pwd)/.build
-DMG_NAME = TalkFlow-$(shell /usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" TalkFlow/Info.plist 2>/dev/null || echo "1.0").dmg
+DMG_NAME = TalkFlow-$(shell /usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" TalkFlow/Info.plist 2>/dev/null || echo "1.0.0").dmg
 MODEL_DIR = TalkFlow/Resources/sensevoice
 MODEL_FILE = $(MODEL_DIR)/model_quant.onnx
 
