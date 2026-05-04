@@ -1476,7 +1476,7 @@
 					<string>@executable_path/../Frameworks</string>
 				</array>
 				<key>LIBRARY_SEARCH_PATHS</key>
-				<string>$(SRCROOT)/TalkFlow/STT/onnxruntime</string>
+				<string>/opt/homebrew/opt/onnxruntime/lib</string>
 				<key>MARKETING_VERSION</key>
 				<string>1.0</string>
 				<key>OTHER_LDFLAGS</key>
@@ -1525,7 +1525,7 @@
 					<string>@executable_path/../Frameworks</string>
 				</array>
 				<key>LIBRARY_SEARCH_PATHS</key>
-				<string>$(SRCROOT)/TalkFlow/STT/onnxruntime</string>
+				<string>/opt/homebrew/opt/onnxruntime/lib</string>
 				<key>MARKETING_VERSION</key>
 				<string>1.0</string>
 				<key>OTHER_LDFLAGS</key>
