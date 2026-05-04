@@ -35,6 +35,12 @@ jobs:
           key: model-${{ hashFiles('scripts/download-stt-model.sh') }}
       - name: Test
         run: make test
+      - name: Set version from tag
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          VERSION="${{ github.ref_name }}"
+          VERSION="${VERSION#v}"
+          /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $VERSION" TalkFlow/Info.plist
       - name: Build & Package
         run: make dmg
       - name: Upload DMG
