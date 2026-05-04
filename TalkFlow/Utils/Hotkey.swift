@@ -114,12 +114,12 @@ func formatHotkey(_ binding: HotkeyBinding?) -> String {
 }
 
 /// 产生状态文案（纯函数）
-func produceStatusMessage(isRecording: Bool, binding: HotkeyBinding?) -> String {
+func produceStatusMessage(isRecording: Bool, binding: HotkeyBinding?, label: String = "转写") -> String {
     if isRecording {
         return "🎤 正在录制... 请按下你想要的组合键（如 ⌘⇧T）"
     }
     if let b = binding {
-        return "当前快捷键已注册到系统。按下 \(formatHotkey(b)) 即可触发转写。"
+        return "当前快捷键已注册到系统。按下 \(formatHotkey(b)) 即可触发\(label)。"
     }
     return "未设置快捷键，点击下方按钮进行录制。"
 }
@@ -127,12 +127,21 @@ func produceStatusMessage(isRecording: Bool, binding: HotkeyBinding?) -> String 
 /// 快捷键绑定 + 录制状态 → UI 状态（核心纯函数）
 func produceHotkeyUIState(
     binding: HotkeyBinding?,
-    isRecording: Bool
+    isRecording: Bool,
+    label: String = "转写"
 ) -> HotkeyUIState {
     HotkeyUIState(
         displayText: formatHotkey(binding),
         isRecording: isRecording,
-        statusMessage: produceStatusMessage(isRecording: isRecording, binding: binding),
+        statusMessage: produceStatusMessage(isRecording: isRecording, binding: binding, label: label),
         isSet: binding != nil
     )
+}
+
+// MARK: - 工作流类型
+
+/// 区分转写业务流与翻译业务流
+enum Workflow: Equatable {
+    case transcription
+    case translation
 }

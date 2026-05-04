@@ -42,6 +42,29 @@ protocol HotkeyIO {
 
     /// ⚠️ 注销 ESC 热键
     func unregisterEscHotkey()
+
+    // MARK: - 翻译快捷键
+
+    /// ⚠️ 加载翻译快捷键绑定
+    func loadTranslationBinding() -> HotkeyBinding?
+
+    /// ⚠️ 保存翻译快捷键绑定
+    func saveTranslationBinding(_ binding: HotkeyBinding)
+
+    /// ⚠️ 清除翻译快捷键绑定
+    func clearTranslationBinding()
+
+    /// ⚠️ 注册翻译全局快捷键
+    func registerTranslationHotkey(_ binding: HotkeyBinding) -> Bool
+
+    /// ⚠️ 注销翻译全局快捷键
+    func unregisterTranslationHotkey()
+
+    /// ⚠️ 开始录制翻译快捷键
+    func startTranslationRecording(onCaptured: @escaping (HotkeyBinding) -> Void)
+
+    /// ⚠️ 停止录制翻译快捷键
+    func stopTranslationRecording()
 }
 
 // MARK: - ⚠️ Carbon 全局快捷键 IO 实现
@@ -51,6 +74,7 @@ protocol HotkeyIO {
 final class CarbonHotkeyIO: HotkeyIO {
 
     private let storageKey = "TalkFlow_HotkeyBinding"
+    private let translationStorageKey = "TalkFlow_TranslationHotkeyBinding"
 
     // Carbon 热键引用
     private var hotkeyRef: EventHotKeyRef?
@@ -65,9 +89,16 @@ final class CarbonHotkeyIO: HotkeyIO {
     private var escOnTrigger: (() -> Void)?
     private let escHotkeyID = EventHotKeyID(signature: 0x54464C4F, id: 2) // "TFLO"
 
+    // 翻译快捷键
+    private var translationHotkeyRef: EventHotKeyRef?
+    private var translationRecordingMonitor: Any?
+    private let translationHotkeyID = EventHotKeyID(signature: 0x54464C4F, id: 3) // "TFLO"
+
     deinit {
         stopRecording()
+        stopTranslationRecording()
         unregisterEscHotkey()
+        unregisterTranslationHotkey()
         unregisterHotkey()
     }
 
@@ -194,6 +225,120 @@ final class CarbonHotkeyIO: HotkeyIO {
         }
     }
 
+    // MARK: - 翻译快捷键
+
+    func loadTranslationBinding() -> HotkeyBinding? {
+        guard let data = UserDefaults.standard.data(forKey: translationStorageKey) else {
+            hotkeyLog("未找到已保存的翻译快捷键绑定")
+            return nil
+        }
+        do {
+            let binding = try JSONDecoder().decode(HotkeyBinding.self, from: data)
+            hotkeyLog("加载已保存的翻译快捷键: \(formatHotkey(binding))")
+            return binding
+        } catch {
+            hotkeyLog("⚠️ 翻译快捷键绑定解码失败: \(error.localizedDescription)")
+            return nil
+        }
+    }
+
+    func saveTranslationBinding(_ binding: HotkeyBinding) {
+        do {
+            let data = try JSONEncoder().encode(binding)
+            UserDefaults.standard.set(data, forKey: translationStorageKey)
+            hotkeyLog("保存翻译快捷键: \(formatHotkey(binding))")
+        } catch {
+            hotkeyLog("⚠️ 翻译快捷键绑定编码失败: \(error.localizedDescription)")
+        }
+    }
+
+    func clearTranslationBinding() {
+        UserDefaults.standard.removeObject(forKey: translationStorageKey)
+        hotkeyLog("清除已保存的翻译快捷键")
+    }
+
+    func registerTranslationHotkey(_ binding: HotkeyBinding) -> Bool {
+        unregisterTranslationHotkey()
+
+        let modifiers = UInt32(binding.modifiers)
+        let keyCode = UInt32(binding.keyCode)
+
+        hotkeyLog("正在注册翻译快捷键: \(formatHotkey(binding)) (keyCode=\(keyCode), modifiers=0x\(String(modifiers, radix: 16)))")
+
+        if eventHandlerRef == nil {
+            var handlerRef: EventHandlerRef?
+            var eventSpec = EventTypeSpec(
+                eventClass: OSType(kEventClassKeyboard),
+                eventKind: UInt32(kEventHotKeyPressed)
+            )
+            let selfPtr = Unmanaged.passUnretained(self).toOpaque()
+            let status = InstallEventHandler(
+                GetEventMonitorTarget(),
+                CarbonHotkeyIO.eventHandlerCallback,
+                1,
+                &eventSpec,
+                selfPtr,
+                &handlerRef
+            )
+            if status != noErr {
+                hotkeyLog("❌ 安装事件处理器失败 (OSStatus: \(status))")
+                return false
+            }
+            eventHandlerRef = handlerRef
+        }
+
+        var ref: EventHotKeyRef?
+        let status = RegisterEventHotKey(
+            keyCode,
+            modifiers,
+            translationHotkeyID,
+            GetEventMonitorTarget(),
+            0,
+            &ref
+        )
+        if status != noErr {
+            hotkeyLog("❌ 翻译快捷键 RegisterEventHotKey 失败 (OSStatus: \(status))")
+            return false
+        }
+        translationHotkeyRef = ref
+        hotkeyLog("✅ 翻译快捷键注册成功")
+        return true
+    }
+
+    func unregisterTranslationHotkey() {
+        if let ref = translationHotkeyRef {
+            UnregisterEventHotKey(ref)
+            translationHotkeyRef = nil
+            hotkeyLog("已注销翻译快捷键")
+        }
+    }
+
+    func startTranslationRecording(onCaptured: @escaping (HotkeyBinding) -> Void) {
+        stopTranslationRecording()
+        hotkeyLog("开始录制翻译快捷键...")
+
+        translationRecordingMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
+            guard let self = self else { return event }
+
+            let carbonMods = nseventModifiersToCarbon(event.modifierFlags)
+            guard carbonMods != 0 else { return event }
+            let binding = HotkeyBinding(keyCode: event.keyCode, modifiers: carbonMods)
+            hotkeyLog("捕获翻译快捷键: \(formatHotkey(binding))")
+
+            self.stopTranslationRecording()
+            onCaptured(binding)
+            return nil
+        }
+    }
+
+    func stopTranslationRecording() {
+        if let monitor = translationRecordingMonitor {
+            NSEvent.removeMonitor(monitor)
+            translationRecordingMonitor = nil
+            hotkeyLog("停止翻译快捷键录制")
+        }
+    }
+
     // MARK: - 临时热键（ESC）
 
     func registerEscHotkey(onTrigger: @escaping () -> Void) {
@@ -251,11 +396,14 @@ final class CarbonHotkeyIO: HotkeyIO {
         let io = Unmanaged<CarbonHotkeyIO>.fromOpaque(userData).takeUnretainedValue()
 
         if hotkeyID.id == 1 {
-            hotkeyLog("🔥 全局快捷键触发！")
+            hotkeyLog("🔥 转写快捷键触发！")
             NotificationCenter.default.post(name: .talkFlowHotkeyTriggered, object: nil)
         } else if hotkeyID.id == 2 {
             hotkeyLog("🔥 ESC 热键触发！")
             io.escOnTrigger?()
+        } else if hotkeyID.id == 3 {
+            hotkeyLog("🔥 翻译快捷键触发！")
+            NotificationCenter.default.post(name: .talkFlowTranslationHotkeyTriggered, object: nil)
         }
 
         return noErr
@@ -266,5 +414,5 @@ final class CarbonHotkeyIO: HotkeyIO {
 
 extension Notification.Name {
     static let talkFlowHotkeyTriggered = Notification.Name("TalkFlowHotkeyTriggered")
-    static let talkFlowUseLLMChanged = Notification.Name("TalkFlowUseLLMChanged")
+    static let talkFlowTranslationHotkeyTriggered = Notification.Name("TalkFlowTranslationHotkeyTriggered")
 }

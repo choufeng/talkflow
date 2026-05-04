@@ -72,4 +72,58 @@ final class PromptConfigTests: XCTestCase {
         ))
         XCTAssertEqual(result, makePolishingSystemPrompt())
     }
+
+    // MARK: - makeTranslationSystemPrompt
+
+    func test_makeTranslationSystemPrompt_isNotEmpty() {
+        let prompt = makeTranslationSystemPrompt(language: "英文")
+        XCTAssertFalse(prompt.isEmpty, "翻译固定提示词不应为空")
+    }
+
+    func test_makeTranslationSystemPrompt_containsLanguage() {
+        let prompt = makeTranslationSystemPrompt(language: "英文")
+        XCTAssertTrue(prompt.contains("英文"), "应包含目标语言")
+    }
+
+    func test_makeTranslationSystemPrompt_containsTranslationRule() {
+        let prompt = makeTranslationSystemPrompt(language: "日文")
+        XCTAssertTrue(prompt.contains("翻译"), "应包含翻译指令")
+        XCTAssertTrue(prompt.contains("日文"), "应包含指定的目标语言")
+    }
+
+    func test_makeTranslationSystemPrompt_isDeterministic() {
+        let a = makeTranslationSystemPrompt(language: "越南语")
+        let b = makeTranslationSystemPrompt(language: "越南语")
+        XCTAssertEqual(a, b, "纯函数不应有状态依赖")
+    }
+
+    // MARK: - mergeTranslationPrompts
+
+    func test_mergeTranslationPrompts_fullMerge() {
+        let polishConfig = PromptConfig(defaultPrompt: "【润色】", userSupplement: "保持口语")
+        let translationConfig = PromptConfig(defaultPrompt: "翻译成英文", userSupplement: "保持格式")
+        let result = mergeTranslationPrompts(polishConfig: polishConfig, translationConfig: translationConfig)
+        XCTAssertEqual(result, "【润色】\n保持口语\n翻译成英文\n保持格式")
+    }
+
+    func test_mergeTranslationPrompts_noSupplement() {
+        let polishConfig = PromptConfig(defaultPrompt: "【润色】", userSupplement: "")
+        let translationConfig = PromptConfig(defaultPrompt: "翻译成英文", userSupplement: "")
+        let result = mergeTranslationPrompts(polishConfig: polishConfig, translationConfig: translationConfig)
+        XCTAssertEqual(result, "【润色】\n翻译成英文")
+    }
+
+    func test_mergeTranslationPrompts_polishOnly() {
+        let polishConfig = PromptConfig(defaultPrompt: "【润色】", userSupplement: "")
+        let translationConfig = PromptConfig(defaultPrompt: "翻译成英文", userSupplement: "保持格式")
+        let result = mergeTranslationPrompts(polishConfig: polishConfig, translationConfig: translationConfig)
+        XCTAssertEqual(result, "【润色】\n翻译成英文\n保持格式")
+    }
+
+    func test_mergeTranslationPrompts_translationOnly() {
+        let polishConfig = PromptConfig(defaultPrompt: "【润色】", userSupplement: "保持口语")
+        let translationConfig = PromptConfig(defaultPrompt: "翻译成英文", userSupplement: "")
+        let result = mergeTranslationPrompts(polishConfig: polishConfig, translationConfig: translationConfig)
+        XCTAssertEqual(result, "【润色】\n保持口语\n翻译成英文")
+    }
 }

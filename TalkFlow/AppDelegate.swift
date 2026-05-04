@@ -21,6 +21,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // 粘贴模块
     private let pasteIO: PasteIO = CGEventPasteIO()
 
+    // 当前工作流（纯数据类型，用于快捷键触发热键后分流）
+    private var currentWorkflow: Workflow = .transcription
+
     /// 录音完成回调 — 供后续工作流（语音转写）接入
     var onRecordingComplete: ((URL) -> Void)?
 
@@ -29,18 +32,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         impureShowMainWindow()
         impureSetupSTT()
 
-        // 监听主快捷键触发
+        // 监听转写快捷键触发
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(impureHandleHotkeyTrigger),
+            selector: #selector(impureHandleTranscriptionHotkey),
             name: .talkFlowHotkeyTriggered,
             object: nil
         )
-        // 监听 LLM 开关变化 → 显示/隐藏模型卡片
+        // 监听翻译快捷键触发
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(impureHandleUseLLMChanged(_:)),
-            name: .talkFlowUseLLMChanged,
+            selector: #selector(impureHandleTranslationHotkey),
+            name: .talkFlowTranslationHotkeyTriggered,
             object: nil
         )
     }
@@ -54,34 +57,52 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 do {
                     let result = try await self.sttEngine.transcribe(url: url)
 
-                    // 润色步骤（异步，在主线程 UI 更新前执行）
                     let finalResult: STTResult
                     switch result {
                     case .speech(let text, let language):
-                        let config = impureLoadAppConfig()
-                        if config.transcription.useLLM,
-                           let provider = self.impureMakePolishingProvider() {
-                            print("[Pipeline] 开始 LLM 润色...")
-                            do {
-                                let request = ChatRequest(messages: [
-                                    ChatMessage(role: .user, content: text)
-                                ])
-                                let response = try await provider.send(request)
-                                print("[Pipeline] 润色完成: \(response.content.prefix(60))...")
-                                finalResult = .speech(text: response.content, language: language)
-                            } catch {
-                                print("[Pipeline] 润色失败，降级使用原文: \(error)")
+                        switch self.currentWorkflow {
+                        case .transcription:
+                            if let provider = self.impureMakePolishingProvider() {
+                                print("[Pipeline] 开始 LLM 润色...")
+                                do {
+                                    let request = ChatRequest(messages: [
+                                        ChatMessage(role: .user, content: text)
+                                    ])
+                                    let response = try await provider.send(request)
+                                    print("[Pipeline] 润色完成: \(response.content.prefix(60))...")
+                                    finalResult = .speech(text: response.content, language: language)
+                                } catch {
+                                    print("[Pipeline] 润色失败，降级使用原文: \(error)")
+                                    finalResult = result
+                                }
+                            } else {
                                 finalResult = result
                             }
-                        } else {
-                            finalResult = result
+
+                        case .translation:
+                            if let provider = self.impureMakeTranslationProvider() {
+                                print("[Pipeline] 开始 LLM 润色+翻译...")
+                                do {
+                                    let request = ChatRequest(messages: [
+                                        ChatMessage(role: .user, content: text)
+                                    ])
+                                    let response = try await provider.send(request)
+                                    print("[Pipeline] 润色+翻译完成: \(response.content.prefix(60))...")
+                                    finalResult = .speech(text: response.content, language: language)
+                                } catch {
+                                    print("[Pipeline] 翻译失败，降级使用原文: \(error)")
+                                    finalResult = result
+                                }
+                            } else {
+                                finalResult = result
+                            }
                         }
                     default:
                         finalResult = result
                     }
 
                     await MainActor.run {
-                        print("[Pipeline] STT 转写完成: \(finalResult)")
+                        print("[Pipeline] 管线完成: \(finalResult)")
                         switch finalResult {
                         case .speech(let text, let language):
                             print("[Pipeline] 识别文本 (\(language)): \(text)")
@@ -155,15 +176,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    @objc private func impureHandleUseLLMChanged(_ notification: Notification) {
-        guard let isOn = notification.object as? Bool else { return }
-        modelCard?.isHidden = !isOn
-    }
-
     // MARK: - ⚠️ 主窗口（含副作用：窗口创建 + 视图挂载）
 
     private func impureShowMainWindow() {
-        let windowRect = NSRect(x: 0, y: 0, width: 800, height: 800)
+        let windowRect = NSRect(x: 0, y: 0, width: 800, height: 700)
         window = NSWindow(
             contentRect: windowRect,
             styleMask: [.titled, .closable, .miniaturizable, .resizable],
@@ -175,7 +191,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window?.center()
 
         // 根视图
-        let rootView = NSView(frame: windowRect)
+        let rootView = NSView()
+        rootView.translatesAutoresizingMaskIntoConstraints = false
 
         // 权限管理卡片
         let ios: [PermissionIO] = [MicrophonePermissionIO(), AccessibilityPermissionIO()]
@@ -186,13 +203,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         permissionCard.setUp()
         rootView.addSubview(permissionCard)
 
-        // 全局快捷键卡片
+        // 快捷键卡片（包含转写快捷键 + 翻译快捷键）
         let hotkeyIO = CarbonHotkeyIO()
         self.hotkeyIO = hotkeyIO
         let hotkeyView = HotkeySettingsView(io: hotkeyIO)
         hotkeyView.setUp()
 
-        let hotkeyCard = CardView(title: "全局快捷键", contentView: hotkeyView)
+        let hotkeyCard = CardView(title: "快捷键", contentView: hotkeyView)
         hotkeyCard.setUp()
         rootView.addSubview(hotkeyCard)
 
@@ -204,6 +221,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         transcriptionCard.setUp()
         rootView.addSubview(transcriptionCard)
 
+        // 翻译设置卡片
+        let translationView = TranslationSettingsView()
+        translationView.setUp()
+
+        let translationCard = CardView(title: "翻译", contentView: translationView)
+        translationCard.setUp()
+        rootView.addSubview(translationCard)
+
         // 模型配置卡片
         let modelView = ModelSettingsView()
         modelView.setUp()
@@ -212,9 +237,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.modelCard = mc
         rootView.addSubview(mc)
 
-        // 初始可见性：根据 useLLM 配置
-        let initialUseLLM = impureLoadAppConfig().transcription.useLLM
-        mc.isHidden = !initialUseLLM
+        // 模型卡片始终可见
+        mc.isHidden = false
 
         NSLayoutConstraint.activate([
             // 权限卡片：顶部固定
@@ -232,20 +256,47 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             transcriptionCard.leadingAnchor.constraint(equalTo: rootView.leadingAnchor, constant: 20),
             transcriptionCard.trailingAnchor.constraint(equalTo: rootView.trailingAnchor, constant: -20),
 
-            // 模型卡片：位于转写卡片下方
-            mc.topAnchor.constraint(equalTo: transcriptionCard.bottomAnchor, constant: 16),
+            // 翻译卡片：位于转写卡片下方
+            translationCard.topAnchor.constraint(equalTo: transcriptionCard.bottomAnchor, constant: 16),
+            translationCard.leadingAnchor.constraint(equalTo: rootView.leadingAnchor, constant: 20),
+            translationCard.trailingAnchor.constraint(equalTo: rootView.trailingAnchor, constant: -20),
+
+            // 模型卡片：位于翻译卡片下方
+            mc.topAnchor.constraint(equalTo: translationCard.bottomAnchor, constant: 16),
             mc.leadingAnchor.constraint(equalTo: rootView.leadingAnchor, constant: 20),
             mc.trailingAnchor.constraint(equalTo: rootView.trailingAnchor, constant: -20),
-            mc.bottomAnchor.constraint(lessThanOrEqualTo: rootView.bottomAnchor, constant: -20),
+            mc.bottomAnchor.constraint(equalTo: rootView.bottomAnchor, constant: -20),
         ])
 
-        window?.contentView = rootView
+        // 包裹滚动视图
+        let scrollView = NSScrollView()
+        scrollView.documentView = rootView
+        scrollView.hasVerticalScroller = true
+        scrollView.autohidesScrollers = true
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+
+        window?.contentView = scrollView
+
+        // rootView 宽度绑定到 scrollView，保持水平自适应
+        NSLayoutConstraint.activate([
+            rootView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+        ])
         window?.makeKeyAndOrderFront(nil)
     }
 
-    // MARK: - ⚠️ 录音协调
+    // MARK: - ⚠️ 快捷键处理（分流）
 
-    @objc private func impureHandleHotkeyTrigger() {
+    @objc private func impureHandleTranscriptionHotkey() {
+        currentWorkflow = .transcription
+        impureHandleHotkeySignal()
+    }
+
+    @objc private func impureHandleTranslationHotkey() {
+        currentWorkflow = .translation
+        impureHandleHotkeySignal()
+    }
+
+    private func impureHandleHotkeySignal() {
         let now = Date()
 
         guard shouldAcceptToggle(lastToggleTime: lastToggleTime, now: now, debounce: debounceInterval) else {
@@ -257,7 +308,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let nextPhase = recordingPhaseFromToggle(recordingPhase, now: now)
         recordingPhase = nextPhase
 
-        print("[Pipeline] 快捷键触发 → 切换到 \(nextPhase)")
+        print("[Pipeline] 快捷键触发（\(currentWorkflow)）→ 切换到 \(nextPhase)")
         switch nextPhase {
         case .idle:
             impureStopRecording()
@@ -265,6 +316,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             impureStartRecording()
         }
     }
+
+    // MARK: - ⚠️ 录音协调
 
     private func impureStartRecording() {
         let url = filePathIO.nextRecordingURL()
@@ -322,7 +375,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         button.image?.size = NSSize(width: 18, height: 18)
     }
 
-    // MARK: - ⚠️ 润色 Provider 工厂
+    // MARK: - ⚠️ Provider 工厂
 
     private func impureMakePolishingProvider() -> VertexAIIO? {
         guard let adc = impureLoadADCFromDefaultPath() else {
@@ -361,6 +414,66 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let promptConfig = PromptConfig(
             defaultPrompt: makePolishingSystemPrompt(),
             userSupplement: config.transcription.polishPrompt
+        )
+
+        return VertexAIIO(
+            tokenProvider: tokenProvider,
+            projectID: projectID,
+            location: "us-central1",
+            model: modelName,
+            promptConfig: promptConfig,
+            thinkingBudget: config.vertexAI.thinkingBudget
+        )
+    }
+
+    private func impureMakeTranslationProvider() -> VertexAIIO? {
+        guard let adc = impureLoadADCFromDefaultPath() else {
+            print("[Pipeline] 翻译 — ADC 未检测到，跳过")
+            return nil
+        }
+
+        let config = impureLoadAppConfig()
+        let projectID = config.vertexAI.projectID
+        let modelName = config.vertexAI.modelName
+
+        guard !projectID.isEmpty, !modelName.isEmpty else {
+            print("[Pipeline] 翻译 — ProjectID 或 modelName 为空，跳过")
+            return nil
+        }
+
+        let tokenProvider: any TokenProviderIO
+        switch adc {
+        case .serviceAccount(let clientEmail, let privateKey, let tokenURI, _):
+            let sa = ServiceAccount(
+                projectID: projectID,
+                privateKey: privateKey,
+                clientEmail: clientEmail,
+                tokenURI: tokenURI
+            )
+            tokenProvider = JWTTokenProvider(sa: sa)
+
+        case .authorizedUser(let clientID, let clientSecret, let refreshToken, _):
+            tokenProvider = RefreshTokenProviderIO(
+                clientID: clientID,
+                clientSecret: clientSecret,
+                refreshToken: refreshToken
+            )
+        }
+
+        // 合并润色+翻译系统提示词，作为翻译流程的 system prompt
+        let systemPrompt = mergeTranslationPrompts(
+            polishConfig: PromptConfig(
+                defaultPrompt: makePolishingSystemPrompt(),
+                userSupplement: config.transcription.polishPrompt
+            ),
+            translationConfig: PromptConfig(
+                defaultPrompt: makeTranslationSystemPrompt(language: config.transcription.translationLanguage),
+                userSupplement: config.transcription.translationPrompt
+            )
+        )
+        let promptConfig = PromptConfig(
+            defaultPrompt: systemPrompt,
+            userSupplement: ""
         )
 
         return VertexAIIO(
