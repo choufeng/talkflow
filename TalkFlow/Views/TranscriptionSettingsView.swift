@@ -43,6 +43,8 @@ final class TranscriptionSettingsView: NSView {
 
         // 多行输入框
         textView.font = NSFont.monospacedSystemFont(ofSize: 12, weight: .regular)
+        textView.textColor = .textColor
+        textView.backgroundColor = .textBackgroundColor
         textView.isEditable = true
         textView.isSelectable = true
         textView.isRichText = false

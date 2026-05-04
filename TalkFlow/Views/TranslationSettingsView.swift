@@ -63,6 +63,8 @@ final class TranslationSettingsView: NSView {
 
         // 多行输入框
         textView.font = NSFont.monospacedSystemFont(ofSize: 12, weight: .regular)
+        textView.textColor = .textColor
+        textView.backgroundColor = .textBackgroundColor
         textView.isEditable = true
         textView.isSelectable = true
         textView.isRichText = false
@@ -81,6 +83,7 @@ final class TranslationSettingsView: NSView {
 
             languagePopup.leadingAnchor.constraint(equalTo: languageLabel.trailingAnchor, constant: 8),
             languagePopup.centerYAnchor.constraint(equalTo: languageLabel.centerYAnchor),
+            languagePopup.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
 
             promptLabel.topAnchor.constraint(equalTo: languageLabel.bottomAnchor, constant: 12),
             promptLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
