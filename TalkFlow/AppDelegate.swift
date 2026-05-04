@@ -276,6 +276,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
 
         window?.contentView = scrollView
+
+        // rootView 宽度绑定到 scrollView，保持水平自适应
+        NSLayoutConstraint.activate([
+            rootView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+        ])
         window?.makeKeyAndOrderFront(nil)
     }
 
