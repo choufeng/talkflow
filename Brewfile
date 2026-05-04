@@ -1,1 +1,1 @@
-brew "onnxruntime", link: false
+brew "onnxruntime"
