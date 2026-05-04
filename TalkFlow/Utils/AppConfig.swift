@@ -14,9 +14,31 @@ struct AppConfig: Codable, Equatable {
 
     /// 转写配置
     struct TranscriptionConfig: Codable, Equatable {
-        var useLLM: Bool = false
+        var useLLM: Bool
         /// 用户自定义润色要求，与固定提示词拼接后作为 LLM system prompt
-        var polishPrompt: String = ""
+        var polishPrompt: String
+        /// 翻译目标语言，默认英文
+        var translationLanguage: String
+        /// 用户自定义翻译补充要求
+        var translationPrompt: String
+
+        init(useLLM: Bool = true,
+             polishPrompt: String = "",
+             translationLanguage: String = "英文",
+             translationPrompt: String = "") {
+            self.useLLM = useLLM
+            self.polishPrompt = polishPrompt
+            self.translationLanguage = translationLanguage
+            self.translationPrompt = translationPrompt
+        }
+
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            useLLM = try container.decodeIfPresent(Bool.self, forKey: .useLLM) ?? true
+            polishPrompt = try container.decodeIfPresent(String.self, forKey: .polishPrompt) ?? ""
+            translationLanguage = try container.decodeIfPresent(String.self, forKey: .translationLanguage) ?? "英文"
+            translationPrompt = try container.decodeIfPresent(String.self, forKey: .translationPrompt) ?? ""
+        }
     }
 
     var vertexAI: VertexAIConfig = VertexAIConfig()
