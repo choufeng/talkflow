@@ -1,11 +1,25 @@
-.PHONY: test coverage lint setup dmg clean-dmg
+.PHONY: test coverage lint setup sign-deps dmg clean-dmg
 
 BUILD_DIR = $(shell pwd)/.build
 DMG_NAME = TalkFlow-$(shell /usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" TalkFlow/Info.plist 2>/dev/null || echo "1.0").dmg
 MODEL_DIR = TalkFlow/Resources/sensevoice
 MODEL_FILE = $(MODEL_DIR)/model_quant.onnx
 
-test:
+# ── 签名 Homebrew dylib（消除 Team ID 冲突，测试/运行必需） ──
+sign-deps:
+	@if [ -f /opt/homebrew/opt/onnxruntime/lib/libonnxruntime.1.24.4.dylib ]; then \
+		for lib in /opt/homebrew/opt/onnxruntime/lib/*.dylib \
+		          /opt/homebrew/opt/onnx/lib/*.dylib \
+		          /opt/homebrew/opt/protobuf/lib/*.dylib \
+		          /opt/homebrew/opt/abseil/lib/*.dylib \
+		          /opt/homebrew/opt/re2/lib/*.dylib; do \
+			[ -f "$$lib" ] || continue; \
+			codesign --force --sign - "$$lib" 2>/dev/null || true; \
+		done; \
+		echo "✅ Homebrew dylibs re-signed"; \
+	fi
+
+test: sign-deps
 	xcodebuild test \
 		-scheme TalkFlow \
 		-destination 'platform=macOS' \
@@ -34,7 +48,7 @@ setup:
 	fi
 
 # ── 编译 Release .app ──
-.app: setup
+.app: setup sign-deps
 	@echo "🔨 Building Release..."
 	xcodebuild build \
 		-scheme TalkFlow \
