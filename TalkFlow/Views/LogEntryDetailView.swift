@@ -104,7 +104,10 @@ final class LogEntryDetailView: NSView {
         textView.font = NSFont.monospacedSystemFont(ofSize: 12, weight: .regular)
         textView.textColor = .labelColor
         textView.backgroundColor = .controlBackgroundColor
-        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.isVerticallyResizable = true
+        textView.isHorizontallyResizable = false
+        textView.textContainer?.widthTracksTextView = true
+        textView.textContainer?.containerSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
 
         scrollView.documentView = textView
         container.addSubview(scrollView)
