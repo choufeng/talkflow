@@ -40,6 +40,8 @@ final class LogCardView: NSView {
     }
 
     private func impureSetupUI() {
+        translatesAutoresizingMaskIntoConstraints = false
+
         let contentView = NSView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
 
