@@ -1,0 +1,21 @@
+#!/bin/bash
+# 分支切换 / worktree 创建后，检查 STT 模型文件是否完整
+# post-checkout 接收三个参数：$1=旧HEAD, $2=新HEAD, $3=是否分支切换(1=切换, 0=文件级)
+set -e
+
+PREV_HEAD="$1"
+NEW_HEAD="$2"
+BRANCH_CHECKOUT="$3"
+
+SCRIPT_DIR="$(dirname "$0")"
+
+# 仅当分支级切换（含 worktree 创建）时触发
+if [ "$BRANCH_CHECKOUT" = "1" ]; then
+    echo "🔍 Checking STT model files..."
+    if "$SCRIPT_DIR/download-stt-model.sh" --check; then
+        echo "✅ STT model files OK."
+    else
+        echo "📥 STT model files missing or corrupt — downloading..."
+        "$SCRIPT_DIR/download-stt-model.sh"
+    fi
+fi
