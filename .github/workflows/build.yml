@@ -42,9 +42,10 @@ jobs:
           VERSION="${VERSION#v}"
           /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $VERSION" TalkFlow/Info.plist
       - name: Build & Package
+        if: github.ref_type != 'branch' || github.event_name == 'pull_request'
         run: make dmg
       - name: Upload DMG
-        if: github.event_name != 'pull_request'
+        if: github.ref_type == 'tag'
         uses: actions/upload-artifact@v4
         with:
           name: TalkFlow-${{ github.ref_name }}
