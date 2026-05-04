@@ -415,5 +415,4 @@ final class CarbonHotkeyIO: HotkeyIO {
 extension Notification.Name {
     static let talkFlowHotkeyTriggered = Notification.Name("TalkFlowHotkeyTriggered")
     static let talkFlowTranslationHotkeyTriggered = Notification.Name("TalkFlowTranslationHotkeyTriggered")
-    static let talkFlowUseLLMChanged = Notification.Name("TalkFlowUseLLMChanged")
 }

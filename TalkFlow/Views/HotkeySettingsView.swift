@@ -308,7 +308,8 @@ final class HotkeySettingsView: NSView {
 
         let tlState = produceHotkeyUIState(
             binding: translationState.binding,
-            isRecording: translationState.isRecording
+            isRecording: translationState.isRecording,
+            label: "翻译"
         )
         translationLabel.stringValue = tlState.displayText
         translationLabel.textColor = tlState.isSet ? .systemGreen : .placeholderTextColor
