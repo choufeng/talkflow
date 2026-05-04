@@ -60,3 +60,34 @@ final class AppSupportFilePathIO: FilePathIO {
         return dir.appendingPathComponent(filename)
     }
 }
+
+// MARK: - 清理纯函数
+
+/// 从录音文件名提取日期（"yyyy-MM-dd'T'HH-mm-ss_xxx.m4a" → Date）
+func recordingDate(from filename: String) -> Date? {
+    guard let tIndex = filename.firstIndex(of: "T") else { return nil }
+    let datePart = String(filename[..<tIndex])
+    let parts = datePart.split(separator: "-")
+    guard parts.count == 3,
+          let year = Int(parts[0]),
+          let month = Int(parts[1]),
+          let day = Int(parts[2]) else { return nil }
+    var comps = DateComponents()
+    comps.year = year
+    comps.month = month
+    comps.day = day
+    return Calendar.current.date(from: comps)
+}
+
+/// 清理 N 天前的录音文件
+func cleanOldRecordings(fileIO: FilePathIO, before days: Int) {
+    guard let cutoff = Calendar.current.date(byAdding: .day, value: -days, to: Date()) else { return }
+    let dir = fileIO.recordingsDirectory
+    guard let filenames = try? FileManager.default.contentsOfDirectory(atPath: dir.path) else { return }
+
+    for filename in filenames where filename.hasSuffix(".m4a") {
+        guard let date = recordingDate(from: filename), date < cutoff else { continue }
+        let fileURL = dir.appendingPathComponent(filename)
+        try? FileManager.default.removeItem(at: fileURL)
+    }
+}
