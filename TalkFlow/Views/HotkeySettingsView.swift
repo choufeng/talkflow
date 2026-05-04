@@ -7,7 +7,7 @@ private let log = OSLog(subsystem: "im.xiajia.TalkFlow", category: "HotkeyView")
 
 private func uiLog(_ msg: String) {
     os_log("%{public}@", log: log, type: .info, msg)
-    print("[TalkFlow.HotkeyUI] \(msg)")
+    impureMakeLogger().debug(tag: "HotkeyUI", msg)
 }
 
 // MARK: - 快捷键行内部状态

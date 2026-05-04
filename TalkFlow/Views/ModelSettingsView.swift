@@ -187,22 +187,22 @@ final class ModelSettingsView: NSView, NSTextFieldDelegate {
     }
 
     private func impureDetectADC() {
+        let log = impureMakeLogger()
         guard let adc = impureLoadADCFromDefaultPath() else {
-            print("[ModelSettings] ADC 未检测到")
+            log.info(tag: "ModelSettings", "ADC 未检测到")
             adcInfo = nil
             return
         }
         adcInfo = adc
 
-        // 提取 projectID
         let pid: String?
         switch adc {
         case .serviceAccount(_, _, _, let projectID):
             pid = projectID
-            print("[ModelSettings] ADC 检测成功 — service_account, projectID: \(pid ?? "无")")
+            log.info(tag: "ModelSettings", "ADC 检测成功 — service_account, projectID: \(pid ?? "无")")
         case .authorizedUser(_, _, _, let projectID):
             pid = projectID
-            print("[ModelSettings] ADC 检测成功 — authorized_user, projectID: \(pid ?? "无")")
+            log.info(tag: "ModelSettings", "ADC 检测成功 — authorized_user, projectID: \(pid ?? "无")")
         }
 
         if let pid = pid {
@@ -280,7 +280,7 @@ final class ModelSettingsView: NSView, NSTextFieldDelegate {
                     self.isTesting = false
                     self.connectionStatus = .success("✅ 连接成功")
                     self.impureRender()
-                    print("[ModelSettings] 连接测试成功 — 响应: \(response.content.prefix(50))")
+                    impureMakeLogger().info(tag: "ModelSettings", "连接测试成功 — 响应: \(response.content.prefix(50))")
                 }
             } catch let error as ProviderError {
                 await MainActor.run {

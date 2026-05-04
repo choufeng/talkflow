@@ -76,9 +76,9 @@ final class LogFileIOTests: XCTestCase {
         io.forceRotate(to: dayString(from: Date()))
 
         let files = io.logFiles()
-        XCTAssertEqual(files.count, 2)
+        // forceRotate 将 latest.log 重命名为日期归档，无新写入时只有归档文件
+        XCTAssertEqual(files.count, 1)
         XCTAssertTrue(files.contains { $0.lastPathComponent == "\(yesterdayStr).log" })
-        XCTAssertTrue(files.contains { $0.lastPathComponent == "latest.log" })
 
         let archive = files.first { $0.lastPathComponent != "latest.log" }!
         let archivedEntries = io.entries(from: archive)

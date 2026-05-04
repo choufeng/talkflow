@@ -8,7 +8,7 @@ private let log = OSLog(subsystem: "im.xiajia.TalkFlow", category: "Hotkey")
 
 private func hotkeyLog(_ msg: String) {
     os_log("%{public}@", log: log, type: .info, msg)
-    print("[TalkFlow.Hotkey] \(msg)")
+    impureMakeLogger().debug(tag: "Hotkey", msg)
 }
 
 // MARK: - 协议抽象

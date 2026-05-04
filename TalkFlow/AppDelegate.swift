@@ -5,6 +5,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem?
     private var modelCard: CardView?
 
+    // 日志模块
+    private let logger: LoggerIO = impureMakeLogger()
+    private let logFileIO: LogFileIO = DefaultLogFileIO()
+
     // 录音模块
     private var hotkeyIO: HotkeyIO?
     private let audioRecorder: AudioRecorderIO = AVAudioRecorderIO()
@@ -46,14 +50,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             name: .talkFlowTranslationHotkeyTriggered,
             object: nil
         )
+
+        // 清理两周前的日志和录音
+        logFileIO.cleanOldLogs(before: 14)
+        let filePathIO = AppSupportFilePathIO()
+        cleanOldRecordings(fileIO: filePathIO, before: 14)
     }
 
     private func impureSetupSTT() {
         onRecordingComplete = { [weak self] url in
-            print("[Pipeline] 录音文件: \(url.path)")
+            self?.logger.info(tag: "Pipeline", "录音文件: \(url.path)")
             self?.sttTask = Task { [weak self] in
                 guard let self else { return }
-                print("[Pipeline] 开始 STT 转写...")
+                self.logger.info(tag: "Pipeline", "开始 STT 转写...")
                 do {
                     let result = try await self.sttEngine.transcribe(url: url)
 
@@ -63,16 +72,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                         switch self.currentWorkflow {
                         case .transcription:
                             if let provider = self.impureMakePolishingProvider() {
-                                print("[Pipeline] 开始 LLM 润色...")
+                                self.logger.info(tag: "Pipeline", "开始 LLM 润色...")
                                 do {
                                     let request = ChatRequest(messages: [
                                         ChatMessage(role: .user, content: text)
                                     ])
                                     let response = try await provider.send(request)
-                                    print("[Pipeline] 润色完成: \(response.content.prefix(60))...")
+                                    self.logger.info(tag: "Pipeline", "润色完成: \(response.content.prefix(60))...")
                                     finalResult = .speech(text: response.content, language: language)
                                 } catch {
-                                    print("[Pipeline] 润色失败，降级使用原文: \(error)")
+                                    self.logger.warning(tag: "Pipeline", "润色失败，降级使用原文: \(error)")
                                     finalResult = result
                                 }
                             } else {
@@ -81,16 +90,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
                         case .translation:
                             if let provider = self.impureMakeTranslationProvider() {
-                                print("[Pipeline] 开始 LLM 润色+翻译...")
+                                self.logger.info(tag: "Pipeline", "开始 LLM 润色+翻译...")
                                 do {
                                     let request = ChatRequest(messages: [
                                         ChatMessage(role: .user, content: text)
                                     ])
                                     let response = try await provider.send(request)
-                                    print("[Pipeline] 润色+翻译完成: \(response.content.prefix(60))...")
+                                    self.logger.info(tag: "Pipeline", "润色+翻译完成: \(response.content.prefix(60))...")
                                     finalResult = .speech(text: response.content, language: language)
                                 } catch {
-                                    print("[Pipeline] 翻译失败，降级使用原文: \(error)")
+                                    self.logger.warning(tag: "Pipeline", "翻译失败，降级使用原文: \(error)")
                                     finalResult = result
                                 }
                             } else {
@@ -102,33 +111,33 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     }
 
                     await MainActor.run {
-                        print("[Pipeline] 管线完成: \(finalResult)")
+                        self.logger.info(tag: "Pipeline", "管线完成: \(finalResult)")
                         switch finalResult {
                         case .speech(let text, let language):
-                            print("[Pipeline] 识别文本 (\(language)): \(text)")
+                            self.logger.info(tag: "Pipeline", "识别文本 (\(language)): \(text)")
                             NSPasteboard.general.clearContents()
                             NSPasteboard.general.setString(text, forType: .string)
-                            print("[Pipeline] 已写入剪贴板")
+                            self.logger.info(tag: "Pipeline", "已写入剪贴板")
                             let pasted = self.pasteIO.paste()
                             if pasted {
-                                print("[Pipeline] Cmd+V 粘贴✅ 成功")
+                                self.logger.info(tag: "Pipeline", "Cmd+V 粘贴成功")
                                 self.statusWindow.dismiss()
                             } else {
-                                print("[Pipeline] Cmd+V 粘贴❌ 失败")
+                                self.logger.error(tag: "Pipeline", "Cmd+V 粘贴失败")
                                 self.statusWindow.show(phase: .pasteFailed)
                                 self.statusWindow.dismissAfter(seconds: 3)
                             }
                         case .silence:
-                            print("[Pipeline] 静音 — 跳过粘贴")
+                            self.logger.info(tag: "Pipeline", "静音 — 跳过粘贴")
                             self.statusWindow.dismiss()
                         case .failure(let error):
-                            print("[Pipeline] STT 失败: \(error)")
+                            self.logger.error(tag: "Pipeline", "STT 失败: \(error)")
                             self.statusWindow.show(phase: .pasteFailed)
                             self.statusWindow.dismissAfter(seconds: 3)
                         }
                     }
                 } catch {
-                    print("[Pipeline] STT 异常: \(error)")
+                    self.logger.error(tag: "Pipeline", "STT 异常: \(error)")
                     await MainActor.run {
                         self.statusWindow.dismiss()
                     }
@@ -240,6 +249,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // 模型卡片始终可见
         mc.isHidden = false
 
+        // 日志卡片
+        let logCardView = LogCardView(logFileIO: logFileIO)
+        let logViewerWindow = LogViewerWindow(logFileIO: logFileIO)
+        logCardView.setUp {
+            logViewerWindow.show()
+        }
+        let logCard = CardView(title: "日志", contentView: logCardView)
+        logCard.setUp()
+        rootView.addSubview(logCard)
+
         NSLayoutConstraint.activate([
             // 权限卡片：顶部固定
             permissionCard.topAnchor.constraint(equalTo: rootView.topAnchor, constant: 20),
@@ -265,7 +284,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             mc.topAnchor.constraint(equalTo: translationCard.bottomAnchor, constant: 16),
             mc.leadingAnchor.constraint(equalTo: rootView.leadingAnchor, constant: 20),
             mc.trailingAnchor.constraint(equalTo: rootView.trailingAnchor, constant: -20),
-            mc.bottomAnchor.constraint(equalTo: rootView.bottomAnchor, constant: -20),
+
+            // 日志卡片：位于模型卡片下方，底部固定
+            logCard.topAnchor.constraint(equalTo: mc.bottomAnchor, constant: 16),
+            logCard.leadingAnchor.constraint(equalTo: rootView.leadingAnchor, constant: 20),
+            logCard.trailingAnchor.constraint(equalTo: rootView.trailingAnchor, constant: -20),
+            logCard.bottomAnchor.constraint(equalTo: rootView.bottomAnchor, constant: -20),
         ])
 
         // 包裹滚动视图
@@ -300,7 +324,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let now = Date()
 
         guard shouldAcceptToggle(lastToggleTime: lastToggleTime, now: now, debounce: debounceInterval) else {
-            print("[Pipeline] 防抖忽略（间隔 < \(debounceInterval)s）")
+            logger.debug(tag: "Pipeline", "防抖忽略（间隔 < \(debounceInterval)s）")
             return
         }
         lastToggleTime = now
@@ -308,7 +332,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let nextPhase = recordingPhaseFromToggle(recordingPhase, now: now)
         recordingPhase = nextPhase
 
-        print("[Pipeline] 快捷键触发（\(currentWorkflow)）→ 切换到 \(nextPhase)")
+        logger.debug(tag: "Pipeline", "快捷键触发（\(currentWorkflow)）→ 切换到 \(nextPhase)")
         switch nextPhase {
         case .idle:
             impureStopRecording()
@@ -321,7 +345,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func impureStartRecording() {
         let url = filePathIO.nextRecordingURL()
-        print("[Pipeline] 🎤 开始录音 → \(url.lastPathComponent)")
+        logger.info(tag: "Pipeline", "🎤 开始录音 → \(url.lastPathComponent)")
         do {
             try audioRecorder.startRecording(to: url)
             statusWindow.show(phase: .recording)
@@ -330,7 +354,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 self?.impureCancelRecording()
             }
         } catch {
-            print("[Pipeline] ❌ 录音启动失败: \(error)")
+            logger.error(tag: "Pipeline", "录音启动失败: \(error)")
             recordingPhase = .idle
         }
     }
@@ -338,7 +362,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func impureStopRecording() {
         let duration = audioRecorder.stopRecording()
         let savedURL = audioRecorder.recordingURL
-        print("[Pipeline] ⏹ 停止录音 时长=\(String(format: "%.1f", duration))s")
+        logger.info(tag: "Pipeline", "⏹ 停止录音 时长=\(String(format: "%.1f", duration))s")
         statusWindow.show(phase: .transcribing)
         hotkeyIO?.unregisterEscHotkey()
         impureUpdateMenuBarIcon(isRecording: false)
@@ -347,7 +371,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
            let url = savedURL {
             onRecordingComplete?(url)
         } else {
-            print("[Pipeline] 录音太短(< \(minRecordingDuration)s) — 丢弃")
+            logger.info(tag: "Pipeline", "录音太短(< \(minRecordingDuration)s) — 丢弃")
             statusWindow.dismiss()
             if let url = savedURL {
                 try? FileManager.default.removeItem(at: url)
@@ -379,7 +403,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func impureMakePolishingProvider() -> VertexAIIO? {
         guard let adc = impureLoadADCFromDefaultPath() else {
-            print("[Pipeline] 润色 — ADC 未检测到，跳过")
+            logger.info(tag: "Pipeline", "润色 — ADC 未检测到，跳过")
             return nil
         }
 
@@ -388,7 +412,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let modelName = config.vertexAI.modelName
 
         guard !projectID.isEmpty, !modelName.isEmpty else {
-            print("[Pipeline] 润色 — ProjectID 或 modelName 为空，跳过")
+            logger.info(tag: "Pipeline", "润色 — ProjectID 或 modelName 为空，跳过")
             return nil
         }
 
@@ -428,7 +452,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func impureMakeTranslationProvider() -> VertexAIIO? {
         guard let adc = impureLoadADCFromDefaultPath() else {
-            print("[Pipeline] 翻译 — ADC 未检测到，跳过")
+            logger.info(tag: "Pipeline", "翻译 — ADC 未检测到，跳过")
             return nil
         }
 
@@ -437,7 +461,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let modelName = config.vertexAI.modelName
 
         guard !projectID.isEmpty, !modelName.isEmpty else {
-            print("[Pipeline] 翻译 — ProjectID 或 modelName 为空，跳过")
+            logger.info(tag: "Pipeline", "翻译 — ProjectID 或 modelName 为空，跳过")
             return nil
         }
 

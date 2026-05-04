@@ -21,32 +21,33 @@ struct SenseVoiceEngineIO: SenseVoiceIO {
 
     func transcribe(url: URL) async throws -> STTResult {
         let (samples, sampleRate) = try decodeAudio(url: url)
-        print("[STT] 解码: \(samples.count) samples @ \(sampleRate)Hz")
+        let log = impureMakeLogger()
+        log.debug(tag: "STT", "解码: \(samples.count) samples @ \(sampleRate)Hz")
         let resampled = resampleTo16k(samples: samples, srcRate: sampleRate)
-        print("[STT] 重采样: \(resampled.count) samples @ 16000Hz")
+        log.debug(tag: "STT", "重采样: \(resampled.count) samples @ 16000Hz")
 
         guard !classifySilence(samples: resampled) else {
-            print("[STT] 静音判定: 采样数 \(resampled.count) < 4800")
+            log.info(tag: "STT", "静音判定: 采样数 \(resampled.count) < 4800")
             return .silence
         }
 
         let fbank = extractFbank(waveform: resampled)
-        print("[STT] Fbank: \(fbank.count) frames x \(fbank.first?.count ?? 0) dims")
-        guard !fbank.isEmpty else { print("[STT] Fbank isEmpty"); return .silence }
+        log.debug(tag: "STT", "Fbank: \(fbank.count) frames x \(fbank.first?.count ?? 0) dims")
+        guard !fbank.isEmpty else { log.debug(tag: "STT", "Fbank isEmpty"); return .silence }
 
         let lfr = applyLFR(fbank)
-        print("[STT] LFR: \(lfr.count) frames x \(lfr.first?.count ?? 0) dims")
-        guard !lfr.isEmpty else { print("[STT] LFR isEmpty"); return .silence }
+        log.debug(tag: "STT", "LFR: \(lfr.count) frames x \(lfr.first?.count ?? 0) dims")
+        guard !lfr.isEmpty else { log.debug(tag: "STT", "LFR isEmpty"); return .silence }
 
         let normalized = applyCMVN(lfr, means: cmvnMeans, vars: cmvnVars)
-        print("[STT] CMVN done, starting inference...")
+        log.debug(tag: "STT", "CMVN done, starting inference...")
 
         let tokenIds = try runInference(feats: normalized, featsLen: Int32(lfr.count))
-        print("[STT] 推理: \(tokenIds.count) token IDs")
+        log.debug(tag: "STT", "推理: \(tokenIds.count) token IDs")
         let text = decodeTokenIds(tokenIds, tokens: tokens)
-        print("[STT] 解码: \"\(text)\"")
+        log.info(tag: "STT", "解码: \"\(text)\"")
         let cleaned = postprocess(text)
-        print("[STT] 后处理: \"\(cleaned)\"")
+        log.debug(tag: "STT", "后处理: \"\(cleaned)\"")
 
         return cleaned.isEmpty ? .silence : .speech(text: cleaned, language: "auto")
     }
