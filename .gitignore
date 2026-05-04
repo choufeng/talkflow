@@ -21,3 +21,4 @@ Pods/
 .worktrees/
 TalkFlow/Resources/sensevoice/model_quant.onnx
 TalkFlow/STT/onnxruntime/libonnxruntime.dylib
+.superpowers/
