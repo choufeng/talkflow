@@ -1283,6 +1283,7 @@
 				<string>C3407740FE944C19826D4452</string>
 				<string>66BA4B22A9244CEB8BA30D88</string>
 				<string>4A28F49B73674FE58F4C80CE</string>
+				<string>A84523AD6E594E9D8EA6A82A</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
