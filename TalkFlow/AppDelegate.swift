@@ -179,7 +179,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: - ⚠️ 主窗口（含副作用：窗口创建 + 视图挂载）
 
     private func impureShowMainWindow() {
-        let windowRect = NSRect(x: 0, y: 0, width: 800, height: 1000)
+        let windowRect = NSRect(x: 0, y: 0, width: 800, height: 700)
         window = NSWindow(
             contentRect: windowRect,
             styleMask: [.titled, .closable, .miniaturizable, .resizable],
@@ -191,7 +191,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window?.center()
 
         // 根视图
-        let rootView = NSView(frame: windowRect)
+        let rootView = NSView()
+        rootView.translatesAutoresizingMaskIntoConstraints = false
 
         // 权限管理卡片
         let ios: [PermissionIO] = [MicrophonePermissionIO(), AccessibilityPermissionIO()]
@@ -264,10 +265,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             mc.topAnchor.constraint(equalTo: translationCard.bottomAnchor, constant: 16),
             mc.leadingAnchor.constraint(equalTo: rootView.leadingAnchor, constant: 20),
             mc.trailingAnchor.constraint(equalTo: rootView.trailingAnchor, constant: -20),
-            mc.bottomAnchor.constraint(lessThanOrEqualTo: rootView.bottomAnchor, constant: -20),
+            mc.bottomAnchor.constraint(equalTo: rootView.bottomAnchor, constant: -20),
         ])
 
-        window?.contentView = rootView
+        // 包裹滚动视图
+        let scrollView = NSScrollView()
+        scrollView.documentView = rootView
+        scrollView.hasVerticalScroller = true
+        scrollView.autohidesScrollers = true
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+
+        window?.contentView = scrollView
         window?.makeKeyAndOrderFront(nil)
     }
 
