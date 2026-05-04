@@ -8,7 +8,6 @@ final class TranscriptionSettingsView: NSView {
 
     // MARK: - Subviews
 
-    private let useLLMCheckbox = NSButton(checkboxWithTitle: "通过远程大语言模型对文本进行修饰和加工", target: nil, action: nil)
     private let promptLabel = NSTextField(labelWithString: "润色要求:")
     private let scrollView = NSScrollView()
     private let textView = NSTextView()
@@ -28,7 +27,7 @@ final class TranscriptionSettingsView: NSView {
 
     func setUp() {
         impureSetupUI()
-        impureLoadCheckboxState()
+        impureLoadPromptState()
     }
 
     // MARK: - ⚠️ UI 构建
@@ -36,17 +35,10 @@ final class TranscriptionSettingsView: NSView {
     private func impureSetupUI() {
         translatesAutoresizingMaskIntoConstraints = false
 
-        useLLMCheckbox.font = NSFont.systemFont(ofSize: 13)
-        useLLMCheckbox.target = self
-        useLLMCheckbox.action = #selector(impureCheckboxToggled)
-        useLLMCheckbox.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(useLLMCheckbox)
-
         // 提示词标签
         promptLabel.font = NSFont.systemFont(ofSize: 12)
         promptLabel.textColor = .secondaryLabelColor
         promptLabel.translatesAutoresizingMaskIntoConstraints = false
-        promptLabel.isHidden = true
         addSubview(promptLabel)
 
         // 多行输入框
@@ -61,15 +53,10 @@ final class TranscriptionSettingsView: NSView {
         scrollView.hasVerticalScroller = true
         scrollView.borderType = .bezelBorder
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.isHidden = true
         addSubview(scrollView)
 
         NSLayoutConstraint.activate([
-            useLLMCheckbox.topAnchor.constraint(equalTo: topAnchor),
-            useLLMCheckbox.leadingAnchor.constraint(equalTo: leadingAnchor),
-            useLLMCheckbox.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
-
-            promptLabel.topAnchor.constraint(equalTo: useLLMCheckbox.bottomAnchor, constant: 12),
+            promptLabel.topAnchor.constraint(equalTo: topAnchor),
             promptLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
 
             scrollView.topAnchor.constraint(equalTo: promptLabel.bottomAnchor, constant: 4),
@@ -82,32 +69,14 @@ final class TranscriptionSettingsView: NSView {
 
     // MARK: - ⚠️ 配置加载
 
-    private func impureLoadCheckboxState() {
+    private func impureLoadPromptState() {
         let config = impureLoadAppConfig()
-        useLLMCheckbox.state = config.transcription.useLLM ? .on : .off
-        impureUpdatePromptVisibility()
-
         if !config.transcription.polishPrompt.isEmpty {
             textView.string = config.transcription.polishPrompt
         }
     }
 
-    private func impureUpdatePromptVisibility() {
-        let isOn = useLLMCheckbox.state == .on
-        promptLabel.isHidden = !isOn
-        scrollView.isHidden = !isOn
-    }
-
     // MARK: - ⚠️ 事件
-
-    @objc private func impureCheckboxToggled() {
-        let isOn = useLLMCheckbox.state == .on
-        var config = impureLoadAppConfig()
-        config.transcription.useLLM = isOn
-        impureSaveAppConfig(config)
-        impureUpdatePromptVisibility()
-        NotificationCenter.default.post(name: .talkFlowUseLLMChanged, object: isOn)
-    }
 
     private func impureSavePromptConfig() {
         var config = impureLoadAppConfig()
