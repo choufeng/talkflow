@@ -8,6 +8,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // 日志模块
     private let logger: LoggerIO = impureMakeLogger()
     private let logFileIO: LogFileIO = DefaultLogFileIO()
+    private var logViewerWindow: LogViewerWindow?
 
     // 录音模块
     private var hotkeyIO: HotkeyIO?
@@ -251,13 +252,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         // 日志卡片
         let logCardView = LogCardView(logFileIO: logFileIO)
-        let logViewerWindow = LogViewerWindow(logFileIO: logFileIO)
-        logCardView.setUp {
-            logViewerWindow.show()
+        logViewerWindow = LogViewerWindow(logFileIO: logFileIO)
+        logCardView.setUp { [weak self] in
+            self?.logViewerWindow?.show()
         }
-        let logCard = CardView(title: "日志", contentView: logCardView)
-        logCard.setUp()
-        rootView.addSubview(logCard)
+        rootView.addSubview(logCardView)
 
         NSLayoutConstraint.activate([
             // 权限卡片：顶部固定
@@ -286,10 +285,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             mc.trailingAnchor.constraint(equalTo: rootView.trailingAnchor, constant: -20),
 
             // 日志卡片：位于模型卡片下方，底部固定
-            logCard.topAnchor.constraint(equalTo: mc.bottomAnchor, constant: 16),
-            logCard.leadingAnchor.constraint(equalTo: rootView.leadingAnchor, constant: 20),
-            logCard.trailingAnchor.constraint(equalTo: rootView.trailingAnchor, constant: -20),
-            logCard.bottomAnchor.constraint(equalTo: rootView.bottomAnchor, constant: -20),
+            logCardView.topAnchor.constraint(equalTo: mc.bottomAnchor, constant: 16),
+            logCardView.leadingAnchor.constraint(equalTo: rootView.leadingAnchor, constant: 20),
+            logCardView.trailingAnchor.constraint(equalTo: rootView.trailingAnchor, constant: -20),
+            logCardView.bottomAnchor.constraint(equalTo: rootView.bottomAnchor, constant: -20),
         ])
 
         // 包裹滚动视图
