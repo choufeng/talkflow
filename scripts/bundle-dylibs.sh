@@ -68,11 +68,13 @@ for src in "${COLLECTED[@]}"; do
   done
 done
 
-# ── 修正可执行文件对主 dylib 的引用 ──
-install_name_tool -change \
-  /opt/homebrew/opt/onnxruntime/lib/libonnxruntime.1.24.4.dylib \
-  @rpath/libonnxruntime.1.24.4.dylib \
-  "$EXEC"
+# ── 修正可执行文件对 Homebrew dylib 的引用 → @rpath ──
+echo "  Fixing executable dylib refs..."
+otool -L "$EXEC" 2>/dev/null | awk '/^\t/ {print $1}' | while read -r ref; do
+  [[ "$ref" == /opt/homebrew/* ]] || continue
+  refname=$(basename "$ref")
+  install_name_tool -change "$ref" "@rpath/$refname" "$EXEC" 2>/dev/null || true
+done
 
 # ── Ad-hoc 签名所有 dylib ──
 echo "🔏 Signing dylibs..."
