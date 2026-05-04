@@ -136,3 +136,11 @@ func produceHotkeyUIState(
         isSet: binding != nil
     )
 }
+
+// MARK: - 工作流类型
+
+/// 区分转写业务流与翻译业务流
+enum Workflow: Equatable {
+    case transcription
+    case translation
+}
