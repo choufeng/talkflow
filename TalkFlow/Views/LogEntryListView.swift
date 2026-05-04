@@ -27,7 +27,6 @@ final class LogEntryListView: NSView, NSTableViewDataSource, NSTableViewDelegate
     init(logFileIO: LogFileIO = DefaultLogFileIO()) {
         self.logFileIO = logFileIO
         super.init(frame: .zero)
-        impureSetupUI()
     }
 
     @available(*, unavailable)
@@ -37,6 +36,7 @@ final class LogEntryListView: NSView, NSTableViewDataSource, NSTableViewDelegate
 
     func setUp(onSelectionChanged: @escaping (LogEntry, String) -> Void) {
         self.onSelectionChanged = onSelectionChanged
+        impureSetupUI()
         impureRefreshFileList()
         impureLoadCurrentFile()
     }

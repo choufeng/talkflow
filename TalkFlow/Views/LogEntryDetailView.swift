@@ -12,12 +12,15 @@ final class LogEntryDetailView: NSView {
 
     override init(frame: NSRect) {
         super.init(frame: frame)
-        impureSetupUI()
     }
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func setUp() {
+        impureSetupUI()
     }
 
     func show(entry: LogEntry?, sourceFile: String = "") {
