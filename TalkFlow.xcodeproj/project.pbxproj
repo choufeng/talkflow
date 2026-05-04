@@ -963,6 +963,7 @@
 				<string>4D463DC015984901A446FF0A</string>
 				<string>B56D6DC7D2E94D8B94D42567</string>
 				<string>84BB66418C6246D9A534DE18</string>
+				<string>A51F175298434D6E999D73C4</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -1948,6 +1949,24 @@
 		<dict>
 			<key>fileRef</key>
 			<string>ACD7AA063A2D4F4B922C599C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A51F175298434D6E999D73C4</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>TranslationSettingsView.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A84523AD6E594E9D8EA6A82A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A51F175298434D6E999D73C4</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
