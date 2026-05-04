@@ -15,6 +15,8 @@ struct AppConfig: Codable, Equatable {
     /// 转写配置
     struct TranscriptionConfig: Codable, Equatable {
         var useLLM: Bool = false
+        /// 用户自定义润色要求，与固定提示词拼接后作为 LLM system prompt
+        var polishPrompt: String = ""
     }
 
     var vertexAI: VertexAIConfig = VertexAIConfig()

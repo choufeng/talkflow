@@ -11,8 +11,8 @@ BASE="https://huggingface.co/haixuantao/SenseVoiceSmall-onnx/resolve/main"
 FILES=(
     "model_quant.onnx:21dc965f689a78d1604717bf561e40d5a236087c85a95584567835750549e822"
     "am.mvn:29b3c740a2c0cfc6b308126d31d7f265fa2be74f3bb095cd2f143ea970896ae5"
-    "chn_jpn_yue_eng_ko_spectok.bpe.model:a2594fc1474e78973149cba8cd1f603ebed8c39c7decb470631f66e70ce58e97"
-    "tokens.json:aa87f86064c3730d799ddf7af3c04659151102cba548bce325cf06ba4da4e6a8"
+    "chn_jpn_yue_eng_ko_spectok.bpe.model:aa87f86064c3730d799ddf7af3c04659151102cba548bce325cf06ba4da4e6a8"
+    "tokens.json:a2594fc1474e78973149cba8cd1f603ebed8c39c7decb470631f66e70ce58e97"
     "config.yaml:f71e239ba36705564b5bf2d2ffd07eece07b8e3f2bbf6d2c99d8df856339ac19"
 )
 

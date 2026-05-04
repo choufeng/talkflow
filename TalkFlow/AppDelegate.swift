@@ -53,9 +53,36 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 print("[Pipeline] 开始 STT 转写...")
                 do {
                     let result = try await self.sttEngine.transcribe(url: url)
+
+                    // 润色步骤（异步，在主线程 UI 更新前执行）
+                    let finalResult: STTResult
+                    switch result {
+                    case .speech(let text, let language):
+                        let config = impureLoadAppConfig()
+                        if config.transcription.useLLM,
+                           let provider = self.impureMakePolishingProvider() {
+                            print("[Pipeline] 开始 LLM 润色...")
+                            do {
+                                let request = ChatRequest(messages: [
+                                    ChatMessage(role: .user, content: text)
+                                ])
+                                let response = try await provider.send(request)
+                                print("[Pipeline] 润色完成: \(response.content.prefix(60))...")
+                                finalResult = .speech(text: response.content, language: language)
+                            } catch {
+                                print("[Pipeline] 润色失败，降级使用原文: \(error)")
+                                finalResult = result
+                            }
+                        } else {
+                            finalResult = result
+                        }
+                    default:
+                        finalResult = result
+                    }
+
                     await MainActor.run {
-                        print("[Pipeline] STT 转写完成: \(result)")
-                        switch result {
+                        print("[Pipeline] STT 转写完成: \(finalResult)")
+                        switch finalResult {
                         case .speech(let text, let language):
                             print("[Pipeline] 识别文本 (\(language)): \(text)")
                             NSPasteboard.general.clearContents()
@@ -293,6 +320,57 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             accessibilityDescription: isRecording ? "TalkFlow (录制中)" : "TalkFlow"
         )
         button.image?.size = NSSize(width: 18, height: 18)
+    }
+
+    // MARK: - ⚠️ 润色 Provider 工厂
+
+    private func impureMakePolishingProvider() -> VertexAIIO? {
+        guard let adc = impureLoadADCFromDefaultPath() else {
+            print("[Pipeline] 润色 — ADC 未检测到，跳过")
+            return nil
+        }
+
+        let config = impureLoadAppConfig()
+        let projectID = config.vertexAI.projectID
+        let modelName = config.vertexAI.modelName
+
+        guard !projectID.isEmpty, !modelName.isEmpty else {
+            print("[Pipeline] 润色 — ProjectID 或 modelName 为空，跳过")
+            return nil
+        }
+
+        let tokenProvider: any TokenProviderIO
+        switch adc {
+        case .serviceAccount(let clientEmail, let privateKey, let tokenURI, _):
+            let sa = ServiceAccount(
+                projectID: projectID,
+                privateKey: privateKey,
+                clientEmail: clientEmail,
+                tokenURI: tokenURI
+            )
+            tokenProvider = JWTTokenProvider(sa: sa)
+
+        case .authorizedUser(let clientID, let clientSecret, let refreshToken, _):
+            tokenProvider = RefreshTokenProviderIO(
+                clientID: clientID,
+                clientSecret: clientSecret,
+                refreshToken: refreshToken
+            )
+        }
+
+        let promptConfig = PromptConfig(
+            defaultPrompt: makePolishingSystemPrompt(),
+            userSupplement: config.transcription.polishPrompt
+        )
+
+        return VertexAIIO(
+            tokenProvider: tokenProvider,
+            projectID: projectID,
+            location: "us-central1",
+            model: modelName,
+            promptConfig: promptConfig,
+            thinkingBudget: config.vertexAI.thinkingBudget
+        )
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
