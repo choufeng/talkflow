@@ -1,7 +1,7 @@
 import AppKit
 import ObjectiveC
 
-/// 日志列表 — 左侧：文件切换 + 级别筛选 + NSTableView + checkbox + 复制
+/// 日志列表 — 左侧：文件切换 + 级别筛选 + NSTableView + 勾选 + 复制
 final class LogEntryListView: NSView, NSTableViewDataSource, NSTableViewDelegate {
 
     private var entries: [LogEntry] = []
@@ -84,7 +84,6 @@ final class LogEntryListView: NSView, NSTableViewDataSource, NSTableViewDelegate
             btn.target = self
             btn.action = #selector(impureLevelToggled(_:))
             btn.translatesAutoresizingMaskIntoConstraints = false
-
             objc_setAssociatedObject(btn, &AssociatedKeys.level, level, .OBJC_ASSOCIATION_RETAIN)
             levelStack.addArrangedSubview(btn)
         }
@@ -92,10 +91,8 @@ final class LogEntryListView: NSView, NSTableViewDataSource, NSTableViewDelegate
 
         NSLayoutConstraint.activate([
             toolbar.heightAnchor.constraint(equalToConstant: 28),
-
             filePopup.leadingAnchor.constraint(equalTo: toolbar.leadingAnchor),
             filePopup.centerYAnchor.constraint(equalTo: toolbar.centerYAnchor),
-
             levelStack.leadingAnchor.constraint(equalTo: filePopup.trailingAnchor, constant: 12),
             levelStack.centerYAnchor.constraint(equalTo: toolbar.centerYAnchor),
         ])
@@ -107,7 +104,7 @@ final class LogEntryListView: NSView, NSTableViewDataSource, NSTableViewDelegate
         scrollView.translatesAutoresizingMaskIntoConstraints = false
 
         let columns: [(String, CGFloat)] = [
-            ("check", 24), ("level", 24), ("time", 65), ("tag", 80), ("message", 200),
+            ("check", 22), ("level", 22), ("time", 60), ("tag", 75), ("message", 180),
         ]
         for (id, width) in columns {
             let col = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(id))
@@ -119,7 +116,12 @@ final class LogEntryListView: NSView, NSTableViewDataSource, NSTableViewDelegate
         tableView.delegate = self
         tableView.usesAlternatingRowBackgroundColors = true
         tableView.headerView = nil
+        tableView.allowsMultipleSelection = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
+
+        // 单击行触发勾选 + 选中
+        tableView.target = self
+        tableView.action = #selector(impureRowClicked)
 
         scrollView.documentView = tableView
 
@@ -149,13 +151,10 @@ final class LogEntryListView: NSView, NSTableViewDataSource, NSTableViewDelegate
 
         NSLayoutConstraint.activate([
             bottomBar.heightAnchor.constraint(equalToConstant: 32),
-
             copyButton.leadingAnchor.constraint(equalTo: bottomBar.leadingAnchor, constant: 4),
             copyButton.centerYAnchor.constraint(equalTo: bottomBar.centerYAnchor),
-
             selectAllButton.leadingAnchor.constraint(equalTo: copyButton.trailingAnchor, constant: 8),
             selectAllButton.centerYAnchor.constraint(equalTo: bottomBar.centerYAnchor),
-
             countLabel.trailingAnchor.constraint(equalTo: bottomBar.trailingAnchor, constant: -8),
             countLabel.centerYAnchor.constraint(equalTo: bottomBar.centerYAnchor),
         ])
@@ -168,11 +167,9 @@ final class LogEntryListView: NSView, NSTableViewDataSource, NSTableViewDelegate
             toolbar.topAnchor.constraint(equalTo: topAnchor, constant: 8),
             toolbar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             toolbar.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-
             scrollView.topAnchor.constraint(equalTo: toolbar.bottomAnchor, constant: 8),
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
-
             bottomBar.topAnchor.constraint(equalTo: scrollView.bottomAnchor),
             bottomBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             bottomBar.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
@@ -197,6 +194,25 @@ final class LogEntryListView: NSView, NSTableViewDataSource, NSTableViewDelegate
         impureApplyFilter()
     }
 
+    @objc private func impureRowClicked() {
+        let row = tableView.clickedRow
+        guard row >= 0, row < filteredEntries.count else { return }
+
+        // 切换勾选
+        if checkedIndices.contains(row) {
+            checkedIndices.remove(row)
+        } else {
+            checkedIndices.insert(row)
+        }
+        impureUpdateCopyButton()
+        tableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integer: 0))
+
+        // 选中行并显示详情
+        tableView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+        let entry = filteredEntries[row]
+        onSelectionChanged?(entry, currentFileName)
+    }
+
     @objc private func impureCopySelected() {
         let selected = checkedIndices.sorted().compactMap { i -> LogEntry? in
             guard i < filteredEntries.count else { return nil }
@@ -213,7 +229,7 @@ final class LogEntryListView: NSView, NSTableViewDataSource, NSTableViewDelegate
     }
 
     @objc private func impureToggleSelectAll() {
-        if checkedIndices.count == filteredEntries.count {
+        if checkedIndices.count == filteredEntries.count && !filteredEntries.isEmpty {
             checkedIndices = []
             selectAllButton.title = "☐ 全选"
         } else {
@@ -251,61 +267,38 @@ final class LogEntryListView: NSView, NSTableViewDataSource, NSTableViewDelegate
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         guard row < filteredEntries.count else { return nil }
         let entry = filteredEntries[row]
+        let id = tableColumn?.identifier.rawValue
 
-        switch tableColumn?.identifier.rawValue {
+        switch id {
         case "check":
-            let btn = NSButton()
-            btn.setButtonType(.switch)
-            btn.state = checkedIndices.contains(row) ? .on : .off
-            btn.target = self
-            btn.action = #selector(impureCheckToggled(_:))
-            btn.tag = row
-            return btn
-
+            let tf = NSTextField(labelWithString: checkedIndices.contains(row) ? "☑" : "☐")
+            tf.font = NSFont.systemFont(ofSize: 13)
+            tf.alignment = .center
+            return tf
         case "level":
             let tf = NSTextField(labelWithString: levelEmoji(entry.level))
             tf.font = NSFont.systemFont(ofSize: 11)
+            tf.alignment = .center
             return tf
-
         case "time":
             let tf = NSTextField(labelWithString: timeFormatter.string(from: entry.timestamp))
             tf.font = NSFont.monospacedDigitSystemFont(ofSize: 11, weight: .regular)
             tf.textColor = .secondaryLabelColor
             return tf
-
         case "tag":
             let tf = NSTextField(labelWithString: "[\(entry.tag)]")
             tf.font = NSFont.systemFont(ofSize: 11)
             tf.textColor = .secondaryLabelColor
             tf.lineBreakMode = .byTruncatingTail
             return tf
-
         case "message":
             let tf = NSTextField(labelWithString: entry.message)
             tf.font = NSFont.systemFont(ofSize: 11)
             tf.lineBreakMode = .byTruncatingTail
             return tf
-
         default:
             return nil
         }
-    }
-
-    func tableViewSelectionDidChange(_ notification: Notification) {
-        let row = tableView.selectedRow
-        guard row >= 0, row < filteredEntries.count else { return }
-        let entry = filteredEntries[row]
-        onSelectionChanged?(entry, currentFileName)
-    }
-
-    @objc private func impureCheckToggled(_ sender: NSButton) {
-        let row = sender.tag
-        if sender.state == .on {
-            checkedIndices.insert(row)
-        } else {
-            checkedIndices.remove(row)
-        }
-        impureUpdateCopyButton()
     }
 
     private func levelEmoji(_ level: LogLevel) -> String {
