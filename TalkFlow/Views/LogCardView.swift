@@ -20,10 +20,10 @@ final class LogCardView: NSView {
     func setUp(onOpen: @escaping () -> Void) {
         self.onOpen = onOpen
         impureSetupUI()
-        refreshCounts()
+        impureRefreshCounts()
     }
 
-    func refreshCounts() {
+    func impureRefreshCounts() {
         let latestURL = logFileIO.logsDirectory.appendingPathComponent("latest.log")
         let entries = logFileIO.entries(from: latestURL)
         let errors = entries.filter { $0.level == .error }.count

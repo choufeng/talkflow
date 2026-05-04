@@ -19,6 +19,7 @@ final class LogViewerWindow {
 
         let listView = LogEntryListView(logFileIO: logFileIO)
         let detailView = LogEntryDetailView()
+        detailView.setUp()
 
         listView.setUp { [weak detailView] entry, fileName in
             detailView?.show(entry: entry, sourceFile: fileName)
