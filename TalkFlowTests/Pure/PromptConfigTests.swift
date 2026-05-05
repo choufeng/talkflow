@@ -39,14 +39,18 @@ final class PromptConfigTests: XCTestCase {
 
     func test_makePolishingSystemPrompt_containsRemovalRule() {
         let prompt = makePolishingSystemPrompt()
-        XCTAssertTrue(prompt.contains("去除"), "应包含去除语气词规则")
-        XCTAssertTrue(prompt.contains("\"嗯\""), "应包含具体示例")
+        XCTAssertTrue(prompt.contains("删除"), "应包含删除语气词规则")
+        XCTAssertTrue(prompt.contains("嗯"), "应包含具体示例")
+        XCTAssertTrue(prompt.contains("禁止"), "应包含禁止总结等约束")
+        XCTAssertTrue(prompt.contains("保留原文的全部信息"), "应包含保真约束")
     }
 
     func test_makePolishingSystemPrompt_containsTypoRule() {
         let prompt = makePolishingSystemPrompt()
         XCTAssertTrue(prompt.contains("错别字"), "应包含错别字修正规则")
-        XCTAssertTrue(prompt.contains("\"的/地/得\""), "应包含同音错误示例")
+        XCTAssertTrue(prompt.contains("的/地/得"), "应包含同音错误示例")
+        XCTAssertTrue(prompt.contains("禁止总结"), "应明确禁止总结")
+        XCTAssertTrue(prompt.contains("禁止合并"), "应明确禁止合并句子")
     }
 
     func test_makePolishingSystemPrompt_isDeterministic() {
@@ -89,6 +93,9 @@ final class PromptConfigTests: XCTestCase {
         let prompt = makeTranslationSystemPrompt(language: "日文")
         XCTAssertTrue(prompt.contains("翻译"), "应包含翻译指令")
         XCTAssertTrue(prompt.contains("日文"), "应包含指定的目标语言")
+        XCTAssertTrue(prompt.contains("逐句翻译"), "应要求逐句翻译")
+        XCTAssertTrue(prompt.contains("禁止总结"), "应明确禁止总结")
+        XCTAssertTrue(prompt.contains("禁止合并"), "应明确禁止合并句子")
     }
 
     func test_makeTranslationSystemPrompt_isDeterministic() {
