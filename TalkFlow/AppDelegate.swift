@@ -137,12 +137,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                             self.statusWindow.show(phase: .pasteFailed)
                             self.statusWindow.dismissAfter(seconds: 3)
                         }
+                        SoundEffect.complete.play()
                         self.hotkeyIO?.unregisterEscHotkey()
                     }
                 } catch {
                     self.logger.error(tag: "Pipeline", "STT 异常: \(error)")
                     await MainActor.run {
                         self.statusWindow.dismiss()
+                        SoundEffect.complete.play()
                         self.hotkeyIO?.unregisterEscHotkey()
                     }
                 }
@@ -347,6 +349,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     // MARK: - ⚠️ 录音协调
 
     private func impureStartRecording() {
+        SoundEffect.hotkeyStart.play()
         let url = filePathIO.nextRecordingURL()
         logger.info(tag: "Pipeline", "🎤 开始录音 → \(url.lastPathComponent)")
         do {
@@ -382,6 +385,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
 
     private func impureCancelRecording() {
+        SoundEffect.cancel.play()
         sttTask?.cancel()
         sttTask = nil
         audioRecorder.cancelRecording()

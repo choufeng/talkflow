@@ -94,6 +94,7 @@ final class ModelSettingsView: NSView, NSTextFieldDelegate {
         vertexAIContainer.addSubview(projectIDLabel)
 
         projectIDField.font = NSFont.monospacedSystemFont(ofSize: 13, weight: .regular)
+        projectIDField.textColor = .controlTextColor
         projectIDField.isEditable = true
         projectIDField.placeholderString = "输入 Google Cloud Project ID"
         projectIDField.delegate = self
@@ -106,6 +107,7 @@ final class ModelSettingsView: NSView, NSTextFieldDelegate {
         vertexAIContainer.addSubview(modelNameLabel)
 
         modelNameField.font = NSFont.monospacedSystemFont(ofSize: 13, weight: .regular)
+        modelNameField.textColor = .controlTextColor
         modelNameField.isEditable = true
         modelNameField.placeholderString = "gemini-2.5-flash"
         modelNameField.delegate = self
