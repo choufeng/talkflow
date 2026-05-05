@@ -1,6 +1,6 @@
 import AppKit
 
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private var window: NSWindow?
     private var statusItem: NSStatusItem?
     private var modelCard: CardView?
@@ -112,6 +112,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     }
 
                     await MainActor.run {
+                        guard !Task.isCancelled else { return }
                         self.logger.info(tag: "Pipeline", "管线完成: \(finalResult)")
                         switch finalResult {
                         case .speech(let text, let language):
@@ -136,11 +137,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                             self.statusWindow.show(phase: .pasteFailed)
                             self.statusWindow.dismissAfter(seconds: 3)
                         }
+                        self.hotkeyIO?.unregisterEscHotkey()
                     }
                 } catch {
                     self.logger.error(tag: "Pipeline", "STT 异常: \(error)")
                     await MainActor.run {
                         self.statusWindow.dismiss()
+                        self.hotkeyIO?.unregisterEscHotkey()
                     }
                 }
             }
@@ -198,6 +201,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         )
 
         window?.title = "TalkFlow"
+        window?.delegate = self
         window?.center()
 
         // 根视图
@@ -363,7 +367,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let savedURL = audioRecorder.recordingURL
         logger.info(tag: "Pipeline", "⏹ 停止录音 时长=\(String(format: "%.1f", duration))s")
         statusWindow.show(phase: .transcribing)
-        hotkeyIO?.unregisterEscHotkey()
         impureUpdateMenuBarIcon(isRecording: false)
 
         if shouldSave(duration: duration, minDuration: minRecordingDuration),
@@ -379,6 +382,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func impureCancelRecording() {
+        sttTask?.cancel()
+        sttTask = nil
         audioRecorder.cancelRecording()
         statusWindow.dismiss()
         hotkeyIO?.unregisterEscHotkey()
@@ -510,6 +515,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        return false
+    }
+
+    // MARK: - NSWindowDelegate
+
+    /// 关闭窗口时仅隐藏，不销毁 — 状态栏图标点击可恢复
+    func windowShouldClose(_ sender: NSWindow) -> Bool {
+        sender.orderOut(nil)
         return false
     }
 }
