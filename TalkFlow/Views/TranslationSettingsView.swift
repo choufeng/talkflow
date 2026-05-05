@@ -13,6 +13,9 @@ final class TranslationSettingsView: NSView {
     private let promptLabel = NSTextField(labelWithString: "翻译要求:")
     private let scrollView = NSScrollView()
     private let textView = NSTextView()
+    private let optimizeButton = NSButton(title: "✨ 优化并保存", target: nil, action: nil)
+    private var isOptimizing = false
+    private var optimizeTask: Task<Void, Never>?
 
     // MARK: - 语言选项
 
@@ -92,7 +95,21 @@ final class TranslationSettingsView: NSView {
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
             scrollView.heightAnchor.constraint(equalToConstant: 80),
-            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
+        ])
+
+        // 优化按钮
+        optimizeButton.bezelStyle = .rounded
+        optimizeButton.font = NSFont.systemFont(ofSize: 12)
+        optimizeButton.target = self
+        optimizeButton.action = #selector(impureOptimizeTapped)
+        optimizeButton.translatesAutoresizingMaskIntoConstraints = false
+        optimizeButton.toolTip = "调用 LLM 优化提示词，可能消耗 API 配额"
+        addSubview(optimizeButton)
+
+        NSLayoutConstraint.activate([
+            optimizeButton.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 4),
+            optimizeButton.leadingAnchor.constraint(equalTo: leadingAnchor),
+            optimizeButton.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }
 
@@ -120,6 +137,77 @@ final class TranslationSettingsView: NSView {
         var config = impureLoadAppConfig()
         config.transcription.translationPrompt = textView.string
         impureSaveAppConfig(config)
+    }
+
+    // MARK: - ⚠️ 优化逻辑
+
+    @objc private func impureOptimizeTapped() {
+        guard !isOptimizing else { return }
+        let rawPrompt = textView.string
+
+        guard let adc = impureLoadADCFromDefaultPath() else {
+            impureMakeLogger().warning(tag: "TranslationSettings", "ADC 未检测到，无法优化")
+            NSSound.beep()
+            return
+        }
+
+        let config = impureLoadAppConfig()
+        let projectID = config.vertexAI.projectID
+        let modelName = config.vertexAI.modelName
+        guard !projectID.isEmpty, !modelName.isEmpty else {
+            impureMakeLogger().warning(tag: "TranslationSettings", "ProjectID/ModelName 未配置")
+            NSSound.beep()
+            return
+        }
+
+        let tokenProvider: any TokenProviderIO
+        switch adc {
+        case .serviceAccount(let clientEmail, let privateKey, let tokenURI, _):
+            let sa = ServiceAccount(projectID: projectID, privateKey: privateKey, clientEmail: clientEmail, tokenURI: tokenURI)
+            tokenProvider = JWTTokenProvider(sa: sa)
+        case .authorizedUser(let clientID, let clientSecret, let refreshToken, _):
+            tokenProvider = RefreshTokenProviderIO(clientID: clientID, clientSecret: clientSecret, refreshToken: refreshToken)
+        }
+
+        let provider = VertexAIIO(
+            tokenProvider: tokenProvider,
+            projectID: projectID,
+            location: "us-central1",
+            model: modelName,
+            promptConfig: PromptConfig(defaultPrompt: "", userSupplement: "")
+        )
+        let optimizer = PromptOptimizerIO(provider: provider)
+
+        isOptimizing = true
+        optimizeButton.title = "⏳ 优化中..."
+        optimizeButton.isEnabled = false
+
+        optimizeTask = Task { [weak self] in
+            guard let self = self else { return }
+            do {
+                let optimized = try await optimizer.optimize(rawPrompt)
+                await MainActor.run {
+                    guard !Task.isCancelled else { return }
+                    if !optimized.isEmpty {
+                        self.textView.string = optimized
+                    }
+                    self.impureSaveTranslationPrompt()
+                    self.isOptimizing = false
+                    self.optimizeButton.title = "✨ 优化并保存"
+                    self.optimizeButton.isEnabled = true
+                    impureMakeLogger().info(tag: "TranslationSettings", "提示词优化完成")
+                }
+            } catch {
+                await MainActor.run {
+                    guard !Task.isCancelled else { return }
+                    self.isOptimizing = false
+                    self.optimizeButton.title = "✨ 优化并保存"
+                    self.optimizeButton.isEnabled = true
+                    impureMakeLogger().error(tag: "TranslationSettings", "优化失败: \(error.localizedDescription)")
+                    NSSound.beep()
+                }
+            }
+        }
     }
 }
 
