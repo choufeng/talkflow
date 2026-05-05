@@ -41,8 +41,9 @@ final class PromptConfigTests: XCTestCase {
         let prompt = makePolishingSystemPrompt()
         XCTAssertTrue(prompt.contains("删除"), "应包含删除语气词规则")
         XCTAssertTrue(prompt.contains("嗯"), "应包含具体示例")
-        XCTAssertTrue(prompt.contains("禁止"), "应包含禁止总结等约束")
-        XCTAssertTrue(prompt.contains("保留原文的全部信息"), "应包含保真约束")
+        XCTAssertTrue(prompt.contains("禁止"), "应包含禁止约束")
+        XCTAssertTrue(prompt.contains("文本过滤器"), "应定位为过滤器而非编辑器")
+        XCTAssertTrue(prompt.contains("还行吧"), "应包含示例")
     }
 
     func test_makePolishingSystemPrompt_containsTypoRule() {
@@ -51,6 +52,7 @@ final class PromptConfigTests: XCTestCase {
         XCTAssertTrue(prompt.contains("的/地/得"), "应包含同音错误示例")
         XCTAssertTrue(prompt.contains("禁止总结"), "应明确禁止总结")
         XCTAssertTrue(prompt.contains("禁止合并"), "应明确禁止合并句子")
+        XCTAssertTrue(prompt.contains("不通顺"), "应允许不通顺原文保留")
     }
 
     func test_makePolishingSystemPrompt_isDeterministic() {
