@@ -242,6 +242,7 @@
 				<string>08043E0D0FA241A98B6C553A</string>
 				<string>C8B75F9874A940C9AEE74744</string>
 				<string>668F9434681245DCBA4B3F8B</string>
+				<string>27D36EEBAFAE43FE8C8951AF</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
@@ -258,6 +259,24 @@
 			<string>PromptConfigTests.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>259B66A4573B42839E19C10D</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>PromptOptimizerIOTests.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>27D36EEBAFAE43FE8C8951AF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>259B66A4573B42839E19C10D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>27D8459A7081442B83B1DEDC</key>
 		<dict>
@@ -494,6 +513,7 @@
 				<string>B5ADE9C4DE0C1AC87BDC1B9E</string>
 				<string>A88C9192E78164E055A2EA24</string>
 				<string>0D916D586C414AA1B6DFA50D</string>
+				<string>259B66A4573B42839E19C10D</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -1328,6 +1348,7 @@
 				<string>8FBE0094EEB9946D32E1DC74</string>
 				<string>E787F4B05230A6D350D792B1</string>
 				<string>59AE0F7547B74C0A8F17A573</string>
+				<string>B7A5C5E41B9A431888EA07DB</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -1579,6 +1600,7 @@
 				<string>42AA022EBD9D43A0A2DACB7A</string>
 				<string>63EF719544C44888837FCC88</string>
 				<string>A629A5B7DDCA492E93BD8871</string>
+				<string>EB02A0C824AF4BFC93E560FD</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
@@ -2004,6 +2026,17 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>B7A5C5E41B9A431888EA07DB</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>PromptOptimizerIO.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>B90FFCA35BB349DAB6B4B4CD</key>
 		<dict>
 			<key>fileRef</key>
@@ -2290,6 +2323,13 @@
 			<string>LogEntry.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>EB02A0C824AF4BFC93E560FD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B7A5C5E41B9A431888EA07DB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>EC793CF34329B78AEB5921FB</key>
 		<dict>
