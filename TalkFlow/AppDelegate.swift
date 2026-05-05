@@ -112,6 +112,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                     }
 
                     await MainActor.run {
+                        guard !Task.isCancelled else { return }
                         self.logger.info(tag: "Pipeline", "管线完成: \(finalResult)")
                         switch finalResult {
                         case .speech(let text, let language):
@@ -136,11 +137,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                             self.statusWindow.show(phase: .pasteFailed)
                             self.statusWindow.dismissAfter(seconds: 3)
                         }
+                        self.hotkeyIO?.unregisterEscHotkey()
                     }
                 } catch {
                     self.logger.error(tag: "Pipeline", "STT 异常: \(error)")
                     await MainActor.run {
                         self.statusWindow.dismiss()
+                        self.hotkeyIO?.unregisterEscHotkey()
                     }
                 }
             }
@@ -364,7 +367,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         let savedURL = audioRecorder.recordingURL
         logger.info(tag: "Pipeline", "⏹ 停止录音 时长=\(String(format: "%.1f", duration))s")
         statusWindow.show(phase: .transcribing)
-        hotkeyIO?.unregisterEscHotkey()
         impureUpdateMenuBarIcon(isRecording: false)
 
         if shouldSave(duration: duration, minDuration: minRecordingDuration),
@@ -380,6 +382,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
 
     private func impureCancelRecording() {
+        sttTask?.cancel()
+        sttTask = nil
         audioRecorder.cancelRecording()
         statusWindow.dismiss()
         hotkeyIO?.unregisterEscHotkey()
