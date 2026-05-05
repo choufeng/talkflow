@@ -119,6 +119,13 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
+		<key>11A9896076C54A2EBF46F956</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E8B0B296967E4540B4898FCA</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>12F9FE998EB2444CB19958F4</key>
 		<dict>
 			<key>isa</key>
@@ -244,6 +251,8 @@
 				<string>668F9434681245DCBA4B3F8B</string>
 				<string>27D36EEBAFAE43FE8C8951AF</string>
 				<string>BA0E097FB84C494D89B40217</string>
+				<string>F8B1577E6359429A87F81293</string>
+				<string>11A9896076C54A2EBF46F956</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
@@ -398,12 +407,34 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>36D7F19A531741349BC1D5DB</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>CachedTokenProviderTests.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>389214641CFD45F191E045CB</key>
 		<dict>
 			<key>fileRef</key>
 			<string>8B775F209C2749ADB5B2B05D</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+		</dict>
+		<key>38CEAEDC9D504DD39B1786B1</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>CachedTokenProvider.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>3986A974DC2E47BDB0792E31</key>
 		<dict>
@@ -527,6 +558,7 @@
 				<string>A88C9192E78164E055A2EA24</string>
 				<string>0D916D586C414AA1B6DFA50D</string>
 				<string>259B66A4573B42839E19C10D</string>
+				<string>36D7F19A531741349BC1D5DB</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -1362,6 +1394,7 @@
 				<string>E787F4B05230A6D350D792B1</string>
 				<string>59AE0F7547B74C0A8F17A573</string>
 				<string>B7A5C5E41B9A431888EA07DB</string>
+				<string>38CEAEDC9D504DD39B1786B1</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -1614,6 +1647,7 @@
 				<string>63EF719544C44888837FCC88</string>
 				<string>A629A5B7DDCA492E93BD8871</string>
 				<string>EB02A0C824AF4BFC93E560FD</string>
+				<string>DC0E809483C54CB59AB37C33</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
@@ -2201,6 +2235,7 @@
 				<string>D384B1BCE65E49E48A1C82DC</string>
 				<string>A385F2D487694A21A6956075</string>
 				<string>3581A8040EA646DB9457074D</string>
+				<string>E8B0B296967E4540B4898FCA</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -2282,6 +2317,13 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>DC0E809483C54CB59AB37C33</key>
+		<dict>
+			<key>fileRef</key>
+			<string>38CEAEDC9D504DD39B1786B1</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>DD88553FEADD406D8ADF5A15</key>
 		<dict>
 			<key>children</key>
@@ -2325,6 +2367,17 @@
 			<string>3B8D6DA6D0DF4619A9967F0B</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+		</dict>
+		<key>E8B0B296967E4540B4898FCA</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>MockTokenProviderIO.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>E9689FBD422D41A78BF0469F</key>
 		<dict>
@@ -2373,6 +2426,13 @@
 		<dict>
 			<key>fileRef</key>
 			<string>137117EBDE004092B2676C06</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>F8B1577E6359429A87F81293</key>
+		<dict>
+			<key>fileRef</key>
+			<string>36D7F19A531741349BC1D5DB</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
