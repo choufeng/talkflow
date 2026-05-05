@@ -1,6 +1,6 @@
 import AppKit
 
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private var window: NSWindow?
     private var statusItem: NSStatusItem?
     private var modelCard: CardView?
@@ -198,6 +198,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         )
 
         window?.title = "TalkFlow"
+        window?.delegate = self
         window?.center()
 
         // 根视图
@@ -510,6 +511,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        return false
+    }
+
+    // MARK: - NSWindowDelegate
+
+    /// 关闭窗口时仅隐藏，不销毁 — 状态栏图标点击可恢复
+    func windowShouldClose(_ sender: NSWindow) -> Bool {
+        sender.orderOut(nil)
         return false
     }
 }
