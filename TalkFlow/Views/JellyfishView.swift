@@ -11,28 +11,39 @@ final class JellyfishView: NSView {
     private let innerGlowLayer = CAShapeLayer()   // 内部光晕椭圆
     private var tentacleLayers = [CAShapeLayer]() // 5 条触须
 
-    // 颜色
-    private let cyan = NSColor(red: 0, green: 0.78, blue: 1.0, alpha: 1.0).cgColor
-    private let cyanGlow = NSColor(red: 0, green: 0.78, blue: 1.0, alpha: 0.15).cgColor
+    // 颜色 — 跟随系统强调色
+    private var accentColor: NSColor { .controlAccentColor }
+
+    private func applyAccentColors() {
+        let accent = accentColor
+        let accentCG = accent.cgColor
+        let glowCG = accent.withAlphaComponent(0.15).cgColor
+        let fillCG = accent.withAlphaComponent(0.08).cgColor
+
+        bellLayer.fillColor = fillCG
+        bellLayer.strokeColor = accentCG
+        bellLayer.shadowColor = accentCG
+        innerGlowLayer.fillColor = glowCG
+        innerGlowLayer.shadowColor = accentCG
+        tentacleLayers.forEach {
+            $0.strokeColor = accentCG
+            $0.shadowColor = accentCG
+        }
+    }
 
     override init(frame: NSRect) {
         super.init(frame: frame)
         wantsLayer = true
 
         // 钟体
-        bellLayer.fillColor = NSColor(red: 0, green: 0.78, blue: 1.0, alpha: 0.08).cgColor
-        bellLayer.strokeColor = cyan
         bellLayer.lineWidth = 1.2
-        bellLayer.shadowColor = cyan
         bellLayer.shadowRadius = 2.5
         bellLayer.shadowOpacity = 1.0
         bellLayer.shadowOffset = .zero
         layer?.addSublayer(bellLayer)
 
         // 内部光晕
-        innerGlowLayer.fillColor = cyanGlow
         innerGlowLayer.strokeColor = nil
-        innerGlowLayer.shadowColor = cyan
         innerGlowLayer.shadowRadius = 1.5
         innerGlowLayer.shadowOpacity = 1.0
         innerGlowLayer.shadowOffset = .zero
@@ -44,22 +55,27 @@ final class JellyfishView: NSView {
         for i in 0..<5 {
             let t = CAShapeLayer()
             t.fillColor = nil
-            t.strokeColor = cyan
             t.lineWidth = tentacleWidths[i]
             t.lineCap = .round
             t.opacity = tentacleOpacities[i]
-            t.shadowColor = cyan
             t.shadowRadius = 1.5
             t.shadowOpacity = 1.0
             t.shadowOffset = .zero
             tentacleLayers.append(t)
             layer?.addSublayer(t)
         }
+
+        applyAccentColors()
     }
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func viewDidChangeEffectiveAppearance() {
+        super.viewDidChangeEffectiveAppearance()
+        applyAccentColors()
     }
 
     override func layout() {

@@ -50,6 +50,14 @@ final class PulseRingView: NSView {
         dotLayer.strokeColor = nil
     }
 
+    override func viewDidChangeEffectiveAppearance() {
+        super.viewDidChangeEffectiveAppearance()
+        let red = NSColor.systemRed.cgColor
+        ringLayer.strokeColor = red
+        ringLayer.shadowColor = red
+        dotLayer.fillColor = red
+    }
+
     func impureStartAnimation() {
         ringLayer.removeAnimation(forKey: "pulsePath")
         ringLayer.removeAnimation(forKey: "pulseOpacity")

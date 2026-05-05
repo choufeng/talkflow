@@ -24,12 +24,32 @@ final class CardView: NSView {
         impureSetupUI()
     }
 
+    // MARK: - Appearance
+
+    /// 浅色模式：米白色区分窗口背景；暗色模式：controlBackgroundColor
+    private static var cardBackgroundColor: NSColor {
+        NSColor(name: nil) { appearance in
+            switch appearance.name {
+            case .darkAqua, .vibrantDark, .accessibilityHighContrastDarkAqua, .accessibilityHighContrastVibrantDark:
+                return NSColor.controlBackgroundColor
+            default:
+                return NSColor(white: 0.97, alpha: 1.0)
+            }
+        }
+    }
+
+    override func updateLayer() {
+        super.updateLayer()
+        layer?.backgroundColor = Self.cardBackgroundColor.cgColor
+        layer?.borderColor = NSColor.separatorColor.cgColor
+    }
+
     // MARK: - ⚠️ UI 构建
 
     private func impureSetupUI() {
         translatesAutoresizingMaskIntoConstraints = false
         wantsLayer = true
-        layer?.backgroundColor = NSColor.controlBackgroundColor.cgColor
+        layer?.backgroundColor = Self.cardBackgroundColor.cgColor
         layer?.cornerRadius = 10
         layer?.borderWidth = 0.5
         layer?.borderColor = NSColor.separatorColor.cgColor
