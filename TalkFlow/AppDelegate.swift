@@ -9,6 +9,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private let logger: LoggerIO = impureMakeLogger()
     private let logFileIO: LogFileIO = DefaultLogFileIO()
     private var logViewerWindow: LogViewerWindow?
+    private var cachedTokenProvider: CachedTokenProvider?
 
     // 录音模块
     private var hotkeyIO: HotkeyIO?
@@ -409,6 +410,26 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
     // MARK: - ⚠️ Provider 工厂
 
+    private func impureCreateTokenProvider(from adc: ADCCredential) -> any TokenProviderIO {
+        let config = impureLoadAppConfig()
+        switch adc {
+        case .serviceAccount(let clientEmail, let privateKey, let tokenURI, _):
+            let sa = ServiceAccount(
+                projectID: config.vertexAI.projectID,
+                privateKey: privateKey,
+                clientEmail: clientEmail,
+                tokenURI: tokenURI
+            )
+            return JWTTokenProvider(sa: sa)
+        case .authorizedUser(let clientID, let clientSecret, let refreshToken, _):
+            return RefreshTokenProviderIO(
+                clientID: clientID,
+                clientSecret: clientSecret,
+                refreshToken: refreshToken
+            )
+        }
+    }
+
     private func impureMakePolishingProvider() -> VertexAIIO? {
         guard let adc = impureLoadADCFromDefaultPath() else {
             logger.info(tag: "Pipeline", "润色 — ADC 未检测到，跳过")
@@ -425,22 +446,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         }
 
         let tokenProvider: any TokenProviderIO
-        switch adc {
-        case .serviceAccount(let clientEmail, let privateKey, let tokenURI, _):
-            let sa = ServiceAccount(
-                projectID: projectID,
-                privateKey: privateKey,
-                clientEmail: clientEmail,
-                tokenURI: tokenURI
-            )
-            tokenProvider = JWTTokenProvider(sa: sa)
-
-        case .authorizedUser(let clientID, let clientSecret, let refreshToken, _):
-            tokenProvider = RefreshTokenProviderIO(
-                clientID: clientID,
-                clientSecret: clientSecret,
-                refreshToken: refreshToken
-            )
+        if let cached = cachedTokenProvider {
+            tokenProvider = cached
+        } else {
+            let inner = impureCreateTokenProvider(from: adc)
+            let cached = CachedTokenProvider(inner: inner)
+            cachedTokenProvider = cached
+            tokenProvider = cached
         }
 
         let promptConfig = PromptConfig(
@@ -474,22 +486,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         }
 
         let tokenProvider: any TokenProviderIO
-        switch adc {
-        case .serviceAccount(let clientEmail, let privateKey, let tokenURI, _):
-            let sa = ServiceAccount(
-                projectID: projectID,
-                privateKey: privateKey,
-                clientEmail: clientEmail,
-                tokenURI: tokenURI
-            )
-            tokenProvider = JWTTokenProvider(sa: sa)
-
-        case .authorizedUser(let clientID, let clientSecret, let refreshToken, _):
-            tokenProvider = RefreshTokenProviderIO(
-                clientID: clientID,
-                clientSecret: clientSecret,
-                refreshToken: refreshToken
-            )
+        if let cached = cachedTokenProvider {
+            tokenProvider = cached
+        } else {
+            let inner = impureCreateTokenProvider(from: adc)
+            let cached = CachedTokenProvider(inner: inner)
+            cachedTokenProvider = cached
+            tokenProvider = cached
         }
 
         // 合并润色+翻译系统提示词，作为翻译流程的 system prompt
