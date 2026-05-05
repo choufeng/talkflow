@@ -208,6 +208,7 @@ final class ModelSettingsView: NSView, NSTextFieldDelegate {
         if let pid = pid {
             projectIDField.stringValue = pid
             projectIDField.isEditable = false
+            impureSaveConfig()
         } else {
             projectIDField.placeholderString = "未检测到 — 请手动输入 Project ID"
         }
