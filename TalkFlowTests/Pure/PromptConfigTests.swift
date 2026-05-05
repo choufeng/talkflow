@@ -95,6 +95,9 @@ final class PromptConfigTests: XCTestCase {
         let prompt = makeTranslationSystemPrompt(language: "日文")
         XCTAssertTrue(prompt.contains("翻译"), "应包含翻译指令")
         XCTAssertTrue(prompt.contains("日文"), "应包含指定的目标语言")
+        XCTAssertTrue(prompt.contains("逐句翻译"), "应要求逐句翻译")
+        XCTAssertTrue(prompt.contains("禁止总结"), "应明确禁止总结")
+        XCTAssertTrue(prompt.contains("禁止合并"), "应明确禁止合并句子")
     }
 
     func test_makeTranslationSystemPrompt_isDeterministic() {
