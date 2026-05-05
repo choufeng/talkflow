@@ -24,6 +24,14 @@ final class CardView: NSView {
         impureSetupUI()
     }
 
+    // MARK: - Appearance
+
+    override func updateLayer() {
+        super.updateLayer()
+        layer?.backgroundColor = NSColor.controlBackgroundColor.cgColor
+        layer?.borderColor = NSColor.separatorColor.cgColor
+    }
+
     // MARK: - ⚠️ UI 构建
 
     private func impureSetupUI() {
