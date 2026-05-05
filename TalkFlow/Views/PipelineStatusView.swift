@@ -31,6 +31,14 @@ final class PipelineStatusView: NSView {
         impureSetupUI()
     }
 
+    // MARK: - Appearance
+
+    override func updateLayer() {
+        super.updateLayer()
+        layer?.backgroundColor = NSColor.windowBackgroundColor.withAlphaComponent(0.92).cgColor
+        layer?.borderColor = NSColor.separatorColor.cgColor
+    }
+
     // MARK: - 公开方法
 
     func render(phase: PipelinePhase) {
@@ -134,7 +142,7 @@ final class PipelineStatusView: NSView {
 
         let label = NSTextField(labelWithString: "转写中...")
         label.font = NSFont.monospacedDigitSystemFont(ofSize: 13, weight: .medium)
-        label.textColor = NSColor(red: 0, green: 0.78, blue: 1.0, alpha: 1.0)
+        label.textColor = .controlAccentColor
         label.translatesAutoresizingMaskIntoConstraints = false
         addSubview(label)
         textLabel = label
@@ -158,19 +166,19 @@ final class PipelineStatusView: NSView {
         let warnIcon = NSImageView()
         warnIcon.image = NSImage(systemSymbolName: "exclamationmark.triangle.fill",
                                   accessibilityDescription: "warning")
-        warnIcon.contentTintColor = NSColor(red: 1.0, green: 0.69, blue: 0.13, alpha: 1.0)
+        warnIcon.contentTintColor = .systemOrange
         warnIcon.translatesAutoresizingMaskIntoConstraints = false
         addSubview(warnIcon)
         indicatorView = warnIcon
 
         let label = NSTextField(labelWithString: "自动粘贴失败，请手动粘贴")
         label.font = NSFont.monospacedDigitSystemFont(ofSize: 12, weight: .medium)
-        label.textColor = NSColor(red: 1.0, green: 0.69, blue: 0.13, alpha: 1.0)
+        label.textColor = .systemOrange
         label.translatesAutoresizingMaskIntoConstraints = false
         addSubview(label)
         textLabel = label
 
-        layer?.borderColor = NSColor(red: 1.0, green: 0.69, blue: 0.13, alpha: 0.3).cgColor
+        layer?.borderColor = NSColor.systemOrange.withAlphaComponent(0.3).cgColor
 
         NSLayoutConstraint.activate([
             warnIcon.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 14),
