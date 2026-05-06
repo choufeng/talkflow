@@ -41,8 +41,32 @@ struct AppConfig: Codable, Equatable {
         }
     }
 
+    /// Anthropic Messages API 配置
+    struct AnthropicConfig: Codable, Equatable {
+        var baseUrl: String = "https://api.anthropic.com"
+        var modelName: String = "claude-sonnet-4-20250514"
+        var thinkingBudget: Int = 0
+    }
+
     var vertexAI: VertexAIConfig = VertexAIConfig()
+    var anthropic: AnthropicConfig = AnthropicConfig()
+    var selectedProvider: String = "vertexAI"
     var transcription: TranscriptionConfig = TranscriptionConfig()
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        vertexAI = try container.decodeIfPresent(VertexAIConfig.self, forKey: .vertexAI) ?? VertexAIConfig()
+        anthropic = try container.decodeIfPresent(AnthropicConfig.self, forKey: .anthropic) ?? AnthropicConfig()
+        selectedProvider = try container.decodeIfPresent(String.self, forKey: .selectedProvider) ?? "vertexAI"
+        transcription = try container.decodeIfPresent(TranscriptionConfig.self, forKey: .transcription) ?? TranscriptionConfig()
+    }
+
+    init() {
+        vertexAI = VertexAIConfig()
+        anthropic = AnthropicConfig()
+        selectedProvider = "vertexAI"
+        transcription = TranscriptionConfig()
+    }
 }
 
 // MARK: - 纯函数

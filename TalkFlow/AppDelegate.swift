@@ -73,7 +73,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                     case .speech(let text, let language):
                         switch self.currentWorkflow {
                         case .transcription:
-                            if let provider = self.impureMakePolishingProvider() {
+                            if let provider = self.impureMakeProvider(polish: true) {
                                 self.logger.info(tag: "Pipeline", "开始 LLM 润色...")
                                 do {
                                     let request = ChatRequest(messages: [
@@ -91,7 +91,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                             }
 
                         case .translation:
-                            if let provider = self.impureMakeTranslationProvider() {
+                            if let provider = self.impureMakeProvider(polish: false) {
                                 self.logger.info(tag: "Pipeline", "开始 LLM 润色+翻译...")
                                 do {
                                     let request = ChatRequest(messages: [
@@ -519,6 +519,53 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             promptConfig: promptConfig,
             thinkingBudget: config.vertexAI.thinkingBudget
         )
+    }
+
+    private func impureMakeAnthropicProvider(polish: Bool) -> AnthropicAIIO? {
+        let config = impureLoadAppConfig()
+        let anthroConfig = config.anthropic
+
+        guard !anthroConfig.baseUrl.isEmpty,
+              !anthroConfig.modelName.isEmpty else {
+            logger.info(tag: "Pipeline", "Anthropic — baseUrl 或 modelName 为空，跳过")
+            return nil
+        }
+
+        let promptConfig: PromptConfig
+        if polish {
+            promptConfig = PromptConfig(
+                defaultPrompt: makePolishingSystemPrompt(),
+                userSupplement: config.transcription.polishPrompt
+            )
+        } else {
+            let systemPrompt = mergeTranslationPrompts(
+                polishConfig: PromptConfig(
+                    defaultPrompt: makePolishingSystemPrompt(),
+                    userSupplement: config.transcription.polishPrompt
+                ),
+                translationConfig: PromptConfig(
+                    defaultPrompt: makeTranslationSystemPrompt(language: config.transcription.translationLanguage),
+                    userSupplement: config.transcription.translationPrompt
+                )
+            )
+            promptConfig = PromptConfig(defaultPrompt: systemPrompt, userSupplement: "")
+        }
+
+        return AnthropicAIIO(
+            baseUrl: anthroConfig.baseUrl,
+            model: anthroConfig.modelName,
+            promptConfig: promptConfig,
+            thinkingBudget: anthroConfig.thinkingBudget,
+            keychainIO: SecItemKeychainIO()
+        )
+    }
+
+    private func impureMakeProvider(polish: Bool) -> (any ProviderIO)? {
+        let config = impureLoadAppConfig()
+        if config.selectedProvider == "anthropic" {
+            return impureMakeAnthropicProvider(polish: polish)
+        }
+        return polish ? impureMakePolishingProvider() : impureMakeTranslationProvider()
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
