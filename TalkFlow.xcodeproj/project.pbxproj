@@ -255,6 +255,7 @@
 				<string>11A9896076C54A2EBF46F956</string>
 				<string>6C061AC6D1A142FFAA6D54E9</string>
 				<string>2185D391EED04F6BA0477176</string>
+				<string>E6E4598F562C45A787C15BD8</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
@@ -696,6 +697,17 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
+		<key>4E8EE750E57D499C830C4006</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>AnthropicMessageAdapter.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>4ED4B478A31A48588936BB62</key>
 		<dict>
 			<key>isa</key>
@@ -918,6 +930,24 @@
 			<string>60F021B9D4264D0987CE4F3E</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+		</dict>
+		<key>6C552C0C0E134EA08399AA81</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4E8EE750E57D499C830C4006</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>6C768818B0514612BA1F94AC</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>AnthropicMessageAdapterTests.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>6EB7ADAF0670456386928B3F</key>
 		<dict>
@@ -1431,6 +1461,7 @@
 				<string>B7A5C5E41B9A431888EA07DB</string>
 				<string>38CEAEDC9D504DD39B1786B1</string>
 				<string>C095887D376E45099AE51B21</string>
+				<string>4E8EE750E57D499C830C4006</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -1685,6 +1716,7 @@
 				<string>EB02A0C824AF4BFC93E560FD</string>
 				<string>DC0E809483C54CB59AB37C33</string>
 				<string>35B8F9C3C8E24155A77B3F3A</string>
+				<string>6C552C0C0E134EA08399AA81</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
@@ -2015,6 +2047,7 @@
 				<string>014B32A783BD31D4A9E8EB36</string>
 				<string>FA6A8070D27692159A390891</string>
 				<string>4D482A0655774BF59E10BBD4</string>
+				<string>6C768818B0514612BA1F94AC</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -2407,6 +2440,13 @@
 		<dict>
 			<key>fileRef</key>
 			<string>8C12EE9D90054AD882AA998E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>E6E4598F562C45A787C15BD8</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6C768818B0514612BA1F94AC</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
