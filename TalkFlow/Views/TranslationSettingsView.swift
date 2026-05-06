@@ -39,6 +39,15 @@ final class TranslationSettingsView: NSView {
         impureLoadConfig()
     }
 
+    // MARK: - 响应链修复 (macOS 26.4)
+
+    override func viewDidMoveToWindow() {
+        super.viewDidMoveToWindow()
+        guard window != nil else { return }
+        textView.isEditable = true
+        textView.isSelectable = true
+    }
+
     // MARK: - ⚠️ UI 构建
 
     private func impureSetupUI() {
