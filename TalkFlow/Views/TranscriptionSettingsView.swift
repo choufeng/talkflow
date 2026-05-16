@@ -8,6 +8,7 @@ final class TranscriptionSettingsView: NSView {
 
     // MARK: - Subviews
 
+    private let useLLMCheckbox = NSButton(checkboxWithTitle: "启用 LLM 润色", target: nil, action: nil)
     private let promptLabel = NSTextField(labelWithString: "润色要求:")
     private let scrollView = NSScrollView()
     private let textView = NSTextView()
@@ -30,13 +31,25 @@ final class TranscriptionSettingsView: NSView {
 
     func setUp() {
         impureSetupUI()
-        impureLoadPromptState()
+        impureLoadConfigState()
     }
 
     // MARK: - ⚠️ UI 构建
 
     private func impureSetupUI() {
         translatesAutoresizingMaskIntoConstraints = false
+
+        // checkbox
+        useLLMCheckbox.font = NSFont.systemFont(ofSize: 12)
+        useLLMCheckbox.target = self
+        useLLMCheckbox.action = #selector(impureToggleUseLLM)
+        useLLMCheckbox.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(useLLMCheckbox)
+
+        NSLayoutConstraint.activate([
+            useLLMCheckbox.topAnchor.constraint(equalTo: topAnchor),
+            useLLMCheckbox.leadingAnchor.constraint(equalTo: leadingAnchor),
+        ])
 
         // 提示词标签
         promptLabel.font = NSFont.systemFont(ofSize: 12)
@@ -79,7 +92,7 @@ final class TranscriptionSettingsView: NSView {
         addSubview(scrollView)
 
         NSLayoutConstraint.activate([
-            promptLabel.topAnchor.constraint(equalTo: topAnchor),
+            promptLabel.topAnchor.constraint(equalTo: useLLMCheckbox.bottomAnchor, constant: 12),
             promptLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
 
             scrollView.topAnchor.constraint(equalTo: promptLabel.bottomAnchor, constant: 4),
@@ -106,11 +119,12 @@ final class TranscriptionSettingsView: NSView {
 
     // MARK: - ⚠️ 配置加载
 
-    private func impureLoadPromptState() {
+    private func impureLoadConfigState() {
         let config = impureLoadAppConfig()
         if !config.transcription.polishPrompt.isEmpty {
             textView.string = config.transcription.polishPrompt
         }
+        useLLMCheckbox.state = config.transcription.useLLM ? .on : .off
     }
 
     // MARK: - ⚠️ 事件
@@ -118,6 +132,12 @@ final class TranscriptionSettingsView: NSView {
     private func impureSavePromptConfig() {
         var config = impureLoadAppConfig()
         config.transcription.polishPrompt = textView.string
+        impureSaveAppConfig(config)
+    }
+
+    @objc private func impureToggleUseLLM() {
+        var config = impureLoadAppConfig()
+        config.transcription.useLLM = (useLLMCheckbox.state == .on)
         impureSaveAppConfig(config)
     }
 
