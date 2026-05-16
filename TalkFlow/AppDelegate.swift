@@ -71,9 +71,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                     let finalResult: STTResult
                     switch result {
                     case .speech(let text, let language):
+                        let config = impureLoadAppConfig()
                         switch self.currentWorkflow {
                         case .transcription:
-                            if let provider = self.impureMakeProvider(polish: true) {
+                            if config.transcription.useLLM, let provider = self.impureMakeProvider(polish: true) {
                                 self.logger.info(tag: "Pipeline", "开始 LLM 润色...")
                                 do {
                                     let request = ChatRequest(messages: [
@@ -91,7 +92,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                             }
 
                         case .translation:
-                            if let provider = self.impureMakeProvider(polish: false) {
+                            if config.transcription.useLLM, let provider = self.impureMakeProvider(polish: false) {
                                 self.logger.info(tag: "Pipeline", "开始 LLM 润色+翻译...")
                                 do {
                                     let request = ChatRequest(messages: [
