@@ -31,7 +31,7 @@ final class TranscriptionSettingsView: NSView {
 
     func setUp() {
         impureSetupUI()
-        impureLoadPromptState()
+        impureLoadConfigState()
     }
 
     // MARK: - ⚠️ UI 构建
@@ -119,7 +119,7 @@ final class TranscriptionSettingsView: NSView {
 
     // MARK: - ⚠️ 配置加载
 
-    private func impureLoadPromptState() {
+    private func impureLoadConfigState() {
         let config = impureLoadAppConfig()
         if !config.transcription.polishPrompt.isEmpty {
             textView.string = config.transcription.polishPrompt
